@@ -294,6 +294,7 @@ Recommended `kind` values:
 - `specialty-action`
 - `trade`
 - `interaction`
+- `reference-link`
 - `note`
 - `free-text`
 
@@ -395,7 +396,6 @@ The source occasionally repeats a location. Preserve the raw entries during scra
 
 If we follow this model, the next scrape outputs should look like:
 
-- `data/json/pokemonpokopia/areas.json`
 - `data/json/pokemonpokopia/locations.json`
 - `data/json/pokemonpokopia/item-tags.json`
 - `data/json/pokemonpokopia/item-anchors.json`

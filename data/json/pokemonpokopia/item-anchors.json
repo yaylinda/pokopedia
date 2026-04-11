@@ -1,0 +1,116 @@
+{
+  "source": {
+    "name": "Serebii",
+    "page": "https://www.serebii.net/pokemonpokopia/items.shtml",
+    "fetchedAt": "2026-04-11T01:32:16Z",
+    "htmlSnapshotPath": "data/raw/pokemonpokopia/items.html"
+  },
+  "count": 15,
+  "anchors": [
+    {
+      "sourceOrder": 1,
+      "anchorId": "materials",
+      "sourceAnchor": "materials",
+      "name": "Materials",
+      "sourceHeading": "List of Materials"
+    },
+    {
+      "sourceOrder": 2,
+      "anchorId": "food",
+      "sourceAnchor": "food",
+      "name": "Food",
+      "sourceHeading": "List of Food"
+    },
+    {
+      "sourceOrder": 3,
+      "anchorId": "furniture",
+      "sourceAnchor": "furniture",
+      "name": "Furniture",
+      "sourceHeading": "List of Furniture"
+    },
+    {
+      "sourceOrder": 4,
+      "anchorId": "misc",
+      "sourceAnchor": "misc.",
+      "name": "Misc.",
+      "sourceHeading": "List of Misc."
+    },
+    {
+      "sourceOrder": 5,
+      "anchorId": "outdoor",
+      "sourceAnchor": "outdoor",
+      "name": "Outdoor",
+      "sourceHeading": "List of Outdoor"
+    },
+    {
+      "sourceOrder": 6,
+      "anchorId": "utilities",
+      "sourceAnchor": "utilities",
+      "name": "Utilities",
+      "sourceHeading": "List of Utilities"
+    },
+    {
+      "sourceOrder": 7,
+      "anchorId": "nature",
+      "sourceAnchor": "nature",
+      "name": "Nature",
+      "sourceHeading": "List of Nature"
+    },
+    {
+      "sourceOrder": 8,
+      "anchorId": "buildings",
+      "sourceAnchor": "buildings",
+      "name": "Buildings",
+      "sourceHeading": "List of Buildings"
+    },
+    {
+      "sourceOrder": 9,
+      "anchorId": "blocks",
+      "sourceAnchor": "blocks",
+      "name": "Blocks",
+      "sourceHeading": "List of Blocks"
+    },
+    {
+      "sourceOrder": 10,
+      "anchorId": "kits",
+      "sourceAnchor": "kits",
+      "name": "Kits",
+      "sourceHeading": "List of Kits"
+    },
+    {
+      "sourceOrder": 11,
+      "anchorId": "key-items",
+      "sourceAnchor": "keyitems",
+      "name": "Key Items",
+      "sourceHeading": "List of Key Items"
+    },
+    {
+      "sourceOrder": 12,
+      "anchorId": "other",
+      "sourceAnchor": "other",
+      "name": "Other",
+      "sourceHeading": "List of Other"
+    },
+    {
+      "sourceOrder": 13,
+      "anchorId": "lostrelics-l",
+      "sourceAnchor": "lostrelics(l)",
+      "name": "Lost Relics (L)",
+      "sourceHeading": "List of Lost Relics (L)"
+    },
+    {
+      "sourceOrder": 14,
+      "anchorId": "lostrelics-s",
+      "sourceAnchor": "lostrelics(s)",
+      "name": "Lost Relics (S)",
+      "sourceHeading": "List of Lost Relics (S)"
+    },
+    {
+      "sourceOrder": 15,
+      "anchorId": "fossils",
+      "sourceAnchor": "fossils",
+      "name": "Fossils",
+      "sourceHeading": "List of Fossils"
+    }
+  ]
+}

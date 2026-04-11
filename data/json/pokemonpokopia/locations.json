@@ -1,0 +1,76 @@
+{
+  "source": {
+    "name": "Serebii",
+    "page": "https://www.serebii.net/pokemonpokopia/locations.shtml",
+    "fetchedAt": "2026-04-11T01:27:28Z",
+    "htmlSnapshotPath": "data/raw/pokemonpokopia/locations.html",
+    "notes": [
+      "This dataset includes only the five main playable locations.",
+      "Cloud Island is intentionally excluded from normalized location data."
+    ],
+    "excludedLocations": [
+      {
+        "sourceOrder": 6,
+        "slug": "cloudisland",
+        "name": "Cloud Island",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/cloudisland.shtml",
+        "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/cloudislandth.jpg",
+        "pictureFilename": "cloudislandth.jpg",
+        "pictureAlt": "Cloud Island"
+      }
+    ]
+  },
+  "count": 5,
+  "locations": [
+    {
+      "locationId": "withered-wastelands",
+      "sourceOrder": 1,
+      "slug": "witheredwastelands",
+      "name": "Withered Wastelands",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/witheredwastelands.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/witheredwastelandsth.jpg",
+      "pictureFilename": "witheredwastelandsth.jpg",
+      "pictureAlt": "Withered Wastelands"
+    },
+    {
+      "locationId": "bleak-beach",
+      "sourceOrder": 2,
+      "slug": "bleakbeach",
+      "name": "Bleak Beach",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/bleakbeach.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/bleakbeachth.jpg",
+      "pictureFilename": "bleakbeachth.jpg",
+      "pictureAlt": "Bleak Beach"
+    },
+    {
+      "locationId": "rocky-ridges",
+      "sourceOrder": 3,
+      "slug": "rockyridges",
+      "name": "Rocky Ridges",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/rockyridges.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/rockyridgesth.jpg",
+      "pictureFilename": "rockyridgesth.jpg",
+      "pictureAlt": "Rocky Ridges"
+    },
+    {
+      "locationId": "sparkling-skylands",
+      "sourceOrder": 4,
+      "slug": "sparklingskylands",
+      "name": "Sparkling Skylands",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/sparklingskylands.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/sparklingskylandsth.jpg",
+      "pictureFilename": "sparklingskylandsth.jpg",
+      "pictureAlt": "Sparkling Skylands"
+    },
+    {
+      "locationId": "palette-town",
+      "sourceOrder": 5,
+      "slug": "palettetown",
+      "name": "Palette Town",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/palettetown.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/palettetownth.jpg",
+      "pictureFilename": "palettetownth.jpg",
+      "pictureAlt": "Palette Town"
+    }
+  ]
+}

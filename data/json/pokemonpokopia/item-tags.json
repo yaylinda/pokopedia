@@ -1,0 +1,81 @@
+{
+  "source": {
+    "name": "Serebii",
+    "page": "https://www.serebii.net/pokemonpokopia/items.shtml",
+    "fetchedAt": "2026-04-11T01:32:16Z",
+    "htmlSnapshotPath": "data/raw/pokemonpokopia/items.html",
+    "notes": [
+      "Standard item tags come from the categories table at the top of the page.",
+      "Additional non-standard tags are discovered from item rows when present."
+    ]
+  },
+  "count": 6,
+  "tags": [
+    {
+      "sourceOrder": 1,
+      "tagId": "decoration",
+      "slug": "decoration",
+      "name": "Decoration",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decoration.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decoration.png",
+      "pictureFilename": "decoration.png",
+      "pictureAlt": "Decoration",
+      "isStandardCategory": true
+    },
+    {
+      "sourceOrder": 2,
+      "tagId": "food",
+      "slug": "food",
+      "name": "Food",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/food.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/food.png",
+      "pictureFilename": "food.png",
+      "pictureAlt": "Food",
+      "isStandardCategory": true
+    },
+    {
+      "sourceOrder": 3,
+      "tagId": "relaxation",
+      "slug": "relaxation",
+      "name": "Relaxation",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/relaxation.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/relaxation.png",
+      "pictureFilename": "relaxation.png",
+      "pictureAlt": "Relaxation",
+      "isStandardCategory": true
+    },
+    {
+      "sourceOrder": 4,
+      "tagId": "road",
+      "slug": "road",
+      "name": "Road",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/road.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/road.png",
+      "pictureFilename": "road.png",
+      "pictureAlt": "Road",
+      "isStandardCategory": true
+    },
+    {
+      "sourceOrder": 5,
+      "tagId": "toy",
+      "slug": "toy",
+      "name": "Toy",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/toy.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/toy.png",
+      "pictureFilename": "toy.png",
+      "pictureAlt": "Toy",
+      "isStandardCategory": true
+    },
+    {
+      "sourceOrder": 6,
+      "tagId": "variantwhenplacingstnadardarchedberriers",
+      "slug": "variantwhenplacingstnadardarchedberriers",
+      "name": "Variant when placing stnadard Arched berriers",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/variantwhenplacingstnadardarchedberriers.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/variantwhenplacingstnadardarchedberriers.png",
+      "pictureFilename": "variantwhenplacingstnadardarchedberriers.png",
+      "pictureAlt": "Variant when placing stnadard Arched berriers",
+      "isStandardCategory": false
+    }
+  ]
+}

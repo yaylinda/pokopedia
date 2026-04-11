@@ -42,3 +42,45 @@ Generated files:
 - `data/json/pokemonpokopia/specialties.json`
 
 This scraper captures the specialties reference table with image, name, and description for each specialty.
+
+## Scrape the main locations table
+
+```bash
+python3 scripts/scrape_pokopia_locations.py
+```
+
+Generated files:
+
+- `data/raw/pokemonpokopia/locations.html`
+- `data/json/pokemonpokopia/locations.json`
+
+This scraper keeps only the five main playable locations and excludes Cloud Island from normalized location data.
+
+## Scrape the items index
+
+```bash
+python3 scripts/scrape_pokopia_items.py
+```
+
+Generated files:
+
+- `data/raw/pokemonpokopia/items.html`
+- `data/json/pokemonpokopia/item-anchors.json`
+- `data/json/pokemonpokopia/item-tags.json`
+- `data/json/pokemonpokopia/items.json`
+
+This scraper captures the full item catalog, top-level anchors, and tag/category badges. Item availability is stored as structured acquisition records plus the raw source text.
+
+## Scrape habitat requirements and spawn rules
+
+```bash
+python3 scripts/scrape_pokopia_habitat_details.py
+```
+
+Generated files:
+
+- `data/raw/pokemonpokopia/habitatdex/*.html`
+- `data/json/pokemonpokopia/habitat-requirements.json`
+- `data/json/pokemonpokopia/habitat-spawns.json`
+
+This scraper walks every top-level habitat page, records required items and quantities, and normalizes Pokemon spawn rules by location, rarity, time of day, and weather.
