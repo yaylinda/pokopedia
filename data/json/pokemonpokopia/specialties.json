@@ -1,0 +1,321 @@
+{
+  "source": {
+    "name": "Serebii",
+    "page": "https://www.serebii.net/pokemonpokopia/specialty.shtml",
+    "fetchedAt": "2026-04-11T00:56:12Z",
+    "htmlSnapshotPath": "data/raw/pokemonpokopia/specialty.html"
+  },
+  "count": 31,
+  "specialties": [
+    {
+      "sourceOrder": 1,
+      "slug": "appraise",
+      "name": "Appraise",
+      "description": "You can show lost relics you've found to Professor Tangrowth, who will appraise them for you",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/appraise.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/appraise.png",
+      "pictureFilename": "appraise.png",
+      "pictureAlt": "Appraise"
+    },
+    {
+      "sourceOrder": 2,
+      "slug": "build",
+      "name": "Build",
+      "description": "Pok\u00e9mon with the Build specialty will lead your building projects",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/build.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/build.png",
+      "pictureFilename": "build.png",
+      "pictureAlt": "Build"
+    },
+    {
+      "sourceOrder": 3,
+      "slug": "bulldoze",
+      "name": "Bulldoze",
+      "description": "Pok\u00e9mon with the Bulldoze specialty can lead your demolition, rebuilding or relocation projects",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/bulldoze.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/bulldoze.png",
+      "pictureFilename": "bulldoze.png",
+      "pictureAlt": "Bulldoze"
+    },
+    {
+      "sourceOrder": 4,
+      "slug": "burn",
+      "name": "Burn",
+      "description": "Pok\u00e9mon with the Burn specialty can set fire to Flammable objects. They can also turn Squish clay into Brick",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/burn.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/burn.png",
+      "pictureFilename": "burn.png",
+      "pictureAlt": "Burn"
+    },
+    {
+      "sourceOrder": 5,
+      "slug": "chop",
+      "name": "Chop",
+      "description": "Pok\u00e9mon with the Chop specialty can process small logs into lumber",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/chop.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/chop.png",
+      "pictureFilename": "chop.png",
+      "pictureAlt": "Chop"
+    },
+    {
+      "sourceOrder": 6,
+      "slug": "collect",
+      "name": "Collect",
+      "description": "Pok\u00e9mon with the Collect specialty will trade you rare things for certain items",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/collect.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/collect.png",
+      "pictureFilename": "collect.png",
+      "pictureAlt": "Collect"
+    },
+    {
+      "sourceOrder": 7,
+      "slug": "crush",
+      "name": "Crush",
+      "description": "Pok\u00e9mon with the Crush specialty can mash materials into different things",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/crush.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/crush.png",
+      "pictureFilename": "crush.png",
+      "pictureAlt": "Crush"
+    },
+    {
+      "sourceOrder": 8,
+      "slug": "dj",
+      "name": "DJ",
+      "description": "DJ Rotom can use the DJ specialty to play music CDs for you",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/dj.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/dj.png",
+      "pictureFilename": "dj.png",
+      "pictureAlt": "DJ"
+    },
+    {
+      "sourceOrder": 9,
+      "slug": "dreamisland",
+      "name": "Dream Island",
+      "description": "Pok\u00e9mon with the Dream Island specialty can transport you to a Dream Island",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/dreamisland.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/dreamisland.png",
+      "pictureFilename": "dreamisland.png",
+      "pictureAlt": "Dream Island"
+    },
+    {
+      "sourceOrder": 10,
+      "slug": "eat",
+      "name": "Eat",
+      "description": "Mosslax has the Eat specialty. Something good may happen if you offer them food",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/eat.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/eat.png",
+      "pictureFilename": "eat.png",
+      "pictureAlt": "Eat"
+    },
+    {
+      "sourceOrder": 11,
+      "slug": "engineer",
+      "name": "Engineer",
+      "description": "Tinkmaster has the Engineer specialty and can lead huge building projects",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/engineer.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/engineer.png",
+      "pictureFilename": "engineer.png",
+      "pictureAlt": "Engineer"
+    },
+    {
+      "sourceOrder": 12,
+      "slug": "explode",
+      "name": "Explode",
+      "description": "Pok\u00e9mon with the Explode specialty can be fired out of a cannon, destroying everything around them on impact",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/explode.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/explode.png",
+      "pictureFilename": "explode.png",
+      "pictureAlt": "Explode"
+    },
+    {
+      "sourceOrder": 13,
+      "slug": "fly",
+      "name": "Fly",
+      "description": "Pok\u00e9mon with the Fly spceialty can fly you to a Pok\u00e9mon you're searching fo",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/fly.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/fly.png",
+      "pictureFilename": "fly.png",
+      "pictureAlt": "Fly"
+    },
+    {
+      "sourceOrder": 14,
+      "slug": "gather",
+      "name": "Gather",
+      "description": "Pok\u00e9mon with the Gather specialty will pick up items on the ground and put them inside a community box",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/gather.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/gather.png",
+      "pictureFilename": "gather.png",
+      "pictureAlt": "Gather"
+    },
+    {
+      "sourceOrder": 15,
+      "slug": "gatherhoney",
+      "name": "Gather Honey",
+      "description": "Pok\u00e9mon with the Gather Honey specialty will give you special furniture if you bring them honey",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/gatherhoney.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/gatherhoney.png",
+      "pictureFilename": "gatherhoney.png",
+      "pictureAlt": "Gather Honey"
+    },
+    {
+      "sourceOrder": 16,
+      "slug": "generate",
+      "name": "Generate",
+      "description": "Pok\u00e9mon with the Generate specialty can power machines with electricty",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/generate.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/generate.png",
+      "pictureFilename": "generate.png",
+      "pictureAlt": "Generate"
+    },
+    {
+      "sourceOrder": 17,
+      "slug": "grow",
+      "name": "Grow",
+      "description": "Pok\u00e9mon with the Grow specialty can make plants grow faster",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.png",
+      "pictureFilename": "grow.png",
+      "pictureAlt": "Grow"
+    },
+    {
+      "sourceOrder": 18,
+      "slug": "hype",
+      "name": "Hype",
+      "description": "Pok\u00e9mon with the Hype specialty will start dancing when they hear music, improving the mood",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/hype.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/hype.png",
+      "pictureFilename": "hype.png",
+      "pictureAlt": "Hype"
+    },
+    {
+      "sourceOrder": 19,
+      "slug": "illuminate",
+      "name": "Illuminate",
+      "description": "Peakychu can use the Illuminate specialty to light up the whole town for you",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/illuminate.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/illuminate.png",
+      "pictureFilename": "illuminate.png",
+      "pictureAlt": "Illuminate"
+    },
+    {
+      "sourceOrder": 20,
+      "slug": "litter",
+      "name": "Litter",
+      "description": "Pok\u00e9mon with the Litter specialty will drop useful materials near their homes",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.png",
+      "pictureFilename": "litter.png",
+      "pictureAlt": "Litter"
+    },
+    {
+      "sourceOrder": 21,
+      "slug": "paint",
+      "name": "Paint",
+      "description": "Smearguru has the Paint specialty and can recolor certain items, such as furniture",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/paint.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/paint.png",
+      "pictureFilename": "paint.png",
+      "pictureAlt": "Paint"
+    },
+    {
+      "sourceOrder": 22,
+      "slug": "party",
+      "name": "Party",
+      "description": "Chef Dente can use the Party specialty to help you prepare food for parties",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/party.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/party.png",
+      "pictureFilename": "party.png",
+      "pictureAlt": "Party"
+    },
+    {
+      "sourceOrder": 23,
+      "slug": "rarify",
+      "name": "Rarify",
+      "description": "Pok\u00e9mon with the Rarify specialty can turn Star Pieces into rare Pok\u00e9metal",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/rarify.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/rarify.png",
+      "pictureFilename": "rarify.png",
+      "pictureAlt": "Rarify"
+    },
+    {
+      "sourceOrder": 24,
+      "slug": "recycle",
+      "name": "Recycle",
+      "description": "Pok\u00e9mon with the Recycle specialty can process nonburnable garbage into iron ore and wastepaper into paper",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/recycle.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/recycle.png",
+      "pictureFilename": "recycle.png",
+      "pictureAlt": "Recycle"
+    },
+    {
+      "sourceOrder": 25,
+      "slug": "search",
+      "name": "Search",
+      "description": "Pok\u00e9mon with the Search specialty can help you find buried items",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/search.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/search.png",
+      "pictureFilename": "search.png",
+      "pictureAlt": "Search"
+    },
+    {
+      "sourceOrder": 26,
+      "slug": "storage",
+      "name": "Storage",
+      "description": "Pok\u00e9mon with the Storage specialty can hold on to your items for you",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/storage.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/storage.png",
+      "pictureFilename": "storage.png",
+      "pictureAlt": "Storage"
+    },
+    {
+      "sourceOrder": 27,
+      "slug": "teleport",
+      "name": "Teleport",
+      "description": "Pok\u00e9mon with the Teleport specialty can instantly take you to a Pok\u00e9mon you're searching for",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/teleport.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/teleport.png",
+      "pictureFilename": "teleport.png",
+      "pictureAlt": "Teleport"
+    },
+    {
+      "sourceOrder": 28,
+      "slug": "trade",
+      "name": "Trade",
+      "description": "Pok\u00e9mon with the Trade speicalty can exchange items with you at a cash register",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/trade.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/trade.png",
+      "pictureFilename": "trade.png",
+      "pictureAlt": "Trade"
+    },
+    {
+      "sourceOrder": 29,
+      "slug": "transform",
+      "name": "Transform",
+      "description": "Ditto can improve its moves by using Transform",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/transform.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/transform.png",
+      "pictureFilename": "transform.png",
+      "pictureAlt": "Transform"
+    },
+    {
+      "sourceOrder": 30,
+      "slug": "water",
+      "name": "Water",
+      "description": "Pok\u00e9mon with the Water specialty can use a full water basin to spray water on nearby fields and plants",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.png",
+      "pictureFilename": "water.png",
+      "pictureAlt": "Water"
+    },
+    {
+      "sourceOrder": 31,
+      "slug": "yawn",
+      "name": "Yawn",
+      "description": "Pok\u00e9mon with the Yawn specialty can tell you how humid it is",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/yawn.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/yawn.png",
+      "pictureFilename": "yawn.png",
+      "pictureAlt": "Yawn"
+    }
+  ]
+}
