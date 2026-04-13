@@ -2,6 +2,35 @@
 
 Pokopedia is a smart helper for all things Pokopia.
 
+This repo now includes two parts:
+
+- a React + TypeScript frontend scaffold for the reference app
+- the source data ingestion pipeline for Serebii's Pokemon Pokopia pages
+
+## Frontend app
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+The app is configured for GitHub Pages deployment through GitHub Actions.
+
+## Data pipeline
+
 This repo starts with a small data-ingestion pipeline for Serebii's Pokemon Pokopia pages. The first scraper snapshots the source HTML for the available Pokemon table and writes a normalized JSON dataset.
 
 ## Scrape the Pokemon table
