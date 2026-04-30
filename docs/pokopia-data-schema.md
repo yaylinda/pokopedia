@@ -6,6 +6,8 @@ This document proposes a storage model for the large Serebii Pokopia datasets, e
 - area and location references
 - habitat requirements
 - habitat spawn rules
+- Pokemon ideal habitats
+- Pokemon favorites and favorite item lists
 
 The main goal is to keep the data queryable without losing source fidelity. A lot of the source HTML is only semi-structured, so the schema should preserve normalized fields and the original raw text when needed.
 
@@ -258,6 +260,143 @@ Suggested shape:
   ]
 }
 ```
+
+### `ideal-habitats.json`
+
+Use this as a small reference dataset for the ideal habitat values shown on
+Pokemon detail pages.
+
+Suggested shape:
+
+```json
+{
+  "sourceOrder": 1,
+  "idealHabitatId": "bright",
+  "slug": "bright",
+  "name": "Bright",
+  "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml",
+  "pokemonCount": 95
+}
+```
+
+This is intentionally separate from `habitats.json`. Serebii uses "ideal
+habitat" values such as Bright, Warm, Humid, Dry, Dark, and Cool as preference
+labels, while the habitat dex contains buildable habitat records such as Tall
+Grass or Park Bench.
+
+### `favorite-categories.json`
+
+Use this as the canonical reference for favorite labels and the item lists linked
+from each favorite.
+
+Suggested shape:
+
+```json
+{
+  "sourceOrder": 1,
+  "favoriteId": "lotsofnature",
+  "slug": "lotsofnature",
+  "name": "Lots of nature",
+  "kind": "favorite-category",
+  "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+  "sourcePageUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+  "sourceAnchor": "items",
+  "rawHtmlPath": "data/raw/pokemonpokopia/favorites/lotsofnature.html",
+  "fetchStatus": 200,
+  "fetchError": null,
+  "itemCount": 28,
+  "items": [
+    {
+      "sourceOrder": 1,
+      "itemId": "berrycase",
+      "itemSlug": "berrycase",
+      "itemName": "Berry case",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/items/berrycase.shtml",
+      "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/berrycase.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/berrycase.png",
+      "pictureFilename": "berrycase.png",
+      "pictureAlt": "Berry case",
+      "description": "At a glance, this looks just like a glossy Cheri Berry. It opens wide for you to store things inside",
+      "tagId": "decoration",
+      "categoryName": "Decoration",
+      "isCatalogLinked": true,
+      "catalogMatchType": "source-link"
+    }
+  ]
+}
+```
+
+Recommended fields:
+
+- `favoriteId`: stable slug from `/favorites/*.shtml`, or a slugified label for
+  flavor preferences such as `sweet-flavors`
+- `kind`: `favorite-category`, `flavor`, `none`, or `reference-link`
+- `sourcePageUrl`: page that actually contains the item list
+- `sourceAnchor`: `items` for favorite pages, or the flavor section anchor such
+  as `sweet`
+- `fetchStatus` and `fetchError`: preserve source oddities without dropping the
+  favorite relationship
+- `items`: item references reconciled to `items.json` by source link first, then
+  by unique item name
+
+Serebii flavor favorites all link to `flavors.shtml`, so flavor labels should be
+stored as separate favorite categories with anchored `detailUrl` values, for
+example `https://www.serebii.net/pokemonpokopia/flavors.shtml#sweet`.
+
+### `pokemon-preferences.json`
+
+Use this relationship dataset to connect each Pokemon to its ideal habitat and
+favorite categories.
+
+Suggested shape:
+
+```json
+{
+  "sourceOrder": 1,
+  "pokemonSlug": "bulbasaur",
+  "pokemonId": 1,
+  "pokemonIdDisplay": "001",
+  "pokemonName": "Bulbasaur",
+  "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/bulbasaur.shtml",
+  "rawHtmlPath": "data/raw/pokemonpokopia/pokedex/bulbasaur.html",
+  "idealHabitat": {
+    "idealHabitatId": "bright",
+    "slug": "bright",
+    "name": "Bright",
+    "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml"
+  },
+  "favorites": [
+    {
+      "sourceOrder": 1,
+      "favoriteId": "lotsofnature",
+      "slug": "lotsofnature",
+      "name": "Lots of nature",
+      "kind": "favorite-category",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+      "sourceHref": "/pokemonpokopia/favorites/lotsofnature.shtml"
+    }
+  ]
+}
+```
+
+Keeping this as a relationship dataset avoids duplicating favorite item lists
+inside every Pokemon record and makes it cheap to answer both directions:
+"which favorites does this Pokemon like?" and "which Pokemon like this favorite?"
+
+## Scrape Plan
+
+1. Use `pokemon.json` as the source of Pokemon detail URLs.
+2. Fetch each detail page into `data/raw/pokemonpokopia/pokedex/{slug}.html`.
+3. Parse the detail page Stats table for the ideal habitat link and favorite
+   links.
+4. Deduplicate all ideal habitats into `ideal-habitats.json`.
+5. Deduplicate all favorite links into `favorite-categories.json`.
+6. Fetch each `/favorites/*.shtml` page and parse its item table.
+7. Fetch `flavors.shtml` once and parse each flavor section as its own favorite
+   category.
+8. Reconcile favorite items to `items.json` by source detail URL first, then by
+   unique item name, while preserving unmatched source rows for auditability.
+9. Store the per-Pokemon relationships in `pokemon-preferences.json`.
 
 Recommended normalized enums:
 
