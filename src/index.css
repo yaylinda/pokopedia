@@ -1,38 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap");
 
 :root {
+  color: oklch(21% 0.028 185);
+  background:
+    linear-gradient(
+      180deg,
+      oklch(98% 0.007 195) 0%,
+      oklch(95% 0.013 190) 48%,
+      oklch(92% 0.023 170) 100%
+    );
   font-family:
     "Atkinson Hyperlegible",
     "Avenir Next",
     sans-serif;
-  color: oklch(23% 0.025 145);
-  background:
-    linear-gradient(
-      180deg,
-      oklch(96% 0.022 98) 0%,
-      oklch(93% 0.026 105) 52%,
-      oklch(91% 0.021 155) 100%
-    );
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   --font-display: "Bricolage Grotesque", "Avenir Next", sans-serif;
-  --color-ink: oklch(23% 0.025 145);
-  --color-muted: oklch(44% 0.026 145);
-  --color-soft: oklch(58% 0.035 145);
-  --color-paper: oklch(98% 0.014 98);
-  --color-panel: oklch(96% 0.018 102);
-  --color-panel-strong: oklch(92% 0.028 118);
-  --color-line: oklch(79% 0.028 112);
-  --color-sage: oklch(48% 0.105 151);
-  --color-sage-dark: oklch(33% 0.09 153);
-  --color-coral: oklch(61% 0.145 38);
-  --color-gold: oklch(76% 0.13 88);
-  --color-sky: oklch(58% 0.105 220);
-  --shadow-soft: 0 24px 70px oklch(27% 0.03 145 / 0.13);
-  --shadow-small: 0 10px 30px oklch(27% 0.03 145 / 0.1);
+  --color-ink: oklch(21% 0.028 185);
+  --color-muted: oklch(44% 0.025 185);
+  --color-paper: oklch(98% 0.007 190);
+  --color-panel: oklch(96% 0.011 185);
+  --color-line: oklch(79% 0.018 185);
+  --color-mist: oklch(91% 0.036 190);
+  --color-mint: oklch(88% 0.052 170);
+  --color-leaf: oklch(43% 0.095 160);
+  --color-leaf-dark: oklch(29% 0.076 164);
+  --color-water: oklch(67% 0.086 220);
+  --color-berry: oklch(53% 0.135 13);
+  --shadow-soft: 0 18px 48px oklch(27% 0.026 185 / 0.1);
+  --shadow-small: 0 8px 22px oklch(27% 0.026 185 / 0.08);
   --radius-sm: 6px;
   --radius: 8px;
   --space-2xs: 0.25rem;
@@ -42,6 +41,11 @@
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 3rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -56,6 +60,11 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 }
 
 body::before {
@@ -65,11 +74,11 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(oklch(42% 0.02 145 / 0.07) 1px, transparent 1px) 0 0 /
+    linear-gradient(oklch(40% 0.018 190 / 0.055) 1px, transparent 1px) 0 0 /
       40px 40px,
-    linear-gradient(90deg, oklch(42% 0.02 145 / 0.06) 1px, transparent 1px)
+    linear-gradient(90deg, oklch(40% 0.018 190 / 0.045) 1px, transparent 1px)
       0 0 / 40px 40px;
-  mask-image: linear-gradient(180deg, oklch(0% 0 0 / 0.6), transparent 72%);
+  mask-image: linear-gradient(180deg, oklch(0% 0 0 / 0.44), transparent 70%);
 }
 
 button,
@@ -89,7 +98,7 @@ button:focus {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid oklch(70% 0.16 88);
+  outline: 3px solid color-mix(in oklch, var(--color-water) 74%, var(--color-paper));
   outline-offset: 2px;
 }
 

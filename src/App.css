@@ -1,58 +1,68 @@
 .app-shell {
-  width: min(1800px, calc(100% - 32px));
+  display: grid;
+  width: min(1680px, calc(100% - 32px));
   margin: 0 auto;
   padding: var(--space-lg) 0 var(--space-2xl);
+  gap: var(--space-md);
 }
 
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-lg);
+.app-header {
+  display: grid;
+  gap: var(--space-md);
   padding: var(--space-md);
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
-  background: color-mix(in oklch, var(--color-paper) 88%, transparent);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-paper) 94%, transparent),
+      color-mix(in oklch, var(--color-mist) 36%, var(--color-paper))
+    );
   box-shadow: var(--shadow-small);
 }
 
+.header-main,
 .brand-block,
-.data-actions,
-.panel-heading,
-.profile-hero,
-.habitat-hero,
-.filter-row,
-.planner-controls,
+.tracker-tools,
+.header-actions,
+.section-heading,
 .chip-row,
 .check-row {
   display: flex;
   align-items: center;
 }
 
+.header-main {
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
 .brand-block {
+  min-width: 0;
   gap: var(--space-md);
 }
 
 .brand-mark {
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
   place-items: center;
   border: 2px solid var(--color-ink);
   border-radius: 50%;
-  background: var(--color-gold);
+  background: color-mix(in oklch, var(--color-water) 52%, var(--color-paper));
   color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-weight: 800;
-  box-shadow: 4px 4px 0 var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
 }
 
 .eyebrow {
   margin: 0 0 var(--space-2xs);
-  color: var(--color-sage-dark);
-  font-size: 0.74rem;
-  font-weight: 700;
+  color: var(--color-leaf);
+  font-size: var(--text-xs);
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -72,66 +82,78 @@ h1 {
 }
 
 h2 {
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   line-height: 1.05;
 }
 
 h3 {
-  margin-bottom: var(--space-sm);
   font-size: 1rem;
+  line-height: 1.2;
 }
 
-.data-actions {
-  flex-wrap: wrap;
+.tracker-tools {
   justify-content: flex-end;
   gap: var(--space-sm);
 }
 
-.owned-meter {
+.tracker-summary {
   display: grid;
-  min-width: 128px;
+  min-width: 150px;
   gap: 1px;
   padding: var(--space-xs) var(--space-sm);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
-  background: oklch(93% 0.038 118);
+  background: color-mix(in oklch, var(--color-mist) 58%, var(--color-paper));
 }
 
-.owned-meter strong,
-.stat strong,
-.plan-rank strong {
+.tracker-summary strong,
+.profile-ledger strong,
+.plan-card-top strong {
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
 }
 
-.owned-meter strong {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+.tracker-summary strong {
+  font-size: 1.25rem;
   line-height: 1;
 }
 
-.owned-meter span,
-.stat span,
+.tracker-summary span,
+.tracker-summary small,
 .field span,
-.filter-row span,
-.planner-controls span,
+.filter-grid span,
+.planner-control-bar span,
+.profile-ledger span,
+.profile-ledger small,
+.entity-row small,
 .favorite-token small,
 .component small,
+.spawn-row span,
 .spawn-pokemon small,
-.pokemon-main small,
-.habitat-row small {
+.plan-card-top span,
+.plan-card-top small,
+.plan-member small {
   color: var(--color-muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
+}
+
+.header-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-xs);
 }
 
 .utility-button,
-.primary-action {
+.primary-action,
+.quiet-action {
   min-height: 40px;
   border: 1px solid var(--color-ink);
   border-radius: var(--radius-sm);
-  font-weight: 700;
+  font-weight: 800;
   transition:
     transform 160ms ease,
     background-color 160ms ease,
+    border-color 160ms ease,
     box-shadow 160ms ease;
 }
 
@@ -141,86 +163,279 @@ h3 {
   color: var(--color-ink);
 }
 
+.primary-action {
+  padding: 0 var(--space-md);
+  background: var(--color-berry);
+  color: var(--color-paper);
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+
+.primary-action.is-owned {
+  border-color: var(--color-leaf-dark);
+  background: var(--color-leaf);
+}
+
+.quiet-action {
+  padding: 0 var(--space-md);
+  background: transparent;
+  color: var(--color-ink);
+}
+
 .utility-button:hover,
 .primary-action:hover,
+.quiet-action:hover,
+.destination-button:hover,
+.entity-row:hover,
 .plan-member:hover,
 .spawn-pokemon:hover {
   transform: translateY(-1px);
 }
 
-.status-note {
-  margin: var(--space-sm) 0 0;
-  color: var(--color-sage-dark);
-  font-weight: 700;
-}
-
-.stats-strip {
+.tab-nav {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--space-sm);
-  margin-top: var(--space-md);
-}
-
-.stat {
-  display: grid;
-  gap: 2px;
-  padding: var(--space-sm) var(--space-md);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-xs);
+  padding: var(--space-2xs);
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
-  background: color-mix(in oklch, var(--color-paper) 78%, var(--color-panel));
+  background: color-mix(in oklch, var(--color-mist) 72%, var(--color-paper));
 }
 
-.stat strong {
-  font-family: var(--font-display);
-  font-size: 1.55rem;
-  line-height: 1;
-}
-
-.workspace {
+.tab-button {
   display: grid;
-  grid-template-columns: minmax(280px, 340px) minmax(430px, 1fr) minmax(360px, 440px);
+  gap: 2px;
+  min-height: 52px;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.tab-button span {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tab-button strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.tab-button.is-active {
+  border-color: var(--color-ink);
+  background: var(--color-paper);
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.status-note {
+  margin: 0;
+  color: var(--color-leaf-dark);
+  font-weight: 800;
+}
+
+.app-view {
+  animation: view-enter 280ms var(--ease-out) both;
+}
+
+.home-grid {
+  display: grid;
+  width: min(920px, 100%);
+  justify-self: center;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "profile"
+    "next";
   gap: var(--space-md);
-  margin-top: var(--space-md);
   align-items: start;
 }
 
-.dex-panel,
-.profile-panel,
-.planner-panel,
-.atlas-list,
-.habitat-detail {
+.home-panel,
+.index-panel,
+.detail-panel,
+.planner-header,
+.plan-card {
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
-  background: color-mix(in oklch, var(--color-paper) 86%, transparent);
+  background: color-mix(in oklch, var(--color-paper) 94%, transparent);
   box-shadow: var(--shadow-soft);
 }
 
-.dex-panel,
-.planner-panel,
-.atlas-list {
+.home-panel {
   display: grid;
+  align-content: start;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+}
+
+.home-profile {
+  grid-area: profile;
+  align-content: start;
+}
+
+.home-lede {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+
+.progress-block {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.progress-block > div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.progress-block strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.progress-block span {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.progress-track {
+  display: block;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-panel);
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-leaf);
+}
+
+.profile-ledger {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.profile-ledger div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-panel);
+}
+
+.profile-ledger strong {
+  overflow: hidden;
+  font-size: 1.55rem;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-ledger .saved-date {
+  white-space: normal;
+  line-height: 1.05;
+}
+
+.home-next {
+  grid-area: next;
+}
+
+.section-heading {
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.home-destinations {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.destination-button {
+  display: grid;
+  gap: var(--space-xs);
+  min-width: 0;
+  min-height: 112px;
+  align-items: end;
+  min-width: 0;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-panel);
+  color: var(--color-ink);
+  text-align: left;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.destination-button span {
+  display: grid;
+  min-width: 0;
+  gap: var(--space-2xs);
+}
+
+.destination-button strong {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.destination-button small {
+  max-width: 24ch;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
+.destination-button.is-primary {
+  border-color: var(--color-leaf-dark);
+  background: color-mix(in oklch, var(--color-mint) 48%, var(--color-paper));
+}
+
+.planner-header p,
+.plan-card p,
+.empty-state {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.two-column-workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: var(--space-md);
+  align-items: start;
+}
+
+.index-panel,
+.detail-panel,
+.planner-header {
   padding: var(--space-md);
 }
 
-.dex-panel,
-.planner-panel {
+.index-panel {
   position: sticky;
   top: var(--space-md);
+  display: grid;
+  gap: var(--space-md);
   max-height: calc(100vh - 32px);
   overflow: auto;
-}
-
-.panel-heading {
-  justify-content: space-between;
-}
-
-.panel-copy {
-  max-width: 48ch;
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
 }
 
 .field {
@@ -246,30 +461,47 @@ select {
   padding: 0 var(--space-xl) 0 var(--space-sm);
 }
 
-.filter-row,
-.planner-controls {
+.filter-grid,
+.planner-control-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-sm);
 }
 
-.filter-row label,
-.planner-controls label {
+.filter-grid label,
+.planner-control-bar label {
   display: grid;
-  flex: 1;
   gap: var(--space-xs);
 }
 
-.pokemon-list,
-.habitat-list,
-.plan-list,
+.list-stack,
 .spawn-list {
   display: grid;
   gap: var(--space-xs);
 }
 
-.pokemon-list {
-  max-height: 58vh;
+.pokemon-list,
+.habitat-list {
+  max-height: min(62vh, 720px);
   overflow: auto;
   padding-right: var(--space-2xs);
+}
+
+.entity-row {
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-ink);
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.entity-row.is-selected {
+  border-color: var(--color-leaf);
+  background: color-mix(in oklch, var(--color-mint) 48%, var(--color-paper));
 }
 
 .pokemon-row {
@@ -277,19 +509,9 @@ select {
   grid-template-columns: minmax(0, 1fr) 34px;
   gap: var(--space-xs);
   align-items: center;
-  border: 1px solid transparent;
-  border-radius: var(--radius);
-  transition:
-    background-color 140ms ease,
-    border-color 140ms ease;
 }
 
-.pokemon-row.is-selected {
-  border-color: var(--color-sage);
-  background: oklch(91% 0.046 137);
-}
-
-.pokemon-main,
+.entity-main,
 .habitat-row,
 .plan-member,
 .spawn-pokemon {
@@ -299,7 +521,8 @@ select {
   text-align: left;
 }
 
-.pokemon-main {
+.entity-main,
+.habitat-row {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
   gap: var(--space-xs);
@@ -308,28 +531,39 @@ select {
   padding: var(--space-xs);
 }
 
-.pokemon-main img,
-.plan-member img,
-.spawn-pokemon img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  image-rendering: auto;
+.habitat-row {
+  width: 100%;
+  grid-template-columns: 58px minmax(0, 1fr);
 }
 
-.pokemon-main span,
+.entity-main img,
+.plan-member img,
+.spawn-pokemon img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.habitat-row img {
+  width: 58px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.entity-main span,
 .habitat-row span,
-.component span,
+.plan-member span,
 .spawn-pokemon span,
-.plan-member span {
+.component span {
   min-width: 0;
 }
 
-.pokemon-main strong,
+.entity-main strong,
 .habitat-row strong,
-.component strong,
+.plan-member strong,
 .spawn-pokemon strong,
-.plan-member span:not(.owned-dot) {
+.component strong,
+.favorite-token strong {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -345,53 +579,61 @@ select {
   border-radius: 50%;
   background: var(--color-paper);
   color: var(--color-paper);
-  font-weight: 800;
+  font-weight: 900;
 }
 
-.owned-toggle.is-owned,
-.primary-action.is-owned {
-  border-color: var(--color-sage-dark);
-  background: var(--color-sage);
-  color: oklch(98% 0.012 105);
+.owned-toggle.is-owned {
+  border-color: var(--color-leaf-dark);
+  background: var(--color-leaf);
+  color: var(--color-paper);
 }
 
-.profile-card {
+.detail-panel {
   display: grid;
   gap: var(--space-xl);
-  padding: var(--space-lg);
+  min-width: 0;
 }
 
-.profile-hero {
+.detail-hero {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) auto;
   gap: var(--space-lg);
+  align-items: center;
+}
+
+.pokemon-detail-hero {
+  grid-template-columns: 136px minmax(0, 1fr) auto;
 }
 
 .pokemon-portrait {
   display: grid;
-  width: 118px;
-  height: 118px;
+  width: 136px;
+  height: 136px;
   place-items: center;
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
   background:
-    linear-gradient(135deg, oklch(95% 0.04 88), oklch(91% 0.045 151));
+    linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--color-water) 24%, var(--color-paper)),
+      color-mix(in oklch, var(--color-mint) 38%, var(--color-paper))
+    );
 }
 
 .pokemon-portrait img {
-  width: 84px;
-  height: 84px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
 }
 
-.profile-title {
-  align-self: center;
+.detail-title {
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
 }
 
-.profile-title h2 {
-  margin-bottom: var(--space-sm);
-  font-size: 3.5rem;
-  line-height: 0.9;
+.detail-title h2 {
+  font-size: 3.2rem;
+  line-height: 0.92;
 }
 
 .chip-row {
@@ -406,30 +648,29 @@ select {
   padding: 0 var(--space-sm);
   border: 1px solid var(--color-line);
   border-radius: 999px;
-  background: oklch(96% 0.018 102);
+  background: color-mix(in oklch, var(--color-mist) 55%, var(--color-paper));
   color: var(--color-muted);
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: var(--text-sm);
+  font-weight: 800;
 }
 
 .chip.strong {
-  border-color: var(--color-sage-dark);
-  background: oklch(88% 0.07 143);
-  color: var(--color-sage-dark);
-}
-
-.primary-action {
-  align-self: start;
-  padding: 0 var(--space-md);
-  background: var(--color-coral);
-  color: oklch(98% 0.012 105);
-  box-shadow: 3px 3px 0 var(--color-ink);
+  border-color: var(--color-leaf-dark);
+  background: color-mix(in oklch, var(--color-mint) 58%, var(--color-paper));
+  color: var(--color-leaf-dark);
 }
 
 .detail-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 0.86fr 1.14fr;
   gap: var(--space-xl);
+  align-items: start;
+}
+
+.detail-section {
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
 }
 
 .favorite-grid,
@@ -441,7 +682,9 @@ select {
 }
 
 .favorite-token,
-.component {
+.component,
+.spawn-pokemon,
+.plan-member {
   min-width: 0;
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
@@ -466,161 +709,35 @@ select {
   padding-top: 0;
 }
 
-.spawn-row span {
-  color: var(--color-muted);
-  font-size: 0.88rem;
+.habitat-detail-hero {
+  grid-template-columns: 220px minmax(0, 1fr);
 }
 
-.check-row {
-  gap: var(--space-xs);
-  color: var(--color-muted);
-  font-size: 0.9rem;
-}
-
-.check-row input {
-  width: 18px;
-  min-height: 18px;
-}
-
-.plan {
-  display: grid;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius);
-  background: var(--color-panel);
-}
-
-.plan-rank {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-sm);
-}
-
-.plan-rank span {
-  color: var(--color-muted);
-  font-weight: 700;
-}
-
-.plan-rank strong {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-}
-
-.plan-pokemon {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-xs);
-}
-
-.plan-member,
-.spawn-pokemon {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: var(--space-xs);
-  align-items: center;
-  min-width: 0;
-  padding: var(--space-xs);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius);
-  background: var(--color-paper);
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease;
-}
-
-.owned-dot {
-  color: var(--color-sage-dark);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.plan p,
-.empty-state {
-  margin: 0;
-  color: var(--color-muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.atlas {
-  display: grid;
-  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-  align-items: start;
-}
-
-.habitat-list {
-  max-height: 520px;
-  overflow: auto;
-  padding-right: var(--space-2xs);
-}
-
-.habitat-row {
-  display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
-  gap: var(--space-sm);
-  align-items: center;
-  padding: var(--space-xs);
-  border: 1px solid transparent;
-  border-radius: var(--radius);
-}
-
-.habitat-row.is-selected {
-  border-color: var(--color-sky);
-  background: oklch(91% 0.038 218);
-}
-
-.habitat-row img {
-  width: 54px;
-  height: 42px;
-  object-fit: contain;
-}
-
-.habitat-detail {
-  display: grid;
-  gap: var(--space-xl);
-  padding: var(--space-lg);
-}
-
-.habitat-hero {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: var(--space-lg);
-  align-items: center;
-}
-
-.habitat-hero img {
-  width: 180px;
+.habitat-detail-hero > img {
+  width: 220px;
   max-width: 100%;
   aspect-ratio: 4 / 3;
   border: 1px solid var(--color-line);
   border-radius: var(--radius);
-  background: var(--color-paper);
+  background: var(--color-panel);
   object-fit: contain;
 }
 
-.habitat-hero h2 {
+.habitat-detail-hero h2 {
   margin-bottom: var(--space-xs);
   font-size: 2.35rem;
 }
 
-.habitat-hero p {
+.habitat-detail-hero p {
   max-width: 72ch;
   margin: 0 0 var(--space-md);
   color: var(--color-muted);
   line-height: 1.55;
 }
 
-.atlas-detail-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: var(--space-xl);
-}
-
-.component {
+.component,
+.spawn-pokemon,
+.plan-member {
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
   gap: var(--space-xs);
@@ -634,60 +751,161 @@ select {
   object-fit: contain;
 }
 
-@media (max-width: 1260px) {
-  .workspace {
-    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+.spawn-pokemon,
+.plan-member {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.planner-workspace {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.planner-header {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.1fr);
+  gap: var(--space-lg);
+  align-items: end;
+}
+
+.planner-header p {
+  max-width: 70ch;
+  margin-top: var(--space-xs);
+}
+
+.planner-control-bar {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+}
+
+.check-row {
+  gap: var(--space-xs);
+  min-height: 40px;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.check-row input {
+  width: 18px;
+  min-height: 18px;
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+.plan-card {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+}
+
+.plan-card-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 var(--space-xs);
+  align-items: baseline;
+}
+
+.plan-card-top small {
+  grid-column: 2;
+}
+
+.plan-card-top strong {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.plan-party {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xs);
+}
+
+@keyframes view-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
 
-  .planner-panel {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1120px) {
+  .header-main,
+  .planner-header,
+  .two-column-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .header-main {
+    display: grid;
+  }
+
+  .tracker-tools {
+    justify-content: start;
+  }
+
+  .index-panel {
     position: static;
-    grid-column: 1 / -1;
     max-height: none;
   }
 
-  .plan-list {
+  .pokemon-list,
+  .habitat-list {
+    max-height: 420px;
+  }
+
+  .planner-control-bar {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 820px) {
   .app-shell {
-    width: min(100% - 20px, 1800px);
+    width: min(100% - 20px, 1680px);
+    padding-top: var(--space-sm);
   }
 
-  .topbar,
-  .profile-hero,
+  .tab-nav,
+  .home-grid,
+  .home-destinations,
+  .profile-ledger,
   .detail-grid,
-  .atlas,
-  .atlas-detail-grid {
+  .planner-control-bar {
     grid-template-columns: 1fr;
   }
 
-  .topbar {
-    display: grid;
+  .home-grid {
+    grid-template-areas:
+      "profile"
+      "next";
   }
 
-  .data-actions {
+  .tracker-tools {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
     justify-content: start;
   }
 
-  .stats-strip,
-  .workspace,
-  .plan-list {
+  .pokemon-detail-hero,
+  .habitat-detail-hero {
     grid-template-columns: 1fr;
   }
 
-  .dex-panel {
-    position: static;
-    max-height: none;
-  }
-
-  .pokemon-list {
-    max-height: 420px;
-  }
-
-  .profile-title h2 {
-    font-size: 2.55rem;
+  .detail-title h2 {
+    font-size: 2.45rem;
   }
 
   .primary-action {
@@ -695,10 +913,37 @@ select {
   }
 }
 
+@media (max-width: 560px) {
+  .brand-block,
+  .home-destinations,
+  .plan-party,
+  .profile-ledger {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-mark {
+    width: 48px;
+    height: 48px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .home-panel,
+  .index-panel,
+  .detail-panel,
+  .planner-header,
+  .plan-card {
+    padding: var(--space-sm);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    animation-duration: 0.01ms !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
