@@ -179,6 +179,19 @@ export type HousePlan = {
   explanation: string
 }
 
+export type HouseMatch = {
+  id: string
+  name: string
+  count: number
+  pokemon: PokemonProfile[]
+}
+
+export type HouseDraftSummary = {
+  idealHabitats: HouseMatch[]
+  sharedFavorites: HouseMatch[]
+  favoriteCoverage: number
+}
+
 const pokemonDataset = pokemonJson as PokemonDataset
 const preferencesDataset = pokemonPreferencesJson as PreferencesDataset
 const habitatsDataset = habitatsJson as HabitatsDataset
@@ -376,6 +389,50 @@ export const scoreHousePlan = (group: PokemonProfile[]): HousePlan => {
   }
 }
 
+export const summarizeHouseDraft = (
+  group: PokemonProfile[],
+): HouseDraftSummary => {
+  const idealHabitatMatches = new Map<string, HouseMatch>()
+  const favoriteMatches = new Map<string, HouseMatch>()
+
+  group.forEach((entry) => {
+    if (entry.idealHabitat) {
+      const existing = idealHabitatMatches.get(entry.idealHabitat.idealHabitatId)
+
+      idealHabitatMatches.set(entry.idealHabitat.idealHabitatId, {
+        id: entry.idealHabitat.idealHabitatId,
+        name: entry.idealHabitat.name,
+        count: (existing?.count ?? 0) + 1,
+        pokemon: [...(existing?.pokemon ?? []), entry],
+      })
+    }
+
+    entry.favorites
+      .filter((favorite) => favorite.kind !== 'none')
+      .forEach((favorite) => {
+        const existing = favoriteMatches.get(favorite.favoriteId)
+
+        favoriteMatches.set(favorite.favoriteId, {
+          id: favorite.favoriteId,
+          name: favorite.name,
+          count: (existing?.count ?? 0) + 1,
+          pokemon: [...(existing?.pokemon ?? []), entry],
+        })
+      })
+  })
+
+  const byMatchStrength = (a: HouseMatch, b: HouseMatch) =>
+    b.count - a.count || a.name.localeCompare(b.name)
+
+  return {
+    idealHabitats: [...idealHabitatMatches.values()].sort(byMatchStrength),
+    sharedFavorites: [...favoriteMatches.values()]
+      .filter((favorite) => favorite.count > 1)
+      .sort(byMatchStrength),
+    favoriteCoverage: favoriteMatches.size,
+  }
+}
+
 export const generateHousePlans = (
   candidates: PokemonProfile[],
   limit = 10,
@@ -410,4 +467,3 @@ export const generateHousePlans = (
     )
     .slice(0, limit)
 }
-

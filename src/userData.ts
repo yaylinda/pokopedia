@@ -1,7 +1,16 @@
+export type SavedHouse = {
+  id: string
+  name: string
+  pokemonSlugs: string[]
+  createdAt: string
+  updatedAt: string
+}
+
 export type PokopediaUserData = {
   version: 1
   updatedAt: string
   ownedPokemonSlugs: string[]
+  savedHouses: SavedHouse[]
 }
 
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
@@ -10,10 +19,41 @@ export const createDefaultUserData = (): PokopediaUserData => ({
   version: 1,
   updatedAt: new Date().toISOString(),
   ownedPokemonSlugs: [],
+  savedHouses: [],
 })
 
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((entry) => typeof entry === 'string')
+
+const parseSavedHouse = (value: unknown): SavedHouse | null => {
+  if (!value || typeof value !== 'object') {
+    return null
+  }
+
+  const maybeHouse = value as Partial<SavedHouse>
+
+  if (
+    typeof maybeHouse.id !== 'string' ||
+    typeof maybeHouse.name !== 'string' ||
+    !isStringArray(maybeHouse.pokemonSlugs)
+  ) {
+    return null
+  }
+
+  return {
+    id: maybeHouse.id,
+    name: maybeHouse.name.trim() || 'Untitled house',
+    pokemonSlugs: [...new Set(maybeHouse.pokemonSlugs)].slice(0, 4),
+    createdAt:
+      typeof maybeHouse.createdAt === 'string'
+        ? maybeHouse.createdAt
+        : new Date().toISOString(),
+    updatedAt:
+      typeof maybeHouse.updatedAt === 'string'
+        ? maybeHouse.updatedAt
+        : new Date().toISOString(),
+  }
+}
 
 export const parseUserData = (value: unknown): PokopediaUserData | null => {
   if (!value || typeof value !== 'object') {
@@ -33,6 +73,11 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
         ? maybeData.updatedAt
         : new Date().toISOString(),
     ownedPokemonSlugs: [...new Set(maybeData.ownedPokemonSlugs)].sort(),
+    savedHouses: Array.isArray(maybeData.savedHouses)
+      ? maybeData.savedHouses
+          .map(parseSavedHouse)
+          .filter((house): house is SavedHouse => house !== null)
+      : [],
   }
 }
 
