@@ -12,29 +12,37 @@ import { PokemonExplorer, type OwnedFilter } from './components/PokemonExplorer'
 import {
   datasetStats,
   favoriteCategoryById,
-  generateHousePlans,
   habitats,
   idealHabitats,
+  pokemonBySlug,
   pokemonProfiles,
   requirementsByHabitatId,
   spawnRecordsByPokemonSlug,
   spawnsByHabitatId,
+  summarizeHouseDraft,
 } from './data/pokopia'
 import {
   parseUserData,
   readUserData,
+  type SavedHouse,
   type PokopediaUserData,
   writeUserData,
 } from './userData'
 import { formatter, normalizeSearch } from './utils/format'
 
-const createUserDataWithOwned = (
+const createUserData = (
   ownedPokemonSlugs: string[],
+  savedHouses: SavedHouse[],
 ): PokopediaUserData => ({
   version: 1,
   updatedAt: new Date().toISOString(),
   ownedPokemonSlugs: [...new Set(ownedPokemonSlugs)].sort(),
+  savedHouses,
 })
+
+const createHouseId = () =>
+  globalThis.crypto?.randomUUID?.() ??
+  `house-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('home')
@@ -49,10 +57,14 @@ function App() {
   const [selectedHabitatId, setSelectedHabitatId] = useState(
     habitats[0]?.habitatId ?? 1,
   )
-  const [plannerIdealFilter, setPlannerIdealFilter] = useState('all')
   const [plannerRosterMode, setPlannerRosterMode] =
     useState<PlannerRosterMode>('all')
-  const [buildAroundSelected, setBuildAroundSelected] = useState(false)
+  const [houseSearchQuery, setHouseSearchQuery] = useState('')
+  const [houseDraftName, setHouseDraftName] = useState('')
+  const [houseDraftSlugs, setHouseDraftSlugs] = useState<string[]>([])
+  const [selectedSavedHouseId, setSelectedSavedHouseId] = useState<
+    string | null
+  >(null)
   const [importMessage, setImportMessage] = useState('')
   const importInputRef = useRef<HTMLInputElement>(null)
 
@@ -130,29 +142,37 @@ function App() {
   const selectedHabitatSpawns =
     spawnsByHabitatId.get(selectedHabitat.habitatId)?.spawns ?? []
 
-  const plannerCandidates = useMemo(() => {
+  const draftPokemon = useMemo(
+    () =>
+      houseDraftSlugs
+        .map((slug) => pokemonBySlug.get(slug))
+        .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry)),
+    [houseDraftSlugs],
+  )
+
+  const draftSummary = useMemo(
+    () => summarizeHouseDraft(draftPokemon),
+    [draftPokemon],
+  )
+
+  const housePokemonOptions = useMemo(() => {
+    const query = normalizeSearch(houseSearchQuery)
+
     return pokemonProfiles.filter((entry) => {
-      const matchesIdeal =
-        plannerIdealFilter === 'all' ||
-        entry.idealHabitat?.idealHabitatId === plannerIdealFilter
       const matchesRoster =
         plannerRosterMode === 'all' || ownedSet.has(entry.slug)
+      const matchesQuery =
+        !query ||
+        entry.name.toLowerCase().includes(query) ||
+        entry.pokopiaNumberDisplay.toLowerCase().includes(query) ||
+        entry.idealHabitat?.name.toLowerCase().includes(query) ||
+        entry.favorites.some((favorite) =>
+          favorite.name.toLowerCase().includes(query),
+        )
 
-      return matchesIdeal && matchesRoster
+      return matchesRoster && matchesQuery
     })
-  }, [ownedSet, plannerIdealFilter, plannerRosterMode])
-
-  const housePlans = useMemo(() => {
-    const plans = generateHousePlans(plannerCandidates, 12)
-
-    if (!buildAroundSelected) {
-      return plans
-    }
-
-    return plans.filter((plan) =>
-      plan.pokemon.some((entry) => entry.slug === selectedPokemon.slug),
-    )
-  }, [buildAroundSelected, plannerCandidates, selectedPokemon.slug])
+  }, [houseSearchQuery, ownedSet, plannerRosterMode])
 
   const selectedFavoriteDetails = selectedPokemon.favorites.map((favorite) => ({
     ...favorite,
@@ -162,15 +182,95 @@ function App() {
   const ownedCount = userData.ownedPokemonSlugs.length
 
   const toggleOwned = (slug: string) => {
-    const nextOwned = new Set(userData.ownedPokemonSlugs)
+    setUserData((current) => {
+      const nextOwned = new Set(current.ownedPokemonSlugs)
 
-    if (nextOwned.has(slug)) {
-      nextOwned.delete(slug)
-    } else {
-      nextOwned.add(slug)
+      if (nextOwned.has(slug)) {
+        nextOwned.delete(slug)
+      } else {
+        nextOwned.add(slug)
+      }
+
+      return createUserData([...nextOwned], current.savedHouses)
+    })
+  }
+
+  const toggleDraftPokemon = (slug: string) => {
+    setHouseDraftSlugs((current) => {
+      if (current.includes(slug)) {
+        return current.filter((entry) => entry !== slug)
+      }
+
+      if (current.length >= 4) {
+        return current
+      }
+
+      return [...current, slug]
+    })
+  }
+
+  const clearHouseDraft = () => {
+    setHouseDraftName('')
+    setHouseDraftSlugs([])
+    setSelectedSavedHouseId(null)
+  }
+
+  const saveHouse = () => {
+    const name = houseDraftName.trim()
+
+    if (!name || houseDraftSlugs.length === 0) {
+      return
     }
 
-    setUserData(createUserDataWithOwned([...nextOwned]))
+    const now = new Date().toISOString()
+    const uniqueSlugs = [...new Set(houseDraftSlugs)].slice(0, 4)
+    const targetHouseId = selectedSavedHouseId ?? createHouseId()
+
+    setUserData((current) => {
+      const existingHouse = current.savedHouses.find(
+        (house) => house.id === targetHouseId,
+      )
+      const savedHouse: SavedHouse = {
+        id: targetHouseId,
+        name,
+        pokemonSlugs: uniqueSlugs,
+        createdAt: existingHouse?.createdAt ?? now,
+        updatedAt: now,
+      }
+      const savedHouses = existingHouse
+        ? current.savedHouses.map((house) =>
+            house.id === targetHouseId ? savedHouse : house,
+          )
+        : [savedHouse, ...current.savedHouses]
+
+      return createUserData(current.ownedPokemonSlugs, savedHouses)
+    })
+    setSelectedSavedHouseId(targetHouseId)
+  }
+
+  const loadHouse = (houseId: string) => {
+    const house = userData.savedHouses.find((entry) => entry.id === houseId)
+
+    if (!house) {
+      return
+    }
+
+    setHouseDraftName(house.name)
+    setHouseDraftSlugs(house.pokemonSlugs)
+    setSelectedSavedHouseId(house.id)
+  }
+
+  const deleteHouse = (houseId: string) => {
+    setUserData((current) =>
+      createUserData(
+        current.ownedPokemonSlugs,
+        current.savedHouses.filter((house) => house.id !== houseId),
+      ),
+    )
+
+    if (selectedSavedHouseId === houseId) {
+      clearHouseDraft()
+    }
   }
 
   const exportUserData = () => {
@@ -205,9 +305,18 @@ function App() {
         validSlugs.has(slug),
       )
 
-      setUserData(createUserDataWithOwned(ownedPokemonSlugs))
+      const savedHouses = parsed.savedHouses
+        .map((house) => ({
+          ...house,
+          pokemonSlugs: house.pokemonSlugs.filter((slug) =>
+            validSlugs.has(slug),
+          ),
+        }))
+        .filter((house) => house.pokemonSlugs.length > 0)
+
+      setUserData(createUserData(ownedPokemonSlugs, savedHouses))
       setImportMessage(
-        `Imported ${formatter.format(ownedPokemonSlugs.length)} owned Pokemon.`,
+        `Imported ${formatter.format(ownedPokemonSlugs.length)} owned Pokemon and ${formatter.format(savedHouses.length)} houses.`,
       )
     } catch {
       setImportMessage('That file could not be read as JSON.')
@@ -291,17 +400,23 @@ function App() {
 
       {activeTab === 'planner' ? (
         <HousePlanner
-          buildAroundSelected={buildAroundSelected}
-          housePlans={housePlans}
-          idealHabitats={idealHabitats}
-          onBuildAroundSelectedChange={setBuildAroundSelected}
-          onIdealFilterChange={setPlannerIdealFilter}
+          draftName={houseDraftName}
+          draftPokemon={draftPokemon}
+          draftSummary={draftSummary}
+          houseSearchQuery={houseSearchQuery}
+          onDeleteHouse={deleteHouse}
+          onDraftNameChange={setHouseDraftName}
+          onHouseSearchQueryChange={setHouseSearchQuery}
+          onLoadHouse={loadHouse}
+          onNewHouse={clearHouseDraft}
           onRosterModeChange={setPlannerRosterMode}
-          onSelectPokemon={openPokemon}
+          onSaveHouse={saveHouse}
+          onToggleDraftPokemon={toggleDraftPokemon}
           ownedSet={ownedSet}
-          plannerIdealFilter={plannerIdealFilter}
+          pokemonOptions={housePokemonOptions}
           plannerRosterMode={plannerRosterMode}
-          selectedPokemon={selectedPokemon}
+          savedHouses={userData.savedHouses}
+          selectedSavedHouseId={selectedSavedHouseId}
         />
       ) : null}
     </main>
