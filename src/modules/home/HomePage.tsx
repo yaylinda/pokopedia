@@ -1,20 +1,12 @@
-import { formatSavedAt, formatter, percentFormatter } from '../utils/format'
+import { useNavigate } from 'react-router-dom'
+import { useUserData } from '../../app/userDataContext'
+import { datasetStats } from '../../data/pokopia'
+import { formatSavedAt, formatter, percentFormatter } from '../../utils/format'
 
-export function HomeDashboard({
-  lastSavedAt,
-  onOpenHabitats,
-  onOpenPlanner,
-  onOpenPokemon,
-  ownedCount,
-  totalPokemon,
-}: {
-  lastSavedAt: string
-  onOpenHabitats: () => void
-  onOpenPlanner: () => void
-  onOpenPokemon: () => void
-  ownedCount: number
-  totalPokemon: number
-}) {
+export function HomePage() {
+  const navigate = useNavigate()
+  const { ownedCount, userData } = useUserData()
+  const totalPokemon = datasetStats.pokemon
   const completion = totalPokemon > 0 ? ownedCount / totalPokemon : 0
   const missingCount = Math.max(totalPokemon - ownedCount, 0)
 
@@ -56,7 +48,9 @@ export function HomeDashboard({
           </div>
           <div>
             <span>Saved</span>
-            <strong className="saved-date">{formatSavedAt(lastSavedAt)}</strong>
+            <strong className="saved-date">
+              {formatSavedAt(userData.updatedAt)}
+            </strong>
             <small>in this browser</small>
           </div>
         </div>
@@ -71,19 +65,31 @@ export function HomeDashboard({
         </div>
 
         <div className="home-destinations">
-          <button className="destination-button is-primary" type="button" onClick={onOpenPokemon}>
+          <button
+            className="destination-button is-primary"
+            type="button"
+            onClick={() => navigate('/pokemon')}
+          >
             <span>
               <strong>Pokédex</strong>
               <small>Search Pokemon and update ownership.</small>
             </span>
           </button>
-          <button className="destination-button" type="button" onClick={onOpenHabitats}>
+          <button
+            className="destination-button"
+            type="button"
+            onClick={() => navigate('/habitats')}
+          >
             <span>
               <strong>Habitats</strong>
               <small>Check components and spawn rules.</small>
             </span>
           </button>
-          <button className="destination-button" type="button" onClick={onOpenPlanner}>
+          <button
+            className="destination-button"
+            type="button"
+            onClick={() => navigate('/planner')}
+          >
             <span>
               <strong>Planner</strong>
               <small>Compare house groups of four.</small>

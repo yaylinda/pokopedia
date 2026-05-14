@@ -1,4 +1,5 @@
-export type TabId = 'home' | 'pokemon' | 'habitats' | 'planner'
+import { NavLink } from 'react-router-dom'
+import { tabRoutes, type TabId } from '../routing'
 
 const tabs: { id: TabId; label: string; kicker: string }[] = [
   { id: 'home', label: 'Home', kicker: 'Tracker' },
@@ -7,29 +8,21 @@ const tabs: { id: TabId; label: string; kicker: string }[] = [
   { id: 'planner', label: 'Planner', kicker: 'Houses' },
 ]
 
-export function NavigationTabs({
-  activeTab,
-  onChange,
-}: {
-  activeTab: TabId
-  onChange: (tab: TabId) => void
-}) {
+export function NavigationTabs() {
   return (
-    <nav className="tab-nav" aria-label="Primary sections" role="tablist">
+    <nav className="tab-nav" aria-label="Primary sections">
       {tabs.map((tab) => (
-        <button
-          aria-controls={`${tab.id}-panel`}
-          aria-selected={activeTab === tab.id}
-          className={activeTab === tab.id ? 'tab-button is-active' : 'tab-button'}
-          id={`${tab.id}-tab`}
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'tab-link is-active' : 'tab-link'
+          }
+          end={tab.id === 'home'}
           key={tab.id}
-          onClick={() => onChange(tab.id)}
-          role="tab"
-          type="button"
+          to={tabRoutes[tab.id]}
         >
           <span>{tab.kicker}</span>
           <strong>{tab.label}</strong>
-        </button>
+        </NavLink>
       ))}
     </nav>
   )

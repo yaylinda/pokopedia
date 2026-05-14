@@ -2,8 +2,8 @@ import type {
   IdealHabitat,
   PokemonProfile,
   PokemonSpawnRecord,
-} from '../data/pokopia'
-import { formatNameList, formatter } from '../utils/format'
+} from '../../../data/pokopia'
+import { formatNameList, formatter } from '../../../utils/format'
 
 export type OwnedFilter = 'all' | 'missing' | 'owned'
 
@@ -16,8 +16,10 @@ export function PokemonExplorer({
   filteredPokemon,
   idealFilter,
   idealHabitats,
+  isIndexCollapsed,
   isSelectedOwned,
   onIdealFilterChange,
+  onIndexToggle,
   onOwnedFilterChange,
   onPokemonQueryChange,
   onSelectPokemon,
@@ -32,8 +34,10 @@ export function PokemonExplorer({
   filteredPokemon: PokemonProfile[]
   idealFilter: string
   idealHabitats: IdealHabitat[]
+  isIndexCollapsed: boolean
   isSelectedOwned: boolean
   onIdealFilterChange: (filter: string) => void
+  onIndexToggle: () => void
   onOwnedFilterChange: (filter: OwnedFilter) => void
   onPokemonQueryChange: (query: string) => void
   onSelectPokemon: (slug: string) => void
@@ -51,7 +55,14 @@ export function PokemonExplorer({
       id="pokemon-panel"
       role="tabpanel"
     >
-      <aside className="index-panel pokemon-index" aria-label="Pokemon list">
+      <aside
+        className={
+          isIndexCollapsed
+            ? 'index-panel explorer-index pokemon-index is-collapsed'
+            : 'index-panel explorer-index pokemon-index'
+        }
+        aria-label="Pokemon list"
+      >
         <div className="section-heading">
           <div>
             <p className="eyebrow">Pokédex</p>
@@ -59,62 +70,77 @@ export function PokemonExplorer({
               {formatter.format(filteredPokemon.length)} entries
             </h2>
           </div>
+          <button
+            aria-controls="pokemon-index-body"
+            aria-expanded={!isIndexCollapsed}
+            className="index-toggle"
+            onClick={onIndexToggle}
+            type="button"
+          >
+            <span>{isIndexCollapsed ? 'Browse' : 'Hide'}</span>
+            <small>{selectedPokemon.name}</small>
+          </button>
         </div>
 
-        <label className="field">
-          <span>Search Pokemon, specialty, favorite</span>
-          <input
-            value={pokemonQuery}
-            onChange={(event) => onPokemonQueryChange(event.target.value)}
-            placeholder="Bulbasaur, Grow, soft stuff..."
-          />
-        </label>
-
-        <div className="filter-grid">
-          <label>
-            <span>Ideal</span>
-            <select
-              value={idealFilter}
-              onChange={(event) => onIdealFilterChange(event.target.value)}
-            >
-              <option value="all">All ideals</option>
-              {idealHabitats.map((habitat) => (
-                <option key={habitat.idealHabitatId} value={habitat.idealHabitatId}>
-                  {habitat.name}
-                </option>
-              ))}
-            </select>
+        <div className="index-panel-body" id="pokemon-index-body">
+          <label className="field">
+            <span>Search Pokemon, specialty, favorite</span>
+            <input
+              value={pokemonQuery}
+              onChange={(event) => onPokemonQueryChange(event.target.value)}
+              placeholder="Bulbasaur, Grow, soft stuff..."
+            />
           </label>
-          <label>
-            <span>Tracker</span>
-            <select
-              value={ownedFilter}
-              onChange={(event) =>
-                onOwnedFilterChange(event.target.value as OwnedFilter)
-              }
-            >
-              <option value="all">All</option>
-              <option value="owned">Owned</option>
-              <option value="missing">Missing</option>
-            </select>
-          </label>
-        </div>
 
-        <div className="list-stack pokemon-list" role="list">
-          {filteredPokemon.length > 0 ? (
-            filteredPokemon.map((entry) => (
-              <PokemonListButton
-                entry={entry}
-                isOwned={ownedSet.has(entry.slug)}
-                isSelected={entry.slug === selectedPokemon.slug}
-                key={entry.slug}
-                onSelect={() => onSelectPokemon(entry.slug)}
-                onToggleOwned={() => onToggleOwned(entry.slug)}
-              />
-            ))
-          ) : (
-            <p className="empty-state">No Pokemon match those filters.</p>
-          )}
+          <div className="filter-grid">
+            <label>
+              <span>Ideal</span>
+              <select
+                value={idealFilter}
+                onChange={(event) => onIdealFilterChange(event.target.value)}
+              >
+                <option value="all">All ideals</option>
+                {idealHabitats.map((habitat) => (
+                  <option
+                    key={habitat.idealHabitatId}
+                    value={habitat.idealHabitatId}
+                  >
+                    {habitat.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>Tracker</span>
+              <select
+                value={ownedFilter}
+                onChange={(event) =>
+                  onOwnedFilterChange(event.target.value as OwnedFilter)
+                }
+              >
+                <option value="all">All</option>
+                <option value="owned">Owned</option>
+                <option value="missing">Missing</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="list-stack pokemon-list" role="list">
+            {filteredPokemon.length > 0 ? (
+              filteredPokemon.map((entry) => (
+                <PokemonListButton
+                  entry={entry}
+                  isOwned={ownedSet.has(entry.slug)}
+                  isSelected={entry.slug === selectedPokemon.slug}
+                  key={entry.slug}
+                  onSelect={() => onSelectPokemon(entry.slug)}
+                  onToggleOwned={() => onToggleOwned(entry.slug)}
+                />
+              ))
+            ) : (
+              <p className="empty-state">No Pokemon match those filters.</p>
+            )}
+          </div>
         </div>
       </aside>
 
