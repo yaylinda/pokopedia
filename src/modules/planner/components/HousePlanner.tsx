@@ -3,7 +3,7 @@ import {
   type HouseDraftSummary,
   type PokemonProfile,
 } from '../../../data/pokopia'
-import type { SavedHouse } from '../../../userData'
+import type { SavedHouse } from '../../../data/types'
 import { formatNameList, formatter } from '../../../utils/format'
 
 export type PlannerRosterMode = 'all' | 'owned'

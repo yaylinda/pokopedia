@@ -9,7 +9,7 @@ import LinearProgress from '@mui/material/LinearProgress'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
-import { useUserData } from '../../app/userDataContext'
+import { useUserData } from '../../data/userDataContext'
 import { datasetStats } from '../../data/pokopia'
 import { formatSavedAt, formatter, percentFormatter } from '../../utils/format'
 

@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
-import { useUserData } from '../../../app/userDataContext'
 import {
   pokemonBySlug,
   pokemonProfiles,
   summarizeHouseDraft,
 } from '../../../data/pokopia'
-import type { SavedHouse } from '../../../userData'
+import { useUserData } from '../../../data/userDataContext'
+import type { SavedHouse } from '../../../data/types'
 import { normalizeSearch } from '../../../utils/format'
 import type { PlannerRosterMode } from '../components/HousePlanner'
 

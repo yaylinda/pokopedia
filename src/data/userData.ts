@@ -1,17 +1,4 @@
-export type SavedHouse = {
-  id: string
-  name: string
-  pokemonSlugs: string[]
-  createdAt: string
-  updatedAt: string
-}
-
-export type PokopediaUserData = {
-  version: 1
-  updatedAt: string
-  ownedPokemonSlugs: string[]
-  savedHouses: SavedHouse[]
-}
+import type { PokopediaUserData, SavedHouse } from './types'
 
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 

@@ -5,14 +5,14 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { pokemonProfiles } from '../data/pokopia'
+import { pokemonProfiles } from './pokopia'
 import {
   createUserData,
   parseUserData,
   readUserData,
-  type SavedHouse,
   writeUserData,
-} from '../userData'
+} from './userData'
+import type { SavedHouse } from './types'
 import { formatter } from '../utils/format'
 import { UserDataContext, type UserDataContextValue } from './userDataContext'
 

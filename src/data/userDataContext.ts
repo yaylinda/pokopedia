@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 import type { RefObject } from 'react'
-import type { PokopediaUserData, SavedHouse } from '../userData'
+import type { PokopediaUserData, SavedHouse } from './types'
 
 export type UserDataContextValue = {
   importInputRef: RefObject<HTMLInputElement | null>

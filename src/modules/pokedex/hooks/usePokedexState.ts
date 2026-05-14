@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useUserData } from '../../../app/userDataContext'
+import { useUserData } from '../../../data/userDataContext'
 import {
   favoriteCategoryById,
   idealHabitats,
