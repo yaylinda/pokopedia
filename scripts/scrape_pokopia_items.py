@@ -18,7 +18,6 @@ from pokopia_common import (
     first_src,
     location_id_from_slug,
     normalize_anchor_id,
-    path_relative_to_root,
     slug_from_path,
     split_br_chunks,
     utc_now,
@@ -27,10 +26,10 @@ from pokopia_common import (
 
 SOURCE_URL = "https://www.serebii.net/pokemonpokopia/items.shtml"
 BASE_URL = "https://www.serebii.net/pokemonpokopia/"
-RAW_HTML_PATH = ROOT / "data" / "raw" / "pokemonpokopia" / "items.html"
-ITEMS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "items.json"
-ANCHORS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "item-anchors.json"
-TAGS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "item-tags.json"
+ITEMS_OUTPUT_PATH = ROOT / "data" / "items.json"
+ANCHORS_OUTPUT_PATH = ROOT / "data" / "item-anchors.json"
+TAGS_OUTPUT_PATH = ROOT / "data" / "item-tags.json"
+TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "items.html"
 
 SECTION_RE = re.compile(
     r'<p><h2><a name="(?P<anchor>[^"]+)"></a>List of (?P<name>[^<]+)</h2></p>\s*'
@@ -54,8 +53,8 @@ PRIMARY_LOCATION_NAMES = {
 
 def main() -> None:
     html = fetch_html(SOURCE_URL)
-    RAW_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RAW_HTML_PATH.write_text(html, encoding="utf-8")
+    TMP_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
+    TMP_HTML_PATH.write_text(html, encoding="utf-8")
 
     standard_tags = parse_standard_tags(html)
     anchors, items, discovered_tags = parse_sections(html)
@@ -66,7 +65,6 @@ def main() -> None:
         "name": "Serebii",
         "page": SOURCE_URL,
         "fetchedAt": utc_now(),
-        "htmlSnapshotPath": path_relative_to_root(RAW_HTML_PATH),
     }
 
     write_json(

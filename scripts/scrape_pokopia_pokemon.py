@@ -16,8 +16,8 @@ from urllib.request import Request, urlopen
 SOURCE_URL = "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
 BASE_URL = "https://www.serebii.net/"
 ROOT = Path(__file__).resolve().parent.parent
-RAW_HTML_PATH = ROOT / "data" / "raw" / "pokemonpokopia" / "availablepokemon.html"
-OUTPUT_JSON_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "pokemon.json"
+OUTPUT_JSON_PATH = ROOT / "data" / "pokemon.json"
+TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "availablepokemon.html"
 
 ROW_START_RE = re.compile(r'<td class="cen">#(?P<number>\d+)</td>')
 POKEMON_CELL_RE = re.compile(
@@ -39,8 +39,8 @@ class ParseResult:
 
 def main() -> None:
     html = fetch_html(SOURCE_URL)
-    RAW_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RAW_HTML_PATH.write_text(html, encoding="utf-8")
+    TMP_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
+    TMP_HTML_PATH.write_text(html, encoding="utf-8")
 
     result = ParseResult(
         fetched_at=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
@@ -57,7 +57,6 @@ def main() -> None:
                     "name": "Serebii",
                     "page": SOURCE_URL,
                     "fetchedAt": result.fetched_at,
-                    "htmlSnapshotPath": path_relative_to_root(RAW_HTML_PATH),
                     "notes": [
                         "The table No. column is the Pokopia number, not the Pokemon ID.",
                         "pokemonId is derived from the Pokemon image filename.",
@@ -198,10 +197,6 @@ def clean_text(value: str) -> str:
 
 def absolute_url(path: str) -> str:
     return urljoin(BASE_URL, path)
-
-
-def path_relative_to_root(path: Path) -> str:
-    return path.relative_to(ROOT).as_posix()
 
 
 if __name__ == "__main__":

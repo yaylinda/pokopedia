@@ -14,8 +14,8 @@ from urllib.request import Request, urlopen
 SOURCE_URL = "https://www.serebii.net/pokemonpokopia/habitats.shtml"
 BASE_URL = "https://www.serebii.net/pokemonpokopia/"
 ROOT = Path(__file__).resolve().parent.parent
-RAW_HTML_PATH = ROOT / "data" / "raw" / "pokemonpokopia" / "habitats.html"
-OUTPUT_JSON_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "habitats.json"
+OUTPUT_JSON_PATH = ROOT / "data" / "habitats.json"
+TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "habitats.html"
 
 TABLE_RE = re.compile(
     r"<p><h2>List of Habitats</h2></p>\s*<table align=\"center\" class=\"dextable\">(?P<table>.*?)</table>",
@@ -35,8 +35,8 @@ ROW_RE = re.compile(
 
 def main() -> None:
     html = fetch_html(SOURCE_URL)
-    RAW_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RAW_HTML_PATH.write_text(html, encoding="utf-8")
+    TMP_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
+    TMP_HTML_PATH.write_text(html, encoding="utf-8")
 
     habitats = parse_habitats(html)
 
@@ -48,7 +48,6 @@ def main() -> None:
                     "name": "Serebii",
                     "page": SOURCE_URL,
                     "fetchedAt": utc_now(),
-                    "htmlSnapshotPath": path_relative_to_root(RAW_HTML_PATH),
                     "notes": [
                         "This dataset includes only the top-level habitats table.",
                         "The separate Habitats (Event) section is intentionally excluded.",
@@ -125,10 +124,6 @@ def clean_text(value: str) -> str:
 
 def absolute_url(path: str) -> str:
     return urljoin(BASE_URL, path)
-
-
-def path_relative_to_root(path: Path) -> str:
-    return path.relative_to(ROOT).as_posix()
 
 
 def utc_now() -> str:

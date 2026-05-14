@@ -17,19 +17,18 @@ from pokopia_common import (
     first_href,
     first_src,
     location_id_from_slug,
-    path_relative_to_root,
     slug_from_path,
     split_br_chunks,
     utc_now,
     write_json,
 )
 
-HABITATS_INPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "habitats.json"
-ITEMS_INPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "items.json"
-POKEMON_INPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "pokemon.json"
-RAW_HTML_DIR = ROOT / "data" / "raw" / "pokemonpokopia" / "habitatdex"
-REQUIREMENTS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "habitat-requirements.json"
-SPAWNS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "habitat-spawns.json"
+HABITATS_INPUT_PATH = ROOT / "data" / "habitats.json"
+ITEMS_INPUT_PATH = ROOT / "data" / "items.json"
+POKEMON_INPUT_PATH = ROOT / "data" / "pokemon.json"
+REQUIREMENTS_OUTPUT_PATH = ROOT / "data" / "habitat-requirements.json"
+SPAWNS_OUTPUT_PATH = ROOT / "data" / "habitat-spawns.json"
+TMP_HTML_DIR = ROOT / ".tmp" / "pokopia-html" / "habitatdex"
 BASE_URL = "https://www.serebii.net/pokemonpokopia/"
 
 IMAGE_FILENAME_RE = re.compile(r"/(?P<id>\d+)(?:-(?P<form>[^/.]+))?\.png$")
@@ -50,8 +49,6 @@ def main() -> None:
     pokemon_by_detail = {entry["detailUrl"]: entry for entry in pokemon}
     pokemon_by_name = build_unique_lookup(pokemon, "name")
 
-    RAW_HTML_DIR.mkdir(parents=True, exist_ok=True)
-
     requirements_records: list[dict[str, object]] = []
     spawn_records: list[dict[str, object]] = []
     total_requirements = 0
@@ -59,8 +56,9 @@ def main() -> None:
 
     for habitat in habitats:
         html = fetch_html(habitat["detailUrl"])
-        raw_path = RAW_HTML_DIR / f"{habitat['slug']}.html"
-        raw_path.write_text(html, encoding="utf-8")
+        tmp_path = TMP_HTML_DIR / f"{habitat['slug']}.html"
+        tmp_path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_path.write_text(html, encoding="utf-8")
 
         requirements = parse_requirements(
             html=html,
@@ -81,7 +79,6 @@ def main() -> None:
             "habitatSlug": habitat["slug"],
             "habitatName": habitat["name"],
             "detailUrl": habitat["detailUrl"],
-            "rawHtmlPath": path_relative_to_root(raw_path),
         }
         requirements_records.append({**habitat_summary, "requirements": requirements})
         spawn_records.append({**habitat_summary, "spawns": spawns})
@@ -90,7 +87,6 @@ def main() -> None:
         "name": "Serebii",
         "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
         "fetchedAt": utc_now(),
-        "rawHtmlDirectory": path_relative_to_root(RAW_HTML_DIR),
         "notes": [
             "Cloud Island is omitted from normalized spawn locations.",
             "Requirement rows without direct item links are reconciled against the item catalog by exact name when possible.",

@@ -1,13 +1,13 @@
-import favoriteCategoriesJson from '../../data/json/pokemonpokopia/favorite-categories.json'
-import habitatRequirementsJson from '../../data/json/pokemonpokopia/habitat-requirements.json'
-import habitatSpawnsJson from '../../data/json/pokemonpokopia/habitat-spawns.json'
-import habitatsJson from '../../data/json/pokemonpokopia/habitats.json'
-import idealHabitatsJson from '../../data/json/pokemonpokopia/ideal-habitats.json'
-import itemsJson from '../../data/json/pokemonpokopia/items.json'
-import locationsJson from '../../data/json/pokemonpokopia/locations.json'
-import pokemonJson from '../../data/json/pokemonpokopia/pokemon.json'
-import pokemonPreferencesJson from '../../data/json/pokemonpokopia/pokemon-preferences.json'
-import specialtiesJson from '../../data/json/pokemonpokopia/specialties.json'
+import favoriteCategoriesJson from '../../data/favorite-categories.json'
+import habitatRequirementsJson from '../../data/habitat-requirements.json'
+import habitatSpawnsJson from '../../data/habitat-spawns.json'
+import habitatsJson from '../../data/habitats.json'
+import idealHabitatsJson from '../../data/ideal-habitats.json'
+import itemsJson from '../../data/items.json'
+import locationsJson from '../../data/locations.json'
+import pokemonJson from '../../data/pokemon.json'
+import pokemonPreferencesJson from '../../data/pokemon-preferences.json'
+import specialtiesJson from '../../data/specialties.json'
 
 export type Specialty = {
   slug: string
