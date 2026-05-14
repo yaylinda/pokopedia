@@ -18,20 +18,19 @@ from pokopia_common import (
     first_alt,
     first_href,
     first_src,
-    path_relative_to_root,
     slug_from_path,
     utc_now,
     write_json,
 )
 
-POKEMON_INPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "pokemon.json"
-ITEMS_INPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "items.json"
-RAW_POKEDEX_DIR = ROOT / "data" / "raw" / "pokemonpokopia" / "pokedex"
-RAW_FAVORITES_DIR = ROOT / "data" / "raw" / "pokemonpokopia" / "favorites"
-RAW_FLAVORS_PATH = ROOT / "data" / "raw" / "pokemonpokopia" / "flavors.html"
-POKEMON_PREFERENCES_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "pokemon-preferences.json"
-IDEAL_HABITATS_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "ideal-habitats.json"
-FAVORITE_CATEGORIES_OUTPUT_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "favorite-categories.json"
+POKEMON_INPUT_PATH = ROOT / "data" / "pokemon.json"
+ITEMS_INPUT_PATH = ROOT / "data" / "items.json"
+POKEMON_PREFERENCES_OUTPUT_PATH = ROOT / "data" / "pokemon-preferences.json"
+IDEAL_HABITATS_OUTPUT_PATH = ROOT / "data" / "ideal-habitats.json"
+FAVORITE_CATEGORIES_OUTPUT_PATH = ROOT / "data" / "favorite-categories.json"
+TMP_POKEDEX_DIR = ROOT / ".tmp" / "pokopia-html" / "pokedex"
+TMP_FAVORITES_DIR = ROOT / ".tmp" / "pokopia-html" / "favorites"
+TMP_FLAVORS_PATH = ROOT / ".tmp" / "pokopia-html" / "flavors.html"
 
 BASE_URL = "https://www.serebii.net/pokemonpokopia/"
 FLAVORS_URL = "https://www.serebii.net/pokemonpokopia/flavors.shtml"
@@ -51,17 +50,15 @@ def main() -> None:
     items_by_detail = {item["detailUrl"]: item for item in items}
     items_by_name = build_unique_lookup(items, "name")
 
-    RAW_POKEDEX_DIR.mkdir(parents=True, exist_ok=True)
-    RAW_FAVORITES_DIR.mkdir(parents=True, exist_ok=True)
-
     preferences: list[dict[str, Any]] = []
     ideal_habitats_by_id: dict[str, dict[str, Any]] = {}
     favorite_categories_by_id: dict[str, dict[str, Any]] = {}
 
     for pokemon_entry in pokemon:
         html = fetch_html(pokemon_entry["detailUrl"])
-        raw_path = RAW_POKEDEX_DIR / f"{pokemon_entry['slug']}.html"
-        raw_path.write_text(html, encoding="utf-8")
+        tmp_path = TMP_POKEDEX_DIR / f"{pokemon_entry['slug']}.html"
+        tmp_path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_path.write_text(html, encoding="utf-8")
 
         ideal_habitat, favorites = parse_preferences_table(html)
         if ideal_habitat:
@@ -90,7 +87,6 @@ def main() -> None:
                 "pokemonIdDisplay": pokemon_entry["pokemonIdDisplay"],
                 "pokemonName": pokemon_entry["name"],
                 "pokemonDetailUrl": pokemon_entry["detailUrl"],
-                "rawHtmlPath": path_relative_to_root(raw_path),
                 "idealHabitat": ideal_habitat,
                 "favorites": favorites,
             }
@@ -110,7 +106,6 @@ def main() -> None:
         "name": "Serebii",
         "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml",
         "fetchedAt": fetched_at,
-        "rawPokedexHtmlDirectory": path_relative_to_root(RAW_POKEDEX_DIR),
         "notes": [
             "Pokemon preference data is parsed from each Pokemon detail page's Stats table.",
             "Favorite item lists are parsed from linked favorite pages and the shared flavors page.",
@@ -133,11 +128,7 @@ def main() -> None:
     write_json(
         FAVORITE_CATEGORIES_OUTPUT_PATH,
         {
-            "source": {
-                **common_source,
-                "rawFavoritesHtmlDirectory": path_relative_to_root(RAW_FAVORITES_DIR),
-                "rawFlavorsHtmlPath": path_relative_to_root(RAW_FLAVORS_PATH),
-            },
+            "source": common_source,
             "count": len(favorite_categories),
             "favoriteCategories": sorted(
                 favorite_categories,
@@ -269,38 +260,36 @@ def hydrate_favorite_category(
 
     if category["kind"] == "flavor":
         html = fetch_html(FLAVORS_URL)
-        RAW_FLAVORS_PATH.write_text(html, encoding="utf-8")
+        TMP_FLAVORS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        TMP_FLAVORS_PATH.write_text(html, encoding="utf-8")
         items = parse_flavor_items(
             html=html,
             favorite_id=category["favoriteId"],
             items_by_name=items_by_name,
         )
-        raw_html_path = path_relative_to_root(RAW_FLAVORS_PATH)
         source_anchor = FLAVOR_ANCHORS.get(category["favoriteId"])
         fetch_status = 200
         fetch_error = None
     elif category["kind"] == "favorite-category":
-        raw_path = RAW_FAVORITES_DIR / f"{category['favoriteId']}.html"
         try:
             html = fetch_html(category["detailUrl"])
-            raw_path.write_text(html, encoding="utf-8")
+            tmp_path = TMP_FAVORITES_DIR / f"{category['favoriteId']}.html"
+            tmp_path.parent.mkdir(parents=True, exist_ok=True)
+            tmp_path.write_text(html, encoding="utf-8")
             items = parse_favorite_items(
                 html=html,
                 items_by_detail=items_by_detail,
                 items_by_name=items_by_name,
             )
-            raw_html_path = path_relative_to_root(raw_path)
             fetch_status = 200
             fetch_error = None
         except HTTPError as error:
             items = []
-            raw_html_path = None
             fetch_status = error.code
             fetch_error = f"HTTP {error.code}: {error.reason}"
         source_anchor = "items"
     else:
         items = []
-        raw_html_path = None
         source_anchor = None
         fetch_status = None
         fetch_error = None
@@ -309,7 +298,6 @@ def hydrate_favorite_category(
         **category,
         "sourcePageUrl": source_page_url,
         "sourceAnchor": source_anchor,
-        "rawHtmlPath": raw_html_path,
         "fetchStatus": fetch_status,
         "fetchError": fetch_error,
         "itemCount": len(items),

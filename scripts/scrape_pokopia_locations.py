@@ -15,7 +15,6 @@ from pokopia_common import (
     first_href,
     first_src,
     location_id_from_slug,
-    path_relative_to_root,
     slug_from_path,
     utc_now,
     write_json,
@@ -23,14 +22,14 @@ from pokopia_common import (
 
 SOURCE_URL = "https://www.serebii.net/pokemonpokopia/locations.shtml"
 BASE_URL = "https://www.serebii.net/pokemonpokopia/"
-RAW_HTML_PATH = ROOT / "data" / "raw" / "pokemonpokopia" / "locations.html"
-OUTPUT_JSON_PATH = ROOT / "data" / "json" / "pokemonpokopia" / "locations.json"
+OUTPUT_JSON_PATH = ROOT / "data" / "locations.json"
+TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "locations.html"
 
 
 def main() -> None:
     html = fetch_html(SOURCE_URL)
-    RAW_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RAW_HTML_PATH.write_text(html, encoding="utf-8")
+    TMP_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
+    TMP_HTML_PATH.write_text(html, encoding="utf-8")
 
     included_locations, excluded_locations = parse_locations(html)
 
@@ -41,7 +40,6 @@ def main() -> None:
                 "name": "Serebii",
                 "page": SOURCE_URL,
                 "fetchedAt": utc_now(),
-                "htmlSnapshotPath": path_relative_to_root(RAW_HTML_PATH),
                 "notes": [
                     "This dataset includes only the five main playable locations.",
                     "Cloud Island is intentionally excluded from normalized location data.",
