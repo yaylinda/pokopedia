@@ -1,3 +1,13 @@
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import ButtonBase from '@mui/material/ButtonBase'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Chip from '@mui/material/Chip'
+import MenuItem from '@mui/material/MenuItem'
+import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import type {
   IdealHabitat,
   PokemonProfile,
@@ -49,100 +59,139 @@ export function PokemonExplorer({
   selectedPokemonSpawns: PokemonSpawnRecord[]
 }) {
   return (
-    <section
+    <Box
       aria-labelledby="pokemon-heading"
-      className="app-view two-column-workspace"
+      component="section"
       id="pokemon-panel"
       role="tabpanel"
+      sx={{
+        alignItems: 'start',
+        display: 'grid',
+        gap: 2,
+        gridTemplateColumns: { xs: '1fr', lg: 'minmax(280px, 360px) minmax(0, 1fr)' },
+      }}
     >
-      <aside
-        className={
-          isIndexCollapsed
-            ? 'index-panel explorer-index pokemon-index is-collapsed'
-            : 'index-panel explorer-index pokemon-index'
-        }
+      <Card
         aria-label="Pokemon list"
+        component="aside"
+        sx={{
+          position: { xs: 'static', lg: 'sticky' },
+          top: 84,
+          maxHeight: { xs: 'none', lg: 'calc(100vh - 32px)' },
+          overflow: 'auto',
+        }}
       >
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Pokédex</p>
-            <h2 id="pokemon-heading">
-              {formatter.format(filteredPokemon.length)} entries
-            </h2>
-          </div>
-          <button
-            aria-controls="pokemon-index-body"
-            aria-expanded={!isIndexCollapsed}
-            className="index-toggle"
-            onClick={onIndexToggle}
-            type="button"
+        <CardContent sx={{ display: 'grid', gap: 2, p: { xs: 2, md: 2.5 } }}>
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }}
           >
-            <span>{isIndexCollapsed ? 'Browse' : 'Hide'}</span>
-            <small>{selectedPokemon.name}</small>
-          </button>
-        </div>
+            <Box>
+              <Typography color="primary" component="p" variant="overline">
+                Pokédex
+              </Typography>
+              <Typography id="pokemon-heading" component="h2" variant="h4">
+                {formatter.format(filteredPokemon.length)} entries
+              </Typography>
+            </Box>
+            <Button
+              aria-controls="pokemon-index-body"
+              aria-expanded={!isIndexCollapsed}
+              onClick={onIndexToggle}
+              size="small"
+              type="button"
+              variant="outlined"
+              sx={{ display: { xs: 'inline-flex', lg: 'none' }, maxWidth: '44vw' }}
+            >
+              {isIndexCollapsed ? 'Browse' : 'Hide'}
+            </Button>
+          </Stack>
 
-        <div className="index-panel-body" id="pokemon-index-body">
-          <label className="field">
-            <span>Search Pokemon, specialty, favorite</span>
-            <input
+          <Box
+            id="pokemon-index-body"
+            sx={{
+              display: { xs: isIndexCollapsed ? 'none' : 'grid', lg: 'grid' },
+              gap: 2,
+            }}
+          >
+            <TextField
+              fullWidth
+              label="Search Pokemon, specialty, favorite"
               value={pokemonQuery}
               onChange={(event) => onPokemonQueryChange(event.target.value)}
               placeholder="Bulbasaur, Grow, soft stuff..."
+              size="small"
             />
-          </label>
 
-          <div className="filter-grid">
-            <label>
-              <span>Ideal</span>
-              <select
+            <Box
+              sx={{
+                display: 'grid',
+                gap: 1.5,
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+              }}
+            >
+              <TextField
+                label="Ideal"
+                select
+                size="small"
                 value={idealFilter}
                 onChange={(event) => onIdealFilterChange(event.target.value)}
               >
-                <option value="all">All ideals</option>
+                <MenuItem value="all">All ideals</MenuItem>
                 {idealHabitats.map((habitat) => (
-                  <option
+                  <MenuItem
                     key={habitat.idealHabitatId}
                     value={habitat.idealHabitatId}
                   >
                     {habitat.name}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </label>
-            <label>
-              <span>Tracker</span>
-              <select
+              </TextField>
+              <TextField
+                label="Tracker"
+                select
+                size="small"
                 value={ownedFilter}
                 onChange={(event) =>
                   onOwnedFilterChange(event.target.value as OwnedFilter)
                 }
               >
-                <option value="all">All</option>
-                <option value="owned">Owned</option>
-                <option value="missing">Missing</option>
-              </select>
-            </label>
-          </div>
+                <MenuItem value="all">All</MenuItem>
+                <MenuItem value="owned">Owned</MenuItem>
+                <MenuItem value="missing">Missing</MenuItem>
+              </TextField>
+            </Box>
 
-          <div className="list-stack pokemon-list" role="list">
-            {filteredPokemon.length > 0 ? (
-              filteredPokemon.map((entry) => (
-                <PokemonListButton
-                  entry={entry}
-                  isOwned={ownedSet.has(entry.slug)}
-                  isSelected={entry.slug === selectedPokemon.slug}
-                  key={entry.slug}
-                  onSelect={() => onSelectPokemon(entry.slug)}
-                  onToggleOwned={() => onToggleOwned(entry.slug)}
-                />
-              ))
-            ) : (
-              <p className="empty-state">No Pokemon match those filters.</p>
-            )}
-          </div>
-        </div>
-      </aside>
+            <Stack
+              role="list"
+              spacing={1}
+              sx={{
+                maxHeight: { xs: 420, lg: 'min(62vh, 720px)' },
+                overflow: 'auto',
+                pr: 0.5,
+              }}
+            >
+              {filteredPokemon.length > 0 ? (
+                filteredPokemon.map((entry) => (
+                  <PokemonListButton
+                    entry={entry}
+                    isOwned={ownedSet.has(entry.slug)}
+                    isSelected={entry.slug === selectedPokemon.slug}
+                    key={entry.slug}
+                    onSelect={() => onSelectPokemon(entry.slug)}
+                    onToggleOwned={() => onToggleOwned(entry.slug)}
+                  />
+                ))
+              ) : (
+                <Typography color="text.secondary">
+                  No Pokemon match those filters.
+                </Typography>
+              )}
+            </Stack>
+          </Box>
+        </CardContent>
+      </Card>
 
       <PokemonProfilePanel
         entry={selectedPokemon}
@@ -151,7 +200,7 @@ export function PokemonExplorer({
         onToggleOwned={() => onToggleOwned(selectedPokemon.slug)}
         spawns={selectedPokemonSpawns}
       />
-    </section>
+    </Box>
   )
 }
 
@@ -169,29 +218,50 @@ function PokemonListButton({
   onToggleOwned: () => void
 }) {
   return (
-    <div
-      className={isSelected ? 'entity-row pokemon-row is-selected' : 'entity-row pokemon-row'}
-      role="listitem"
-    >
-      <button type="button" className="entity-main" onClick={onSelect}>
-        <img src={entry.imageUrl} alt="" />
-        <span>
-          <strong>{entry.name}</strong>
-          <small>
+    <Box role="listitem" sx={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 36px', gap: 1 }}>
+      <ButtonBase
+        onClick={onSelect}
+        sx={{
+          alignItems: 'center',
+          backgroundColor: isSelected ? 'primary.light' : 'transparent',
+          display: 'grid',
+          gap: 1,
+          gridTemplateColumns: '44px minmax(0, 1fr)',
+          justifyContent: 'stretch',
+          minWidth: 0,
+          p: 1,
+          textAlign: 'left',
+          width: '100%',
+        }}
+      >
+        <Box component="img" src={entry.imageUrl} alt="" sx={{ width: 42, height: 42, objectFit: 'contain' }} />
+        <Box sx={{ minWidth: 0 }}>
+          <Typography component="strong" noWrap>
+            {entry.name}
+          </Typography>
+          <Typography color="text.secondary" component="small" variant="caption">
             {entry.pokopiaNumberDisplay} /{' '}
             {entry.idealHabitat?.name ?? 'No ideal'}
-          </small>
-        </span>
-      </button>
-      <button
+          </Typography>
+        </Box>
+      </ButtonBase>
+      <Button
         aria-label={isOwned ? `Mark ${entry.name} missing` : `Mark ${entry.name} owned`}
-        className={isOwned ? 'owned-toggle is-owned' : 'owned-toggle'}
         onClick={onToggleOwned}
         type="button"
+        variant={isOwned ? 'contained' : 'outlined'}
+        sx={{
+          minWidth: 34,
+          width: 34,
+          height: 34,
+          alignSelf: 'center',
+          borderRadius: '50%',
+          p: 0,
+        }}
       >
         {isOwned ? '✓' : ''}
-      </button>
-    </div>
+      </Button>
+    </Box>
   )
 }
 
@@ -209,73 +279,107 @@ function PokemonProfilePanel({
   spawns: PokemonSpawnRecord[]
 }) {
   return (
-    <article className="detail-panel pokemon-detail-panel">
-      <div className="detail-hero pokemon-detail-hero">
-        <div className="pokemon-portrait">
-          <img src={entry.imageUrl} alt="" />
-        </div>
-        <div className="detail-title">
-          <p className="eyebrow">{entry.pokopiaNumberDisplay}</p>
-          <h2>{entry.name}</h2>
-          <div className="chip-row">
+    <Card component="article">
+      <CardContent sx={{ display: 'grid', gap: 4, p: { xs: 2, md: 3 } }}>
+        <Box
+          sx={{
+            alignItems: 'center',
+            display: 'grid',
+            gap: 3,
+            gridTemplateColumns: { xs: '1fr', md: '136px minmax(0, 1fr) auto' },
+          }}
+        >
+          <Box sx={{ display: 'grid', height: 136, placeItems: 'center', width: 136 }}>
+            <Box component="img" src={entry.imageUrl} alt="" sx={{ width: 96, height: 96, objectFit: 'contain' }} />
+          </Box>
+          <Box sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+            <Typography color="primary" component="p" variant="overline">
+              {entry.pokopiaNumberDisplay}
+            </Typography>
+            <Typography component="h2" variant="h2" sx={{ fontSize: { xs: '2.45rem', md: '3.2rem' }, lineHeight: 0.92 }}>
+              {entry.name}
+            </Typography>
+            <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
             {entry.idealHabitat ? (
-              <span className="chip strong">{entry.idealHabitat.name} ideal</span>
+              <Chip color="primary" label={`${entry.idealHabitat.name} ideal`} />
             ) : null}
             {entry.specialties.map((specialty) => (
-              <span className="chip" key={specialty.slug}>
-                {specialty.name}
-              </span>
+              <Chip key={specialty.slug} label={specialty.name} variant="outlined" />
             ))}
-          </div>
-        </div>
-        <button
-          className={isOwned ? 'primary-action is-owned' : 'primary-action'}
+            </Stack>
+          </Box>
+          <Button
+          color={isOwned ? 'primary' : 'secondary'}
           type="button"
           onClick={onToggleOwned}
+          variant="contained"
+          sx={{ justifySelf: { xs: 'start', md: 'end' } }}
         >
           {isOwned ? 'Owned ✓' : 'Mark owned'}
-        </button>
-      </div>
+          </Button>
+        </Box>
 
-      <div className="detail-grid">
-        <section className="detail-section">
-          <h3>Favorites</h3>
-          <div className="favorite-grid">
+        <Box
+          sx={{
+            alignItems: 'start',
+            display: 'grid',
+            gap: 4,
+            gridTemplateColumns: { xs: '1fr', md: '0.86fr 1.14fr' },
+          }}
+        >
+          <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+            <Typography component="h3" variant="h5">
+              Favorites
+            </Typography>
+            <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
             {favoriteDetails.map((favorite) => (
-              <span className="favorite-token" key={favorite.favoriteId}>
-                <strong>{favorite.name}</strong>
-                <small>
+              <Box
+                key={favorite.favoriteId}
+                sx={{
+                  display: 'grid',
+                  gap: 0.25,
+                  p: 1.5,
+                  minWidth: 0,
+                }}
+              >
+                <Typography component="strong" noWrap>
+                  {favorite.name}
+                </Typography>
+                <Typography color="text.secondary" component="small" variant="caption">
                   {favorite.kind === 'flavor'
                     ? 'Flavor'
                     : `${formatter.format(favorite.itemCount)} items`}
-                </small>
-              </span>
+                </Typography>
+              </Box>
             ))}
-          </div>
-        </section>
+            </Box>
+          </Box>
 
-        <section className="detail-section">
-          <h3>Where it appears</h3>
+          <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+            <Typography component="h3" variant="h5">
+              Where it appears
+            </Typography>
           {spawns.length > 0 ? (
-            <div className="spawn-list">
+            <Stack spacing={1} divider={null}>
               {spawns.slice(0, 8).map((spawn) => (
-                <div
-                  className="spawn-row"
+                <Box
                   key={`${spawn.habitatId}-${spawn.sourceOrder}`}
+                  sx={{ display: 'grid', gap: 0.25, py: 1, borderTop: 1, borderColor: 'divider', '&:first-of-type': { borderTop: 0, pt: 0 } }}
                 >
-                  <strong>{spawn.habitatName}</strong>
-                  <span>
+                  <Typography component="strong">{spawn.habitatName}</Typography>
+                  <Typography color="text.secondary" component="span" variant="caption">
                     {spawn.rarity} / {formatNameList(spawn.timeOfDay)} /{' '}
                     {formatNameList(spawn.weather)}
-                  </span>
-                </div>
+                  </Typography>
+                </Box>
               ))}
-            </div>
+            </Stack>
           ) : (
-            <p className="empty-state">No normalized spawn rule found.</p>
+            <Typography color="text.secondary">No normalized spawn rule found.</Typography>
           )}
-        </section>
-      </div>
-    </article>
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
   )
 }

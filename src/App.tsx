@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { useEffect } from 'react'
@@ -10,7 +11,6 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom'
-import './App.css'
 import { AppHeader } from './components/AppHeader'
 import { UserDataProvider } from './data/UserDataProvider'
 import { HabitatsPage } from './modules/habitats/HabitatsPage'
@@ -43,10 +43,20 @@ function AppLayout() {
   }, [navigate, searchParams])
 
   return (
-    <main className="app-shell">
+    <Box
+      component="main"
+      sx={{
+        display: 'grid',
+        gap: 2,
+        width: { xs: 'min(100% - 20px, 1680px)', md: 'min(1680px, calc(100% - 32px))' },
+        mx: 'auto',
+        py: { xs: 1, md: 1.5 },
+        pb: 6,
+      }}
+    >
       <AppHeader />
       <Outlet />
-    </main>
+    </Box>
   )
 }
 

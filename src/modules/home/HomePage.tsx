@@ -23,114 +23,162 @@ export function HomePage() {
   return (
     <section
       aria-labelledby="home-heading"
-      className="app-view home-grid"
       id="home-panel"
       role="tabpanel"
     >
-      <Card className="home-panel home-profile" component="section">
-        <CardContent className="home-card-content">
-        <Typography className="eyebrow" component="p">
-          Local profile
-        </Typography>
-        <Typography id="home-heading" component="h2" variant="h4">
-          Your Pokopia notebook
-        </Typography>
-        <Typography className="home-lede" color="text.secondary">
-          A quiet starting point for your local tracker. The reference-heavy
-          lists live in the tabs.
-        </Typography>
-
-        <Box className="progress-block" aria-label="Pokemon tracker progress">
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
-            <Typography component="strong" variant="h4">
-              {percentFormatter.format(completion)}
+      <Box
+        sx={{
+          display: 'grid',
+          gap: 2,
+          justifySelf: 'center',
+          width: 'min(920px, 100%)',
+        }}
+      >
+        <Card component="section">
+          <CardContent sx={{ display: 'grid', gap: 3, p: { xs: 2, md: 3 } }}>
+            <Box>
+              <Typography color="primary" component="p" variant="overline">
+                Local profile
+              </Typography>
+              <Typography id="home-heading" component="h2" variant="h4">
+                Your Pokopia notebook
+              </Typography>
+            </Box>
+            <Typography color="text.secondary" sx={{ maxWidth: '56ch' }}>
+              A quiet starting point for your local tracker. The reference-heavy
+              lists live in the tabs.
             </Typography>
-            <Typography component="span" color="text.secondary">
-              complete
-            </Typography>
-          </Stack>
-          <LinearProgress
-            color="primary"
-            value={completion * 100}
-            variant="determinate"
-          />
-        </Box>
 
-        <Box className="profile-ledger" aria-label="Tracker progress">
-          <Box>
-            <span>Owned</span>
-            <strong>{formatter.format(ownedCount)}</strong>
-            <small>Pokemon marked in this browser</small>
-          </Box>
-          <Box>
-            <span>Missing</span>
-            <strong>{formatter.format(missingCount)}</strong>
-            <small>from the normalized roster</small>
-          </Box>
-          <Box>
-            <span>Saved</span>
-            <strong className="saved-date">
-              {formatSavedAt(userData.updatedAt)}
-            </strong>
-            <small>in this browser</small>
-          </Box>
-        </Box>
-        </CardContent>
-      </Card>
+            <Box
+              aria-label="Pokemon tracker progress"
+              sx={{ display: 'grid', gap: 1 }}
+            >
+              <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
+                <Typography component="strong" variant="h4">
+                  {percentFormatter.format(completion)}
+                </Typography>
+                <Typography component="span" color="text.secondary">
+                  complete
+                </Typography>
+              </Stack>
+              <LinearProgress
+                color="primary"
+                value={completion * 100}
+                variant="determinate"
+                sx={{ height: 10 }}
+              />
+            </Box>
 
-      <Card className="home-panel home-next" component="section" aria-labelledby="next-heading">
-        <CardContent className="home-card-content">
-        <div className="section-heading">
-          <div>
-            <Typography className="eyebrow" component="p">
-              Next step
-            </Typography>
-            <Typography id="next-heading" component="h2" variant="h4">
-              Choose a workspace
-            </Typography>
-          </div>
-        </div>
+            <Box
+              aria-label="Tracker progress"
+              sx={{
+                display: 'grid',
+                gap: 1.5,
+                gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, minmax(0, 1fr))' },
+              }}
+            >
+              {[
+                ['Owned', formatter.format(ownedCount), 'Pokemon marked in this browser'],
+                ['Missing', formatter.format(missingCount), 'from the normalized roster'],
+                ['Saved', formatSavedAt(userData.updatedAt), 'in this browser'],
+              ].map(([label, value, note]) => (
+                <Box
+                  key={label}
+                  sx={{
+                    display: 'grid',
+                    gap: 0.25,
+                    minWidth: 0,
+                    p: 1.5,
+                  }}
+                >
+                  <Typography color="text.secondary" variant="body2">
+                    {label}
+                  </Typography>
+                  <Typography
+                    component="strong"
+                    variant="h5"
+                    sx={{ overflowWrap: 'anywhere' }}
+                  >
+                    {value}
+                  </Typography>
+                  <Typography color="text.secondary" variant="caption">
+                    {note}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </CardContent>
+        </Card>
 
-        <div className="home-destinations">
-          <Button
-            className="destination-button is-primary"
-            startIcon={<SearchRoundedIcon />}
-            type="button"
-            variant="contained"
-            onClick={() => navigate('/pokemon')}
-          >
-            <span>
-              <strong>Pokédex</strong>
-              <small>Search Pokemon and update ownership.</small>
-            </span>
-          </Button>
-          <Button
-            className="destination-button"
-            startIcon={<TerrainRoundedIcon />}
-            type="button"
-            variant="outlined"
-            onClick={() => navigate('/habitats')}
-          >
-            <span>
-              <strong>Habitats</strong>
-              <small>Check components and spawn rules.</small>
-            </span>
-          </Button>
-          <Button
-            className="destination-button"
-            startIcon={<HomeWorkRoundedIcon />}
-            type="button"
-            variant="outlined"
-            onClick={() => navigate('/planner')}
-          >
-            <span>
-              <strong>Planner</strong>
-              <small>Compare house groups of four.</small>
-            </span>
-          </Button>
-        </div>
-        </CardContent>
-      </Card>
+        <Card component="section" aria-labelledby="next-heading">
+          <CardContent sx={{ display: 'grid', gap: 3, p: { xs: 2, md: 3 } }}>
+            <Box>
+              <Typography color="primary" component="p" variant="overline">
+                Next step
+              </Typography>
+              <Typography id="next-heading" component="h2" variant="h4">
+                Choose a workspace
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'grid',
+                gap: 1.5,
+                gridTemplateColumns: { xs: '1fr', md: 'repeat(3, minmax(0, 1fr))' },
+              }}
+            >
+              {[
+                {
+                  icon: <SearchRoundedIcon />,
+                  label: 'Pokédex',
+                  note: 'Search Pokemon and update ownership.',
+                  path: '/pokemon',
+                  variant: 'contained' as const,
+                },
+                {
+                  icon: <TerrainRoundedIcon />,
+                  label: 'Habitats',
+                  note: 'Check components and spawn rules.',
+                  path: '/habitats',
+                  variant: 'outlined' as const,
+                },
+                {
+                  icon: <HomeWorkRoundedIcon />,
+                  label: 'Planner',
+                  note: 'Compare house groups of four.',
+                  path: '/planner',
+                  variant: 'outlined' as const,
+                },
+              ].map((destination) => (
+                <Button
+                  key={destination.path}
+                  startIcon={destination.icon}
+                  type="button"
+                  variant={destination.variant}
+                  onClick={() => navigate(destination.path)}
+                  sx={{
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-start',
+                    minHeight: 112,
+                    p: 2,
+                    textAlign: 'left',
+                  }}
+                >
+                  <Box sx={{ display: 'grid', gap: 0.5 }}>
+                    <Typography component="strong" variant="h5">
+                      {destination.label}
+                    </Typography>
+                    <Typography component="span" variant="body2">
+                      {destination.note}
+                    </Typography>
+                  </Box>
+                </Button>
+              ))}
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
     </section>
   )
 }

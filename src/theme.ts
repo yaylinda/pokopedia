@@ -104,9 +104,34 @@ export const appTheme = createTheme({
     },
     MuiCssBaseline: {
       styleOverrides: {
+        '@import':
+          'url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;700;800&display=swap")',
+        '*': {
+          boxSizing: 'border-box',
+        },
+        html: {
+          minHeight: '100%',
+        },
         body: {
+          minWidth: 320,
+          minHeight: '100vh',
+          margin: 0,
+          padding:
+            'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
           background:
             'linear-gradient(180deg, #f8fbfa 0%, #eef5f2 52%, #e6f0eb 100%)',
+        },
+        button: {
+          cursor: 'pointer',
+        },
+        img: {
+          display: 'block',
+        },
+        a: {
+          color: 'inherit',
+        },
+        '#root': {
+          minHeight: '100vh',
         },
       },
     },
