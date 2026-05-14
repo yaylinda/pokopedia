@@ -3,6 +3,7 @@ import Button from '@mui/material/Button'
 import ButtonBase from '@mui/material/ButtonBase'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import Checkbox from '@mui/material/Checkbox'
 import Chip from '@mui/material/Chip'
 import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
@@ -245,22 +246,21 @@ function PokemonListButton({
           </Typography>
         </Box>
       </ButtonBase>
-      <Button
-        aria-label={isOwned ? `Mark ${entry.name} missing` : `Mark ${entry.name} owned`}
-        onClick={onToggleOwned}
-        type="button"
-        variant={isOwned ? 'contained' : 'outlined'}
-        sx={{
-          minWidth: 34,
-          width: 34,
-          height: 34,
-          alignSelf: 'center',
-          borderRadius: '50%',
-          p: 0,
+      <Checkbox
+        checked={isOwned}
+        onChange={onToggleOwned}
+        slotProps={{
+          input: {
+            'aria-label': isOwned
+              ? `Mark ${entry.name} missing`
+              : `Mark ${entry.name} owned`,
+          },
         }}
-      >
-        {isOwned ? '✓' : ''}
-      </Button>
+        sx={{
+          alignSelf: 'center',
+          justifySelf: 'center',
+        }}
+      />
     </Box>
   )
 }
