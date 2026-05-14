@@ -4,7 +4,9 @@ import { formatNameList, formatter } from '../utils/format'
 export function HabitatExplorer({
   filteredHabitats,
   habitatQuery,
+  isIndexCollapsed,
   onHabitatQueryChange,
+  onIndexToggle,
   onSelectHabitat,
   onSelectPokemon,
   selectedHabitat,
@@ -13,7 +15,9 @@ export function HabitatExplorer({
 }: {
   filteredHabitats: Habitat[]
   habitatQuery: string
+  isIndexCollapsed: boolean
   onHabitatQueryChange: (query: string) => void
+  onIndexToggle: () => void
   onSelectHabitat: (habitatId: number) => void
   onSelectPokemon: (slug: string) => void
   selectedHabitat: Habitat
@@ -27,7 +31,14 @@ export function HabitatExplorer({
       id="habitats-panel"
       role="tabpanel"
     >
-      <aside className="index-panel habitat-index" aria-label="Habitat list">
+      <aside
+        className={
+          isIndexCollapsed
+            ? 'index-panel explorer-index habitat-index is-collapsed'
+            : 'index-panel explorer-index habitat-index'
+        }
+        aria-label="Habitat list"
+      >
         <div className="section-heading">
           <div>
             <p className="eyebrow">Habitat atlas</p>
@@ -35,41 +46,53 @@ export function HabitatExplorer({
               {formatter.format(filteredHabitats.length)} habitats
             </h2>
           </div>
+          <button
+            aria-controls="habitat-index-body"
+            aria-expanded={!isIndexCollapsed}
+            className="index-toggle"
+            onClick={onIndexToggle}
+            type="button"
+          >
+            <span>{isIndexCollapsed ? 'Browse' : 'Hide'}</span>
+            <small>{selectedHabitat.name}</small>
+          </button>
         </div>
 
-        <label className="field">
-          <span>Search habitat, component, spawn</span>
-          <input
-            value={habitatQuery}
-            onChange={(event) => onHabitatQueryChange(event.target.value)}
-            placeholder="Tall grass, tree, Scyther..."
-          />
-        </label>
+        <div className="index-panel-body" id="habitat-index-body">
+          <label className="field">
+            <span>Search habitat, component, spawn</span>
+            <input
+              value={habitatQuery}
+              onChange={(event) => onHabitatQueryChange(event.target.value)}
+              placeholder="Tall grass, tree, Scyther..."
+            />
+          </label>
 
-        <div className="list-stack habitat-list" role="list">
-          {filteredHabitats.length > 0 ? (
-            filteredHabitats.map((habitat) => (
-              <button
-                className={
-                  habitat.habitatId === selectedHabitat.habitatId
-                    ? 'entity-row habitat-row is-selected'
-                    : 'entity-row habitat-row'
-                }
-                key={habitat.habitatId}
-                onClick={() => onSelectHabitat(habitat.habitatId)}
-                role="listitem"
-                type="button"
-              >
-                <img src={habitat.pictureUrl} alt="" />
-                <span>
-                  <strong>{habitat.name}</strong>
-                  <small>{habitat.habitatIdDisplay}</small>
-                </span>
-              </button>
-            ))
-          ) : (
-            <p className="empty-state">No habitats match that search.</p>
-          )}
+          <div className="list-stack habitat-list" role="list">
+            {filteredHabitats.length > 0 ? (
+              filteredHabitats.map((habitat) => (
+                <button
+                  className={
+                    habitat.habitatId === selectedHabitat.habitatId
+                      ? 'entity-row habitat-row is-selected'
+                      : 'entity-row habitat-row'
+                  }
+                  key={habitat.habitatId}
+                  onClick={() => onSelectHabitat(habitat.habitatId)}
+                  role="listitem"
+                  type="button"
+                >
+                  <img src={habitat.pictureUrl} alt="" />
+                  <span>
+                    <strong>{habitat.name}</strong>
+                    <small>{habitat.habitatIdDisplay}</small>
+                  </span>
+                </button>
+              ))
+            ) : (
+              <p className="empty-state">No habitats match that search.</p>
+            )}
+          </div>
         </div>
       </aside>
 

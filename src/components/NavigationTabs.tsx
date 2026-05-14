@@ -1,3 +1,5 @@
+import { getTabHref } from '../routing'
+
 export type TabId = 'home' | 'pokemon' | 'habitats' | 'planner'
 
 const tabs: { id: TabId; label: string; kicker: string }[] = [
@@ -15,21 +17,21 @@ export function NavigationTabs({
   onChange: (tab: TabId) => void
 }) {
   return (
-    <nav className="tab-nav" aria-label="Primary sections" role="tablist">
+    <nav className="tab-nav" aria-label="Primary sections">
       {tabs.map((tab) => (
-        <button
-          aria-controls={`${tab.id}-panel`}
-          aria-selected={activeTab === tab.id}
-          className={activeTab === tab.id ? 'tab-button is-active' : 'tab-button'}
-          id={`${tab.id}-tab`}
+        <a
+          aria-current={activeTab === tab.id ? 'page' : undefined}
+          className={activeTab === tab.id ? 'tab-link is-active' : 'tab-link'}
+          href={getTabHref(tab.id)}
           key={tab.id}
-          onClick={() => onChange(tab.id)}
-          role="tab"
-          type="button"
+          onClick={(event) => {
+            event.preventDefault()
+            onChange(tab.id)
+          }}
         >
           <span>{tab.kicker}</span>
           <strong>{tab.label}</strong>
-        </button>
+        </a>
       ))}
     </nav>
   )

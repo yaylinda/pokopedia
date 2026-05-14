@@ -29,6 +29,7 @@ import {
   writeUserData,
 } from './userData'
 import { formatter, normalizeSearch } from './utils/format'
+import { getBasePath, tabRoutes } from './routing'
 
 const createUserData = (
   ownedPokemonSlugs: string[],
@@ -44,18 +45,109 @@ const createHouseId = () =>
   globalThis.crypto?.randomUUID?.() ??
   `house-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
+const tabByRoute = new Map(
+  Object.entries(tabRoutes).map(([tabId, route]) => [route, tabId as TabId]),
+)
+
+const getRelativePath = (pathname: string) => {
+  const basePath = getBasePath()
+  const baseRoot = basePath.replace(/\/$/, '')
+  let relativePath = pathname
+
+  if (baseRoot && relativePath.startsWith(baseRoot)) {
+    relativePath = relativePath.slice(baseRoot.length) || '/'
+  }
+
+  if (!relativePath.startsWith('/')) {
+    relativePath = `/${relativePath}`
+  }
+
+  return relativePath.replace(/\/$/, '') || '/'
+}
+
+const getPokemonSlugFromParam = (pokemonId: string | null) => {
+  if (!pokemonId) {
+    return null
+  }
+
+  return (
+    pokemonProfiles.find(
+      (entry) =>
+        String(entry.pokemonId) === pokemonId ||
+        entry.pokemonIdDisplay === pokemonId ||
+        entry.slug === pokemonId,
+    )?.slug ?? null
+  )
+}
+
+const getHabitatIdFromParam = (habitatId: string | null) => {
+  if (!habitatId) {
+    return null
+  }
+
+  const numericId = Number(habitatId)
+
+  return habitats.some((habitat) => habitat.habitatId === numericId)
+    ? numericId
+    : null
+}
+
+const readRouteState = () => {
+  const url = new URL(window.location.href)
+  const routeOverride = url.searchParams.get('route')
+  const routePath = routeOverride ?? getRelativePath(url.pathname)
+  const tab = tabByRoute.get(routePath.replace(/\/$/, '') || '/') ?? 'home'
+  const pokemonSlug = getPokemonSlugFromParam(url.searchParams.get('pokemonId'))
+  const habitatId = getHabitatIdFromParam(url.searchParams.get('habitatId'))
+
+  return { habitatId, pokemonSlug, tab }
+}
+
+const buildRouteUrl = (
+  tab: TabId,
+  pokemonSlug: string,
+  habitatId: number,
+) => {
+  const basePath = getBasePath()
+  const route = tabRoutes[tab]
+  const path =
+    route === '/' ? basePath : `${basePath.replace(/\/$/, '')}${route}`
+  const url = new URL(path, window.location.origin)
+
+  if (tab === 'pokemon') {
+    const pokemonId = pokemonBySlug.get(pokemonSlug)?.pokemonId
+
+    if (pokemonId) {
+      url.searchParams.set('pokemonId', String(pokemonId))
+    }
+  }
+
+  if (tab === 'habitats') {
+    url.searchParams.set('habitatId', String(habitatId))
+  }
+
+  return `${url.pathname}${url.search}`
+}
+
 function App() {
-  const [activeTab, setActiveTab] = useState<TabId>('home')
+  const initialRouteState = useMemo(readRouteState, [])
+  const [activeTab, setActiveTab] = useState<TabId>(initialRouteState.tab)
   const [userData, setUserData] = useState(readUserData)
   const [pokemonQuery, setPokemonQuery] = useState('')
   const [idealFilter, setIdealFilter] = useState('all')
   const [ownedFilter, setOwnedFilter] = useState<OwnedFilter>('all')
   const [selectedPokemonSlug, setSelectedPokemonSlug] = useState(
-    pokemonProfiles[0]?.slug ?? '',
+    initialRouteState.pokemonSlug ?? pokemonProfiles[0]?.slug ?? '',
+  )
+  const [isPokemonIndexCollapsed, setIsPokemonIndexCollapsed] = useState(
+    Boolean(initialRouteState.pokemonSlug),
   )
   const [habitatQuery, setHabitatQuery] = useState('')
   const [selectedHabitatId, setSelectedHabitatId] = useState(
-    habitats[0]?.habitatId ?? 1,
+    initialRouteState.habitatId ?? habitats[0]?.habitatId ?? 1,
+  )
+  const [isHabitatIndexCollapsed, setIsHabitatIndexCollapsed] = useState(
+    Boolean(initialRouteState.habitatId),
   )
   const [plannerRosterMode, setPlannerRosterMode] =
     useState<PlannerRosterMode>('all')
@@ -71,6 +163,40 @@ function App() {
   useEffect(() => {
     writeUserData(userData)
   }, [userData])
+
+  useEffect(() => {
+    const params = new URL(window.location.href).searchParams
+
+    if (params.has('route')) {
+      window.history.replaceState(
+        null,
+        '',
+        buildRouteUrl(activeTab, selectedPokemonSlug, selectedHabitatId),
+      )
+    }
+  }, [activeTab, selectedHabitatId, selectedPokemonSlug])
+
+  useEffect(() => {
+    const onPopState = () => {
+      const routeState = readRouteState()
+
+      setActiveTab(routeState.tab)
+
+      if (routeState.pokemonSlug) {
+        setSelectedPokemonSlug(routeState.pokemonSlug)
+        setIsPokemonIndexCollapsed(true)
+      }
+
+      if (routeState.habitatId) {
+        setSelectedHabitatId(routeState.habitatId)
+        setIsHabitatIndexCollapsed(true)
+      }
+    }
+
+    window.addEventListener('popstate', onPopState)
+
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   const ownedSet = useMemo(
     () => new Set(userData.ownedPokemonSlugs),
@@ -180,6 +306,24 @@ function App() {
   }))
 
   const ownedCount = userData.ownedPokemonSlugs.length
+
+  const writeRoute = (
+    tab: TabId,
+    pokemonSlug = selectedPokemon.slug,
+    habitatId = selectedHabitat.habitatId,
+  ) => {
+    const routeUrl = buildRouteUrl(tab, pokemonSlug, habitatId)
+    const currentUrl = `${window.location.pathname}${window.location.search}`
+
+    if (routeUrl !== currentUrl) {
+      window.history.pushState(null, '', routeUrl)
+    }
+  }
+
+  const changeTab = (tab: TabId) => {
+    setActiveTab(tab)
+    writeRoute(tab)
+  }
 
   const toggleOwned = (slug: string) => {
     setUserData((current) => {
@@ -327,17 +471,36 @@ function App() {
     }
   }
 
+  const selectPokemon = (slug: string) => {
+    setSelectedPokemonSlug(slug)
+    setIsPokemonIndexCollapsed(true)
+    writeRoute('pokemon', slug)
+  }
+
+  const selectHabitat = (habitatId: number) => {
+    setSelectedHabitatId(habitatId)
+    setIsHabitatIndexCollapsed(true)
+    writeRoute('habitats', selectedPokemon.slug, habitatId)
+  }
+
   const openPokemon = (slug = selectedPokemon.slug) => {
     setSelectedPokemonSlug(slug)
+    setIsPokemonIndexCollapsed(true)
     setActiveTab('pokemon')
+    writeRoute('pokemon', slug)
   }
 
   const openHabitats = (habitatId = selectedHabitat.habitatId) => {
     setSelectedHabitatId(habitatId)
+    setIsHabitatIndexCollapsed(true)
     setActiveTab('habitats')
+    writeRoute('habitats', selectedPokemon.slug, habitatId)
   }
 
-  const openPlanner = () => setActiveTab('planner')
+  const openPlanner = () => {
+    setActiveTab('planner')
+    writeRoute('planner')
+  }
 
   return (
     <main className="app-shell">
@@ -349,7 +512,7 @@ function App() {
         onImportFile={(file) => {
           void importUserData(file)
         }}
-        onTabChange={setActiveTab}
+        onTabChange={changeTab}
         ownedCount={ownedCount}
         totalPokemon={datasetStats.pokemon}
       />
@@ -371,11 +534,15 @@ function App() {
           filteredPokemon={filteredPokemon}
           idealFilter={idealFilter}
           idealHabitats={idealHabitats}
+          isIndexCollapsed={isPokemonIndexCollapsed}
           isSelectedOwned={ownedSet.has(selectedPokemon.slug)}
           onIdealFilterChange={setIdealFilter}
+          onIndexToggle={() =>
+            setIsPokemonIndexCollapsed((isCollapsed) => !isCollapsed)
+          }
           onOwnedFilterChange={setOwnedFilter}
           onPokemonQueryChange={setPokemonQuery}
-          onSelectPokemon={setSelectedPokemonSlug}
+          onSelectPokemon={selectPokemon}
           onToggleOwned={toggleOwned}
           ownedFilter={ownedFilter}
           ownedSet={ownedSet}
@@ -389,8 +556,12 @@ function App() {
         <HabitatExplorer
           filteredHabitats={filteredHabitats}
           habitatQuery={habitatQuery}
+          isIndexCollapsed={isHabitatIndexCollapsed}
           onHabitatQueryChange={setHabitatQuery}
-          onSelectHabitat={setSelectedHabitatId}
+          onIndexToggle={() =>
+            setIsHabitatIndexCollapsed((isCollapsed) => !isCollapsed)
+          }
+          onSelectHabitat={selectHabitat}
           onSelectPokemon={openPokemon}
           selectedHabitat={selectedHabitat}
           selectedHabitatRequirements={selectedHabitatRequirements}

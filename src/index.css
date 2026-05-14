@@ -96,6 +96,7 @@ button:focus {
 }
 
 button:focus-visible,
+a:focus-visible,
 input:focus-visible,
 select:focus-visible {
   outline: 3px solid color-mix(in oklch, var(--color-water) 74%, var(--color-paper));
