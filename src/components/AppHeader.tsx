@@ -1,3 +1,12 @@
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
+import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Chip from '@mui/material/Chip'
+import Stack from '@mui/material/Stack'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
 import { Link } from 'react-router-dom'
 import { useUserData } from '../app/userDataContext'
 import { datasetStats } from '../data/pokopia'
@@ -16,37 +25,61 @@ export function AppHeader() {
   const completion = totalPokemon > 0 ? ownedCount / totalPokemon : 0
 
   return (
-    <header className="app-header">
-      <div className="app-topbar">
-        <Link className="app-brand" to="/">
+    <AppBar
+      className="app-header"
+      color="inherit"
+      component="header"
+      elevation={0}
+      position="sticky"
+    >
+      <Toolbar className="app-topbar" disableGutters>
+        <Typography className="app-brand" component={Link} to="/" variant="h5">
           Pokopedia
-        </Link>
+        </Typography>
 
         <NavigationTabs />
 
-        <section className="tracker-tools" aria-label="User data">
-          <div className="tracker-summary">
-            <strong>{formatter.format(ownedCount)}</strong>
-            <small>
-              {percentFormatter.format(completion)} owned
-              <span aria-hidden="true"> / </span>
-              <span className="tracker-total">
-                {formatter.format(totalPokemon)} total
-              </span>
-            </small>
-          </div>
-          <div className="header-actions">
-            <button className="utility-button" type="button" onClick={exportUserData}>
-              Export
-            </button>
-            <button
-              className="utility-button"
+        <Stack
+          aria-label="User data"
+          className="tracker-tools"
+          component="section"
+          direction="row"
+          spacing={1}
+        >
+          <Chip
+            className="tracker-summary"
+            label={
+              <Box component="span">
+                <strong>{formatter.format(ownedCount)}</strong>{' '}
+                <span>{percentFormatter.format(completion)} owned</span>
+                <span className="tracker-total">
+                  {' '}
+                  / {formatter.format(totalPokemon)} total
+                </span>
+              </Box>
+            }
+            variant="outlined"
+          />
+          <Stack className="header-actions" direction="row" spacing={1}>
+            <Button
+              size="small"
+              startIcon={<FileDownloadOutlinedIcon fontSize="small" />}
               type="button"
+              variant="outlined"
+              onClick={exportUserData}
+            >
+              Export
+            </Button>
+            <Button
+              size="small"
+              startIcon={<UploadFileOutlinedIcon fontSize="small" />}
+              type="button"
+              variant="outlined"
               onClick={() => importInputRef.current?.click()}
             >
               Import
-            </button>
-          </div>
+            </Button>
+          </Stack>
           <input
             ref={importInputRef}
             className="visually-hidden"
@@ -56,14 +89,14 @@ export function AppHeader() {
               void importUserData(event.currentTarget.files?.[0])
             }}
           />
-        </section>
-      </div>
+        </Stack>
+      </Toolbar>
 
       {importMessage ? (
         <p className="status-note" role="status">
           {importMessage}
         </p>
       ) : null}
-    </header>
+    </AppBar>
   )
 }

@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
+import { Link, useLocation } from 'react-router-dom'
 import { tabRoutes, type TabId } from '../routing'
 
 const tabs: { id: TabId; label: string; kicker: string }[] = [
@@ -9,21 +11,39 @@ const tabs: { id: TabId; label: string; kicker: string }[] = [
 ]
 
 export function NavigationTabs() {
+  const location = useLocation()
+  const activeTab =
+    tabs.find((tab) =>
+      tab.id === 'home'
+        ? location.pathname === tabRoutes.home
+        : location.pathname.startsWith(tabRoutes[tab.id]),
+    )?.id ?? 'home'
+
   return (
-    <nav className="tab-nav" aria-label="Primary sections">
+    <Tabs
+      aria-label="Primary sections"
+      className="tab-nav"
+      role="navigation"
+      textColor="primary"
+      value={activeTab}
+      variant="scrollable"
+      scrollButtons="auto"
+    >
       {tabs.map((tab) => (
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? 'tab-link is-active' : 'tab-link'
-          }
-          end={tab.id === 'home'}
+        <Tab
+          className="tab-link"
+          component={Link}
           key={tab.id}
+          label={
+            <span className="tab-label">
+              <span>{tab.kicker}</span>
+              <strong>{tab.label}</strong>
+            </span>
+          }
           to={tabRoutes[tab.id]}
-        >
-          <span>{tab.kicker}</span>
-          <strong>{tab.label}</strong>
-        </NavLink>
+          value={tab.id}
+        />
       ))}
-    </nav>
+    </Tabs>
   )
 }
