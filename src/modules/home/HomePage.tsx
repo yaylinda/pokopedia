@@ -1,3 +1,13 @@
+import HomeWorkRoundedIcon from '@mui/icons-material/HomeWorkRounded'
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
+import TerrainRoundedIcon from '@mui/icons-material/TerrainRounded'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import LinearProgress from '@mui/material/LinearProgress'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import { useUserData } from '../../app/userDataContext'
 import { datasetStats } from '../../data/pokopia'
@@ -17,86 +27,110 @@ export function HomePage() {
       id="home-panel"
       role="tabpanel"
     >
-      <section className="home-panel home-profile">
-        <p className="eyebrow">Local profile</p>
-        <h2 id="home-heading">Your Pokopia notebook</h2>
-        <p className="home-lede">
+      <Card className="home-panel home-profile" component="section">
+        <CardContent className="home-card-content">
+        <Typography className="eyebrow" component="p">
+          Local profile
+        </Typography>
+        <Typography id="home-heading" component="h2" variant="h4">
+          Your Pokopia notebook
+        </Typography>
+        <Typography className="home-lede" color="text.secondary">
           A quiet starting point for your local tracker. The reference-heavy
           lists live in the tabs.
-        </p>
+        </Typography>
 
-        <div className="progress-block" aria-label="Pokemon tracker progress">
-          <div>
-            <strong>{percentFormatter.format(completion)}</strong>
-            <span>complete</span>
-          </div>
-          <span className="progress-track">
-            <span style={{ inlineSize: `${completion * 100}%` }} />
-          </span>
-        </div>
+        <Box className="progress-block" aria-label="Pokemon tracker progress">
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
+            <Typography component="strong" variant="h4">
+              {percentFormatter.format(completion)}
+            </Typography>
+            <Typography component="span" color="text.secondary">
+              complete
+            </Typography>
+          </Stack>
+          <LinearProgress
+            color="primary"
+            value={completion * 100}
+            variant="determinate"
+          />
+        </Box>
 
-        <div className="profile-ledger" aria-label="Tracker progress">
-          <div>
+        <Box className="profile-ledger" aria-label="Tracker progress">
+          <Box>
             <span>Owned</span>
             <strong>{formatter.format(ownedCount)}</strong>
             <small>Pokemon marked in this browser</small>
-          </div>
-          <div>
+          </Box>
+          <Box>
             <span>Missing</span>
             <strong>{formatter.format(missingCount)}</strong>
             <small>from the normalized roster</small>
-          </div>
-          <div>
+          </Box>
+          <Box>
             <span>Saved</span>
             <strong className="saved-date">
               {formatSavedAt(userData.updatedAt)}
             </strong>
             <small>in this browser</small>
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Box>
+        </CardContent>
+      </Card>
 
-      <section className="home-panel home-next" aria-labelledby="next-heading">
+      <Card className="home-panel home-next" component="section" aria-labelledby="next-heading">
+        <CardContent className="home-card-content">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Next step</p>
-            <h2 id="next-heading">Choose a workspace</h2>
+            <Typography className="eyebrow" component="p">
+              Next step
+            </Typography>
+            <Typography id="next-heading" component="h2" variant="h4">
+              Choose a workspace
+            </Typography>
           </div>
         </div>
 
         <div className="home-destinations">
-          <button
+          <Button
             className="destination-button is-primary"
+            startIcon={<SearchRoundedIcon />}
             type="button"
+            variant="contained"
             onClick={() => navigate('/pokemon')}
           >
             <span>
               <strong>Pokédex</strong>
               <small>Search Pokemon and update ownership.</small>
             </span>
-          </button>
-          <button
+          </Button>
+          <Button
             className="destination-button"
+            startIcon={<TerrainRoundedIcon />}
             type="button"
+            variant="outlined"
             onClick={() => navigate('/habitats')}
           >
             <span>
               <strong>Habitats</strong>
               <small>Check components and spawn rules.</small>
             </span>
-          </button>
-          <button
+          </Button>
+          <Button
             className="destination-button"
+            startIcon={<HomeWorkRoundedIcon />}
             type="button"
+            variant="outlined"
             onClick={() => navigate('/planner')}
           >
             <span>
               <strong>Planner</strong>
               <small>Compare house groups of four.</small>
             </span>
-          </button>
+          </Button>
         </div>
-      </section>
+        </CardContent>
+      </Card>
     </section>
   )
 }
