@@ -107,6 +107,7 @@ const buildRouteUrl = (
   tab: TabId,
   pokemonSlug: string,
   habitatId: number,
+  includeSelection = false,
 ) => {
   const basePath = getBasePath()
   const route = tabRoutes[tab]
@@ -114,7 +115,7 @@ const buildRouteUrl = (
     route === '/' ? basePath : `${basePath.replace(/\/$/, '')}${route}`
   const url = new URL(path, window.location.origin)
 
-  if (tab === 'pokemon') {
+  if (includeSelection && tab === 'pokemon') {
     const pokemonId = pokemonBySlug.get(pokemonSlug)?.pokemonId
 
     if (pokemonId) {
@@ -122,7 +123,7 @@ const buildRouteUrl = (
     }
   }
 
-  if (tab === 'habitats') {
+  if (includeSelection && tab === 'habitats') {
     url.searchParams.set('habitatId', String(habitatId))
   }
 
@@ -171,7 +172,7 @@ function App() {
       window.history.replaceState(
         null,
         '',
-        buildRouteUrl(activeTab, selectedPokemonSlug, selectedHabitatId),
+        buildRouteUrl(activeTab, selectedPokemonSlug, selectedHabitatId, true),
       )
     }
   }, [activeTab, selectedHabitatId, selectedPokemonSlug])
@@ -311,8 +312,9 @@ function App() {
     tab: TabId,
     pokemonSlug = selectedPokemon.slug,
     habitatId = selectedHabitat.habitatId,
+    includeSelection = false,
   ) => {
-    const routeUrl = buildRouteUrl(tab, pokemonSlug, habitatId)
+    const routeUrl = buildRouteUrl(tab, pokemonSlug, habitatId, includeSelection)
     const currentUrl = `${window.location.pathname}${window.location.search}`
 
     if (routeUrl !== currentUrl) {
@@ -322,6 +324,15 @@ function App() {
 
   const changeTab = (tab: TabId) => {
     setActiveTab(tab)
+
+    if (tab === 'pokemon') {
+      setIsPokemonIndexCollapsed(false)
+    }
+
+    if (tab === 'habitats') {
+      setIsHabitatIndexCollapsed(false)
+    }
+
     writeRoute(tab)
   }
 
@@ -474,27 +485,36 @@ function App() {
   const selectPokemon = (slug: string) => {
     setSelectedPokemonSlug(slug)
     setIsPokemonIndexCollapsed(true)
-    writeRoute('pokemon', slug)
+    writeRoute('pokemon', slug, selectedHabitat.habitatId, true)
   }
 
   const selectHabitat = (habitatId: number) => {
     setSelectedHabitatId(habitatId)
     setIsHabitatIndexCollapsed(true)
-    writeRoute('habitats', selectedPokemon.slug, habitatId)
+    writeRoute('habitats', selectedPokemon.slug, habitatId, true)
   }
 
-  const openPokemon = (slug = selectedPokemon.slug) => {
-    setSelectedPokemonSlug(slug)
-    setIsPokemonIndexCollapsed(true)
+  const openPokemon = (slug?: string) => {
+    const targetSlug = slug ?? selectedPokemon.slug
+
+    setSelectedPokemonSlug(targetSlug)
+    setIsPokemonIndexCollapsed(Boolean(slug))
     setActiveTab('pokemon')
-    writeRoute('pokemon', slug)
+    writeRoute('pokemon', targetSlug, selectedHabitat.habitatId, Boolean(slug))
   }
 
-  const openHabitats = (habitatId = selectedHabitat.habitatId) => {
-    setSelectedHabitatId(habitatId)
-    setIsHabitatIndexCollapsed(true)
+  const openHabitats = (habitatId?: number) => {
+    const targetHabitatId = habitatId ?? selectedHabitat.habitatId
+
+    setSelectedHabitatId(targetHabitatId)
+    setIsHabitatIndexCollapsed(Boolean(habitatId))
     setActiveTab('habitats')
-    writeRoute('habitats', selectedPokemon.slug, habitatId)
+    writeRoute(
+      'habitats',
+      selectedPokemon.slug,
+      targetHabitatId,
+      Boolean(habitatId),
+    )
   }
 
   const openPlanner = () => {
