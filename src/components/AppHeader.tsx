@@ -1,44 +1,28 @@
-import type { RefObject } from 'react'
-import { getTabHref } from '../routing'
+import { Link } from 'react-router-dom'
+import { useUserData } from '../app/userDataContext'
+import { datasetStats } from '../data/pokopia'
 import { formatter, percentFormatter } from '../utils/format'
-import { NavigationTabs, type TabId } from './NavigationTabs'
+import { NavigationTabs } from './NavigationTabs'
 
-export function AppHeader({
-  activeTab,
-  importInputRef,
-  importMessage,
-  onExportData,
-  onImportFile,
-  onTabChange,
-  ownedCount,
-  totalPokemon,
-}: {
-  activeTab: TabId
-  importInputRef: RefObject<HTMLInputElement | null>
-  importMessage: string
-  onExportData: () => void
-  onImportFile: (file: File | undefined) => void
-  onTabChange: (tab: TabId) => void
-  ownedCount: number
-  totalPokemon: number
-}) {
+export function AppHeader() {
+  const {
+    exportUserData,
+    importInputRef,
+    importMessage,
+    importUserData,
+    ownedCount,
+  } = useUserData()
+  const totalPokemon = datasetStats.pokemon
   const completion = totalPokemon > 0 ? ownedCount / totalPokemon : 0
 
   return (
     <header className="app-header">
       <div className="app-topbar">
-        <a
-          className="app-brand"
-          href={getTabHref('home')}
-          onClick={(event) => {
-            event.preventDefault()
-            onTabChange('home')
-          }}
-        >
+        <Link className="app-brand" to="/">
           Pokopedia
-        </a>
+        </Link>
 
-        <NavigationTabs activeTab={activeTab} onChange={onTabChange} />
+        <NavigationTabs />
 
         <section className="tracker-tools" aria-label="User data">
           <div className="tracker-summary">
@@ -52,7 +36,7 @@ export function AppHeader({
             </small>
           </div>
           <div className="header-actions">
-            <button className="utility-button" type="button" onClick={onExportData}>
+            <button className="utility-button" type="button" onClick={exportUserData}>
               Export
             </button>
             <button
@@ -68,7 +52,9 @@ export function AppHeader({
             className="visually-hidden"
             type="file"
             accept="application/json"
-            onChange={(event) => onImportFile(event.currentTarget.files?.[0])}
+            onChange={(event) => {
+              void importUserData(event.currentTarget.files?.[0])
+            }}
           />
         </section>
       </div>

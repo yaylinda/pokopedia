@@ -1,5 +1,5 @@
-import type { Habitat, Requirement, Spawn } from '../data/pokopia'
-import { formatNameList, formatter } from '../utils/format'
+import type { Habitat, Requirement, Spawn } from '../../../data/pokopia'
+import { formatNameList, formatter } from '../../../utils/format'
 
 export function HabitatExplorer({
   filteredHabitats,

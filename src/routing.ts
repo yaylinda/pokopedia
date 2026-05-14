@@ -1,4 +1,4 @@
-import type { TabId } from './components/NavigationTabs'
+export type TabId = 'home' | 'pokemon' | 'habitats' | 'planner'
 
 export const tabRoutes: Record<TabId, string> = {
   home: '/',
@@ -17,4 +17,10 @@ export const getTabHref = (tabId: TabId) => {
   const route = tabRoutes[tabId]
 
   return route === '/' ? base : `${base.replace(/\/$/, '')}${route}`
+}
+
+export const getRouterBasename = () => {
+  const base = getBasePath().replace(/\/$/, '')
+
+  return base || '/'
 }

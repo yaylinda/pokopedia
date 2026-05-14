@@ -2,8 +2,8 @@ import type {
   IdealHabitat,
   PokemonProfile,
   PokemonSpawnRecord,
-} from '../data/pokopia'
-import { formatNameList, formatter } from '../utils/format'
+} from '../../../data/pokopia'
+import { formatNameList, formatter } from '../../../utils/format'
 
 export type OwnedFilter = 'all' | 'missing' | 'owned'
 

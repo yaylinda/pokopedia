@@ -1,6 +1,5 @@
-import { getTabHref } from '../routing'
-
-export type TabId = 'home' | 'pokemon' | 'habitats' | 'planner'
+import { NavLink } from 'react-router-dom'
+import { tabRoutes, type TabId } from '../routing'
 
 const tabs: { id: TabId; label: string; kicker: string }[] = [
   { id: 'home', label: 'Home', kicker: 'Tracker' },
@@ -9,29 +8,21 @@ const tabs: { id: TabId; label: string; kicker: string }[] = [
   { id: 'planner', label: 'Planner', kicker: 'Houses' },
 ]
 
-export function NavigationTabs({
-  activeTab,
-  onChange,
-}: {
-  activeTab: TabId
-  onChange: (tab: TabId) => void
-}) {
+export function NavigationTabs() {
   return (
     <nav className="tab-nav" aria-label="Primary sections">
       {tabs.map((tab) => (
-        <a
-          aria-current={activeTab === tab.id ? 'page' : undefined}
-          className={activeTab === tab.id ? 'tab-link is-active' : 'tab-link'}
-          href={getTabHref(tab.id)}
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? 'tab-link is-active' : 'tab-link'
+          }
+          end={tab.id === 'home'}
           key={tab.id}
-          onClick={(event) => {
-            event.preventDefault()
-            onChange(tab.id)
-          }}
+          to={tabRoutes[tab.id]}
         >
           <span>{tab.kicker}</span>
           <strong>{tab.label}</strong>
-        </a>
+        </NavLink>
       ))}
     </nav>
   )

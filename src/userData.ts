@@ -22,6 +22,16 @@ export const createDefaultUserData = (): PokopediaUserData => ({
   savedHouses: [],
 })
 
+export const createUserData = (
+  ownedPokemonSlugs: string[],
+  savedHouses: SavedHouse[],
+): PokopediaUserData => ({
+  version: 1,
+  updatedAt: new Date().toISOString(),
+  ownedPokemonSlugs: [...new Set(ownedPokemonSlugs)].sort(),
+  savedHouses,
+})
+
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((entry) => typeof entry === 'string')
 
