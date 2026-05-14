@@ -6,18 +6,13 @@ import {
 } from '../../../data/pokopia'
 import { useUserData } from '../../../data/userDataContext'
 import type { SavedHouse } from '../../../data/types'
-import { normalizeSearch } from '../../../utils/format'
-import type { PlannerRosterMode } from '../components/HousePlanner'
 
 const createHouseId = () =>
   globalThis.crypto?.randomUUID?.() ??
   `house-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
 export function useHousePlannerState() {
-  const { deleteHouse, ownedSet, savedHouses, saveHouse } = useUserData()
-  const [plannerRosterMode, setPlannerRosterMode] =
-    useState<PlannerRosterMode>('all')
-  const [houseSearchQuery, setHouseSearchQuery] = useState('')
+  const { deleteHouse, savedHouses, saveHouse } = useUserData()
   const [houseDraftName, setHouseDraftName] = useState('')
   const [houseDraftSlugs, setHouseDraftSlugs] = useState<string[]>([])
   const [selectedSavedHouseId, setSelectedSavedHouseId] = useState<
@@ -36,25 +31,6 @@ export function useHousePlannerState() {
     () => summarizeHouseDraft(draftPokemon),
     [draftPokemon],
   )
-
-  const pokemonOptions = useMemo(() => {
-    const query = normalizeSearch(houseSearchQuery)
-
-    return pokemonProfiles.filter((entry) => {
-      const matchesRoster =
-        plannerRosterMode === 'all' || ownedSet.has(entry.slug)
-      const matchesQuery =
-        !query ||
-        entry.name.toLowerCase().includes(query) ||
-        entry.pokopiaNumberDisplay.toLowerCase().includes(query) ||
-        entry.idealHabitat?.name.toLowerCase().includes(query) ||
-        entry.favorites.some((favorite) =>
-          favorite.name.toLowerCase().includes(query),
-        )
-
-      return matchesRoster && matchesQuery
-    })
-  }, [houseSearchQuery, ownedSet, plannerRosterMode])
 
   const toggleDraftPokemon = (slug: string) => {
     setHouseDraftSlugs((current) => {
@@ -127,17 +103,12 @@ export function useHousePlannerState() {
     draftName: houseDraftName,
     draftPokemon,
     draftSummary,
-    houseSearchQuery,
     loadHouse,
-    ownedSet,
-    plannerRosterMode,
-    pokemonOptions,
+    pokemonOptions: pokemonProfiles,
     savedHouses,
     saveDraft,
     selectedSavedHouseId,
     setHouseDraftName,
-    setHouseSearchQuery,
-    setPlannerRosterMode,
     toggleDraftPokemon,
   }
 }

@@ -1,8 +1,7 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded'
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded'
-import Avatar from '@mui/material/Avatar'
+import Autocomplete from '@mui/material/Autocomplete'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
@@ -13,10 +12,8 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
@@ -30,42 +27,30 @@ import {
 import type { SavedHouse } from '../../../data/types'
 import { formatNameList, formatter } from '../../../utils/format'
 
-export type PlannerRosterMode = 'all' | 'owned'
-
 export function HousePlanner({
   draftName,
   draftPokemon,
   draftSummary,
-  houseSearchQuery,
   onDeleteHouse,
   onDraftNameChange,
-  onHouseSearchQueryChange,
   onLoadHouse,
   onNewHouse,
-  onRosterModeChange,
   onSaveHouse,
   onToggleDraftPokemon,
-  ownedSet,
   pokemonOptions,
-  plannerRosterMode,
   savedHouses,
   selectedSavedHouseId,
 }: {
   draftName: string
   draftPokemon: PokemonProfile[]
   draftSummary: HouseDraftSummary
-  houseSearchQuery: string
   onDeleteHouse: (houseId: string) => void
   onDraftNameChange: (name: string) => void
-  onHouseSearchQueryChange: (query: string) => void
   onLoadHouse: (houseId: string) => void
   onNewHouse: () => void
-  onRosterModeChange: (mode: PlannerRosterMode) => void
   onSaveHouse: () => void
   onToggleDraftPokemon: (slug: string) => void
-  ownedSet: Set<string>
   pokemonOptions: PokemonProfile[]
-  plannerRosterMode: PlannerRosterMode
   savedHouses: SavedHouse[]
   selectedSavedHouseId: string | null
 }) {
@@ -148,6 +133,8 @@ export function HousePlanner({
                   <DraftSlots
                     draftPokemon={draftPokemon}
                     onToggleDraftPokemon={onToggleDraftPokemon}
+                    pokemonOptions={pokemonOptions}
+                    selectedSlugs={selectedSlugs}
                   />
 
                   <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
@@ -178,17 +165,6 @@ export function HousePlanner({
               </Box>
             </CardContent>
           </Card>
-
-          <RosterPicker
-            houseSearchQuery={houseSearchQuery}
-            onHouseSearchQueryChange={onHouseSearchQueryChange}
-            onRosterModeChange={onRosterModeChange}
-            onToggleDraftPokemon={onToggleDraftPokemon}
-            ownedSet={ownedSet}
-            plannerRosterMode={plannerRosterMode}
-            pokemonOptions={pokemonOptions}
-            selectedSlugs={selectedSlugs}
-          />
         </Stack>
 
         <SavedHousesPanel
@@ -205,10 +181,18 @@ export function HousePlanner({
 function DraftSlots({
   draftPokemon,
   onToggleDraftPokemon,
+  pokemonOptions,
+  selectedSlugs,
 }: {
   draftPokemon: PokemonProfile[]
   onToggleDraftPokemon: (slug: string) => void
+  pokemonOptions: PokemonProfile[]
+  selectedSlugs: Set<string>
 }) {
+  const availableOptions = pokemonOptions.filter(
+    (entry) => !selectedSlugs.has(entry.slug),
+  )
+
   return (
     <Box
       aria-label="Pokemon selected for this house"
@@ -263,10 +247,53 @@ function DraftSlots({
                 alignItems: 'center',
                 display: 'grid',
                 minHeight: 118,
-                textAlign: 'center',
               }}
             >
-              <Typography color="text.secondary">Open spot</Typography>
+              <Autocomplete
+                autoHighlight
+                fullWidth
+                getOptionLabel={(option) => option.name}
+                noOptionsText="No Pokemon left"
+                onChange={(_, option) => {
+                  if (option) {
+                    onToggleDraftPokemon(option.slug)
+                  }
+                }}
+                openOnFocus
+                options={availableOptions}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Open spot"
+                    placeholder="Choose Pokemon"
+                    size="small"
+                  />
+                )}
+                renderOption={({ key, ...props }, option) => (
+                  <Box
+                    component="li"
+                    key={key}
+                    {...props}
+                    sx={{ alignItems: 'center', display: 'flex', gap: 1 }}
+                  >
+                    <Box
+                      component="img"
+                      src={option.imageUrl}
+                      alt=""
+                      sx={{ height: 32, objectFit: 'contain', width: 32 }}
+                    />
+                    <Box sx={{ minWidth: 0 }}>
+                      <Typography component="strong" noWrap>
+                        {option.name}
+                      </Typography>
+                      <Typography color="text.secondary" variant="caption">
+                        {option.idealHabitat?.name ?? 'No ideal'} ideal
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+                value={null}
+              />
             </CardContent>
           </Card>
         )
@@ -318,137 +345,11 @@ function MatchSummary({
         </>
       ) : (
         <Typography color="text.secondary">
-          Choose Pokemon from the roster to see which habitats and favorites
+          Choose Pokemon from an open spot to see which habitats and favorites
           line up.
         </Typography>
       )}
     </Stack>
-  )
-}
-
-function RosterPicker({
-  houseSearchQuery,
-  onHouseSearchQueryChange,
-  onRosterModeChange,
-  onToggleDraftPokemon,
-  ownedSet,
-  plannerRosterMode,
-  pokemonOptions,
-  selectedSlugs,
-}: {
-  houseSearchQuery: string
-  onHouseSearchQueryChange: (query: string) => void
-  onRosterModeChange: (mode: PlannerRosterMode) => void
-  onToggleDraftPokemon: (slug: string) => void
-  ownedSet: Set<string>
-  plannerRosterMode: PlannerRosterMode
-  pokemonOptions: PokemonProfile[]
-  selectedSlugs: Set<string>
-}) {
-  return (
-    <Card component="section" aria-labelledby="roster-heading">
-      <CardContent sx={{ display: 'grid', gap: 2, p: { xs: 2, md: 3 } }}>
-        <Stack
-          direction={{ xs: 'column', md: 'row' }}
-          spacing={2}
-          sx={{ justifyContent: 'space-between' }}
-        >
-          <Box>
-            <Typography color="primary" component="p" variant="overline">
-              Pokemon picker
-            </Typography>
-            <Typography id="roster-heading" component="h3" variant="h5">
-              {formatter.format(pokemonOptions.length)} candidates
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: 'grid',
-              gap: 1,
-              gridTemplateColumns: { xs: '1fr', sm: 'minmax(220px, 1fr) 180px' },
-              width: { xs: '100%', md: 'min(620px, 100%)' },
-            }}
-          >
-            <TextField
-              label="Search"
-              value={houseSearchQuery}
-              onChange={(event) => onHouseSearchQueryChange(event.target.value)}
-              placeholder="Mew, Warm, soft stuff..."
-              size="small"
-            />
-            <TextField
-              label="Roster"
-              select
-              size="small"
-              value={plannerRosterMode}
-              onChange={(event) =>
-                onRosterModeChange(event.target.value as PlannerRosterMode)
-              }
-            >
-              <MenuItem value="all">Full roster</MenuItem>
-              <MenuItem value="owned">Owned only</MenuItem>
-            </TextField>
-          </Box>
-        </Stack>
-
-        <List
-          dense
-          sx={{
-            display: 'grid',
-            gap: 0.5,
-            gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' },
-            maxHeight: 460,
-            overflow: 'auto',
-          }}
-        >
-          {pokemonOptions.length > 0 ? (
-            pokemonOptions.map((entry) => {
-              const isSelected = selectedSlugs.has(entry.slug)
-              const isDisabled = selectedSlugs.size >= 4 && !isSelected
-
-              return (
-                <ListItem disablePadding key={entry.slug}>
-                  <ListItemButton
-                    disabled={isDisabled}
-                    onClick={() => onToggleDraftPokemon(entry.slug)}
-                    selected={isSelected}
-                  >
-                    <ListItemAvatar>
-                      <Avatar
-                        alt=""
-                        src={entry.imageUrl}
-                        sx={{ bgcolor: 'transparent' }}
-                        variant="square"
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={entry.name}
-                      secondary={`${entry.idealHabitat?.name ?? 'No ideal'} / ${
-                        ownedSet.has(entry.slug) ? 'Owned' : 'Planning ahead'
-                      }`}
-                      slotProps={{
-                        primary: { noWrap: true },
-                        secondary: { noWrap: true },
-                      }}
-                    />
-                    <Chip
-                      icon={isSelected ? undefined : <AddRoundedIcon />}
-                      label={isSelected ? 'Added' : 'Add'}
-                      size="small"
-                      variant={isSelected ? 'filled' : 'outlined'}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              )
-            })
-          ) : (
-            <Typography color="text.secondary">
-              No Pokemon match those filters.
-            </Typography>
-          )}
-        </List>
-      </CardContent>
-    </Card>
   )
 }
 
