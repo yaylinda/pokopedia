@@ -16,7 +16,7 @@ import type {
   PokemonProfile,
   PokemonSpawnRecord,
 } from '../../../data/pokopia'
-import { formatNameList, formatter } from '../../../utils/format'
+import { formatter } from '../../../utils/format'
 
 export type OwnedFilter = 'all' | 'missing' | 'owned'
 
@@ -280,19 +280,22 @@ function PokemonProfilePanel({
 }) {
   return (
     <Card component="article">
-      <CardContent sx={{ display: 'grid', gap: 4, p: { xs: 2, md: 3 } }}>
+      <CardContent sx={{ display: 'grid', gap: 3, p: { xs: 2, md: 3 } }}>
         <Box
           sx={{
             alignItems: 'center',
             display: 'grid',
             gap: 3,
-            gridTemplateColumns: { xs: '1fr', md: '136px minmax(0, 1fr) auto' },
+            gridTemplateColumns: {
+              xs: '1fr',
+              md: '112px minmax(0, 1fr) auto',
+            },
           }}
         >
-          <Box sx={{ display: 'grid', height: 136, placeItems: 'center', width: 136 }}>
+          <Box sx={{ display: 'grid', height: 112, placeItems: 'center', width: 112 }}>
             <Box component="img" src={entry.imageUrl} alt="" sx={{ width: 96, height: 96, objectFit: 'contain' }} />
           </Box>
-          <Box sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+          <Box sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
             <Typography color="primary" component="p" variant="overline">
               {entry.pokopiaNumberDisplay}
             </Typography>
@@ -307,6 +310,7 @@ function PokemonProfilePanel({
               <Chip key={specialty.slug} label={specialty.name} variant="outlined" />
             ))}
             </Stack>
+            <SpawnSummary spawns={spawns} />
           </Box>
           <Button
           color={isOwned ? 'primary' : 'secondary'}
@@ -319,53 +323,53 @@ function PokemonProfilePanel({
           </Button>
         </Box>
 
-        <Box
-          sx={{
-            alignItems: 'start',
-            display: 'grid',
-            gap: 4,
-            gridTemplateColumns: { xs: '1fr', md: '0.86fr 1.14fr' },
-          }}
-        >
-          <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
-            <Typography component="h3" variant="h5">
-              Favorites
-            </Typography>
-            <Box sx={{ display: 'grid', gap: 1 }}>
+        <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+          <Typography component="h3" variant="h5">
+            Favorites
+          </Typography>
+          <Box sx={{ display: 'grid', gap: 1 }}>
             {favoriteDetails.map((favorite) => (
               <FavoriteItemsAccordion
                 favorite={favorite}
                 key={favorite.favoriteId}
               />
             ))}
-            </Box>
-          </Box>
-
-          <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
-            <Typography component="h3" variant="h5">
-              Where it appears
-            </Typography>
-          {spawns.length > 0 ? (
-            <Stack spacing={1} divider={null}>
-              {spawns.slice(0, 8).map((spawn) => (
-                <Box
-                  key={`${spawn.habitatId}-${spawn.sourceOrder}`}
-                  sx={{ display: 'grid', gap: 0.25, py: 1, borderTop: 1, borderColor: 'divider', '&:first-of-type': { borderTop: 0, pt: 0 } }}
-                >
-                  <Typography component="strong">{spawn.habitatName}</Typography>
-                  <Typography color="text.secondary" component="span" variant="caption">
-                    {spawn.rarity} / {formatNameList(spawn.timeOfDay)} /{' '}
-                    {formatNameList(spawn.weather)}
-                  </Typography>
-                </Box>
-              ))}
-            </Stack>
-          ) : (
-            <Typography color="text.secondary">No normalized spawn rule found.</Typography>
-          )}
           </Box>
         </Box>
       </CardContent>
     </Card>
+  )
+}
+
+function SpawnSummary({ spawns }: { spawns: PokemonSpawnRecord[] }) {
+  if (spawns.length === 0) {
+    return (
+      <Typography color="text.secondary" variant="caption">
+        No normalized spawn rule found.
+      </Typography>
+    )
+  }
+
+  return (
+    <Stack direction="row" sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.75 }}>
+      <Typography color="text.secondary" component="span" variant="caption">
+        Appears in
+      </Typography>
+      {spawns.slice(0, 4).map((spawn) => (
+        <Chip
+          key={`${spawn.habitatId}-${spawn.sourceOrder}`}
+          label={`${spawn.habitatName} · ${spawn.rarity}`}
+          size="small"
+          variant="outlined"
+        />
+      ))}
+      {spawns.length > 4 ? (
+        <Chip
+          label={`+${formatter.format(spawns.length - 4)} more`}
+          size="small"
+          variant="outlined"
+        />
+      ) : null}
+    </Stack>
   )
 }
