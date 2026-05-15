@@ -121,10 +121,23 @@ export type Item = {
   rawLocationText: string
 }
 
+export type FavoriteCategoryItem = {
+  sourceOrder: number
+  itemId: string
+  itemSlug: string
+  itemName: string
+  detailUrl: string
+  pictureUrl: string
+  description: string
+  tagId: string | null
+  categoryName: string | null
+  isCatalogLinked: boolean
+}
+
 export type FavoriteCategory = Favorite & {
   sourcePageUrl: string | null
   itemCount: number
-  items: Requirement[]
+  items: FavoriteCategoryItem[]
 }
 
 export type Location = {
@@ -186,9 +199,16 @@ export type HouseMatch = {
   pokemon: PokemonProfile[]
 }
 
+export type HouseBestItem = {
+  item: FavoriteCategoryItem
+  favoriteCategories: Pick<HouseMatch, 'id' | 'name' | 'count'>[]
+  totalFavoritePokemon: number
+}
+
 export type HouseDraftSummary = {
   idealHabitats: HouseMatch[]
   sharedFavorites: HouseMatch[]
+  bestItems: HouseBestItem[]
   favoriteCoverage: number
 }
 
@@ -320,6 +340,46 @@ const combinations = <T>(itemsToCombine: T[], size: number): T[][] => {
   return [...withFirst, ...withoutFirst]
 }
 
+const summarizeBestItems = (sharedFavorites: HouseMatch[]): HouseBestItem[] => {
+  const itemMatches = new Map<string, HouseBestItem>()
+
+  sharedFavorites.forEach((favorite) => {
+    const favoriteCategory = favoriteCategoryById.get(favorite.id)
+    const seenInCategory = new Set<string>()
+
+    favoriteCategory?.items.forEach((item) => {
+      if (seenInCategory.has(item.itemId)) {
+        return
+      }
+
+      seenInCategory.add(item.itemId)
+
+      const existing = itemMatches.get(item.itemId) ?? {
+        item,
+        favoriteCategories: [],
+        totalFavoritePokemon: 0,
+      }
+
+      existing.favoriteCategories.push({
+        id: favorite.id,
+        name: favorite.name,
+        count: favorite.count,
+      })
+      existing.totalFavoritePokemon += favorite.count
+      itemMatches.set(item.itemId, existing)
+    })
+  })
+
+  return [...itemMatches.values()]
+    .filter((item) => item.favoriteCategories.length > 1)
+    .sort(
+      (a, b) =>
+        b.favoriteCategories.length - a.favoriteCategories.length ||
+        b.totalFavoritePokemon - a.totalFavoritePokemon ||
+        a.item.itemName.localeCompare(b.item.itemName),
+    )
+}
+
 export const scoreHousePlan = (group: PokemonProfile[]): HousePlan => {
   const idealCounts = new Map<string, number>()
   const favoriteCounts = new Map<string, { name: string; count: number }>()
@@ -423,12 +483,14 @@ export const summarizeHouseDraft = (
 
   const byMatchStrength = (a: HouseMatch, b: HouseMatch) =>
     b.count - a.count || a.name.localeCompare(b.name)
+  const sharedFavorites = [...favoriteMatches.values()]
+    .filter((favorite) => favorite.count > 1)
+    .sort(byMatchStrength)
 
   return {
     idealHabitats: [...idealHabitatMatches.values()].sort(byMatchStrength),
-    sharedFavorites: [...favoriteMatches.values()]
-      .filter((favorite) => favorite.count > 1)
-      .sort(byMatchStrength),
+    sharedFavorites,
+    bestItems: summarizeBestItems(sharedFavorites),
     favoriteCoverage: favoriteMatches.size,
   }
 }

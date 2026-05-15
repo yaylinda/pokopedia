@@ -9,6 +9,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { FavoriteItemsAccordion } from '../../../components/FavoriteItemsAccordion'
+import type { FavoriteWithItems } from '../../../components/favoriteItems'
 import type {
   IdealHabitat,
   PokemonProfile,
@@ -18,9 +20,7 @@ import { formatNameList, formatter } from '../../../utils/format'
 
 export type OwnedFilter = 'all' | 'missing' | 'owned'
 
-type FavoriteDetail = PokemonProfile['favorites'][number] & {
-  itemCount: number
-}
+type FavoriteDetail = PokemonProfile['favorites'][number] & FavoriteWithItems
 
 export function PokemonExplorer({
   favoriteDetails,
@@ -331,26 +331,12 @@ function PokemonProfilePanel({
             <Typography component="h3" variant="h5">
               Favorites
             </Typography>
-            <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+            <Box sx={{ display: 'grid', gap: 1 }}>
             {favoriteDetails.map((favorite) => (
-              <Box
+              <FavoriteItemsAccordion
+                favorite={favorite}
                 key={favorite.favoriteId}
-                sx={{
-                  display: 'grid',
-                  gap: 0.25,
-                  p: 1.5,
-                  minWidth: 0,
-                }}
-              >
-                <Typography component="strong" noWrap>
-                  {favorite.name}
-                </Typography>
-                <Typography color="text.secondary" component="small" variant="caption">
-                  {favorite.kind === 'flavor'
-                    ? 'Flavor'
-                    : `${formatter.format(favorite.itemCount)} items`}
-                </Typography>
-              </Box>
+              />
             ))}
             </Box>
           </Box>

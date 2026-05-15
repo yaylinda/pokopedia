@@ -71,10 +71,15 @@ export function usePokedexState() {
     pokemonProfiles[0]
   const selectedPokemonSpawns =
     spawnRecordsByPokemonSlug.get(selectedPokemon.slug) ?? []
-  const selectedFavoriteDetails = selectedPokemon.favorites.map((favorite) => ({
-    ...favorite,
-    itemCount: favoriteCategoryById.get(favorite.favoriteId)?.itemCount ?? 0,
-  }))
+  const selectedFavoriteDetails = selectedPokemon.favorites.map((favorite) => {
+    const category = favoriteCategoryById.get(favorite.favoriteId)
+
+    return {
+      ...favorite,
+      itemCount: category?.itemCount ?? 0,
+      items: category?.items ?? [],
+    }
+  })
 
   const selectPokemon = (slug: string) => {
     const pokemonId =

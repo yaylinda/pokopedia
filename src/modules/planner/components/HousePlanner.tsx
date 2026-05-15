@@ -1,6 +1,10 @@
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
+import InterestsRoundedIcon from '@mui/icons-material/InterestsRounded'
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded'
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded'
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded'
+import type { ReactNode } from 'react'
 import Autocomplete from '@mui/material/Autocomplete'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -18,14 +22,16 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
+import { FavoriteItemChip } from '../../../components/FavoriteItemsAccordion'
 import {
   pokemonBySlug,
+  type HouseBestItem,
   type HouseDraftSummary,
   type HouseMatch,
   type PokemonProfile,
 } from '../../../data/pokopia'
 import type { SavedHouse } from '../../../data/types'
-import { formatNameList, formatter } from '../../../utils/format'
+import { formatNameList } from '../../../utils/format'
 
 export function HousePlanner({
   draftName,
@@ -310,38 +316,11 @@ function MatchSummary({
   draftSummary: HouseDraftSummary
 }) {
   return (
-    <Stack spacing={2}>
-      <Box>
-        <Typography color="primary" component="p" variant="overline">
-          Live matches
-        </Typography>
-        <Typography component="h3" variant="h5">
-          Habitat and favorite overlap
-        </Typography>
-      </Box>
-
+    <Stack spacing={1.5}>
       {draftPokemon.length > 0 ? (
         <>
-          <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
-            <Chip
-              label={`${formatter.format(draftSummary.favoriteCoverage)} favorite categories`}
-              variant="outlined"
-            />
-            <Chip
-              label={`${formatter.format(draftSummary.sharedFavorites.length)} shared favorites`}
-              variant="outlined"
-            />
-          </Stack>
-          <MatchSection
-            empty="No ideal habitat data found."
-            matches={draftSummary.idealHabitats}
-            title="Ideal habitats"
-          />
-          <MatchSection
-            empty="Add another Pokemon to reveal overlapping favorites."
-            matches={draftSummary.sharedFavorites}
-            title="Shared favorites"
-          />
+          <BestItemsSection bestItems={draftSummary.bestItems} />
+          <CompactOverlapSummary draftSummary={draftSummary} />
         </>
       ) : (
         <Typography color="text.secondary">
@@ -350,6 +329,79 @@ function MatchSummary({
         </Typography>
       )}
     </Stack>
+  )
+}
+
+function CompactOverlapSummary({
+  draftSummary,
+}: {
+  draftSummary: HouseDraftSummary
+}) {
+  return (
+    <Box sx={{ display: 'grid', gap: 1 }}>
+      <CompactMatchRow
+        empty="No ideal habitat data found."
+        icon={<WbSunnyRoundedIcon fontSize="small" />}
+        matches={draftSummary.idealHabitats}
+        title="Ideal habitats"
+      />
+      <CompactMatchRow
+        empty="Add another Pokemon to reveal shared favorites."
+        icon={<FavoriteRoundedIcon fontSize="small" />}
+        matches={draftSummary.sharedFavorites}
+        title="Shared favorites"
+      />
+    </Box>
+  )
+}
+
+function CompactMatchRow({
+  empty,
+  icon,
+  matches,
+  title,
+}: {
+  empty: string
+  icon: ReactNode
+  matches: HouseMatch[]
+  title: string
+}) {
+  return (
+    <Box
+      sx={{
+        alignItems: 'start',
+        display: 'grid',
+        gap: 1,
+        gridTemplateColumns: { xs: '1fr', sm: '140px minmax(0, 1fr)' },
+      }}
+    >
+      <Stack
+        direction="row"
+        spacing={0.75}
+        sx={{ alignItems: 'center', color: 'text.secondary', minHeight: 28 }}
+      >
+        {icon}
+        <Typography component="h4" variant="subtitle2">
+          {title}
+        </Typography>
+      </Stack>
+      {matches.length > 0 ? (
+        <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
+          {matches.map((match) => (
+            <Chip
+              key={match.id}
+              label={`${match.name} ${match.count}/4`}
+              size="small"
+              variant="outlined"
+            />
+          ))}
+        </Stack>
+      ) : (
+        <Typography color="text.secondary" variant="body2">
+          {empty}
+        </Typography>
+      )}
+    </Box>
   )
 }
 
@@ -433,48 +485,61 @@ function SavedHousesPanel({
   )
 }
 
-function MatchSection({
-  empty,
-  matches,
-  title,
-}: {
-  empty: string
-  matches: HouseMatch[]
-  title: string
-}) {
+function BestItemsSection({ bestItems }: { bestItems: HouseBestItem[] }) {
   return (
     <Stack spacing={1}>
-      <Typography component="h4" variant="h6">
-        {title}
-      </Typography>
-      {matches.length > 0 ? (
-        <Stack spacing={1}>
-          {matches.map((match) => (
-            <MatchRow key={match.id} match={match} />
+      <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
+        <InterestsRoundedIcon color="primary" fontSize="small" />
+        <Typography component="h3" variant="h5">
+          Best items
+        </Typography>
+      </Stack>
+      {bestItems.length > 0 ? (
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 0.75,
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, minmax(0, 1fr))',
+            },
+            m: 0,
+            p: 0,
+          }}
+        >
+          {bestItems.map((bestItem) => (
+            <BestItemCard bestItem={bestItem} key={bestItem.item.itemId} />
           ))}
-        </Stack>
+        </Box>
       ) : (
-        <Typography color="text.secondary">{empty}</Typography>
+        <Typography color="text.secondary">
+          No item appears in multiple shared favorites yet.
+        </Typography>
       )}
     </Stack>
   )
 }
 
-function MatchRow({ match }: { match: HouseMatch }) {
+function BestItemCard({ bestItem }: { bestItem: HouseBestItem }) {
   return (
     <Box
       sx={{
+        alignItems: 'center',
+        border: 1,
+        borderColor: 'divider',
+        borderRadius: 1,
         display: 'grid',
-        gap: 0.5,
-        gridTemplateColumns: 'minmax(0, 1fr) auto',
+        gap: 1,
+        gridTemplateColumns: 'minmax(0, auto) minmax(0, 1fr)',
+        minHeight: 38,
+        minWidth: 0,
+        px: 1,
+        py: 0.75,
       }}
     >
-      <Typography component="strong" noWrap>
-        {match.name}
-      </Typography>
-      <Chip label={`${match.count}/4`} size="small" variant="outlined" />
-      <Typography color="text.secondary" sx={{ gridColumn: '1 / -1' }} variant="body2">
-        {formatNameList(match.pokemon.map((entry) => entry.name))}
+      <FavoriteItemChip component="div" item={bestItem.item} />
+      <Typography color="text.secondary" noWrap variant="caption">
+        {formatNameList(bestItem.favoriteCategories.map((entry) => entry.name))}
       </Typography>
     </Box>
   )

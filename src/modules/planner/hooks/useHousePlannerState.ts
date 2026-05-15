@@ -11,9 +11,13 @@ const createHouseId = () =>
   globalThis.crypto?.randomUUID?.() ??
   `house-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
+const createAutomaticHouseName = (pokemonSlugs: string[]) =>
+  pokemonSlugs.map((slug) => pokemonBySlug.get(slug)?.name ?? slug).join(' + ')
+
 export function useHousePlannerState() {
   const { deleteHouse, savedHouses, saveHouse } = useUserData()
   const [houseDraftName, setHouseDraftName] = useState('')
+  const [isHouseDraftNameEdited, setIsHouseDraftNameEdited] = useState(false)
   const [houseDraftSlugs, setHouseDraftSlugs] = useState<string[]>([])
   const [selectedSavedHouseId, setSelectedSavedHouseId] = useState<
     string | null
@@ -32,22 +36,30 @@ export function useHousePlannerState() {
     [draftPokemon],
   )
 
+  const updateHouseDraftName = (name: string) => {
+    setIsHouseDraftNameEdited(true)
+    setHouseDraftName(name)
+  }
+
   const toggleDraftPokemon = (slug: string) => {
-    setHouseDraftSlugs((current) => {
-      if (current.includes(slug)) {
-        return current.filter((entry) => entry !== slug)
-      }
+    let nextSlugs = houseDraftSlugs
 
-      if (current.length >= 4) {
-        return current
-      }
+    if (houseDraftSlugs.includes(slug)) {
+      nextSlugs = houseDraftSlugs.filter((entry) => entry !== slug)
+    } else if (houseDraftSlugs.length < 4) {
+      nextSlugs = [...houseDraftSlugs, slug]
+    }
 
-      return [...current, slug]
-    })
+    setHouseDraftSlugs(nextSlugs)
+
+    if (!isHouseDraftNameEdited) {
+      setHouseDraftName(createAutomaticHouseName(nextSlugs))
+    }
   }
 
   const clearHouseDraft = () => {
     setHouseDraftName('')
+    setIsHouseDraftNameEdited(false)
     setHouseDraftSlugs([])
     setSelectedSavedHouseId(null)
   }
@@ -85,6 +97,7 @@ export function useHousePlannerState() {
     }
 
     setHouseDraftName(house.name)
+    setIsHouseDraftNameEdited(true)
     setHouseDraftSlugs(house.pokemonSlugs)
     setSelectedSavedHouseId(house.id)
   }
@@ -108,7 +121,7 @@ export function useHousePlannerState() {
     savedHouses,
     saveDraft,
     selectedSavedHouseId,
-    setHouseDraftName,
+    setHouseDraftName: updateHouseDraftName,
     toggleDraftPokemon,
   }
 }
