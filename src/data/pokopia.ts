@@ -178,6 +178,7 @@ export type PokemonProfile = Pokemon & {
 export type PokemonSpawnRecord = Spawn & {
   habitatId: number
   habitatName: string
+  habitatPictureUrl?: string
   habitatSlug: string
 }
 
@@ -290,6 +291,7 @@ export const spawnRecordsByPokemonSlug = habitatSpawns.reduce(
         ...spawn,
         habitatId: habitat.habitatId,
         habitatName: habitat.habitatName,
+        habitatPictureUrl: habitatsById.get(habitat.habitatId)?.pictureUrl,
         habitatSlug: habitat.habitatSlug,
       })
 

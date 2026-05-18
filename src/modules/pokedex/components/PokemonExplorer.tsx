@@ -1,13 +1,23 @@
+import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded'
+import BedtimeRoundedIcon from '@mui/icons-material/BedtimeRounded'
+import CatchingPokemonRoundedIcon from '@mui/icons-material/CatchingPokemonRounded'
+import ForestRoundedIcon from '@mui/icons-material/ForestRounded'
+import LocalFireDepartmentRoundedIcon from '@mui/icons-material/LocalFireDepartmentRounded'
+import TerrainRoundedIcon from '@mui/icons-material/TerrainRounded'
+import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded'
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded'
+import type { ReactElement, ReactNode } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import ButtonBase from '@mui/material/ButtonBase'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Checkbox from '@mui/material/Checkbox'
 import Chip from '@mui/material/Chip'
+import IconButton from '@mui/material/IconButton'
 import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
+import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import { FavoriteItemsAccordion } from '../../../components/FavoriteItemsAccordion'
 import type { FavoriteWithItems } from '../../../components/favoriteItems'
@@ -15,6 +25,7 @@ import type {
   IdealHabitat,
   PokemonProfile,
   PokemonSpawnRecord,
+  Specialty,
 } from '../../../data/pokopia'
 import { formatter } from '../../../utils/format'
 
@@ -34,12 +45,15 @@ export function PokemonExplorer({
   onOwnedFilterChange,
   onPokemonQueryChange,
   onSelectPokemon,
+  onSpecialtyFilterChange,
   onToggleOwned,
   ownedFilter,
   ownedSet,
   pokemonQuery,
   selectedPokemon,
   selectedPokemonSpawns,
+  specialties,
+  specialtyFilter,
 }: {
   favoriteDetails: FavoriteDetail[]
   filteredPokemon: PokemonProfile[]
@@ -52,12 +66,15 @@ export function PokemonExplorer({
   onOwnedFilterChange: (filter: OwnedFilter) => void
   onPokemonQueryChange: (query: string) => void
   onSelectPokemon: (slug: string) => void
+  onSpecialtyFilterChange: (filter: string) => void
   onToggleOwned: (slug: string) => void
   ownedFilter: OwnedFilter
   ownedSet: Set<string>
   pokemonQuery: string
   selectedPokemon: PokemonProfile
   selectedPokemonSpawns: PokemonSpawnRecord[]
+  specialties: Specialty[]
+  specialtyFilter: string
 }) {
   return (
     <Box
@@ -129,7 +146,10 @@ export function PokemonExplorer({
               sx={{
                 display: 'grid',
                 gap: 1.5,
-                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, minmax(0, 1fr))' },
+                gridTemplateColumns: {
+                  xs: '1fr',
+                  sm: 'repeat(3, minmax(0, 1fr))',
+                },
               }}
             >
               <TextField
@@ -146,6 +166,22 @@ export function PokemonExplorer({
                     value={habitat.idealHabitatId}
                   >
                     {habitat.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                label="Specialty"
+                select
+                size="small"
+                value={specialtyFilter}
+                onChange={(event) =>
+                  onSpecialtyFilterChange(event.target.value)
+                }
+              >
+                <MenuItem value="all">All specialties</MenuItem>
+                {specialties.map((specialty) => (
+                  <MenuItem key={specialty.slug} value={specialty.slug}>
+                    {specialty.name}
                   </MenuItem>
                 ))}
               </TextField>
@@ -219,12 +255,22 @@ function PokemonListButton({
   onToggleOwned: () => void
 }) {
   return (
-    <Box role="listitem" sx={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 36px', gap: 1 }}>
+    <Box
+      role="listitem"
+      sx={{
+        display: 'grid',
+        gap: 1,
+        gridTemplateColumns: 'minmax(0, 1fr) 36px',
+      }}
+    >
       <ButtonBase
         onClick={onSelect}
         sx={{
           alignItems: 'center',
-          backgroundColor: isSelected ? 'primary.light' : 'transparent',
+          backgroundColor: isSelected ? 'rgba(47, 115, 90, 0.13)' : 'transparent',
+          border: 1,
+          borderColor: isSelected ? 'primary.main' : 'transparent',
+          borderRadius: 2,
           display: 'grid',
           gap: 1,
           gridTemplateColumns: '44px minmax(0, 1fr)',
@@ -235,9 +281,14 @@ function PokemonListButton({
           width: '100%',
         }}
       >
-        <Box component="img" src={entry.imageUrl} alt="" sx={{ width: 42, height: 42, objectFit: 'contain' }} />
-        <Box sx={{ minWidth: 0 }}>
-          <Typography component="strong" noWrap>
+        <Box
+          component="img"
+          src={entry.imageUrl}
+          alt=""
+          sx={{ height: 42, objectFit: 'contain', width: 42 }}
+        />
+        <Box sx={{ display: 'grid', gap: 0.25, minWidth: 0 }}>
+          <Typography component="strong" noWrap sx={{ display: 'block' }}>
             {entry.name}
           </Typography>
           <Typography color="text.secondary" component="small" variant="caption">
@@ -246,21 +297,22 @@ function PokemonListButton({
           </Typography>
         </Box>
       </ButtonBase>
-      <Checkbox
-        checked={isOwned}
-        onChange={onToggleOwned}
-        slotProps={{
-          input: {
-            'aria-label': isOwned
-              ? `Mark ${entry.name} missing`
-              : `Mark ${entry.name} owned`,
-          },
-        }}
-        sx={{
-          alignSelf: 'center',
-          justifySelf: 'center',
-        }}
-      />
+      <Tooltip title={isOwned ? 'In collection' : 'Still missing'}>
+        <IconButton
+          aria-label={isOwned ? `Set ${entry.name} as missing` : `Add ${entry.name} to collection`}
+          aria-pressed={isOwned}
+          color={isOwned ? 'secondary' : 'default'}
+          onClick={onToggleOwned}
+          size="small"
+          sx={{
+            alignSelf: 'center',
+            backgroundColor: isOwned ? 'secondary.light' : 'transparent',
+            justifySelf: 'center',
+          }}
+        >
+          <CatchingPokemonRoundedIcon fontSize="small" />
+        </IconButton>
+      </Tooltip>
     </Box>
   )
 }
@@ -285,41 +337,79 @@ function PokemonProfilePanel({
           sx={{
             alignItems: 'center',
             display: 'grid',
-            gap: 3,
+            gap: { xs: 2, md: 3 },
             gridTemplateColumns: {
               xs: '1fr',
-              md: '112px minmax(0, 1fr) auto',
+              sm: '112px minmax(0, 1fr)',
+              md: '128px minmax(0, 1fr) auto',
             },
           }}
         >
-          <Box sx={{ display: 'grid', height: 112, placeItems: 'center', width: 112 }}>
-            <Box component="img" src={entry.imageUrl} alt="" sx={{ width: 96, height: 96, objectFit: 'contain' }} />
+          <Box
+            sx={{
+              alignSelf: 'start',
+              background:
+                'radial-gradient(circle at 50% 42%, rgba(216, 239, 230, 0.95), rgba(251, 252, 248, 0) 68%)',
+              display: 'grid',
+              height: { xs: 104, md: 128 },
+              placeItems: 'center',
+              width: { xs: 104, md: 128 },
+            }}
+          >
+            <Box
+              component="img"
+              src={entry.imageUrl}
+              alt=""
+              sx={{
+                height: { xs: 92, md: 112 },
+                objectFit: 'contain',
+                width: { xs: 92, md: 112 },
+              }}
+            />
           </Box>
           <Box sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
             <Typography color="primary" component="p" variant="overline">
               {entry.pokopiaNumberDisplay}
             </Typography>
-            <Typography component="h2" variant="h2" sx={{ fontSize: { xs: '2.45rem', md: '3.2rem' }, lineHeight: 0.92 }}>
+            <Typography
+              component="h2"
+              variant="h2"
+              sx={{
+                fontSize: { xs: '2.45rem', md: '3.2rem' },
+                lineHeight: 0.92,
+              }}
+            >
               {entry.name}
             </Typography>
-            <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
-            {entry.idealHabitat ? (
-              <Chip color="primary" label={`${entry.idealHabitat.name} ideal`} />
-            ) : null}
-            {entry.specialties.map((specialty) => (
-              <Chip key={specialty.slug} label={specialty.name} variant="outlined" />
-            ))}
+            <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
+              {entry.idealHabitat ? (
+                <IdealHabitatPill
+                  habitat={entry.idealHabitat}
+                  label={`${entry.idealHabitat.name} ideal`}
+                />
+              ) : null}
+              {entry.specialties.map((specialty) => (
+                <DataPill
+                  iconSrc={specialty.pictureUrl ?? specialty.iconUrl}
+                  key={specialty.slug}
+                  label={specialty.name}
+                />
+              ))}
             </Stack>
             <SpawnSummary spawns={spawns} />
           </Box>
           <Button
-          color={isOwned ? 'primary' : 'secondary'}
-          type="button"
-          onClick={onToggleOwned}
-          variant="contained"
-          sx={{ justifySelf: { xs: 'start', md: 'end' } }}
-        >
-          {isOwned ? 'Owned ✓' : 'Mark owned'}
+            color={isOwned ? 'secondary' : 'primary'}
+            startIcon={<CatchingPokemonRoundedIcon />}
+            type="button"
+            onClick={onToggleOwned}
+            variant={isOwned ? 'contained' : 'outlined'}
+            sx={{
+              justifySelf: { xs: 'start', sm: 'end' },
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {isOwned ? 'In collection' : 'Need to find'}
           </Button>
         </Box>
 
@@ -351,16 +441,18 @@ function SpawnSummary({ spawns }: { spawns: PokemonSpawnRecord[] }) {
   }
 
   return (
-    <Stack direction="row" sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.75 }}>
+    <Stack
+      direction="row"
+      sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.75 }}
+    >
       <Typography color="text.secondary" component="span" variant="caption">
         Appears in
       </Typography>
       {spawns.slice(0, 4).map((spawn) => (
-        <Chip
+        <DataPill
+          iconSrc={spawn.habitatPictureUrl}
           key={`${spawn.habitatId}-${spawn.sourceOrder}`}
           label={`${spawn.habitatName} · ${spawn.rarity}`}
-          size="small"
-          variant="outlined"
         />
       ))}
       {spawns.length > 4 ? (
@@ -372,4 +464,159 @@ function SpawnSummary({ spawns }: { spawns: PokemonSpawnRecord[] }) {
       ) : null}
     </Stack>
   )
+}
+
+function IdealHabitatPill({
+  habitat,
+  label = habitat.name,
+}: {
+  habitat: IdealHabitat
+  label?: string
+}) {
+  return (
+    <DataPill
+      icon={getIdealHabitatIcon(habitat.idealHabitatId)}
+      label={label}
+      tone={getIdealHabitatTone(habitat.idealHabitatId)}
+    />
+  )
+}
+
+function DataPill({
+  icon,
+  iconSrc,
+  label,
+  tone,
+}: {
+  icon?: ReactElement
+  iconSrc?: string
+  label: ReactNode
+  tone?: PillTone
+}) {
+  return (
+    <Box
+      component="span"
+      sx={{
+        alignItems: 'center',
+        backgroundColor: tone?.backgroundColor ?? 'rgba(251, 252, 248, 0.74)',
+        border: 1,
+        borderColor: tone?.borderColor ?? 'divider',
+        borderRadius: 999,
+        color: tone?.color ?? 'text.primary',
+        display: 'inline-flex',
+        gap: 0.65,
+        maxWidth: '100%',
+        minHeight: 30,
+        px: 0.85,
+        py: 0.35,
+      }}
+    >
+      {iconSrc ? (
+        <Box
+          alt=""
+          component="img"
+          src={iconSrc}
+          sx={{
+            flex: '0 0 auto',
+            height: 20,
+            objectFit: 'contain',
+            width: 20,
+          }}
+        />
+      ) : icon ? (
+        <Box
+          component="span"
+          sx={{
+            alignItems: 'center',
+            display: 'inline-flex',
+            flex: '0 0 auto',
+            fontSize: 18,
+            lineHeight: 0,
+          }}
+        >
+          {icon}
+        </Box>
+      ) : null}
+      <Typography
+        component="span"
+        noWrap
+        variant="caption"
+        sx={{ fontWeight: 800, minWidth: 0 }}
+      >
+        {label}
+      </Typography>
+    </Box>
+  )
+}
+
+type PillTone = {
+  backgroundColor: string
+  borderColor: string
+  color: string
+}
+
+function getIdealHabitatTone(idealHabitatId: string): PillTone {
+  switch (idealHabitatId) {
+    case 'bright':
+      return {
+        backgroundColor: '#fff1bf',
+        borderColor: '#e4bd4d',
+        color: '#4d3e05',
+      }
+    case 'warm':
+      return {
+        backgroundColor: '#ffe2ce',
+        borderColor: '#df8a52',
+        color: '#61330e',
+      }
+    case 'humid':
+      return {
+        backgroundColor: '#d9f0ec',
+        borderColor: '#79b9ad',
+        color: '#124c45',
+      }
+    case 'dry':
+      return {
+        backgroundColor: '#eee5d1',
+        borderColor: '#bfa76d',
+        color: '#4a3c1d',
+      }
+    case 'dark':
+      return {
+        backgroundColor: '#d9d6e7',
+        borderColor: '#81799b',
+        color: '#29243d',
+      }
+    case 'cool':
+      return {
+        backgroundColor: '#dcecf7',
+        borderColor: '#82add0',
+        color: '#173c58',
+      }
+    default:
+      return {
+        backgroundColor: '#e4eee9',
+        borderColor: '#aebfb8',
+        color: '#17302d',
+      }
+  }
+}
+
+function getIdealHabitatIcon(idealHabitatId: string) {
+  switch (idealHabitatId) {
+    case 'bright':
+      return <WbSunnyRoundedIcon fontSize="inherit" />
+    case 'warm':
+      return <LocalFireDepartmentRoundedIcon fontSize="inherit" />
+    case 'humid':
+      return <WaterDropRoundedIcon fontSize="inherit" />
+    case 'dry':
+      return <TerrainRoundedIcon fontSize="inherit" />
+    case 'dark':
+      return <BedtimeRoundedIcon fontSize="inherit" />
+    case 'cool':
+      return <AcUnitRoundedIcon fontSize="inherit" />
+    default:
+      return <ForestRoundedIcon fontSize="inherit" />
+  }
 }

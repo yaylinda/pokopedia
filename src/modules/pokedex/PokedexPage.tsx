@@ -17,12 +17,15 @@ export function PokedexPage() {
       onOwnedFilterChange={state.setOwnedFilter}
       onPokemonQueryChange={state.setPokemonQuery}
       onSelectPokemon={state.selectPokemon}
+      onSpecialtyFilterChange={state.setSpecialtyFilter}
       onToggleOwned={state.toggleOwned}
       ownedFilter={state.ownedFilter}
       ownedSet={state.ownedSet}
       pokemonQuery={state.pokemonQuery}
       selectedPokemon={state.selectedPokemon}
       selectedPokemonSpawns={state.selectedPokemonSpawns}
+      specialties={state.specialties}
+      specialtyFilter={state.specialtyFilter}
     />
   )
 }
