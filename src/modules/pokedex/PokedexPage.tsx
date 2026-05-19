@@ -14,12 +14,10 @@ export function PokedexPage() {
       isSelectedOwned={state.ownedSet.has(state.selectedPokemon.slug)}
       onIdealFilterChange={state.setIdealFilter}
       onIndexToggle={state.toggleIndex}
-      onOwnedFilterChange={state.setOwnedFilter}
       onPokemonQueryChange={state.setPokemonQuery}
       onSelectPokemon={state.selectPokemon}
       onSpecialtyFilterChange={state.setSpecialtyFilter}
       onToggleOwned={state.toggleOwned}
-      ownedFilter={state.ownedFilter}
       ownedSet={state.ownedSet}
       pokemonQuery={state.pokemonQuery}
       selectedPokemon={state.selectedPokemon}

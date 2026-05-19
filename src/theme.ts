@@ -98,7 +98,7 @@ export const appTheme = createTheme({
     MuiChip: {
       styleOverrides: {
         root: {
-          fontWeight: 800,
+          fontWeight: 700,
         },
       },
     },

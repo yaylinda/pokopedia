@@ -9,7 +9,6 @@ import {
   specialties,
 } from '../../../data/pokopia'
 import { normalizeSearch } from '../../../utils/format'
-import type { OwnedFilter } from '../components/PokemonExplorer'
 
 const getPokemonSlugFromParam = (pokemonId: string | null) => {
   if (!pokemonId) {
@@ -31,7 +30,6 @@ export function usePokedexState() {
   const { ownedSet, toggleOwned } = useUserData()
   const [pokemonQuery, setPokemonQuery] = useState('')
   const [idealFilter, setIdealFilter] = useState('all')
-  const [ownedFilter, setOwnedFilter] = useState<OwnedFilter>('all')
   const [specialtyFilter, setSpecialtyFilter] = useState('all')
   const selectedPokemonSlug =
     getPokemonSlugFromParam(searchParams.get('pokemonId')) ??
@@ -61,14 +59,10 @@ export function usePokedexState() {
       const matchesSpecialty =
         specialtyFilter === 'all' ||
         entry.specialties.some((specialty) => specialty.slug === specialtyFilter)
-      const matchesOwned =
-        ownedFilter === 'all' ||
-        (ownedFilter === 'owned' && ownedSet.has(entry.slug)) ||
-        (ownedFilter === 'missing' && !ownedSet.has(entry.slug))
 
-      return matchesQuery && matchesIdeal && matchesSpecialty && matchesOwned
+      return matchesQuery && matchesIdeal && matchesSpecialty
     })
-  }, [idealFilter, ownedFilter, ownedSet, pokemonQuery, specialtyFilter])
+  }, [idealFilter, pokemonQuery, specialtyFilter])
 
   const selectedPokemon =
     pokemonProfiles.find((entry) => entry.slug === selectedPokemonSlug) ??
@@ -99,7 +93,6 @@ export function usePokedexState() {
     idealFilter,
     idealHabitats,
     isIndexCollapsed,
-    ownedFilter,
     ownedSet,
     pokemonQuery,
     selectedFavoriteDetails,
@@ -107,7 +100,6 @@ export function usePokedexState() {
     selectedPokemonSpawns,
     selectPokemon,
     setIdealFilter,
-    setOwnedFilter,
     setPokemonQuery,
     setSpecialtyFilter,
     specialties,

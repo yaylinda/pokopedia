@@ -12,7 +12,6 @@ import Button from '@mui/material/Button'
 import ButtonBase from '@mui/material/ButtonBase'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
@@ -29,8 +28,6 @@ import type {
 } from '../../../data/pokopia'
 import { formatter } from '../../../utils/format'
 
-export type OwnedFilter = 'all' | 'missing' | 'owned'
-
 type FavoriteDetail = PokemonProfile['favorites'][number] & FavoriteWithItems
 
 export function PokemonExplorer({
@@ -42,12 +39,10 @@ export function PokemonExplorer({
   isSelectedOwned,
   onIdealFilterChange,
   onIndexToggle,
-  onOwnedFilterChange,
   onPokemonQueryChange,
   onSelectPokemon,
   onSpecialtyFilterChange,
   onToggleOwned,
-  ownedFilter,
   ownedSet,
   pokemonQuery,
   selectedPokemon,
@@ -63,12 +58,10 @@ export function PokemonExplorer({
   isSelectedOwned: boolean
   onIdealFilterChange: (filter: string) => void
   onIndexToggle: () => void
-  onOwnedFilterChange: (filter: OwnedFilter) => void
   onPokemonQueryChange: (query: string) => void
   onSelectPokemon: (slug: string) => void
   onSpecialtyFilterChange: (filter: string) => void
   onToggleOwned: (slug: string) => void
-  ownedFilter: OwnedFilter
   ownedSet: Set<string>
   pokemonQuery: string
   selectedPokemon: PokemonProfile
@@ -148,18 +141,18 @@ export function PokemonExplorer({
                 gap: 1.5,
                 gridTemplateColumns: {
                   xs: '1fr',
-                  sm: 'repeat(3, minmax(0, 1fr))',
+                  sm: 'repeat(2, minmax(0, 1fr))',
                 },
               }}
             >
               <TextField
-                label="Ideal"
+                label="Ideal habitat"
                 select
                 size="small"
                 value={idealFilter}
                 onChange={(event) => onIdealFilterChange(event.target.value)}
               >
-                <MenuItem value="all">All ideals</MenuItem>
+                <MenuItem value="all">All ideal habitats</MenuItem>
                 {idealHabitats.map((habitat) => (
                   <MenuItem
                     key={habitat.idealHabitatId}
@@ -185,28 +178,17 @@ export function PokemonExplorer({
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField
-                label="Tracker"
-                select
-                size="small"
-                value={ownedFilter}
-                onChange={(event) =>
-                  onOwnedFilterChange(event.target.value as OwnedFilter)
-                }
-              >
-                <MenuItem value="all">All</MenuItem>
-                <MenuItem value="owned">Owned</MenuItem>
-                <MenuItem value="missing">Missing</MenuItem>
-              </TextField>
             </Box>
 
             <Stack
               role="list"
               spacing={1}
               sx={{
+                '&::-webkit-scrollbar': { display: 'none' },
                 maxHeight: { xs: 420, lg: 'min(62vh, 720px)' },
                 overflow: 'auto',
                 pr: 0.5,
+                scrollbarWidth: 'none',
               }}
             >
               {filteredPokemon.length > 0 ? (
@@ -295,6 +277,43 @@ function PokemonListButton({
             {entry.pokopiaNumberDisplay} /{' '}
             {entry.idealHabitat?.name ?? 'No ideal'}
           </Typography>
+          {entry.specialties.length > 0 ? (
+            <Stack
+              direction="row"
+              sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.5, mt: 0.25 }}
+            >
+              {entry.specialties.slice(0, 2).map((specialty) => (
+                <Box
+                  component="span"
+                  key={specialty.slug}
+                  sx={{
+                    alignItems: 'center',
+                    color: 'primary.dark',
+                    display: 'inline-flex',
+                    gap: 0.35,
+                    minWidth: 0,
+                  }}
+                >
+                  {specialty.pictureUrl || specialty.iconUrl ? (
+                    <Box
+                      alt=""
+                      component="img"
+                      src={specialty.pictureUrl ?? specialty.iconUrl}
+                      sx={{
+                        flex: '0 0 auto',
+                        height: 15,
+                        objectFit: 'contain',
+                        width: 15,
+                      }}
+                    />
+                  ) : null}
+                  <Typography component="span" noWrap variant="caption">
+                    {specialty.name}
+                  </Typography>
+                </Box>
+              ))}
+            </Stack>
+          ) : null}
         </Box>
       </ButtonBase>
       <Tooltip title={isOwned ? 'In collection' : 'Still missing'}>
@@ -335,13 +354,13 @@ function PokemonProfilePanel({
       <CardContent sx={{ display: 'grid', gap: 3, p: { xs: 2, md: 3 } }}>
         <Box
           sx={{
-            alignItems: 'center',
+            alignItems: 'start',
             display: 'grid',
-            gap: { xs: 2, md: 3 },
+            gap: { xs: 2, md: 2.5 },
             gridTemplateColumns: {
               xs: '1fr',
-              sm: '112px minmax(0, 1fr)',
-              md: '128px minmax(0, 1fr) auto',
+              sm: '104px minmax(0, 1fr)',
+              md: '116px minmax(0, 1fr) auto',
             },
           }}
         >
@@ -351,9 +370,9 @@ function PokemonProfilePanel({
               background:
                 'radial-gradient(circle at 50% 42%, rgba(216, 239, 230, 0.95), rgba(251, 252, 248, 0) 68%)',
               display: 'grid',
-              height: { xs: 104, md: 128 },
+              height: { xs: 104, md: 116 },
               placeItems: 'center',
-              width: { xs: 104, md: 128 },
+              width: { xs: 104, md: 116 },
             }}
           >
             <Box
@@ -361,42 +380,58 @@ function PokemonProfilePanel({
               src={entry.imageUrl}
               alt=""
               sx={{
-                height: { xs: 92, md: 112 },
+                height: { xs: 92, md: 104 },
                 objectFit: 'contain',
-                width: { xs: 92, md: 112 },
+                width: { xs: 92, md: 104 },
               }}
             />
           </Box>
-          <Box sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
-            <Typography color="primary" component="p" variant="overline">
-              {entry.pokopiaNumberDisplay}
-            </Typography>
-            <Typography
-              component="h2"
-              variant="h2"
+          <Box sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+            <Box sx={{ display: 'grid', gap: 0.5, minWidth: 0 }}>
+              <Typography color="primary" component="p" variant="overline">
+                {entry.pokopiaNumberDisplay}
+              </Typography>
+              <Typography
+                component="h2"
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.25rem', md: '2.9rem' },
+                  lineHeight: 0.95,
+                }}
+              >
+                {entry.name}
+              </Typography>
+            </Box>
+
+            <Box
               sx={{
-                fontSize: { xs: '2.45rem', md: '3.2rem' },
-                lineHeight: 0.92,
+                display: 'grid',
+                gap: 1.5,
+                gridTemplateColumns: {
+                  xs: '1fr',
+                  md: 'minmax(130px, 0.7fr) minmax(160px, 0.8fr) minmax(220px, 1.2fr)',
+                },
               }}
             >
-              {entry.name}
-            </Typography>
-            <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
-              {entry.idealHabitat ? (
-                <IdealHabitatPill
-                  habitat={entry.idealHabitat}
-                  label={`${entry.idealHabitat.name} ideal`}
-                />
-              ) : null}
-              {entry.specialties.map((specialty) => (
-                <DataPill
-                  iconSrc={specialty.pictureUrl ?? specialty.iconUrl}
-                  key={specialty.slug}
-                  label={specialty.name}
-                />
-              ))}
-            </Stack>
-            <SpawnSummary spawns={spawns} />
+              <MetadataGroup label="Specialties">
+                {entry.specialties.map((specialty) => (
+                  <DataPill
+                    iconSrc={specialty.pictureUrl ?? specialty.iconUrl}
+                    key={specialty.slug}
+                    label={specialty.name}
+                  />
+                ))}
+              </MetadataGroup>
+              <MetadataGroup label="Ideal habitat">
+                {entry.idealHabitat ? (
+                  <IdealHabitatPill
+                    habitat={entry.idealHabitat}
+                    label={entry.idealHabitat.name}
+                  />
+                ) : null}
+              </MetadataGroup>
+              <SpawnSummary spawns={spawns} />
+            </Box>
           </Box>
           <Button
             color={isOwned ? 'secondary' : 'primary'}
@@ -431,38 +466,56 @@ function PokemonProfilePanel({
   )
 }
 
+function MetadataGroup({
+  children,
+  label,
+}: {
+  children: ReactNode
+  label: string
+}) {
+  return (
+    <Box sx={{ alignContent: 'start', display: 'grid', gap: 0.65, minWidth: 0 }}>
+      <Typography
+        color="text.secondary"
+        component="span"
+        variant="caption"
+        sx={{ fontWeight: 700 }}
+      >
+        {label}
+      </Typography>
+      <Stack
+        direction="row"
+        sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.65 }}
+      >
+        {children}
+      </Stack>
+    </Box>
+  )
+}
+
 function SpawnSummary({ spawns }: { spawns: PokemonSpawnRecord[] }) {
   if (spawns.length === 0) {
     return (
-      <Typography color="text.secondary" variant="caption">
-        No normalized spawn rule found.
-      </Typography>
+      <MetadataGroup label="Appears in">
+        <DataPill label="No normalized spawn rule found" />
+      </MetadataGroup>
     )
   }
 
   return (
-    <Stack
-      direction="row"
-      sx={{ alignItems: 'center', flexWrap: 'wrap', gap: 0.75 }}
-    >
-      <Typography color="text.secondary" component="span" variant="caption">
-        Appears in
-      </Typography>
+    <MetadataGroup label="Appears in">
       {spawns.slice(0, 4).map((spawn) => (
         <DataPill
           iconSrc={spawn.habitatPictureUrl}
           key={`${spawn.habitatId}-${spawn.sourceOrder}`}
-          label={`${spawn.habitatName} · ${spawn.rarity}`}
+          label={spawn.habitatName}
+          meta={spawn.rarity}
         />
       ))}
       {spawns.length > 4 ? (
-        <Chip
-          label={`+${formatter.format(spawns.length - 4)} more`}
-          size="small"
-          variant="outlined"
-        />
+        <DataPill label={`+${formatter.format(spawns.length - 4)} more`} />
       ) : null}
-    </Stack>
+    </MetadataGroup>
   )
 }
 
@@ -486,11 +539,13 @@ function DataPill({
   icon,
   iconSrc,
   label,
+  meta,
   tone,
 }: {
   icon?: ReactElement
   iconSrc?: string
-  label: ReactNode
+  label: string
+  meta?: string
   tone?: PillTone
 }) {
   return (
@@ -498,12 +553,13 @@ function DataPill({
       component="span"
       sx={{
         alignItems: 'center',
-        backgroundColor: tone?.backgroundColor ?? 'rgba(251, 252, 248, 0.74)',
+        backgroundColor: 'rgba(251, 252, 248, 0.66)',
         border: 1,
         borderColor: tone?.borderColor ?? 'divider',
         borderRadius: 999,
-        color: tone?.color ?? 'text.primary',
+        color: 'text.primary',
         display: 'inline-flex',
+        flex: '0 0 auto',
         gap: 0.65,
         maxWidth: '100%',
         minHeight: 30,
@@ -528,6 +584,7 @@ function DataPill({
           component="span"
           sx={{
             alignItems: 'center',
+            color: tone?.color ?? 'text.secondary',
             display: 'inline-flex',
             flex: '0 0 auto',
             fontSize: 18,
@@ -541,16 +598,26 @@ function DataPill({
         component="span"
         noWrap
         variant="caption"
-        sx={{ fontWeight: 800, minWidth: 0 }}
+        sx={{ fontWeight: 700, minWidth: 0 }}
       >
         {label}
       </Typography>
+      {meta ? (
+        <Typography
+          color="text.secondary"
+          component="span"
+          noWrap
+          variant="caption"
+          sx={{ fontWeight: 500, minWidth: 0 }}
+        >
+          · {meta}
+        </Typography>
+      ) : null}
     </Box>
   )
 }
 
 type PillTone = {
-  backgroundColor: string
   borderColor: string
   color: string
 }
@@ -559,45 +626,38 @@ function getIdealHabitatTone(idealHabitatId: string): PillTone {
   switch (idealHabitatId) {
     case 'bright':
       return {
-        backgroundColor: '#fff1bf',
         borderColor: '#e4bd4d',
-        color: '#4d3e05',
+        color: '#7d6204',
       }
     case 'warm':
       return {
-        backgroundColor: '#ffe2ce',
         borderColor: '#df8a52',
-        color: '#61330e',
+        color: '#9b4d16',
       }
     case 'humid':
       return {
-        backgroundColor: '#d9f0ec',
         borderColor: '#79b9ad',
-        color: '#124c45',
+        color: '#1d7166',
       }
     case 'dry':
       return {
-        backgroundColor: '#eee5d1',
         borderColor: '#bfa76d',
-        color: '#4a3c1d',
+        color: '#7a6127',
       }
     case 'dark':
       return {
-        backgroundColor: '#d9d6e7',
         borderColor: '#81799b',
-        color: '#29243d',
+        color: '#4c426d',
       }
     case 'cool':
       return {
-        backgroundColor: '#dcecf7',
         borderColor: '#82add0',
-        color: '#173c58',
+        color: '#2b678e',
       }
     default:
       return {
-        backgroundColor: '#e4eee9',
         borderColor: '#aebfb8',
-        color: '#17302d',
+        color: '#2f735a',
       }
   }
 }
