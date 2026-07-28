@@ -33,6 +33,20 @@ The app is configured for GitHub Pages deployment through GitHub Actions.
 
 This repo starts with a small data-ingestion pipeline for Serebii's Pokemon Pokopia pages. Scrapers write normalized JSON datasets into `data/` and may spool fetched HTML into ignored `.tmp/pokopia-html/` files while they run.
 
+## Generate the region and home plan
+
+Build a complete five-region recommendation and 1-4 Pokemon home groups from
+the normalized roster, preference, specialty, habitat, and optional litter data:
+
+```bash
+python3 scripts/generate_region_home_plan.py
+```
+
+Generated files:
+
+- `data/region-home-plan.json` - structured assignments, scores, and source fields
+- `docs/region-home-plan.md` - a readable region-by-region home roster
+
 ## Scrape the Pokemon table
 
 ```bash
