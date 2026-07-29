@@ -18,6 +18,7 @@ import { HomePage } from './modules/home/HomePage'
 import { PlannerPage } from './modules/planner/PlannerPage'
 import { PokedexPage } from './modules/pokedex/PokedexPage'
 import { RegionPlanPage } from './modules/region-plan/RegionPlanPage'
+import { RegionRosterPage } from './modules/region-roster/RegionRosterPage'
 import { getRouterBasename } from './routing'
 import { appTheme } from './theme'
 
@@ -72,6 +73,7 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="pokemon" element={<PokedexPage />} />
               <Route path="habitats" element={<HabitatsPage />} />
+              <Route path="region-roster" element={<RegionRosterPage />} />
               <Route path="region-plan" element={<RegionPlanPage />} />
               <Route path="planner" element={<PlannerPage />} />
               <Route path="*" element={<Navigate replace to="/" />} />

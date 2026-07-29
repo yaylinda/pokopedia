@@ -7,6 +7,7 @@ const tabs: { id: TabId; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'pokemon', label: 'Pokédex' },
   { id: 'habitats', label: 'Habitats' },
+  { id: 'regionRoster', label: 'Roster' },
   { id: 'regionPlan', label: 'Region Plan' },
   { id: 'planner', label: 'Planner' },
 ]

@@ -1,9 +1,16 @@
-export type TabId = 'home' | 'pokemon' | 'habitats' | 'regionPlan' | 'planner'
+export type TabId =
+  | 'home'
+  | 'pokemon'
+  | 'habitats'
+  | 'regionRoster'
+  | 'regionPlan'
+  | 'planner'
 
 export const tabRoutes: Record<TabId, string> = {
   home: '/',
   pokemon: '/pokemon',
   habitats: '/habitats',
+  regionRoster: '/region-roster',
   regionPlan: '/region-plan',
   planner: '/planner',
 }
