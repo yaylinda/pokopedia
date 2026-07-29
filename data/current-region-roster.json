@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-07-28",
+  "sourceNote": "Identified from user-provided in-game region comfort screenshots. Comfort groups are deduplicated across overlapping screenshots.",
+  "regions": {
+    "palette-town": {
+      "name": "Palette Town",
+      "environmentLevel": {
+        "current": 10,
+        "isMax": true
+      },
+      "pokemonCount": 50,
+      "eventPokemonSlugs": [
+        "sableye",
+        "jirachi"
+      ],
+      "comfortLevels": {
+        "awesome": [
+          "ivysaur",
+          "venusaur",
+          "charmeleon",
+          "pichu",
+          "munchlax",
+          "snorlax",
+          "absol",
+          "gimmighoul",
+          "gholdengo",
+          "metagross",
+          "servine",
+          "serperior",
+          "vaporeon",
+          "leafeon",
+          "suicune",
+          "mewtwo",
+          "mew",
+          "sableye",
+          "jirachi"
+        ],
+        "great": [
+          "charmander",
+          "charizard",
+          "squirtle",
+          "wartortle",
+          "pikachu",
+          "toxel",
+          "gallade",
+          "snivy",
+          "dragapult",
+          "tinkaton",
+          "sylveon"
+        ],
+        "nice": [
+          "bulbasaur",
+          "blastoise",
+          "ditto",
+          "vikavolt",
+          "toxtricitylowkeyform",
+          "armarouge",
+          "ceruledge",
+          "corviknight",
+          "eevee",
+          "jolteon",
+          "flareon",
+          "espeon",
+          "umbreon",
+          "glaceon",
+          "raikou",
+          "entei"
+        ],
+        "average": [],
+        "iffy": [
+          "scizor"
+        ],
+        "no-home": [
+          "articuno",
+          "zapdos",
+          "moltres"
+        ]
+      }
+    },
+    "sparkling-skylands": {
+      "name": "Sparkling Skylands",
+      "environmentLevel": {
+        "current": 10,
+        "isMax": true
+      },
+      "pokemonCount": 57,
+      "eventPokemonSlugs": [],
+      "comfortLevels": {
+        "awesome": [
+          "abra",
+          "alakazam",
+          "girafarig",
+          "flygon",
+          "duskull",
+          "dusclops",
+          "greninja",
+          "dedenne"
+        ],
+        "great": [
+          "raichu",
+          "audino",
+          "vulpix",
+          "poliwrath",
+          "mimejr.",
+          "mr.mime",
+          "cyndaquil",
+          "quilava",
+          "typhlosion",
+          "farigiraf",
+          "ralts",
+          "kirlia",
+          "vibrava",
+          "froakie",
+          "frogadier",
+          "noibat",
+          "sprigatito",
+          "tinkatink"
+        ],
+        "nice": [
+          "gyarados",
+          "ditto",
+          "drifblim",
+          "conkeldurr",
+          "meowth",
+          "mimikyu",
+          "clefairy",
+          "ninetales",
+          "poliwhirl",
+          "kadabra",
+          "dratini",
+          "dragonair",
+          "dragonite",
+          "misdreavus",
+          "mismagius",
+          "gardevoir",
+          "plusle",
+          "minun",
+          "dusknoir",
+          "beldum",
+          "metang",
+          "noivern",
+          "rookidee",
+          "corvisquire",
+          "dreepy",
+          "drakloak",
+          "floragato",
+          "meowscarada",
+          "wattrel"
+        ],
+        "average": [
+          "clefable",
+          "tinkatuff"
+        ],
+        "iffy": [],
+        "no-home": []
+      }
+    },
+    "withered-wastelands": {
+      "name": "Withered Wastelands",
+      "environmentLevel": {
+        "current": 10,
+        "isMax": true
+      },
+      "pokemonCount": 58,
+      "eventPokemonSlugs": [],
+      "comfortLevels": {
+        "awesome": [
+          "bellossom",
+          "victreebel",
+          "professortangrowth",
+          "scyther",
+          "drifloon",
+          "sliggoo"
+        ],
+        "great": [
+          "venomoth",
+          "bellsprout",
+          "magnemite",
+          "onix",
+          "pinsir",
+          "heracross",
+          "cacturne",
+          "combee",
+          "vespiquen",
+          "shelloseastsea",
+          "shellos",
+          "drilbur",
+          "lampent",
+          "fraxure",
+          "goomy"
+        ],
+        "nice": [
+          "pidgey",
+          "pidgeotto",
+          "oddish",
+          "vileplume",
+          "venonat",
+          "weepinbell",
+          "cubone",
+          "marowak",
+          "tyrogue",
+          "hitmonlee",
+          "hitmonchan",
+          "tangela",
+          "ditto",
+          "hoothoot",
+          "noctowl",
+          "gulpin",
+          "cacnea",
+          "excadrill",
+          "timburr",
+          "litwick",
+          "chandelure",
+          "axew",
+          "haxorus",
+          "geodude",
+          "bonsly"
+        ],
+        "average": [
+          "paras",
+          "parasect",
+          "slowpoke",
+          "slowbro",
+          "slowking",
+          "hitmontop",
+          "magikarp",
+          "cramorant",
+          "gastrodoneastsea",
+          "gurdurr"
+        ],
+        "iffy": [
+          "pidgeot"
+        ],
+        "no-home": [
+          "illumise"
+        ]
+      }
+    },
+    "bleak-beach": {
+      "name": "Bleak Beach",
+      "environmentLevel": {
+        "current": 10,
+        "isMax": true
+      },
+      "pokemonCount": 68,
+      "eventPokemonSlugs": [],
+      "comfortLevels": {
+        "awesome": [
+          "crobat",
+          "voltorb",
+          "blissey",
+          "elekid",
+          "mosslax",
+          "makuhita",
+          "hariyama"
+        ],
+        "great": [
+          "gloom",
+          "magnezone",
+          "koffing",
+          "weezing",
+          "zubat",
+          "meowth",
+          "electrode",
+          "exeggcute",
+          "exeggutor",
+          "chansey",
+          "electabuzz",
+          "electivire",
+          "ampharos",
+          "zoroark",
+          "pawmi",
+          "pawmo",
+          "mawile",
+          "kricketune",
+          "poliwag"
+        ],
+        "nice": [
+          "magneton",
+          "ditto",
+          "cramorant",
+          "fidough",
+          "psyduck",
+          "golduck",
+          "gengar",
+          "happiny",
+          "lapras",
+          "spinarak",
+          "ariados",
+          "marill",
+          "torchic",
+          "combusken",
+          "blaziken",
+          "wingull",
+          "piplup",
+          "prinplup",
+          "empoleon",
+          "trubbish",
+          "zorua",
+          "minccino",
+          "cinccino",
+          "grubbin",
+          "charjabug",
+          "mimikyu",
+          "pawmot",
+          "tatsugiridroopyform",
+          "tatsugiristretchyform",
+          "tatsugiricurlyform",
+          "ekans",
+          "lotad",
+          "stereorotom"
+        ],
+        "average": [
+          "haunter",
+          "azumarill",
+          "arbok",
+          "ralts",
+          "kricketot"
+        ],
+        "iffy": [
+          "pelipper",
+          "ludicolo"
+        ],
+        "no-home": [
+          "farfetch'd",
+          "azurill"
+        ]
+      }
+    },
+    "rocky-ridges": {
+      "name": "Rocky Ridges",
+      "environmentLevel": {
+        "current": 10,
+        "isMax": true
+      },
+      "pokemonCount": 70,
+      "eventPokemonSlugs": [],
+      "comfortLevels": {
+        "awesome": [
+          "steelix",
+          "decidueye",
+          "arcanine",
+          "glimmet",
+          "politoed",
+          "porygon",
+          "porygon2",
+          "porygon-z",
+          "tyrantrum",
+          "amaura"
+        ],
+        "great": [
+          "growlithe",
+          "muk",
+          "mareep",
+          "smeargle",
+          "igglybuff",
+          "machop",
+          "machoke",
+          "machamp",
+          "magby",
+          "bonsly",
+          "pupitar",
+          "tyranitar",
+          "riolu",
+          "cinderace",
+          "greedent",
+          "rolycoly",
+          "coalossal",
+          "fidough",
+          "glimmora",
+          "trapinch",
+          "shieldon"
+        ],
+        "nice": [
+          "persian",
+          "grimer",
+          "flaaffy",
+          "garbodor",
+          "diglett",
+          "dugtrio",
+          "magmar",
+          "magmortar",
+          "sudowoodo",
+          "larvitar",
+          "lucario",
+          "larvesta",
+          "rowlet",
+          "dartrix",
+          "scorbunny",
+          "raboot",
+          "carkol",
+          "charcadet",
+          "aerodactyl",
+          "cranidos",
+          "rampardos",
+          "bastiodon",
+          "tyrunt",
+          "aurorus"
+        ],
+        "average": [
+          "ditto",
+          "paldeanwooper",
+          "clodsire",
+          "volcarona",
+          "swablu",
+          "altaria"
+        ],
+        "iffy": [],
+        "no-home": [
+          "swalot",
+          "jigglypuff",
+          "wigglytuff",
+          "graveler",
+          "golem",
+          "murkrow",
+          "honchkrow",
+          "torkoal",
+          "chatot"
+        ]
+      }
+    }
+  }
+}
