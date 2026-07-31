@@ -91,7 +91,7 @@ const specialtyUsefulness: Record<string, LindaPokemonRating> = {
   gatherhoney: 4,
   generate: 4,
   grow: 4,
-  hype: 2,
+  hype: 1,
   illuminate: 5,
   litter: 4,
   paint: 5,
