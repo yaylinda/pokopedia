@@ -4,7 +4,7 @@ import {
   readUserData,
   writeUserData,
 } from './userData'
-import type { SavedHouse } from './types'
+import type { LindaPokemonStats, SavedHouse } from './types'
 import { UserDataContext, type UserDataContextValue } from './userDataContext'
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
@@ -29,7 +29,12 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         nextOwned.add(slug)
       }
 
-      return createUserData([...nextOwned], current.savedHouses)
+      return createUserData(
+        [...nextOwned],
+        current.savedHouses,
+        current.pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+      )
     })
   }
 
@@ -44,7 +49,12 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
           )
         : [savedHouse, ...current.savedHouses]
 
-      return createUserData(current.ownedPokemonSlugs, savedHouses)
+      return createUserData(
+        current.ownedPokemonSlugs,
+        savedHouses,
+        current.pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+      )
     })
   }
 
@@ -53,6 +63,71 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
       createUserData(
         current.ownedPokemonSlugs,
         current.savedHouses.filter((house) => house.id !== houseId),
+        current.pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+      ),
+    )
+  }
+
+  const updatePokemonStats = (
+    slug: string,
+    update: Partial<LindaPokemonStats>,
+  ) => {
+    setUserData((current) => {
+      const currentStats = current.pokemonStatsBySlug[slug] ?? {
+        likeRating: null,
+        usefulnessRating: null,
+        belongsInCurrentRegion: null,
+      }
+      const nextStats = { ...currentStats, ...update }
+      const pokemonStatsBySlug = {
+        ...current.pokemonStatsBySlug,
+        [slug]: nextStats,
+      }
+
+      if (
+        nextStats.likeRating === null &&
+        nextStats.usefulnessRating === null &&
+        nextStats.belongsInCurrentRegion === null
+      ) {
+        delete pokemonStatsBySlug[slug]
+      }
+
+      return createUserData(
+        current.ownedPokemonSlugs,
+        current.savedHouses,
+        pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+      )
+    })
+  }
+
+  const setPokemonRosterRegion = (slug: string, regionId: string | null) => {
+    setUserData((current) => {
+      const rosterRegionOverrides = { ...current.rosterRegionOverrides }
+
+      if (regionId) {
+        rosterRegionOverrides[slug] = regionId
+      } else {
+        delete rosterRegionOverrides[slug]
+      }
+
+      return createUserData(
+        current.ownedPokemonSlugs,
+        current.savedHouses,
+        current.pokemonStatsBySlug,
+        rosterRegionOverrides,
+      )
+    })
+  }
+
+  const resetRosterModel = () => {
+    setUserData((current) =>
+      createUserData(
+        current.ownedPokemonSlugs,
+        current.savedHouses,
+        current.pokemonStatsBySlug,
+        {},
       ),
     )
   }
@@ -61,9 +136,14 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
     deleteHouse,
     ownedCount: userData.ownedPokemonSlugs.length,
     ownedSet,
+    pokemonStatsBySlug: userData.pokemonStatsBySlug,
+    resetRosterModel,
+    rosterRegionOverrides: userData.rosterRegionOverrides,
     savedHouses: userData.savedHouses,
     saveHouse,
+    setPokemonRosterRegion,
     toggleOwned,
+    updatePokemonStats,
     userData,
   }
 

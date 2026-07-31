@@ -1,10 +1,16 @@
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded'
+import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded'
 import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import FilterAltOffRoundedIcon from '@mui/icons-material/FilterAltOffRounded'
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded'
+import HandymanRoundedIcon from '@mui/icons-material/HandymanRounded'
 import LandscapeRoundedIcon from '@mui/icons-material/LandscapeRounded'
+import LinkRoundedIcon from '@mui/icons-material/LinkRounded'
+import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded'
+import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import StarRoundedIcon from '@mui/icons-material/StarRounded'
 import WorkspacesRoundedIcon from '@mui/icons-material/WorkspacesRounded'
@@ -14,6 +20,7 @@ import ButtonBase from '@mui/material/ButtonBase'
 import Chip from '@mui/material/Chip'
 import Collapse from '@mui/material/Collapse'
 import InputAdornment from '@mui/material/InputAdornment'
+import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import ToggleButton from '@mui/material/ToggleButton'
@@ -25,8 +32,19 @@ import {
   comfortLevels,
   currentRegionRoster,
   type ComfortLevel,
+  type CurrentRegion,
   type RegionRosterPokemon,
 } from '../../data/currentRegionRoster'
+import {
+  evolutionConstraintGroups,
+  getEvolutionConstraintGroup,
+  rosterConstraintGraph,
+} from '../../data/rosterConstraints'
+import type {
+  LindaPokemonRating,
+  LindaPokemonStats,
+} from '../../data/types'
+import { useUserData } from '../../data/userDataContext'
 
 type GroupMode = 'comfort' | 'habitat' | 'favorite'
 
@@ -187,11 +205,25 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
 const formatRosterDate = (value: string) =>
   dateFormatter.format(new Date(`${value}T00:00:00Z`))
 
-const getComfortCounts = (pokemon: RegionRosterPokemon[]) =>
+const allRosterPokemon = currentRegionRoster.regions.flatMap(
+  (region) => region.pokemon,
+)
+const allRosterPokemonBySlug = new Map(
+  allRosterPokemon.map((pokemon) => [pokemon.slug, pokemon]),
+)
+
+const getComfortCounts = (
+  pokemon: RegionRosterPokemon[],
+  regionId?: string,
+) =>
   Object.fromEntries(
     comfortLevels.map((level) => [
       level,
-      pokemon.filter((entry) => entry.comfortLevel === level).length,
+      pokemon.filter(
+        (entry) =>
+          entry.comfortLevel === level &&
+          (!regionId || entry.regionId === regionId),
+      ).length,
     ]),
   ) as Record<ComfortLevel, number>
 
@@ -215,6 +247,13 @@ const matchesQuery = (pokemon: RegionRosterPokemon, query: string) => {
 }
 
 export function RegionRosterPage() {
+  const {
+    pokemonStatsBySlug,
+    resetRosterModel,
+    rosterRegionOverrides,
+    setPokemonRosterRegion,
+    updatePokemonStats,
+  } = useUserData()
   const [selectedRegionId, setSelectedRegionId] = useState(
     currentRegionRoster.regions[0].regionId,
   )
@@ -222,18 +261,55 @@ export function RegionRosterPage() {
   const [query, setQuery] = useState('')
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
 
+  const effectiveStatsBySlug = useMemo(
+    () =>
+      Object.fromEntries(
+        allRosterPokemon.map((pokemon) => [
+          pokemon.slug,
+          pokemonStatsBySlug[pokemon.slug] ?? pokemon.lindaStats,
+        ]),
+      ),
+    [pokemonStatsBySlug],
+  )
+  const modeledRegions = useMemo(
+    () =>
+      currentRegionRoster.regions.map((region) => ({
+        ...region,
+        pokemon: allRosterPokemon.filter(
+          (pokemon) =>
+            (rosterRegionOverrides[pokemon.slug] ?? pokemon.regionId) ===
+            region.regionId,
+        ),
+      })),
+    [rosterRegionOverrides],
+  )
+  const evolutionViolationCount = useMemo(
+    () =>
+      evolutionConstraintGroups.filter(
+        (group) =>
+          new Set(
+            group.flatMap((slug) => {
+              const pokemon = allRosterPokemonBySlug.get(slug)
+              return pokemon
+                ? [rosterRegionOverrides[slug] ?? pokemon.regionId]
+                : []
+            }),
+          ).size > 1,
+      ).length,
+    [rosterRegionOverrides],
+  )
   const selectedRegion =
-    currentRegionRoster.regions.find(
+    modeledRegions.find(
       (region) => region.regionId === selectedRegionId,
-    ) ?? currentRegionRoster.regions[0]
+    ) ?? modeledRegions[0]
   const regionStyle = regionStyles[selectedRegion.regionId]
   const filteredPokemon = useMemo(
     () => selectedRegion.pokemon.filter((pokemon) => matchesQuery(pokemon, query)),
     [query, selectedRegion],
   )
   const groups = useMemo(
-    () => buildGroups(filteredPokemon, groupMode),
-    [filteredPokemon, groupMode],
+    () => buildGroups(filteredPokemon, groupMode, selectedRegion.regionId),
+    [filteredPokemon, groupMode, selectedRegion.regionId],
   )
 
   const chooseRegion = (regionId: string) => {
@@ -267,12 +343,21 @@ export function RegionRosterPage() {
 
       <RegionSelector
         onChoose={chooseRegion}
+        regions={modeledRegions}
         selectedRegionId={selectedRegion.regionId}
       />
 
+      <RosterSandboxBar
+        evolutionViolationCount={evolutionViolationCount}
+        moveCount={Object.keys(rosterRegionOverrides).length}
+        onReset={resetRosterModel}
+      />
+
       <RegionSummary
+        lindaStatsBySlug={effectiveStatsBySlug}
         pokemon={selectedRegion.pokemon}
         regionName={selectedRegion.name}
+        selectedRegionId={selectedRegion.regionId}
         style={regionStyle}
       />
 
@@ -283,6 +368,8 @@ export function RegionRosterPage() {
           onQueryChange={setQuery}
           query={query}
         />
+
+        <LindaLensGuide />
 
         <Box
           aria-live="polite"
@@ -318,12 +405,29 @@ export function RegionRosterPage() {
           <Box sx={{ display: 'grid', gap: 1.25 }}>
             {groups.map((group) => (
               <PokemonGroupSection
+                activeRegionId={selectedRegion.regionId}
                 expandedKey={expandedKey}
                 group={group}
-                groupMode={groupMode}
                 key={group.id}
+                modeledRegions={modeledRegions}
+                pokemonStatsBySlug={effectiveStatsBySlug}
                 onToggle={(key) =>
                   setExpandedKey((current) => (current === key ? null : key))
+                }
+                onUpdatePokemonStats={updatePokemonStats}
+                onMovePokemon={(pokemon, regionId) =>
+                  getEvolutionConstraintGroup(pokemon.slug).forEach((slug) => {
+                    const member = allRosterPokemonBySlug.get(slug)
+                    if (!member) return
+                    setPokemonRosterRegion(
+                      slug,
+                      regionId === member.regionId ? null : regionId,
+                    )
+                    updatePokemonStats(slug, {
+                      ...(effectiveStatsBySlug[slug] ?? member.lindaStats),
+                      belongsInCurrentRegion: null,
+                    })
+                  })
                 }
               />
             ))}
@@ -388,9 +492,11 @@ function HeaderStat({ label, value }: { label: string; value: number }) {
 
 function RegionSelector({
   onChoose,
+  regions,
   selectedRegionId,
 }: {
   onChoose: (regionId: string) => void
+  regions: CurrentRegion[]
   selectedRegionId: string
 }) {
   return (
@@ -411,9 +517,14 @@ function RegionSelector({
         scrollbarWidth: 'thin',
       }}
     >
-      {currentRegionRoster.regions.map((region) => {
+      {regions.map((region) => {
         const style = regionStyles[region.regionId]
         const selected = selectedRegionId === region.regionId
+        const originalCount =
+          currentRegionRoster.regions.find(
+            (currentRegion) => currentRegion.regionId === region.regionId,
+          )?.pokemon.length ?? region.pokemon.length
+        const countDelta = region.pokemon.length - originalCount
 
         return (
           <ButtonBase
@@ -451,7 +562,17 @@ function RegionSelector({
                 {region.pokemon.length}
               </Typography>
             </Box>
-            <ComfortBar pokemon={region.pokemon} />
+            <ComfortBar pokemon={region.pokemon} regionId={region.regionId} />
+            {countDelta !== 0 && (
+              <Typography
+                component="span"
+                sx={{ color: style.deep, fontWeight: 800, justifySelf: 'end' }}
+                variant="caption"
+              >
+                {countDelta > 0 ? '+' : ''}
+                {countDelta} in sandbox
+              </Typography>
+            )}
           </ButtonBase>
         )
       })}
@@ -459,16 +580,107 @@ function RegionSelector({
   )
 }
 
+function RosterSandboxBar({
+  evolutionViolationCount,
+  moveCount,
+  onReset,
+}: {
+  evolutionViolationCount: number
+  moveCount: number
+  onReset: () => void
+}) {
+  return (
+    <Box
+      sx={{
+        alignItems: { xs: 'start', sm: 'center' },
+        backgroundColor:
+          moveCount > 0 ? 'oklch(0.94 0.055 250)' : 'oklch(0.97 0.018 250)',
+        border: `1px solid ${moveCount > 0 ? 'oklch(0.67 0.11 250)' : 'oklch(0.85 0.025 250)'}`,
+        borderRadius: 1.5,
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: 1,
+        justifyContent: 'space-between',
+        p: { xs: 1.25, md: 1.5 },
+      }}
+    >
+      <Box sx={{ display: 'grid', gap: 0.25 }}>
+        <Typography component="h2" sx={{ fontWeight: 850 }} variant="subtitle1">
+          Roster sandbox
+          {moveCount > 0 ? ` · ${moveCount} ${moveCount === 1 ? 'move' : 'moves'}` : ''}
+        </Typography>
+        <Typography color="text.secondary" variant="body2">
+          Expand any Pokémon to try another region. Counts and Linda summaries update instantly.
+        </Typography>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, pt: 0.5 }}>
+          <Chip
+            icon={<AccountTreeRoundedIcon />}
+            label={`${rosterConstraintGraph.nodeCount} nodes · ${rosterConstraintGraph.edgeCount} must-link edges`}
+            size="small"
+            variant="outlined"
+          />
+          <Chip
+            color={evolutionViolationCount > 0 ? 'warning' : 'success'}
+            icon={<LinkRoundedIcon />}
+            label={
+              evolutionViolationCount > 0
+                ? `${evolutionViolationCount} evolution lines currently split`
+                : 'All evolution lines together'
+            }
+            size="small"
+            variant="outlined"
+          />
+        </Box>
+      </Box>
+      {moveCount > 0 && (
+        <Button
+          color="inherit"
+          onClick={onReset}
+          size="small"
+          startIcon={<RestartAltRoundedIcon />}
+          variant="outlined"
+        >
+          Reset moves
+        </Button>
+      )}
+    </Box>
+  )
+}
+
 function RegionSummary({
+  lindaStatsBySlug,
   pokemon,
   regionName,
+  selectedRegionId,
   style,
 }: {
+  lindaStatsBySlug: Record<string, LindaPokemonStats>
   pokemon: RegionRosterPokemon[]
   regionName: string
+  selectedRegionId: string
   style: VisualStyle
 }) {
-  const counts = getComfortCounts(pokemon)
+  const counts = getComfortCounts(pokemon, selectedRegionId)
+  const movedHereCount = pokemon.filter(
+    (entry) => entry.regionId !== selectedRegionId,
+  ).length
+  const stats = pokemon.map(
+    (entry) => lindaStatsBySlug[entry.slug] ?? entry.lindaStats,
+  )
+  const average = (key: 'likeRating' | 'usefulnessRating') => {
+    const ratings = stats.flatMap((entry) =>
+      entry[key] === null ? [] : [entry[key]],
+    )
+    return ratings.length > 0
+      ? (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1)
+      : '—'
+  }
+  const belongsDecided = stats.filter(
+    (entry) => entry.belongsInCurrentRegion !== null,
+  ).length
+  const belongsHere = stats.filter(
+    (entry) => entry.belongsInCurrentRegion === true,
+  ).length
 
   return (
     <Box
@@ -497,7 +709,7 @@ function RegionSummary({
       </Box>
 
       <Box sx={{ display: 'grid', gap: 1 }}>
-        <ComfortBar large pokemon={pokemon} />
+        <ComfortBar large pokemon={pokemon} regionId={selectedRegionId} />
         <Box
           sx={{
             display: 'grid',
@@ -528,8 +740,78 @@ function RegionSummary({
               </Typography>
             </Box>
           ))}
+          {movedHereCount > 0 && (
+            <Box sx={{ alignItems: 'center', display: 'flex', gap: 0.625 }}>
+              <Box
+                aria-hidden="true"
+                sx={{
+                  backgroundColor: 'oklch(0.62 0.025 250)',
+                  borderRadius: '50%',
+                  flex: '0 0 auto',
+                  height: 9,
+                  width: 9,
+                }}
+              />
+              <Typography component="strong">{movedHereCount}</Typography>
+              <Typography color="text.secondary" noWrap variant="caption">
+                Recheck
+              </Typography>
+            </Box>
+          )}
+        </Box>
+        <Box
+          sx={{
+            borderTop: '1px solid oklch(0.89 0.018 250)',
+            display: 'grid',
+            gap: 1,
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+            pt: 1,
+          }}
+        >
+          <RegionLindaMetric
+            icon={<FavoriteRoundedIcon />}
+            label="Avg. like"
+            value={`${average('likeRating')}/5`}
+          />
+          <RegionLindaMetric
+            icon={<HandymanRoundedIcon />}
+            label="Avg. useful"
+            value={`${average('usefulnessRating')}/5`}
+          />
+          <RegionLindaMetric
+            icon={<PlaceRoundedIcon />}
+            label="Belongs here"
+            value={belongsDecided > 0 ? `${belongsHere}/${belongsDecided}` : 'Not decided'}
+          />
         </Box>
       </Box>
+    </Box>
+  )
+}
+
+function RegionLindaMetric({
+  icon,
+  label,
+  value,
+}: {
+  icon: ReactNode
+  label: string
+  value: string
+}) {
+  return (
+    <Box sx={{ alignItems: 'center', display: 'grid', gap: 0.25, gridTemplateColumns: 'auto 1fr' }}>
+      <Box
+        aria-hidden="true"
+        sx={{ color: 'oklch(0.53 0.13 42)', display: 'flex', gridRow: '1 / 3', '& svg': { fontSize: 18 } }}
+      >
+        {icon}
+      </Box>
+      <Typography component="strong" sx={{ fontWeight: 850 }} variant="body2">
+        {value}
+      </Typography>
+      <Typography color="text.secondary" variant="caption">
+        {label}
+      </Typography>
     </Box>
   )
 }
@@ -537,13 +819,17 @@ function RegionSummary({
 function ComfortBar({
   large = false,
   pokemon,
+  regionId,
 }: {
   large?: boolean
   pokemon: RegionRosterPokemon[]
+  regionId: string
 }) {
-  const counts = getComfortCounts(pokemon)
+  const counts = getComfortCounts(pokemon, regionId)
+  const movedHereCount = pokemon.filter((entry) => entry.regionId !== regionId).length
   const label = comfortLevels
     .map((level) => `${comfortStyles[level].label}: ${counts[level]}`)
+    .concat(movedHereCount > 0 ? [`Comfort to recheck: ${movedHereCount}`] : [])
     .join(', ')
 
   return (
@@ -571,6 +857,17 @@ function ComfortBar({
             />
           </Tooltip>
         ) : null,
+      )}
+      {movedHereCount > 0 && (
+        <Tooltip title={`Comfort to recheck: ${movedHereCount}`}>
+          <Box
+            sx={{
+              backgroundColor: 'oklch(0.62 0.025 250)',
+              flex: `${movedHereCount} 1 0`,
+              minWidth: large ? 5 : 2,
+            }}
+          />
+        </Tooltip>
       )}
     </Box>
   )
@@ -668,20 +965,120 @@ function ViewControls({
   )
 }
 
+function LindaLensGuide() {
+  return (
+    <Box
+      aria-label="Linda rating guide"
+      component="aside"
+      sx={{
+        alignItems: { xs: 'start', lg: 'center' },
+        backgroundColor: 'oklch(0.965 0.035 72)',
+        border: '1px solid oklch(0.84 0.07 72)',
+        borderRadius: 1.5,
+        display: 'grid',
+        gap: { xs: 1.25, lg: 2 },
+        gridTemplateColumns: {
+          xs: '1fr',
+          sm: 'repeat(3, minmax(0, 1fr))',
+          lg: '150px repeat(3, minmax(0, 1fr))',
+        },
+        p: { xs: 1.25, md: 1.5 },
+      }}
+    >
+      <Box sx={{ gridColumn: { xs: '1 / -1', lg: 'auto' } }}>
+        <Typography
+          component="h3"
+          sx={{ color: 'oklch(0.38 0.10 52)', fontWeight: 850 }}
+          variant="subtitle2"
+        >
+          Linda lens
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          Your take, at a glance
+        </Typography>
+      </Box>
+      <LindaGuideItem
+        icon={<FavoriteRoundedIcon />}
+        label="Like"
+        text="Starts at 3 · 1 not for me · 5 favorite"
+      />
+      <LindaGuideItem
+        icon={<HandymanRoundedIcon />}
+        label="Useful"
+        text="Skill-based start · 1 niche · 5 essential"
+      />
+      <LindaGuideItem
+        icon={<PlaceRoundedIcon />}
+        label="Belongs here"
+        text="Not decided until you choose"
+      />
+    </Box>
+  )
+}
+
+function LindaGuideItem({
+  icon,
+  label,
+  text,
+}: {
+  icon: ReactNode
+  label: string
+  text: string
+}) {
+  return (
+    <Stack direction="row" spacing={0.75} sx={{ alignItems: 'flex-start' }}>
+      <Box
+        aria-hidden="true"
+        sx={{
+          color: 'oklch(0.52 0.14 42)',
+          display: 'flex',
+          mt: 0.125,
+          '& svg': { fontSize: 17 },
+        }}
+      >
+        {icon}
+      </Box>
+      <Box sx={{ display: 'grid', gap: 0.125 }}>
+        <Typography component="strong" sx={{ fontWeight: 800 }} variant="caption">
+          {label}
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          {text}
+        </Typography>
+      </Box>
+    </Stack>
+  )
+}
+
 function buildGroups(
   pokemon: RegionRosterPokemon[],
   mode: GroupMode,
+  activeRegionId: string,
 ): PokemonGroup[] {
   if (mode === 'comfort') {
-    return comfortLevels.map((level) => ({
-      id: level,
-      label: comfortStyles[level].label,
-      note: comfortStyles[level].note,
-      pokemon: pokemon.filter((entry) => entry.comfortLevel === level),
-      accent: comfortStyles[level].accent,
-      deep: comfortStyles[level].deep,
-      soft: comfortStyles[level].soft,
-    }))
+    return [
+      ...comfortLevels.map((level) => ({
+        id: level,
+        label: comfortStyles[level].label,
+        note: comfortStyles[level].note,
+        pokemon: pokemon.filter(
+          (entry) =>
+            entry.regionId === activeRegionId && entry.comfortLevel === level,
+        ),
+        accent: comfortStyles[level].accent,
+        deep: comfortStyles[level].deep,
+        soft: comfortStyles[level].soft,
+      })),
+      {
+        id: 'moved-here',
+        label: 'Moved here',
+        note: 'Comfort needs rechecking in-game',
+        pokemon: pokemon.filter((entry) => entry.regionId !== activeRegionId),
+        accent: 'oklch(0.62 0.025 250)',
+        deep: 'oklch(0.38 0.035 250)',
+        soft: 'oklch(0.94 0.015 250)',
+      },
+    ]
   }
 
   if (mode === 'habitat') {
@@ -726,15 +1123,26 @@ function buildGroups(
 }
 
 function PokemonGroupSection({
+  activeRegionId,
   expandedKey,
   group,
-  groupMode,
+  modeledRegions,
+  onMovePokemon,
   onToggle,
+  onUpdatePokemonStats,
+  pokemonStatsBySlug,
 }: {
+  activeRegionId: string
   expandedKey: string | null
   group: PokemonGroup
-  groupMode: GroupMode
+  modeledRegions: CurrentRegion[]
+  onMovePokemon: (pokemon: RegionRosterPokemon, regionId: string) => void
   onToggle: (key: string) => void
+  onUpdatePokemonStats: (
+    slug: string,
+    update: Partial<LindaPokemonStats>,
+  ) => void
+  pokemonStatsBySlug: Record<string, LindaPokemonStats>
 }) {
   const expansionPrefix = `${group.id}:`
 
@@ -791,10 +1199,19 @@ function PokemonGroupSection({
             const cardKey = `${expansionPrefix}${pokemon.key}`
             return (
               <PokemonTile
+                activeRegionId={activeRegionId}
                 expanded={expandedKey === cardKey}
-                groupMode={groupMode}
                 key={pokemon.key}
+                lindaStats={pokemonStatsBySlug[pokemon.slug] ?? pokemon.lindaStats}
+                modeledRegions={modeledRegions}
+                onMove={(regionId) => onMovePokemon(pokemon, regionId)}
                 onToggle={() => onToggle(cardKey)}
+                onUpdateLindaStats={(update) =>
+                  onUpdatePokemonStats(pokemon.slug, {
+                    ...(pokemonStatsBySlug[pokemon.slug] ?? pokemon.lindaStats),
+                    ...update,
+                  })
+                }
                 pokemon={pokemon}
               />
             )
@@ -810,17 +1227,27 @@ function PokemonGroupSection({
 }
 
 function PokemonTile({
+  activeRegionId,
   expanded,
-  groupMode,
+  lindaStats,
+  modeledRegions,
+  onMove,
   onToggle,
+  onUpdateLindaStats,
   pokemon,
 }: {
+  activeRegionId: string
   expanded: boolean
-  groupMode: GroupMode
+  lindaStats: LindaPokemonStats
+  modeledRegions: CurrentRegion[]
+  onMove: (regionId: string) => void
   onToggle: () => void
+  onUpdateLindaStats: (update: Partial<LindaPokemonStats>) => void
   pokemon: RegionRosterPokemon
 }) {
   const comfortStyle = comfortStyles[pokemon.comfortLevel]
+  const evolutionGroup = getEvolutionConstraintGroup(pokemon.slug)
+  const movedHere = activeRegionId !== pokemon.regionId
 
   return (
     <Box
@@ -848,7 +1275,7 @@ function PokemonTile({
           display: 'grid',
           gridTemplateColumns: '64px minmax(0, 1fr) auto',
           justifyItems: 'stretch',
-          minHeight: 78,
+          minHeight: 108,
           p: 0.75,
           textAlign: 'left',
           '&:focus-visible': {
@@ -899,39 +1326,33 @@ function PokemonTile({
           )}
         </Box>
 
-        <Box sx={{ alignContent: 'center', display: 'grid', gap: 0.375, minWidth: 0, px: 0.75 }}>
+        <Box sx={{ alignContent: 'center', display: 'grid', gap: 0.5, minWidth: 0, px: 0.75 }}>
           <Typography component="h4" noWrap sx={{ fontWeight: 800 }}>
             {pokemon.name}
           </Typography>
           <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', minWidth: 0 }}>
-            {groupMode !== 'comfort' && (
-              <Typography
-                component="span"
-                noWrap
-                sx={{ color: comfortStyle.deep, fontWeight: 700 }}
-                variant="caption"
-              >
-                {comfortStyle.label}
-              </Typography>
-            )}
-            {groupMode !== 'habitat' && pokemon.idealHabitat && (
-              <>
-                {groupMode !== 'comfort' && (
-                  <Typography color="text.disabled" component="span" variant="caption">
-                    ·
-                  </Typography>
-                )}
-                <Typography color="text.secondary" component="span" noWrap variant="caption">
-                  {pokemon.idealHabitat.name} habitat
-                </Typography>
-              </>
-            )}
-            {groupMode === 'habitat' && pokemon.specialties[0] && (
-              <Typography color="text.secondary" component="span" noWrap variant="caption">
-                · {pokemon.specialties[0].name}
-              </Typography>
-            )}
+            <Typography
+              component="span"
+              noWrap
+              sx={{ color: comfortStyle.deep, fontWeight: 750 }}
+              variant="caption"
+            >
+              {movedHere ? 'Comfort needs recheck' : `${comfortStyle.label} comfort`}
+            </Typography>
+            <Typography color="text.disabled" component="span" variant="caption">
+              ·
+            </Typography>
+            <Typography color="text.secondary" component="span" noWrap variant="caption">
+              {pokemon.specialties.length > 0
+                ? `${pokemon.specialties[0].name}${pokemon.specialties.length > 1 ? ` +${pokemon.specialties.length - 1}` : ''}`
+                : 'No skill listed'}
+            </Typography>
           </Stack>
+          <LindaStatsSnapshot
+            evolutionGroupSize={evolutionGroup.length}
+            movedHere={movedHere}
+            stats={lindaStats}
+          />
         </Box>
 
         <ExpandMoreRoundedIcon
@@ -955,6 +1376,11 @@ function PokemonTile({
           }}
         >
           <DetailRow
+            icon={<GridViewRoundedIcon />}
+            label="Current comfort"
+            values={movedHere ? ['Needs rechecking in-game'] : [comfortStyle.label]}
+          />
+          <DetailRow
             icon={<LandscapeRoundedIcon />}
             label="Ideal habitat"
             values={pokemon.idealHabitat ? [pokemon.idealHabitat.name] : []}
@@ -964,6 +1390,19 @@ function PokemonTile({
             label="Skills"
             values={pokemon.specialties.map((specialty) => specialty.name)}
           />
+          <LindaStatsEditor
+            onChange={onUpdateLindaStats}
+            pokemonName={pokemon.name}
+            stats={lindaStats}
+          />
+          <RosterMoveControl
+            activeRegionId={activeRegionId}
+            evolutionGroup={evolutionGroup}
+            modeledRegions={modeledRegions}
+            onMove={onMove}
+            originalRegionName={pokemon.regionName}
+            pokemonName={pokemon.name}
+          />
           <DetailRow
             icon={<AutoAwesomeRoundedIcon />}
             label="Favorites"
@@ -971,6 +1410,317 @@ function PokemonTile({
           />
         </Box>
       </Collapse>
+    </Box>
+  )
+}
+
+function LindaStatsSnapshot({
+  evolutionGroupSize,
+  movedHere,
+  stats,
+}: {
+  evolutionGroupSize: number
+  movedHere: boolean
+  stats: LindaPokemonStats
+}) {
+  const belongsLabel =
+    stats.belongsInCurrentRegion === null
+      ? 'Undecided'
+      : stats.belongsInCurrentRegion
+        ? 'Belongs'
+        : 'Reconsider'
+
+  return (
+    <Box
+      aria-label={`Linda ratings: like ${stats.likeRating ?? 'not rated'} of 5, usefulness ${stats.usefulnessRating ?? 'not rated'} of 5, region ${belongsLabel}`}
+      sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.375 }}
+    >
+      <LindaMiniMetric
+        color="oklch(0.52 0.16 25)"
+        icon={<FavoriteRoundedIcon />}
+        label={`Like ${stats.likeRating ?? '—'}/5`}
+      />
+      <LindaMiniMetric
+        color="oklch(0.45 0.12 235)"
+        icon={<HandymanRoundedIcon />}
+        label={`Useful ${stats.usefulnessRating ?? '—'}/5`}
+      />
+      <LindaMiniMetric
+        color={
+          stats.belongsInCurrentRegion === null
+            ? 'oklch(0.48 0.035 250)'
+            : stats.belongsInCurrentRegion
+              ? 'oklch(0.42 0.11 145)'
+              : 'oklch(0.46 0.14 42)'
+        }
+        icon={<PlaceRoundedIcon />}
+        label={belongsLabel}
+      />
+      {evolutionGroupSize > 1 && (
+        <LindaMiniMetric
+          color="oklch(0.42 0.10 285)"
+          icon={<LinkRoundedIcon />}
+          label={`${evolutionGroupSize} linked`}
+        />
+      )}
+      {movedHere && (
+        <LindaMiniMetric
+          color="oklch(0.42 0.10 250)"
+          icon={<RestartAltRoundedIcon />}
+          label="Moved"
+        />
+      )}
+    </Box>
+  )
+}
+
+function LindaMiniMetric({
+  color,
+  icon,
+  label,
+}: {
+  color: string
+  icon: ReactNode
+  label: string
+}) {
+  return (
+    <Box
+      sx={{
+        alignItems: 'center',
+        backgroundColor: 'oklch(0.955 0.012 250)',
+        borderRadius: 8,
+        color,
+        display: 'flex',
+        gap: 0.25,
+        minHeight: 20,
+        px: 0.625,
+        '& svg': { fontSize: 12 },
+      }}
+    >
+      {icon}
+      <Typography component="span" sx={{ color: 'inherit', fontSize: '0.66rem', fontWeight: 800 }}>
+        {label}
+      </Typography>
+    </Box>
+  )
+}
+
+function LindaStatsEditor({
+  onChange,
+  pokemonName,
+  stats,
+}: {
+  onChange: (update: Partial<LindaPokemonStats>) => void
+  pokemonName: string
+  stats: LindaPokemonStats
+}) {
+  return (
+    <Box
+      component="section"
+      sx={{
+        backgroundColor: 'oklch(0.965 0.035 72)',
+        border: '1px solid oklch(0.84 0.07 72)',
+        borderRadius: 1,
+        display: 'grid',
+        gap: 1.25,
+        p: 1,
+      }}
+    >
+      <Box sx={{ display: 'grid', gap: 0.125 }}>
+        <Typography component="h5" sx={{ color: 'oklch(0.38 0.10 52)', fontWeight: 850 }} variant="subtitle2">
+          Linda’s take
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          Adjust the starting scores for {pokemonName}.
+        </Typography>
+      </Box>
+      <LindaRatingControl
+        accent="oklch(0.65 0.16 25)"
+        guide="1 not for me · 3 like · 5 favorite"
+        icon={<FavoriteRoundedIcon />}
+        label="How much I like them"
+        onChange={(likeRating) => onChange({ likeRating })}
+        value={stats.likeRating}
+      />
+      <LindaRatingControl
+        accent="oklch(0.60 0.13 235)"
+        guide="1 niche · 3 handy · 5 essential"
+        icon={<HandymanRoundedIcon />}
+        label="How useful they are"
+        onChange={(usefulnessRating) => onChange({ usefulnessRating })}
+        value={stats.usefulnessRating}
+      />
+      <Box sx={{ display: 'grid', gap: 0.5 }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+          <PlaceRoundedIcon sx={{ color: 'oklch(0.52 0.14 42)', fontSize: 17 }} />
+          <Typography component="p" sx={{ fontWeight: 800 }} variant="caption">
+            Belongs in this region
+          </Typography>
+        </Stack>
+        <ToggleButtonGroup
+          aria-label={`Whether ${pokemonName} belongs in this region`}
+          exclusive
+          onChange={(_event, next: 'yes' | 'no' | 'undecided' | null) => {
+            if (!next) return
+            onChange({
+              belongsInCurrentRegion:
+                next === 'undecided' ? null : next === 'yes',
+            })
+          }}
+          size="small"
+          value={
+            stats.belongsInCurrentRegion === null
+              ? 'undecided'
+              : stats.belongsInCurrentRegion
+                ? 'yes'
+                : 'no'
+          }
+          sx={{
+            '& .MuiToggleButton-root': {
+              minHeight: 32,
+              px: 1,
+              textTransform: 'none',
+            },
+          }}
+        >
+          <ToggleButton value="yes">Yes</ToggleButton>
+          <ToggleButton value="no">No</ToggleButton>
+          <ToggleButton value="undecided">Not decided</ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
+    </Box>
+  )
+}
+
+function LindaRatingControl({
+  accent,
+  guide,
+  icon,
+  label,
+  onChange,
+  value,
+}: {
+  accent: string
+  guide: string
+  icon: ReactNode
+  label: string
+  onChange: (value: LindaPokemonRating) => void
+  value: LindaPokemonRating | null
+}) {
+  const scores: LindaPokemonRating[] = [1, 2, 3, 4, 5]
+
+  return (
+    <Box sx={{ display: 'grid', gap: 0.5 }}>
+      <Box sx={{ alignItems: 'center', display: 'flex', gap: 0.5, justifyContent: 'space-between' }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+          <Box sx={{ color: accent, display: 'flex', '& svg': { fontSize: 17 } }}>{icon}</Box>
+          <Typography component="p" sx={{ fontWeight: 800 }} variant="caption">
+            {label}
+          </Typography>
+        </Stack>
+        <Typography color="text.secondary" variant="caption">
+          {value ?? '—'}/5
+        </Typography>
+      </Box>
+      <Box aria-label={`${label}: ${value ?? 'not rated'} out of 5`} role="group" sx={{ display: 'grid', gap: 0.5, gridTemplateColumns: 'repeat(5, 1fr)' }}>
+        {scores.map((score) => (
+          <ButtonBase
+            aria-label={`${score} out of 5`}
+            aria-pressed={value === score}
+            key={score}
+            onClick={() => onChange(score)}
+            sx={{
+              backgroundColor: value !== null && score <= value ? accent : 'oklch(0.93 0.015 250)',
+              border: `1px solid ${value === score ? 'oklch(0.34 0.05 250)' : 'transparent'}`,
+              borderRadius: 0.75,
+              color: value !== null && score <= value ? 'oklch(0.99 0.003 250)' : 'text.secondary',
+              fontSize: '0.72rem',
+              fontWeight: 850,
+              minHeight: 28,
+            }}
+          >
+            {score}
+          </ButtonBase>
+        ))}
+      </Box>
+      <Typography color="text.secondary" variant="caption">
+        {guide}
+      </Typography>
+    </Box>
+  )
+}
+
+function RosterMoveControl({
+  activeRegionId,
+  evolutionGroup,
+  modeledRegions,
+  onMove,
+  originalRegionName,
+  pokemonName,
+}: {
+  activeRegionId: string
+  evolutionGroup: string[]
+  modeledRegions: CurrentRegion[]
+  onMove: (regionId: string) => void
+  originalRegionName: string
+  pokemonName: string
+}) {
+  const evolutionMembers = evolutionGroup.flatMap((slug) => {
+    const member = allRosterPokemonBySlug.get(slug)
+    return member ? [member.name] : []
+  })
+
+  return (
+    <Box
+      component="section"
+      sx={{
+        backgroundColor: 'oklch(0.955 0.03 250)',
+        border: '1px solid oklch(0.80 0.055 250)',
+        borderRadius: 1,
+        display: 'grid',
+        gap: 1,
+        p: 1,
+      }}
+    >
+      <Box sx={{ display: 'grid', gap: 0.125 }}>
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
+          <AccountTreeRoundedIcon sx={{ color: 'oklch(0.43 0.12 250)', fontSize: 17 }} />
+          <Typography component="h5" sx={{ fontWeight: 850 }} variant="subtitle2">
+            Roster sandbox
+          </Typography>
+        </Stack>
+        <Typography color="text.secondary" variant="caption">
+          Originally in {originalRegionName}. A move resets “belongs here” to not decided,
+          and comfort must be rechecked in-game.
+        </Typography>
+      </Box>
+      {evolutionMembers.length > 1 && (
+        <Box sx={{ display: 'grid', gap: 0.5 }}>
+          <Typography sx={{ color: 'oklch(0.40 0.10 285)', fontWeight: 800 }} variant="caption">
+            Must-link constraint · this evolution line moves together
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            {evolutionMembers.map((name) => (
+              <Chip icon={<LinkRoundedIcon />} key={name} label={name} size="small" variant="outlined" />
+            ))}
+          </Box>
+        </Box>
+      )}
+      <TextField
+        aria-label={`Move ${pokemonName} to another region`}
+        fullWidth
+        label={evolutionMembers.length > 1 ? 'Move evolution line to' : 'Move Pokémon to'}
+        onChange={(event) => onMove(event.target.value)}
+        select
+        size="small"
+        value={activeRegionId}
+      >
+        {modeledRegions.map((region) => (
+          <MenuItem key={region.regionId} value={region.regionId}>
+            {region.name} · {region.pokemon.length} Pokémon
+          </MenuItem>
+        ))}
+      </TextField>
     </Box>
   )
 }

@@ -6,6 +6,10 @@ import {
   type IdealHabitat,
   type Specialty,
 } from './pokopia'
+import type {
+  LindaPokemonRating,
+  LindaPokemonStats,
+} from './types'
 
 export const comfortLevels = [
   'awesome',
@@ -51,6 +55,7 @@ export type RegionRosterPokemon = {
   idealHabitat: IdealHabitat | null
   favorites: Favorite[]
   specialties: Specialty[]
+  lindaStats: LindaPokemonStats
 }
 
 export type CurrentRegion = {
@@ -67,6 +72,62 @@ const roster = currentRegionRosterJson as CurrentRegionRosterJson
 const specialtyBySlug = new Map(
   specialtyCatalog.map((specialty) => [specialty.slug, specialty]),
 )
+
+const specialtyUsefulness: Record<string, LindaPokemonRating> = {
+  appraise: 5,
+  build: 4,
+  bulldoze: 4,
+  burn: 3,
+  chop: 3,
+  collect: 5,
+  crush: 3,
+  dj: 2,
+  dreamisland: 5,
+  eat: 2,
+  engineer: 5,
+  explode: 3,
+  fly: 4,
+  gather: 4,
+  gatherhoney: 4,
+  generate: 4,
+  grow: 4,
+  hype: 2,
+  illuminate: 5,
+  litter: 4,
+  paint: 5,
+  party: 5,
+  rarify: 5,
+  recycle: 4,
+  search: 3,
+  storage: 5,
+  teleport: 5,
+  trade: 3,
+  transform: 2,
+  water: 4,
+  yawn: 2,
+}
+
+const scoreUsefulness = (specialties: Specialty[]): LindaPokemonRating => {
+  const strongestSkill = Math.max(
+    1,
+    ...specialties.map((specialty) => specialtyUsefulness[specialty.slug] ?? 3),
+  )
+
+  return Math.min(
+    5,
+    strongestSkill + (specialties.length > 1 ? 1 : 0),
+  ) as LindaPokemonRating
+}
+
+const makeDefaultLindaStats = (
+  specialties: Specialty[],
+): LindaPokemonStats => ({
+  // Personal taste cannot be inferred from game data, so start at a friendly neutral.
+  likeRating: 3,
+  usefulnessRating: scoreUsefulness(specialties),
+  // This is Linda's call and must never be inferred from placement data.
+  belongsInCurrentRegion: null,
+})
 
 const makeFavorite = (
   sourceOrder: number,
@@ -193,6 +254,7 @@ export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).ma
               profile?.idealHabitat ?? supplementalProfile?.idealHabitat ?? null,
             favorites: profile?.favorites ?? supplementalProfile?.favorites ?? [],
             specialties,
+            lindaStats: makeDefaultLindaStats(specialties),
           }
         }),
     ),

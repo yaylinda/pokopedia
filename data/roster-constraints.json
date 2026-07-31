@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-31",
+  "source": "https://pokeapi.co/api/v2/evolution-chain/",
+  "constraints": [
+    {
+      "id": "evolution-lines-together",
+      "label": "Keep evolution lines together",
+      "strength": "must",
+      "edges": [
+        {
+          "source": "abra",
+          "target": "kadabra"
+        },
+        {
+          "source": "alakazam",
+          "target": "kadabra"
+        },
+        {
+          "source": "altaria",
+          "target": "swablu"
+        },
+        {
+          "source": "amaura",
+          "target": "aurorus"
+        },
+        {
+          "source": "ampharos",
+          "target": "flaaffy"
+        },
+        {
+          "source": "arbok",
+          "target": "ekans"
+        },
+        {
+          "source": "arcanine",
+          "target": "growlithe"
+        },
+        {
+          "source": "ariados",
+          "target": "spinarak"
+        },
+        {
+          "source": "armarouge",
+          "target": "charcadet"
+        },
+        {
+          "source": "axew",
+          "target": "fraxure"
+        },
+        {
+          "source": "azumarill",
+          "target": "marill"
+        },
+        {
+          "source": "azurill",
+          "target": "marill"
+        },
+        {
+          "source": "bastiodon",
+          "target": "shieldon"
+        },
+        {
+          "source": "beldum",
+          "target": "metang"
+        },
+        {
+          "source": "bellossom",
+          "target": "gloom"
+        },
+        {
+          "source": "bellsprout",
+          "target": "weepinbell"
+        },
+        {
+          "source": "blastoise",
+          "target": "wartortle"
+        },
+        {
+          "source": "blaziken",
+          "target": "combusken"
+        },
+        {
+          "source": "blissey",
+          "target": "chansey"
+        },
+        {
+          "source": "bonsly",
+          "target": "sudowoodo"
+        },
+        {
+          "source": "bulbasaur",
+          "target": "ivysaur"
+        },
+        {
+          "source": "cacnea",
+          "target": "cacturne"
+        },
+        {
+          "source": "carkol",
+          "target": "coalossal"
+        },
+        {
+          "source": "carkol",
+          "target": "rolycoly"
+        },
+        {
+          "source": "ceruledge",
+          "target": "charcadet"
+        },
+        {
+          "source": "chandelure",
+          "target": "lampent"
+        },
+        {
+          "source": "chansey",
+          "target": "happiny"
+        },
+        {
+          "source": "charizard",
+          "target": "charmeleon"
+        },
+        {
+          "source": "charjabug",
+          "target": "grubbin"
+        },
+        {
+          "source": "charjabug",
+          "target": "vikavolt"
+        },
+        {
+          "source": "charmander",
+          "target": "charmeleon"
+        },
+        {
+          "source": "cinccino",
+          "target": "minccino"
+        },
+        {
+          "source": "cinderace",
+          "target": "raboot"
+        },
+        {
+          "source": "clefable",
+          "target": "clefairy"
+        },
+        {
+          "source": "clefairy",
+          "target": "cleffa"
+        },
+        {
+          "source": "clodsire",
+          "target": "paldeanwooper"
+        },
+        {
+          "source": "combee",
+          "target": "vespiquen"
+        },
+        {
+          "source": "combusken",
+          "target": "torchic"
+        },
+        {
+          "source": "conkeldurr",
+          "target": "gurdurr"
+        },
+        {
+          "source": "corviknight",
+          "target": "corvisquire"
+        },
+        {
+          "source": "corvisquire",
+          "target": "rookidee"
+        },
+        {
+          "source": "cranidos",
+          "target": "rampardos"
+        },
+        {
+          "source": "crobat",
+          "target": "golbat"
+        },
+        {
+          "source": "cubone",
+          "target": "marowak"
+        },
+        {
+          "source": "cyndaquil",
+          "target": "quilava"
+        },
+        {
+          "source": "dachsbun",
+          "target": "fidough"
+        },
+        {
+          "source": "dartrix",
+          "target": "decidueye"
+        },
+        {
+          "source": "dartrix",
+          "target": "rowlet"
+        },
+        {
+          "source": "diglett",
+          "target": "dugtrio"
+        },
+        {
+          "source": "dragapult",
+          "target": "drakloak"
+        },
+        {
+          "source": "dragonair",
+          "target": "dragonite"
+        },
+        {
+          "source": "dragonair",
+          "target": "dratini"
+        },
+        {
+          "source": "drakloak",
+          "target": "dreepy"
+        },
+        {
+          "source": "drifblim",
+          "target": "drifloon"
+        },
+        {
+          "source": "drilbur",
+          "target": "excadrill"
+        },
+        {
+          "source": "dusclops",
+          "target": "dusknoir"
+        },
+        {
+          "source": "dusclops",
+          "target": "duskull"
+        },
+        {
+          "source": "eevee",
+          "target": "espeon"
+        },
+        {
+          "source": "eevee",
+          "target": "flareon"
+        },
+        {
+          "source": "eevee",
+          "target": "glaceon"
+        },
+        {
+          "source": "eevee",
+          "target": "jolteon"
+        },
+        {
+          "source": "eevee",
+          "target": "leafeon"
+        },
+        {
+          "source": "eevee",
+          "target": "sylveon"
+        },
+        {
+          "source": "eevee",
+          "target": "umbreon"
+        },
+        {
+          "source": "eevee",
+          "target": "vaporeon"
+        },
+        {
+          "source": "electabuzz",
+          "target": "electivire"
+        },
+        {
+          "source": "electabuzz",
+          "target": "elekid"
+        },
+        {
+          "source": "electrode",
+          "target": "voltorb"
+        },
+        {
+          "source": "empoleon",
+          "target": "prinplup"
+        },
+        {
+          "source": "exeggcute",
+          "target": "exeggutor"
+        },
+        {
+          "source": "farigiraf",
+          "target": "girafarig"
+        },
+        {
+          "source": "flaaffy",
+          "target": "mareep"
+        },
+        {
+          "source": "floragato",
+          "target": "meowscarada"
+        },
+        {
+          "source": "floragato",
+          "target": "sprigatito"
+        },
+        {
+          "source": "flygon",
+          "target": "vibrava"
+        },
+        {
+          "source": "fraxure",
+          "target": "haxorus"
+        },
+        {
+          "source": "froakie",
+          "target": "frogadier"
+        },
+        {
+          "source": "frogadier",
+          "target": "greninja"
+        },
+        {
+          "source": "gallade",
+          "target": "kirlia"
+        },
+        {
+          "source": "garbodor",
+          "target": "trubbish"
+        },
+        {
+          "source": "gardevoir",
+          "target": "kirlia"
+        },
+        {
+          "source": "gastly",
+          "target": "haunter"
+        },
+        {
+          "source": "gastrodon",
+          "target": "shellos"
+        },
+        {
+          "source": "gastrodon",
+          "target": "shelloseastsea"
+        },
+        {
+          "source": "gastrodoneastsea",
+          "target": "shellos"
+        },
+        {
+          "source": "gastrodoneastsea",
+          "target": "shelloseastsea"
+        },
+        {
+          "source": "gengar",
+          "target": "haunter"
+        },
+        {
+          "source": "geodude",
+          "target": "graveler"
+        },
+        {
+          "source": "gholdengo",
+          "target": "gimmighoul"
+        },
+        {
+          "source": "glimmet",
+          "target": "glimmora"
+        },
+        {
+          "source": "gloom",
+          "target": "oddish"
+        },
+        {
+          "source": "gloom",
+          "target": "vileplume"
+        },
+        {
+          "source": "golbat",
+          "target": "zubat"
+        },
+        {
+          "source": "golduck",
+          "target": "psyduck"
+        },
+        {
+          "source": "golem",
+          "target": "graveler"
+        },
+        {
+          "source": "goodra",
+          "target": "sliggoo"
+        },
+        {
+          "source": "goomy",
+          "target": "sliggoo"
+        },
+        {
+          "source": "greedent",
+          "target": "skwovet"
+        },
+        {
+          "source": "grimer",
+          "target": "muk"
+        },
+        {
+          "source": "gulpin",
+          "target": "swalot"
+        },
+        {
+          "source": "gurdurr",
+          "target": "timburr"
+        },
+        {
+          "source": "gyarados",
+          "target": "magikarp"
+        },
+        {
+          "source": "hariyama",
+          "target": "makuhita"
+        },
+        {
+          "source": "hitmonchan",
+          "target": "tyrogue"
+        },
+        {
+          "source": "hitmonlee",
+          "target": "tyrogue"
+        },
+        {
+          "source": "hitmontop",
+          "target": "tyrogue"
+        },
+        {
+          "source": "honchkrow",
+          "target": "murkrow"
+        },
+        {
+          "source": "hoothoot",
+          "target": "noctowl"
+        },
+        {
+          "source": "igglybuff",
+          "target": "jigglypuff"
+        },
+        {
+          "source": "ivysaur",
+          "target": "venusaur"
+        },
+        {
+          "source": "jigglypuff",
+          "target": "wigglytuff"
+        },
+        {
+          "source": "kilowattrel",
+          "target": "wattrel"
+        },
+        {
+          "source": "kirlia",
+          "target": "ralts"
+        },
+        {
+          "source": "koffing",
+          "target": "weezing"
+        },
+        {
+          "source": "kricketot",
+          "target": "kricketune"
+        },
+        {
+          "source": "lampent",
+          "target": "litwick"
+        },
+        {
+          "source": "larvesta",
+          "target": "volcarona"
+        },
+        {
+          "source": "larvitar",
+          "target": "pupitar"
+        },
+        {
+          "source": "lombre",
+          "target": "lotad"
+        },
+        {
+          "source": "lombre",
+          "target": "ludicolo"
+        },
+        {
+          "source": "lucario",
+          "target": "riolu"
+        },
+        {
+          "source": "machamp",
+          "target": "machoke"
+        },
+        {
+          "source": "machoke",
+          "target": "machop"
+        },
+        {
+          "source": "magby",
+          "target": "magmar"
+        },
+        {
+          "source": "magmar",
+          "target": "magmortar"
+        },
+        {
+          "source": "magnemite",
+          "target": "magneton"
+        },
+        {
+          "source": "magneton",
+          "target": "magnezone"
+        },
+        {
+          "source": "meowth",
+          "target": "persian"
+        },
+        {
+          "source": "metagross",
+          "target": "metang"
+        },
+        {
+          "source": "mimejr.",
+          "target": "mr.mime"
+        },
+        {
+          "source": "misdreavus",
+          "target": "mismagius"
+        },
+        {
+          "source": "mosslax",
+          "target": "munchlax"
+        },
+        {
+          "source": "munchlax",
+          "target": "snorlax"
+        },
+        {
+          "source": "ninetales",
+          "target": "vulpix"
+        },
+        {
+          "source": "noibat",
+          "target": "noivern"
+        },
+        {
+          "source": "onix",
+          "target": "steelix"
+        },
+        {
+          "source": "paras",
+          "target": "parasect"
+        },
+        {
+          "source": "pawmi",
+          "target": "pawmo"
+        },
+        {
+          "source": "pawmo",
+          "target": "pawmot"
+        },
+        {
+          "source": "peakychu",
+          "target": "pichu"
+        },
+        {
+          "source": "peakychu",
+          "target": "raichu"
+        },
+        {
+          "source": "pelipper",
+          "target": "wingull"
+        },
+        {
+          "source": "pichu",
+          "target": "pikachu"
+        },
+        {
+          "source": "pidgeot",
+          "target": "pidgeotto"
+        },
+        {
+          "source": "pidgeotto",
+          "target": "pidgey"
+        },
+        {
+          "source": "pikachu",
+          "target": "raichu"
+        },
+        {
+          "source": "piplup",
+          "target": "prinplup"
+        },
+        {
+          "source": "politoed",
+          "target": "poliwhirl"
+        },
+        {
+          "source": "poliwag",
+          "target": "poliwhirl"
+        },
+        {
+          "source": "poliwhirl",
+          "target": "poliwrath"
+        },
+        {
+          "source": "porygon",
+          "target": "porygon2"
+        },
+        {
+          "source": "porygon-z",
+          "target": "porygon2"
+        },
+        {
+          "source": "professortangrowth",
+          "target": "tangela"
+        },
+        {
+          "source": "pupitar",
+          "target": "tyranitar"
+        },
+        {
+          "source": "quilava",
+          "target": "typhlosion"
+        },
+        {
+          "source": "raboot",
+          "target": "scorbunny"
+        },
+        {
+          "source": "scizor",
+          "target": "scyther"
+        },
+        {
+          "source": "serperior",
+          "target": "servine"
+        },
+        {
+          "source": "servine",
+          "target": "snivy"
+        },
+        {
+          "source": "slowbro",
+          "target": "slowpoke"
+        },
+        {
+          "source": "slowking",
+          "target": "slowpoke"
+        },
+        {
+          "source": "squirtle",
+          "target": "wartortle"
+        },
+        {
+          "source": "tangela",
+          "target": "tangrowth"
+        },
+        {
+          "source": "tinkatink",
+          "target": "tinkatuff"
+        },
+        {
+          "source": "tinkaton",
+          "target": "tinkatuff"
+        },
+        {
+          "source": "toxel",
+          "target": "toxtricityampedform"
+        },
+        {
+          "source": "toxel",
+          "target": "toxtricitylowkeyform"
+        },
+        {
+          "source": "trapinch",
+          "target": "vibrava"
+        },
+        {
+          "source": "tyrantrum",
+          "target": "tyrunt"
+        },
+        {
+          "source": "venomoth",
+          "target": "venonat"
+        },
+        {
+          "source": "victreebel",
+          "target": "weepinbell"
+        },
+        {
+          "source": "zoroark",
+          "target": "zorua"
+        }
+      ]
+    }
+  ]
+}

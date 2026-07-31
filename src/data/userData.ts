@@ -1,26 +1,80 @@
-import type { PokopediaUserData, SavedHouse } from './types'
+import type {
+  LindaPokemonRating,
+  LindaPokemonStats,
+  PokopediaUserData,
+  SavedHouse,
+} from './types'
 
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 
 export const createDefaultUserData = (): PokopediaUserData => ({
-  version: 1,
+  version: 2,
   updatedAt: new Date().toISOString(),
   ownedPokemonSlugs: [],
   savedHouses: [],
+  pokemonStatsBySlug: {},
+  rosterRegionOverrides: {},
 })
 
 export const createUserData = (
   ownedPokemonSlugs: string[],
   savedHouses: SavedHouse[],
+  pokemonStatsBySlug: Record<string, LindaPokemonStats>,
+  rosterRegionOverrides: Record<string, string>,
 ): PokopediaUserData => ({
-  version: 1,
+  version: 2,
   updatedAt: new Date().toISOString(),
   ownedPokemonSlugs: [...new Set(ownedPokemonSlugs)].sort(),
   savedHouses,
+  pokemonStatsBySlug,
+  rosterRegionOverrides,
 })
 
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((entry) => typeof entry === 'string')
+
+const parseRating = (value: unknown): LindaPokemonRating | null =>
+  typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 5
+    ? (value as LindaPokemonRating)
+    : null
+
+const parsePokemonStats = (value: unknown): LindaPokemonStats | null => {
+  if (!value || typeof value !== 'object') return null
+
+  const maybeStats = value as Partial<LindaPokemonStats>
+
+  return {
+    likeRating: parseRating(maybeStats.likeRating),
+    usefulnessRating: parseRating(maybeStats.usefulnessRating),
+    belongsInCurrentRegion:
+      typeof maybeStats.belongsInCurrentRegion === 'boolean'
+        ? maybeStats.belongsInCurrentRegion
+        : null,
+  }
+}
+
+const parsePokemonStatsBySlug = (
+  value: unknown,
+): Record<string, LindaPokemonStats> => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([slug, stats]) => {
+      const parsed = parsePokemonStats(stats)
+      return parsed ? [[slug, parsed]] : []
+    }),
+  )
+}
+
+const parseStringRecord = (value: unknown): Record<string, string> => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+
+  return Object.fromEntries(
+    Object.entries(value).filter(
+      (entry): entry is [string, string] => typeof entry[1] === 'string',
+    ),
+  )
+}
 
 const parseSavedHouse = (value: unknown): SavedHouse | null => {
   if (!value || typeof value !== 'object') {
@@ -64,7 +118,7 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
   }
 
   return {
-    version: 1,
+    version: 2,
     updatedAt:
       typeof maybeData.updatedAt === 'string'
         ? maybeData.updatedAt
@@ -75,6 +129,8 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
           .map(parseSavedHouse)
           .filter((house): house is SavedHouse => house !== null)
       : [],
+    pokemonStatsBySlug: parsePokemonStatsBySlug(maybeData.pokemonStatsBySlug),
+    rosterRegionOverrides: parseStringRecord(maybeData.rosterRegionOverrides),
   }
 }
 
