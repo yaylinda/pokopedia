@@ -13,12 +13,18 @@ const toHtmlResponse = async (response, request) => {
 
 export default {
   async fetch(request, env) {
-    let response = await env.ASSETS.fetch(request)
+    const url = new URL(request.url)
     const acceptsHtml = request.headers.get('accept')?.includes('text/html')
+    const isAppRoute = acceptsHtml && !url.pathname.split('/').at(-1).includes('.')
+    let response = isAppRoute
+      ? await env.ASSETS.fetch(
+          new Request(new URL('/', request.url), request),
+        )
+      : await env.ASSETS.fetch(request)
 
     if (response.status === 404 && acceptsHtml) {
-      const indexUrl = new URL('/index.html', request.url)
-      response = await env.ASSETS.fetch(new Request(indexUrl, request))
+      const rootUrl = new URL('/', request.url)
+      response = await env.ASSETS.fetch(new Request(rootUrl, request))
     }
 
     if (response.headers.get('content-type')?.includes('text/html')) {

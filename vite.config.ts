@@ -24,4 +24,8 @@ function sites(): Plugin {
 export default defineConfig({
   plugins: [react(), sites()],
   base: process.env.GITHUB_ACTIONS === 'true' && repoName ? `/${repoName}/` : '/',
+  build: {
+    // Sites serves static assets from dist/client alongside dist/server/index.js.
+    outDir: 'dist/client',
+  },
 })
