@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import {
   createUserData,
   readUserData,
   writeUserData,
 } from './userData'
-import type { LindaPokemonStats, SavedHouse } from './types'
+import type { LindaPokemonStats } from './types'
 import { UserDataContext, type UserDataContextValue } from './userDataContext'
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
@@ -13,61 +13,6 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     writeUserData(userData)
   }, [userData])
-
-  const ownedSet = useMemo(
-    () => new Set(userData.ownedPokemonSlugs),
-    [userData.ownedPokemonSlugs],
-  )
-
-  const toggleOwned = (slug: string) => {
-    setUserData((current) => {
-      const nextOwned = new Set(current.ownedPokemonSlugs)
-
-      if (nextOwned.has(slug)) {
-        nextOwned.delete(slug)
-      } else {
-        nextOwned.add(slug)
-      }
-
-      return createUserData(
-        [...nextOwned],
-        current.savedHouses,
-        current.pokemonStatsBySlug,
-        current.rosterRegionOverrides,
-      )
-    })
-  }
-
-  const saveHouse = (savedHouse: SavedHouse) => {
-    setUserData((current) => {
-      const exists = current.savedHouses.some(
-        (house) => house.id === savedHouse.id,
-      )
-      const savedHouses = exists
-        ? current.savedHouses.map((house) =>
-            house.id === savedHouse.id ? savedHouse : house,
-          )
-        : [savedHouse, ...current.savedHouses]
-
-      return createUserData(
-        current.ownedPokemonSlugs,
-        savedHouses,
-        current.pokemonStatsBySlug,
-        current.rosterRegionOverrides,
-      )
-    })
-  }
-
-  const deleteHouse = (houseId: string) => {
-    setUserData((current) =>
-      createUserData(
-        current.ownedPokemonSlugs,
-        current.savedHouses.filter((house) => house.id !== houseId),
-        current.pokemonStatsBySlug,
-        current.rosterRegionOverrides,
-      ),
-    )
-  }
 
   const updatePokemonStats = (
     slug: string,
@@ -93,12 +38,7 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         delete pokemonStatsBySlug[slug]
       }
 
-      return createUserData(
-        current.ownedPokemonSlugs,
-        current.savedHouses,
-        pokemonStatsBySlug,
-        current.rosterRegionOverrides,
-      )
+      return createUserData(pokemonStatsBySlug, current.rosterRegionOverrides)
     })
   }
 
@@ -112,39 +52,22 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         delete rosterRegionOverrides[slug]
       }
 
-      return createUserData(
-        current.ownedPokemonSlugs,
-        current.savedHouses,
-        current.pokemonStatsBySlug,
-        rosterRegionOverrides,
-      )
+      return createUserData(current.pokemonStatsBySlug, rosterRegionOverrides)
     })
   }
 
   const resetRosterModel = () => {
     setUserData((current) =>
-      createUserData(
-        current.ownedPokemonSlugs,
-        current.savedHouses,
-        current.pokemonStatsBySlug,
-        {},
-      ),
+      createUserData(current.pokemonStatsBySlug, {}),
     )
   }
 
   const value: UserDataContextValue = {
-    deleteHouse,
-    ownedCount: userData.ownedPokemonSlugs.length,
-    ownedSet,
     pokemonStatsBySlug: userData.pokemonStatsBySlug,
     resetRosterModel,
     rosterRegionOverrides: userData.rosterRegionOverrides,
-    savedHouses: userData.savedHouses,
-    saveHouse,
     setPokemonRosterRegion,
-    toggleOwned,
     updatePokemonStats,
-    userData,
   }
 
   return (

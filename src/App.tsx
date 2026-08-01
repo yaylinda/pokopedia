@@ -1,82 +1,29 @@
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
-import { useEffect } from 'react'
 import {
   BrowserRouter,
   Navigate,
-  Outlet,
   Route,
   Routes,
-  useLocation,
-  useNavigate,
   useSearchParams,
 } from 'react-router-dom'
-import { AppHeader } from './components/AppHeader'
 import { UserDataProvider } from './data/UserDataProvider'
-import { HabitatsPage } from './modules/habitats/HabitatsPage'
-import { HomePage } from './modules/home/HomePage'
-import { PlannerPage } from './modules/planner/PlannerPage'
-import { PokedexPage } from './modules/pokedex/PokedexPage'
-import { RegionPlanPage } from './modules/region-plan/RegionPlanPage'
 import { RegionRosterPage } from './modules/region-roster/RegionRosterPage'
-import { getRouterBasename } from './routing'
 import { appTheme } from './theme'
 
-const routeTitles: Record<string, string> = {
-  '/': 'Home',
-  '/pokemon': 'Pokédex',
-  '/habitats': 'Habitats',
-  '/region-roster': 'Roster',
-  '/region-plan': 'Region Plan',
-  '/planner': 'Planner',
-}
+const getRouterBasename = () =>
+  import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
 
-function AppLayout() {
-  const location = useLocation()
+function RedirectToRoster() {
   const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+  const nextSearchParams = new URLSearchParams(searchParams)
 
-  useEffect(() => {
-    const pathname = location.pathname.replace(/\/+$/, '') || '/'
-    const routeTitle = routeTitles[pathname]
-    document.title = routeTitle ? `Pokopedia · ${routeTitle}` : 'Pokopedia'
-  }, [location.pathname])
+  // GitHub Pages' 404 shim stores the requested path in this parameter.
+  nextSearchParams.delete('route')
+  const query = nextSearchParams.toString()
 
-  useEffect(() => {
-    const route = searchParams.get('route')
-
-    if (!route) {
-      return
-    }
-
-    const nextParams = new URLSearchParams(searchParams)
-
-    nextParams.delete('route')
-    navigate(
-      `${route}${nextParams.size > 0 ? `?${nextParams.toString()}` : ''}`,
-      {
-        replace: true,
-      },
-    )
-  }, [navigate, searchParams])
-
-  return (
-    <Box
-      component="main"
-      sx={{
-        display: 'grid',
-        gap: 2,
-        width: { xs: 'min(100% - 20px, 1680px)', md: 'min(1680px, calc(100% - 32px))' },
-        mx: 'auto',
-        py: { xs: 1, md: 1.5 },
-        pb: 6,
-      }}
-    >
-      <AppHeader />
-      <Outlet />
-    </Box>
-  )
+  return <Navigate replace to={`/region-roster${query ? `?${query}` : ''}`} />
 }
 
 function App() {
@@ -85,17 +32,23 @@ function App() {
       <CssBaseline />
       <BrowserRouter basename={getRouterBasename()}>
         <UserDataProvider>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="pokemon" element={<PokedexPage />} />
-              <Route path="habitats" element={<HabitatsPage />} />
+          <Box
+            component="main"
+            sx={{
+              width: {
+                xs: 'min(100% - 20px, 1680px)',
+                md: 'min(1680px, calc(100% - 32px))',
+              },
+              mx: 'auto',
+              py: { xs: 1, md: 1.5 },
+              pb: 6,
+            }}
+          >
+            <Routes>
               <Route path="region-roster" element={<RegionRosterPage />} />
-              <Route path="region-plan" element={<RegionPlanPage />} />
-              <Route path="planner" element={<PlannerPage />} />
-              <Route path="*" element={<Navigate replace to="/" />} />
-            </Route>
-          </Routes>
+              <Route path="*" element={<RedirectToRoster />} />
+            </Routes>
+          </Box>
         </UserDataProvider>
       </BrowserRouter>
     </ThemeProvider>
