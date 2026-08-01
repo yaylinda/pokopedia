@@ -149,6 +149,10 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def build_profiles() -> list[dict[str, Any]]:
     pokemon = load_json(ROOT / "data" / "pokemon.json")["pokemon"]
+    items = {
+        entry["itemId"]: {"id": entry["itemId"], "name": entry["name"]}
+        for entry in load_json(ROOT / "data" / "items.json")["items"]
+    }
     preferences = {
         entry["pokemonSlug"]: entry
         for entry in load_json(ROOT / "data" / "pokemon-preferences.json")["pokemon"]
@@ -159,13 +163,8 @@ def build_profiles() -> list[dict[str, Any]]:
         for spawn in group["spawns"]:
             habitat_locations.setdefault(spawn["pokemonSlug"], set()).update(spawn["locations"])
 
-    litter_path = ROOT / "litter-house-dashboard" / "app" / "litter-data.json"
-    litter_by_slug: dict[str, dict[str, Any]] = {}
-    if litter_path.exists():
-        litter_by_slug = {
-            entry["slug"]: entry["litterItem"]
-            for entry in load_json(litter_path).get("roster", [])
-        }
+    litter_items = load_json(ROOT / "data" / "pokemon-litter-items.json")["pokemon"]
+    litter_by_slug = {slug: items[item_id] for slug, item_id in litter_items.items()}
 
     profiles = []
     for entry in pokemon:
@@ -622,7 +621,7 @@ def create_plan(generated_at: str) -> dict[str, Any]:
             "preferences": "data/pokemon-preferences.json",
             "habitatSpawns": "data/habitat-spawns.json",
             "specialties": "data/specialties.json",
-            "litterOptional": "litter-house-dashboard/app/litter-data.json",
+            "litterItems": "data/pokemon-litter-items.json",
             "locations": "data/locations.json",
         },
         "regions": region_outputs,

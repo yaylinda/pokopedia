@@ -25,7 +25,7 @@
     "preferences": "data/pokemon-preferences.json",
     "habitatSpawns": "data/habitat-spawns.json",
     "specialties": "data/specialties.json",
-    "litterOptional": "litter-house-dashboard/app/litter-data.json",
+    "litterItems": "data/pokemon-litter-items.json",
     "locations": "data/locations.json"
   },
   "regions": [

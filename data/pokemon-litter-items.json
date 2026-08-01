@@ -1,0 +1,45 @@
+{
+  "source": {
+    "notes": [
+      "Maps Pokemon with known litter output to canonical item IDs from data/items.json.",
+      "Jumpluff and Jirachi are current additions beyond the 33 Pokemon tagged with the Litter specialty in data/pokemon.json."
+    ]
+  },
+  "pokemon": {
+    "venusaur": "leaf",
+    "vileplume": "leaf",
+    "bellsprout": "vinerope",
+    "weepinbell": "vinerope",
+    "tangela": "vinerope",
+    "tangrowth": "vinerope",
+    "cacturne": "sturdystick",
+    "combee": "honey",
+    "haxorus": "smalllog",
+    "grimer": "nonburnablegarbage",
+    "muk": "nonburnablegarbage",
+    "blissey": "stone",
+    "spinarak": "twine",
+    "ariados": "twine",
+    "mareep": "fluff",
+    "flaaffy": "fluff",
+    "paldeanwooper": "squishyclay",
+    "clodsire": "squishyclay",
+    "garbodor": "nonburnablegarbage",
+    "larvesta": "twine",
+    "volcarona": "twine",
+    "glimmet": "ironore",
+    "glimmora": "ironore",
+    "trapinch": "squishyclay",
+    "swablu": "fluff",
+    "altaria": "fluff",
+    "snivy": "vinerope",
+    "servine": "vinerope",
+    "serperior": "vinerope",
+    "rampardos": "stone",
+    "bastiodon": "stone",
+    "tyrantrum": "stone",
+    "aurorus": "stone",
+    "jumpluff": "fluff",
+    "jirachi": "stardust"
+  }
+}
