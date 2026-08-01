@@ -458,7 +458,7 @@ function RegionSummary({
           }}
         >
           <RegionLindaMetric
-            explanation="Linda's personal preference. 1 means not for me and 5 means favorite. Ratings start at 3, while starred legendary Pokémon start at 5."
+            explanation="Linda's personal preference. 1 means not for me and 5 means favorite. Ratings start at 3, while Legendary and Mythical Pokémon start at 5."
             icon={<FavoriteRoundedIcon />}
             label="Avg. like"
             value={`${average('likeRating')}/5`}
@@ -820,10 +820,10 @@ function PokemonTile({
               {pokemon.name.charAt(0)}
             </Typography>
           )}
-          {pokemon.isLegendary && (
-            <Tooltip title="Legendary Pokémon">
+          {pokemon.isLegendaryOrMythical && (
+            <Tooltip title="Legendary or Mythical Pokémon">
               <StarRoundedIcon
-                aria-label="Legendary Pokémon"
+                aria-label="Legendary or Mythical Pokémon"
                 sx={{
                   color: 'oklch(0.70 0.17 82)',
                   filter: 'drop-shadow(0 1px 0 oklch(0.98 0.01 80))',

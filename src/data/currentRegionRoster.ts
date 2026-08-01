@@ -79,7 +79,7 @@ export type RegionRosterPokemon = {
   regionId: string
   regionName: string
   comfortLevel: ComfortLevel
-  isLegendary: boolean
+  isLegendaryOrMythical: boolean
   slug: string
   name: string
   pokopiaNumberDisplay: string | null
@@ -102,9 +102,17 @@ export type CurrentRegion = {
 }
 
 const roster = currentRegionRosterJson as CurrentRegionRosterJson
-export const legendaryPokemonSlugs = new Set(
-  Object.values(roster.regions).flatMap((region) => region.eventPokemonSlugs),
-)
+export const legendaryOrMythicalPokemonSlugs = new Set([
+  'articuno',
+  'zapdos',
+  'moltres',
+  'mewtwo',
+  'raikou',
+  'entei',
+  'suicune',
+  'mew',
+  'jirachi',
+])
 const pokemonCatalog = pokemonJson as {
   pokemon: PokemonCatalogEntry[]
 }
@@ -149,10 +157,10 @@ const scoreUsefulness = (
 
 const makeDefaultLindaStats = (
   specialties: Specialty[],
-  isLegendary: boolean,
+  isLegendaryOrMythical: boolean,
 ): LindaPokemonStats => ({
   // Personal taste cannot be inferred from game data, so start at a friendly neutral.
-  likeRating: isLegendary ? 5 : 3,
+  likeRating: isLegendaryOrMythical ? 5 : 3,
   usefulnessRating: scoreUsefulness(specialties),
   // This is Linda's call and must never be inferred from placement data.
   belongsInCurrentRegion: null,
@@ -268,9 +276,8 @@ export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).ma
             regionId,
             regionName: region.name,
             comfortLevel,
-            // The captured field name reflects the original screenshot pass;
-            // in the game, the star marks a legendary Pokemon.
-            isLegendary: region.eventPokemonSlugs.includes(slug),
+            isLegendaryOrMythical:
+              legendaryOrMythicalPokemonSlugs.has(slug),
             slug,
             name: profile?.name ?? supplementalProfile?.name ?? titleFromSlug(slug),
             pokopiaNumberDisplay:
@@ -285,7 +292,7 @@ export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).ma
             specialties,
             lindaStats: makeDefaultLindaStats(
               specialties,
-              legendaryPokemonSlugs.has(slug),
+              legendaryOrMythicalPokemonSlugs.has(slug),
             ),
           }
         }),
