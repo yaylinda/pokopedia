@@ -1,6 +1,5 @@
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded'
 import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded'
-import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
@@ -27,7 +26,8 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
-import { useMemo, useState, type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import {
   comfortLevels,
   currentRegionRoster,
@@ -45,8 +45,6 @@ import type {
   LindaPokemonStats,
 } from '../../data/types'
 import { useUserData } from '../../data/userDataContext'
-
-type GroupMode = 'comfort' | 'habitat' | 'favorite'
 
 type VisualStyle = {
   accent: string
@@ -170,30 +168,14 @@ const habitatStyles: Record<string, VisualStyle> = {
   },
 }
 
-const favoritePalette: VisualStyle[] = [
-  {
-    accent: 'oklch(0.64 0.15 250)',
-    deep: 'oklch(0.39 0.11 250)',
-    soft: 'oklch(0.95 0.04 250)',
-  },
-  {
-    accent: 'oklch(0.68 0.15 340)',
-    deep: 'oklch(0.41 0.11 340)',
-    soft: 'oklch(0.95 0.04 340)',
-  },
-  {
-    accent: 'oklch(0.68 0.14 165)',
-    deep: 'oklch(0.40 0.10 165)',
-    soft: 'oklch(0.95 0.04 165)',
-  },
-  {
-    accent: 'oklch(0.72 0.16 82)',
-    deep: 'oklch(0.43 0.11 78)',
-    soft: 'oklch(0.96 0.05 86)',
-  },
-]
-
 const habitatOrder = ['Bright', 'Warm', 'Cool', 'Humid', 'Dry', 'Dark']
+const regionOrder = [
+  'withered-wastelands',
+  'bleak-beach',
+  'rocky-ridges',
+  'sparkling-skylands',
+  'palette-town',
+]
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -254,12 +236,22 @@ export function RegionRosterPage() {
     setPokemonRosterRegion,
     updatePokemonStats,
   } = useUserData()
-  const [selectedRegionId, setSelectedRegionId] = useState(
-    currentRegionRoster.regions[0].regionId,
-  )
-  const [groupMode, setGroupMode] = useState<GroupMode>('comfort')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const requestedRegionId = searchParams.get('region')
+  const selectedRegionId =
+    requestedRegionId && regionOrder.includes(requestedRegionId)
+      ? requestedRegionId
+      : regionOrder[0]
   const [query, setQuery] = useState('')
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (requestedRegionId === selectedRegionId) return
+
+    const nextSearchParams = new URLSearchParams(searchParams)
+    nextSearchParams.set('region', selectedRegionId)
+    setSearchParams(nextSearchParams, { replace: true })
+  }, [requestedRegionId, searchParams, selectedRegionId, setSearchParams])
 
   const effectiveStatsBySlug = useMemo(
     () =>
@@ -273,14 +265,23 @@ export function RegionRosterPage() {
   )
   const modeledRegions = useMemo(
     () =>
-      currentRegionRoster.regions.map((region) => ({
-        ...region,
-        pokemon: allRosterPokemon.filter(
-          (pokemon) =>
-            (rosterRegionOverrides[pokemon.slug] ?? pokemon.regionId) ===
-            region.regionId,
-        ),
-      })),
+      regionOrder.flatMap((regionId) => {
+        const region = currentRegionRoster.regions.find(
+          (entry) => entry.regionId === regionId,
+        )
+        return region
+          ? [
+              {
+                ...region,
+                pokemon: allRosterPokemon.filter(
+                  (pokemon) =>
+                    (rosterRegionOverrides[pokemon.slug] ?? pokemon.regionId) ===
+                    region.regionId,
+                ),
+              },
+            ]
+          : []
+      }),
     [rosterRegionOverrides],
   )
   const evolutionViolationCount = useMemo(
@@ -308,18 +309,14 @@ export function RegionRosterPage() {
     [query, selectedRegion],
   )
   const groups = useMemo(
-    () => buildGroups(filteredPokemon, groupMode, selectedRegion.regionId),
-    [filteredPokemon, groupMode, selectedRegion.regionId],
+    () => buildHabitatGroups(filteredPokemon),
+    [filteredPokemon],
   )
 
   const chooseRegion = (regionId: string) => {
-    setSelectedRegionId(regionId)
-    setExpandedKey(null)
-  }
-
-  const changeGroupMode = (_event: MouseEvent<HTMLElement>, next: GroupMode | null) => {
-    if (!next) return
-    setGroupMode(next)
+    const nextSearchParams = new URLSearchParams(searchParams)
+    nextSearchParams.set('region', regionId)
+    setSearchParams(nextSearchParams)
     setExpandedKey(null)
   }
 
@@ -341,35 +338,51 @@ export function RegionRosterPage() {
     >
       <RosterHeader />
 
-      <RegionSelector
-        onChoose={chooseRegion}
-        regions={modeledRegions}
-        selectedRegionId={selectedRegion.regionId}
-      />
+      <Box
+        sx={{
+          alignItems: 'start',
+          display: 'grid',
+          gap: { xs: 2, lg: 3 },
+          gridTemplateColumns: { xs: 'minmax(0, 1fr)', lg: '232px minmax(0, 1fr)' },
+          minWidth: 0,
+        }}
+      >
+        <Box
+          component="aside"
+          sx={{
+            alignSelf: 'start',
+            display: 'grid',
+            gap: 1.5,
+            minWidth: 0,
+            position: { lg: 'sticky' },
+            top: { lg: 16 },
+          }}
+        >
+          <RegionSelector
+            onChoose={chooseRegion}
+            regions={modeledRegions}
+            selectedRegionId={selectedRegion.regionId}
+          />
+          <RosterModelStatus
+            evolutionViolationCount={evolutionViolationCount}
+            moveCount={Object.keys(rosterRegionOverrides).length}
+            onReset={resetRosterModel}
+          />
+        </Box>
 
-      <RosterSandboxBar
-        evolutionViolationCount={evolutionViolationCount}
-        moveCount={Object.keys(rosterRegionOverrides).length}
-        onReset={resetRosterModel}
-      />
+        <Box sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
+          <RegionSummary
+            lindaStatsBySlug={effectiveStatsBySlug}
+            pokemon={selectedRegion.pokemon}
+            regionName={selectedRegion.name}
+            selectedRegionId={selectedRegion.regionId}
+            style={regionStyle}
+          />
 
-      <RegionSummary
-        lindaStatsBySlug={effectiveStatsBySlug}
-        pokemon={selectedRegion.pokemon}
-        regionName={selectedRegion.name}
-        selectedRegionId={selectedRegion.regionId}
-        style={regionStyle}
-      />
-
-      <Box sx={{ display: 'grid', gap: 1.5 }}>
-        <ViewControls
-          groupMode={groupMode}
-          onGroupModeChange={changeGroupMode}
-          onQueryChange={setQuery}
-          query={query}
-        />
-
-        <LindaLensGuide />
+          <RosterSearch
+            onQueryChange={setQuery}
+            query={query}
+          />
 
         <Box
           aria-live="polite"
@@ -384,9 +397,7 @@ export function RegionRosterPage() {
           <Typography color="text.secondary" variant="body2">
             {query
               ? `${filteredPokemon.length} of ${selectedRegion.pokemon.length} Pokémon match`
-              : groupMode === 'favorite'
-                ? `${selectedRegion.pokemon.length} Pokémon across ${groups.length} favorite groups · Pokémon may appear more than once`
-                : `${selectedRegion.pokemon.length} Pokémon across ${groups.length} groups`}
+              : `${selectedRegion.pokemon.length} Pokémon across ${groups.length} ideal habitats`}
           </Typography>
           {query && (
             <Button
@@ -435,6 +446,7 @@ export function RegionRosterPage() {
         ) : (
           <EmptyRoster onReset={() => setQuery('')} />
         )}
+        </Box>
       </Box>
     </Box>
   )
@@ -462,10 +474,6 @@ function RosterHeader() {
         </Typography>
         <Typography component="h1" id="region-roster-heading" variant="h3">
           Pokémon by region
-        </Typography>
-        <Typography color="text.secondary" sx={{ maxWidth: '64ch' }}>
-          Pick a region, then reorganize its residents by comfort, ideal habitat,
-          or favorite things.
         </Typography>
       </Box>
       <Stack direction="row" spacing={2.5}>
@@ -500,87 +508,97 @@ function RegionSelector({
   selectedRegionId: string
 }) {
   return (
-    <Box
-      aria-label="Choose a region"
-      component="nav"
-      sx={{
-        display: 'grid',
-        gap: 1,
-        gridTemplateColumns: {
-          xs: 'repeat(5, minmax(158px, 1fr))',
-          lg: 'repeat(5, minmax(0, 1fr))',
-        },
-        mx: { xs: -1.5, sm: -2, md: 0 },
-        overflowX: 'auto',
-        px: { xs: 1.5, sm: 2, md: 0 },
-        pb: 0.5,
-        scrollbarWidth: 'thin',
-      }}
-    >
-      {regions.map((region) => {
-        const style = regionStyles[region.regionId]
-        const selected = selectedRegionId === region.regionId
-        const originalCount =
-          currentRegionRoster.regions.find(
-            (currentRegion) => currentRegion.regionId === region.regionId,
-          )?.pokemon.length ?? region.pokemon.length
-        const countDelta = region.pokemon.length - originalCount
+    <Box sx={{ display: 'grid', gap: 0.75, minWidth: 0 }}>
+      <Box sx={{ alignItems: 'baseline', display: 'flex', justifyContent: 'space-between' }}>
+        <Typography component="h2" sx={{ fontWeight: 850 }} variant="subtitle1">
+          Regions
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          {regions.length} total
+        </Typography>
+      </Box>
+      <Box
+        aria-label="Choose a region"
+        component="nav"
+        sx={{
+          display: 'grid',
+          gap: 1,
+          gridTemplateColumns: {
+            xs: 'repeat(5, minmax(172px, 1fr))',
+            lg: 'minmax(0, 1fr)',
+          },
+          mx: { xs: -1.5, sm: -2, lg: 0 },
+          overflowX: { xs: 'auto', lg: 'visible' },
+          px: { xs: 1.5, sm: 2, lg: 0 },
+          pb: { xs: 0.5, lg: 0 },
+          scrollbarWidth: 'thin',
+        }}
+      >
+        {regions.map((region) => {
+          const style = regionStyles[region.regionId]
+          const selected = selectedRegionId === region.regionId
+          const originalCount =
+            currentRegionRoster.regions.find(
+              (currentRegion) => currentRegion.regionId === region.regionId,
+            )?.pokemon.length ?? region.pokemon.length
+          const countDelta = region.pokemon.length - originalCount
 
-        return (
-          <ButtonBase
-            aria-pressed={selected}
-            key={region.regionId}
-            onClick={() => onChoose(region.regionId)}
-            sx={{
-              alignItems: 'start',
-              backgroundColor: selected ? style.soft : 'oklch(0.99 0.004 250)',
-              border: `1px solid ${selected ? style.accent : 'oklch(0.86 0.015 250)'}`,
-              borderRadius: 1.5,
-              color: style.deep,
-              display: 'grid',
-              gap: 1,
-              justifyItems: 'stretch',
-              minHeight: 88,
-              p: 1.25,
-              textAlign: 'left',
-              transition: 'transform 150ms ease-out, border-color 150ms ease-out',
-              '&:hover': {
-                borderColor: style.accent,
-                transform: 'translateY(-2px)',
-              },
-              '&:focus-visible': {
-                outline: `3px solid ${style.accent}`,
-                outlineOffset: 2,
-              },
-            }}
-          >
-            <Box sx={{ alignItems: 'start', display: 'flex', gap: 1, justifyContent: 'space-between' }}>
-              <Typography component="span" sx={{ fontWeight: 800 }}>
-                {region.name}
-              </Typography>
-              <Typography component="strong" variant="h6">
-                {region.pokemon.length}
-              </Typography>
-            </Box>
-            <ComfortBar pokemon={region.pokemon} regionId={region.regionId} />
-            {countDelta !== 0 && (
-              <Typography
-                component="span"
-                sx={{ color: style.deep, fontWeight: 800, justifySelf: 'end' }}
-                variant="caption"
-              >
-                {countDelta > 0 ? '+' : ''}
-                {countDelta} in sandbox
-              </Typography>
-            )}
-          </ButtonBase>
-        )
-      })}
+          return (
+            <ButtonBase
+              aria-pressed={selected}
+              key={region.regionId}
+              onClick={() => onChoose(region.regionId)}
+              sx={{
+                alignItems: 'start',
+                backgroundColor: selected ? style.soft : 'oklch(0.99 0.004 250)',
+                border: `1px solid ${selected ? style.accent : 'oklch(0.86 0.015 250)'}`,
+                borderRadius: 1.5,
+                color: style.deep,
+                display: 'grid',
+                gap: 0.75,
+                justifyItems: 'stretch',
+                minHeight: { xs: 88, lg: 76 },
+                p: 1,
+                textAlign: 'left',
+                transition: 'transform 150ms ease-out, border-color 150ms ease-out',
+                '&:hover': {
+                  borderColor: style.accent,
+                  transform: 'translateX(2px)',
+                },
+                '&:focus-visible': {
+                  outline: `3px solid ${style.accent}`,
+                  outlineOffset: 2,
+                },
+              }}
+            >
+              <Box sx={{ alignItems: 'start', display: 'flex', gap: 1, justifyContent: 'space-between' }}>
+                <Typography component="span" noWrap sx={{ fontWeight: 800 }}>
+                  {region.name}
+                </Typography>
+                <Typography component="strong" variant="h6">
+                  {region.pokemon.length}
+                </Typography>
+              </Box>
+              <ComfortBar pokemon={region.pokemon} regionId={region.regionId} />
+              {countDelta !== 0 && (
+                <Typography
+                  component="span"
+                  sx={{ color: style.deep, fontWeight: 800, justifySelf: 'end' }}
+                  variant="caption"
+                >
+                  {countDelta > 0 ? '+' : ''}
+                  {countDelta} in model
+                </Typography>
+              )}
+            </ButtonBase>
+          )
+        })}
+      </Box>
     </Box>
   )
 }
 
-function RosterSandboxBar({
+function RosterModelStatus({
   evolutionViolationCount,
   moveCount,
   onReset,
@@ -592,55 +610,43 @@ function RosterSandboxBar({
   return (
     <Box
       sx={{
-        alignItems: { xs: 'start', sm: 'center' },
-        backgroundColor:
-          moveCount > 0 ? 'oklch(0.94 0.055 250)' : 'oklch(0.97 0.018 250)',
-        border: `1px solid ${moveCount > 0 ? 'oklch(0.67 0.11 250)' : 'oklch(0.85 0.025 250)'}`,
-        borderRadius: 1.5,
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        gap: 1,
-        justifyContent: 'space-between',
-        p: { xs: 1.25, md: 1.5 },
+        display: 'grid',
+        gap: 0.75,
+        pt: 0.5,
       }}
     >
-      <Box sx={{ display: 'grid', gap: 0.25 }}>
-        <Typography component="h2" sx={{ fontWeight: 850 }} variant="subtitle1">
-          Roster sandbox
-          {moveCount > 0 ? ` · ${moveCount} ${moveCount === 1 ? 'move' : 'moves'}` : ''}
-        </Typography>
-        <Typography color="text.secondary" variant="body2">
-          Expand any Pokémon to try another region. Counts and Linda summaries update instantly.
-        </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, pt: 0.5 }}>
-          <Chip
-            icon={<AccountTreeRoundedIcon />}
-            label={`${rosterConstraintGraph.nodeCount} nodes · ${rosterConstraintGraph.edgeCount} must-link edges`}
-            size="small"
-            variant="outlined"
-          />
-          <Chip
-            color={evolutionViolationCount > 0 ? 'warning' : 'success'}
-            icon={<LinkRoundedIcon />}
-            label={
-              evolutionViolationCount > 0
-                ? `${evolutionViolationCount} evolution lines currently split`
-                : 'All evolution lines together'
-            }
-            size="small"
-            variant="outlined"
-          />
+      <Typography color="text.secondary" component="h2" variant="overline">
+        Evolution constraints
+      </Typography>
+      <Stack direction="row" spacing={0.75} sx={{ alignItems: 'flex-start' }}>
+        <LinkRoundedIcon
+          sx={{
+            color: evolutionViolationCount > 0 ? 'warning.dark' : 'success.dark',
+            fontSize: 17,
+            mt: 0.125,
+          }}
+        />
+        <Box sx={{ display: 'grid', gap: 0.125 }}>
+          <Typography sx={{ fontWeight: 800 }} variant="caption">
+            {evolutionViolationCount > 0
+              ? `${evolutionViolationCount} evolution lines split`
+              : 'All evolution lines together'}
+          </Typography>
+          <Typography color="text.secondary" variant="caption">
+            {rosterConstraintGraph.nodeCount} nodes · {rosterConstraintGraph.edgeCount} must-link edges
+          </Typography>
         </Box>
-      </Box>
+      </Stack>
       {moveCount > 0 && (
         <Button
           color="inherit"
           onClick={onReset}
           size="small"
           startIcon={<RestartAltRoundedIcon />}
-          variant="outlined"
+          sx={{ justifySelf: 'start', px: 0.5 }}
+          variant="text"
         >
-          Reset moves
+          Reset {moveCount} {moveCount === 1 ? 'move' : 'moves'}
         </Button>
       )}
     </Box>
@@ -769,16 +775,19 @@ function RegionSummary({
           }}
         >
           <RegionLindaMetric
+            explanation="Linda's personal preference. 1 means not for me, 5 means favorite, and new ratings start at 3."
             icon={<FavoriteRoundedIcon />}
             label="Avg. like"
             value={`${average('likeRating')}/5`}
           />
           <RegionLindaMetric
+            explanation="How useful this Pokémon's skills are to Linda. 1 means niche and 5 means essential; hype-only Pokémon start at 1."
             icon={<HandymanRoundedIcon />}
             label="Avg. useful"
             value={`${average('usefulnessRating')}/5`}
           />
           <RegionLindaMetric
+            explanation="Linda's decision about whether each Pokémon belongs in its current region. Undecided Pokémon are not counted in this total."
             icon={<PlaceRoundedIcon />}
             label="Belongs here"
             value={belongsDecided > 0 ? `${belongsHere}/${belongsDecided}` : 'Not decided'}
@@ -790,29 +799,45 @@ function RegionSummary({
 }
 
 function RegionLindaMetric({
+  explanation,
   icon,
   label,
   value,
 }: {
+  explanation: string
   icon: ReactNode
   label: string
   value: string
 }) {
   return (
-    <Box sx={{ alignItems: 'center', display: 'grid', gap: 0.25, gridTemplateColumns: 'auto 1fr' }}>
+    <Tooltip arrow placement="top" title={explanation}>
       <Box
-        aria-hidden="true"
-        sx={{ color: 'oklch(0.53 0.13 42)', display: 'flex', gridRow: '1 / 3', '& svg': { fontSize: 18 } }}
+        aria-label={`${label}: ${value}. ${explanation}`}
+        tabIndex={0}
+        sx={{
+          alignItems: 'center',
+          borderRadius: 1,
+          cursor: 'help',
+          display: 'grid',
+          gap: 0.25,
+          gridTemplateColumns: 'auto 1fr',
+          outlineOffset: 3,
+        }}
       >
-        {icon}
+        <Box
+          aria-hidden="true"
+          sx={{ color: 'oklch(0.53 0.13 42)', display: 'flex', gridRow: '1 / 3', '& svg': { fontSize: 18 } }}
+        >
+          {icon}
+        </Box>
+        <Typography component="strong" sx={{ fontWeight: 850 }} variant="body2">
+          {value}
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          {label}
+        </Typography>
       </Box>
-      <Typography component="strong" sx={{ fontWeight: 850 }} variant="body2">
-        {value}
-      </Typography>
-      <Typography color="text.secondary" variant="caption">
-        {label}
-      </Typography>
-    </Box>
+    </Tooltip>
   )
 }
 
@@ -873,66 +898,20 @@ function ComfortBar({
   )
 }
 
-function ViewControls({
-  groupMode,
-  onGroupModeChange,
+function RosterSearch({
   onQueryChange,
   query,
 }: {
-  groupMode: GroupMode
-  onGroupModeChange: (
-    event: MouseEvent<HTMLElement>,
-    next: GroupMode | null,
-  ) => void
   onQueryChange: (value: string) => void
   query: string
 }) {
   return (
     <Box
       sx={{
-        alignItems: { xs: 'stretch', md: 'center' },
         display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        gap: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
       }}
     >
-      <Box sx={{ display: 'grid', gap: 0.5 }}>
-        <Typography color="text.secondary" component="p" variant="caption">
-          GROUP POKÉMON BY
-        </Typography>
-        <ToggleButtonGroup
-          aria-label="Group Pokémon by"
-          exclusive
-          onChange={onGroupModeChange}
-          size="small"
-          value={groupMode}
-          sx={{
-            backgroundColor: 'oklch(0.99 0.004 250)',
-            '& .MuiToggleButton-root': {
-              borderColor: 'oklch(0.84 0.02 250)',
-              gap: 0.75,
-              minHeight: 40,
-              px: { xs: 1.25, sm: 1.75 },
-            },
-            '& .Mui-selected': {
-              backgroundColor: 'oklch(0.90 0.06 250) !important',
-              color: 'oklch(0.35 0.13 250)',
-            },
-          }}
-        >
-          <ToggleButton value="comfort">
-            <GridViewRoundedIcon fontSize="small" /> Comfort
-          </ToggleButton>
-          <ToggleButton value="habitat">
-            <LandscapeRoundedIcon fontSize="small" /> Ideal habitat
-          </ToggleButton>
-          <ToggleButton value="favorite">
-            <CategoryRoundedIcon fontSize="small" /> Favorite items
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </Box>
-
       <TextField
         aria-label="Search Pokémon in this region"
         onChange={(event) => onQueryChange(event.target.value)}
@@ -958,168 +937,26 @@ function ViewControls({
             ) : undefined,
           },
         }}
-        sx={{ minWidth: { md: 340 } }}
+        sx={{ width: { xs: '100%', md: 340 } }}
         value={query}
       />
     </Box>
   )
 }
 
-function LindaLensGuide() {
-  return (
-    <Box
-      aria-label="Linda rating guide"
-      component="aside"
-      sx={{
-        alignItems: { xs: 'start', lg: 'center' },
-        backgroundColor: 'oklch(0.965 0.035 72)',
-        border: '1px solid oklch(0.84 0.07 72)',
-        borderRadius: 1.5,
-        display: 'grid',
-        gap: { xs: 1.25, lg: 2 },
-        gridTemplateColumns: {
-          xs: '1fr',
-          sm: 'repeat(3, minmax(0, 1fr))',
-          lg: '150px repeat(3, minmax(0, 1fr))',
-        },
-        p: { xs: 1.25, md: 1.5 },
-      }}
-    >
-      <Box sx={{ gridColumn: { xs: '1 / -1', lg: 'auto' } }}>
-        <Typography
-          component="h3"
-          sx={{ color: 'oklch(0.38 0.10 52)', fontWeight: 850 }}
-          variant="subtitle2"
-        >
-          Linda lens
-        </Typography>
-        <Typography color="text.secondary" variant="caption">
-          Your take, at a glance
-        </Typography>
-      </Box>
-      <LindaGuideItem
-        icon={<FavoriteRoundedIcon />}
-        label="Like"
-        text="Starts at 3 · 1 not for me · 5 favorite"
-      />
-      <LindaGuideItem
-        icon={<HandymanRoundedIcon />}
-        label="Useful"
-        text="Skill-based start · 1 niche · 5 essential"
-      />
-      <LindaGuideItem
-        icon={<PlaceRoundedIcon />}
-        label="Belongs here"
-        text="Not decided until you choose"
-      />
-    </Box>
-  )
-}
-
-function LindaGuideItem({
-  icon,
-  label,
-  text,
-}: {
-  icon: ReactNode
-  label: string
-  text: string
-}) {
-  return (
-    <Stack direction="row" spacing={0.75} sx={{ alignItems: 'flex-start' }}>
-      <Box
-        aria-hidden="true"
-        sx={{
-          color: 'oklch(0.52 0.14 42)',
-          display: 'flex',
-          mt: 0.125,
-          '& svg': { fontSize: 17 },
-        }}
-      >
-        {icon}
-      </Box>
-      <Box sx={{ display: 'grid', gap: 0.125 }}>
-        <Typography component="strong" sx={{ fontWeight: 800 }} variant="caption">
-          {label}
-        </Typography>
-        <Typography color="text.secondary" variant="caption">
-          {text}
-        </Typography>
-      </Box>
-    </Stack>
-  )
-}
-
-function buildGroups(
-  pokemon: RegionRosterPokemon[],
-  mode: GroupMode,
-  activeRegionId: string,
-): PokemonGroup[] {
-  if (mode === 'comfort') {
-    return [
-      ...comfortLevels.map((level) => ({
-        id: level,
-        label: comfortStyles[level].label,
-        note: comfortStyles[level].note,
-        pokemon: pokemon.filter(
-          (entry) =>
-            entry.regionId === activeRegionId && entry.comfortLevel === level,
-        ),
-        accent: comfortStyles[level].accent,
-        deep: comfortStyles[level].deep,
-        soft: comfortStyles[level].soft,
-      })),
-      {
-        id: 'moved-here',
-        label: 'Moved here',
-        note: 'Comfort needs rechecking in-game',
-        pokemon: pokemon.filter((entry) => entry.regionId !== activeRegionId),
-        accent: 'oklch(0.62 0.025 250)',
-        deep: 'oklch(0.38 0.035 250)',
-        soft: 'oklch(0.94 0.015 250)',
-      },
-    ]
-  }
-
-  if (mode === 'habitat') {
-    return habitatOrder.map((habitatName) => {
-      const style = habitatStyles[habitatName]
-      return {
-        id: habitatName.toLocaleLowerCase(),
-        label: habitatName,
-        note: 'Ideal habitat',
-        pokemon: pokemon.filter(
-          (entry) => entry.idealHabitat?.name === habitatName,
-        ),
-        ...style,
-      }
-    })
-  }
-
-  const favoriteNames = Array.from(
-    new Set(
-      pokemon.flatMap((entry) => entry.favorites.map((favorite) => favorite.name)),
-    ),
-  )
-
-  return favoriteNames
-    .map((favoriteName, index) => {
-      const matchingPokemon = pokemon.filter((entry) =>
-        entry.favorites.some((favorite) => favorite.name === favoriteName),
-      )
-      return {
-        id: favoriteName.toLocaleLowerCase().replaceAll(' ', '-'),
-        label: favoriteName,
-        note: `${matchingPokemon.length} Pokémon like this`,
-        pokemon: matchingPokemon,
-        ...favoritePalette[index % favoritePalette.length],
-      }
-    })
-    .sort(
-      (left, right) =>
-        right.pokemon.length - left.pokemon.length ||
-        left.label.localeCompare(right.label),
-    )
+function buildHabitatGroups(pokemon: RegionRosterPokemon[]): PokemonGroup[] {
+  return habitatOrder.map((habitatName) => {
+    const style = habitatStyles[habitatName]
+    return {
+      id: habitatName.toLocaleLowerCase(),
+      label: habitatName,
+      note: 'Ideal habitat',
+      pokemon: pokemon.filter(
+        (entry) => entry.idealHabitat?.name === habitatName,
+      ),
+      ...style,
+    }
+  })
 }
 
 function PokemonGroupSection({
@@ -1154,13 +991,19 @@ function PokemonGroupSection({
         border: `1px solid ${group.pokemon.length > 0 ? 'oklch(0.86 0.016 250)' : group.accent}`,
         borderRadius: 1.5,
         display: 'grid',
-        gap: { xs: 1, md: 1.5 },
-        gridTemplateColumns: { xs: '1fr', md: '150px minmax(0, 1fr)' },
+        gap: 1.5,
         minWidth: 0,
         p: { xs: 1.25, md: 1.5 },
       }}
     >
-      <Box sx={{ alignContent: 'start', display: 'grid', gap: 0.25 }}>
+      <Box
+        sx={{
+          alignItems: 'baseline',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: { xs: 0.5, sm: 1 },
+        }}
+      >
         <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
           <Box
             aria-hidden="true"
@@ -1178,7 +1021,7 @@ function PokemonGroupSection({
         <Typography color="text.secondary" variant="caption">
           {group.pokemon.length} {group.pokemon.length === 1 ? 'Pokémon' : 'Pokémon'}
         </Typography>
-        <Typography color={group.deep} variant="caption">
+        <Typography color={group.deep} sx={{ ml: { sm: 'auto' } }} variant="caption">
           {group.note}
         </Typography>
       </Box>
@@ -1187,10 +1030,10 @@ function PokemonGroupSection({
         <Box
           sx={{
             display: 'grid',
-            gap: 0.75,
+            gap: 1.5,
             gridTemplateColumns: {
-              xs: 'repeat(auto-fill, minmax(190px, 1fr))',
-              xl: 'repeat(auto-fill, minmax(210px, 1fr))',
+              xs: 'minmax(0, 1fr)',
+              md: 'repeat(2, minmax(0, 1fr))',
             },
             minWidth: 0,
           }}
