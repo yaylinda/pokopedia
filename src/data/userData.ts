@@ -7,7 +7,7 @@ import type {
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 
 export const createDefaultUserData = (): PokopediaUserData => ({
-  version: 3,
+  version: 4,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug: {},
   rosterRegionOverrides: {},
@@ -17,7 +17,7 @@ export const createUserData = (
   pokemonStatsBySlug: Record<string, LindaPokemonStats>,
   rosterRegionOverrides: Record<string, string>,
 ): PokopediaUserData => ({
-  version: 3,
+  version: 4,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug,
   rosterRegionOverrides,
@@ -72,14 +72,25 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
   }
 
   const maybeData = value as Partial<PokopediaUserData>
+  const pokemonStatsBySlug = parsePokemonStatsBySlug(
+    maybeData.pokemonStatsBySlug,
+  )
+  const shouldNormalizeLikeRatings = maybeData.version !== 4
 
   return {
-    version: 3,
+    version: 4,
     updatedAt:
-      typeof maybeData.updatedAt === 'string'
+      !shouldNormalizeLikeRatings && typeof maybeData.updatedAt === 'string'
         ? maybeData.updatedAt
         : new Date().toISOString(),
-    pokemonStatsBySlug: parsePokemonStatsBySlug(maybeData.pokemonStatsBySlug),
+    pokemonStatsBySlug: shouldNormalizeLikeRatings
+      ? Object.fromEntries(
+          Object.entries(pokemonStatsBySlug).map(([slug, stats]) => [
+            slug,
+            { ...stats, likeRating: 3 },
+          ]),
+        )
+      : pokemonStatsBySlug,
     rosterRegionOverrides: parseStringRecord(maybeData.rosterRegionOverrides),
   }
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-07-28",
-  "sourceNote": "Identified from user-provided in-game region comfort screenshots. Comfort groups are deduplicated across overlapping screenshots.",
+  "updatedAt": "2026-08-01",
+  "sourceNote": "Identified from user-provided in-game region comfort details. Comfort groups are deduplicated across overlapping screenshots.",
   "regions": {
     "palette-town": {
       "name": "Palette Town",
@@ -243,7 +243,7 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 68,
+      "pokemonCount": 69,
       "eventPokemonSlugs": [],
       "comfortLevels": {
         "awesome": [
@@ -319,6 +319,7 @@
           "kricketot"
         ],
         "iffy": [
+          "gastly",
           "pelipper",
           "ludicolo"
         ],
