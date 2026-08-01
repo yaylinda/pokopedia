@@ -71,12 +71,21 @@ jobs:
         run: npm run build
 
       - name: Configure GitHub Pages
+        id: pages
         uses: actions/configure-pages@v6
+
+      - name: Prepare GitHub Pages metadata
+        run: >-
+          sed --in-place
+          "s|__SITE_ORIGIN__|${{ steps.pages.outputs.base_url }}|g"
+          dist/client/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: ./dist
+          # OpenAI Sites also consumes dist/server and dist/.openai. GitHub
+          # Pages only needs the browser-ready Vite output.
+          path: ./dist/client
 
       - name: Deploy to GitHub Pages
         id: deployment

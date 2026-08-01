@@ -8,6 +8,7 @@ import {
   Outlet,
   Route,
   Routes,
+  useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom'
@@ -22,9 +23,25 @@ import { RegionRosterPage } from './modules/region-roster/RegionRosterPage'
 import { getRouterBasename } from './routing'
 import { appTheme } from './theme'
 
+const routeTitles: Record<string, string> = {
+  '/': 'Home',
+  '/pokemon': 'Pokédex',
+  '/habitats': 'Habitats',
+  '/region-roster': 'Roster',
+  '/region-plan': 'Region Plan',
+  '/planner': 'Planner',
+}
+
 function AppLayout() {
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const pathname = location.pathname.replace(/\/+$/, '') || '/'
+    const routeTitle = routeTitles[pathname]
+    document.title = routeTitle ? `Pokopedia · ${routeTitle}` : 'Pokopedia'
+  }, [location.pathname])
 
   useEffect(() => {
     const route = searchParams.get('route')
