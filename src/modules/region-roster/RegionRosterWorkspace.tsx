@@ -44,8 +44,12 @@ import type {
 import {
   allRosterPokemonBySlug,
   comfortStyles,
+  getAbilityDistribution,
   getComfortCounts,
+  getFlavorDistribution,
+  getHabitatDistribution,
   regionStyles,
+  type DistributionSegment,
   type PokemonGroup,
   type VisualStyle,
 } from './regionRosterConfig'
@@ -475,6 +479,146 @@ function RegionSummary({
             label="Belongs here"
             value={belongsDecided > 0 ? `${belongsHere}/${belongsDecided}` : 'Not decided'}
           />
+        </Box>
+      </Box>
+
+      <RegionDistributions pokemon={pokemon} />
+    </Box>
+  )
+}
+
+function RegionDistributions({
+  pokemon,
+}: {
+  pokemon: RegionRosterPokemon[]
+}) {
+  const abilitySegments = getAbilityDistribution(pokemon)
+  const abilityCount = abilitySegments.reduce(
+    (total, segment) => total + segment.count,
+    0,
+  )
+
+  return (
+    <Box
+      sx={{
+        borderTop: '1px solid oklch(0.89 0.018 250)',
+        display: 'grid',
+        gap: 1.5,
+        gridColumn: '1 / -1',
+        pt: 1.5,
+      }}
+    >
+      <Typography color="text.secondary" component="h3" variant="overline">
+        Region breakdowns
+      </Typography>
+      <DistributionRow
+        description={`${abilityCount} assignments · Pokémon may have more than one`}
+        label="Ability types"
+        segments={abilitySegments}
+      />
+      <DistributionRow
+        description={`${pokemon.length} Pokémon`}
+        label="Favorite food flavors"
+        segments={getFlavorDistribution(pokemon)}
+      />
+      <DistributionRow
+        description={`${pokemon.length} Pokémon`}
+        label="Ideal habitats"
+        segments={getHabitatDistribution(pokemon)}
+      />
+    </Box>
+  )
+}
+
+function DistributionRow({
+  description,
+  label,
+  segments,
+}: {
+  description: string
+  label: string
+  segments: DistributionSegment[]
+}) {
+  const accessibleLabel = segments
+    .map((segment) => `${segment.label}: ${segment.count}`)
+    .join(', ')
+
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gap: { xs: 0.75, md: 1.5 },
+        gridTemplateColumns: { xs: '1fr', md: '160px minmax(0, 1fr)' },
+        minWidth: 0,
+      }}
+    >
+      <Box sx={{ alignSelf: 'start', display: 'grid', gap: 0.125 }}>
+        <Typography component="h4" sx={{ fontWeight: 850 }} variant="body2">
+          {label}
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          {description}
+        </Typography>
+      </Box>
+      <Box sx={{ display: 'grid', gap: 0.75, minWidth: 0 }}>
+        <Box
+          aria-label={`${label}. ${accessibleLabel}`}
+          role="img"
+          sx={{
+            backgroundColor: 'oklch(0.91 0.01 250)',
+            borderRadius: 8,
+            display: 'flex',
+            gap: '2px',
+            height: 14,
+            overflow: 'hidden',
+          }}
+        >
+          {segments.map((segment) => (
+            <Tooltip
+              key={segment.id}
+              title={`${segment.label}: ${segment.count}`}
+            >
+              <Box
+                sx={{
+                  backgroundColor: segment.color,
+                  flex: `${segment.count} 1 0`,
+                  minWidth: 4,
+                }}
+              />
+            </Tooltip>
+          ))}
+        </Box>
+        <Box
+          aria-hidden="true"
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '4px 12px',
+          }}
+        >
+          {segments.map((segment) => (
+            <Box
+              key={segment.id}
+              sx={{ alignItems: 'center', display: 'flex', gap: 0.5 }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: segment.color,
+                  borderRadius: '50%',
+                  flex: '0 0 auto',
+                  height: 8,
+                  width: 8,
+                }}
+              />
+              <Typography component="strong" sx={{ fontWeight: 800 }} variant="caption">
+                {segment.count}
+              </Typography>
+              <Typography color="text.secondary" variant="caption">
+                {segment.label}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       </Box>
     </Box>

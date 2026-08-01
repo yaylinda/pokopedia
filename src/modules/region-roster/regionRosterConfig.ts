@@ -18,6 +18,13 @@ export type PokemonGroup = VisualStyle & {
   note: string
 }
 
+export type DistributionSegment = {
+  id: string
+  label: string
+  count: number
+  color: string
+}
+
 export const regionStyles: Record<string, VisualStyle> = {
   'palette-town': {
     accent: 'oklch(0.72 0.16 82)',
@@ -129,6 +136,42 @@ const habitatStyles: Record<string, VisualStyle> = {
 
 const habitatOrder = ['Bright', 'Warm', 'Cool', 'Humid', 'Dry', 'Dark']
 
+const flavorStyles: Record<string, VisualStyle> = {
+  'sweet-flavors': {
+    accent: 'oklch(0.69 0.16 350)',
+    deep: 'oklch(0.40 0.12 350)',
+    soft: 'oklch(0.95 0.05 350)',
+  },
+  'spicy-flavors': {
+    accent: 'oklch(0.66 0.18 35)',
+    deep: 'oklch(0.39 0.13 35)',
+    soft: 'oklch(0.95 0.05 35)',
+  },
+  'sour-flavors': {
+    accent: 'oklch(0.75 0.16 115)',
+    deep: 'oklch(0.42 0.11 115)',
+    soft: 'oklch(0.96 0.05 115)',
+  },
+  'bitter-flavors': {
+    accent: 'oklch(0.58 0.11 305)',
+    deep: 'oklch(0.36 0.09 305)',
+    soft: 'oklch(0.94 0.04 305)',
+  },
+  'dry-flavors': {
+    accent: 'oklch(0.69 0.10 75)',
+    deep: 'oklch(0.41 0.08 75)',
+    soft: 'oklch(0.95 0.04 75)',
+  },
+}
+
+const flavorOrder = [
+  'sweet-flavors',
+  'spicy-flavors',
+  'sour-flavors',
+  'bitter-flavors',
+  'dry-flavors',
+]
+
 export const regionOrder = [
   'withered-wastelands',
   'bleak-beach',
@@ -144,6 +187,92 @@ export const allRosterPokemon = currentRegionRoster.regions.flatMap(
 export const allRosterPokemonBySlug = new Map(
   allRosterPokemon.map((pokemon) => [pokemon.slug, pokemon]),
 )
+
+const abilityOrder = Array.from(
+  new Set(
+    allRosterPokemon.flatMap((pokemon) =>
+      pokemon.specialties.map((specialty) => specialty.name),
+    ),
+  ),
+).sort((left, right) => {
+  const count = (name: string) =>
+    allRosterPokemon.filter((pokemon) =>
+      pokemon.specialties.some((specialty) => specialty.name === name),
+    ).length
+
+  return count(right) - count(left) || left.localeCompare(right)
+})
+
+const abilityColors = abilityOrder.map((_, index) => {
+  const hue = Math.round((index * 137.508 + 18) % 360)
+  const lightness = [0.62, 0.68, 0.58][index % 3]
+  const chroma = [0.15, 0.12, 0.13][index % 3]
+
+  return `oklch(${lightness} ${chroma} ${hue})`
+})
+
+export const getAbilityDistribution = (
+  pokemon: RegionRosterPokemon[],
+): DistributionSegment[] =>
+  abilityOrder.flatMap((abilityName, index) => {
+    const count = pokemon.filter((entry) =>
+      entry.specialties.some((specialty) => specialty.name === abilityName),
+    ).length
+
+    return count > 0
+      ? [
+          {
+            id: abilityName.toLocaleLowerCase().replaceAll(' ', '-'),
+            label: abilityName,
+            count,
+            color: abilityColors[index],
+          },
+        ]
+      : []
+  })
+
+export const getFlavorDistribution = (
+  pokemon: RegionRosterPokemon[],
+): DistributionSegment[] =>
+  flavorOrder.flatMap((flavorId) => {
+    const favorite = pokemon
+      .flatMap((entry) => entry.favorites)
+      .find((entry) => entry.favoriteId === flavorId)
+    const count = pokemon.filter((entry) =>
+      entry.favorites.some((entry) => entry.favoriteId === flavorId),
+    ).length
+
+    return count > 0
+      ? [
+          {
+            id: flavorId,
+            label: favorite?.name.replace(/ flavors$/i, '') ?? flavorId,
+            count,
+            color: flavorStyles[flavorId].accent,
+          },
+        ]
+      : []
+  })
+
+export const getHabitatDistribution = (
+  pokemon: RegionRosterPokemon[],
+): DistributionSegment[] =>
+  habitatOrder.flatMap((habitatName) => {
+    const count = pokemon.filter(
+      (entry) => entry.idealHabitat?.name === habitatName,
+    ).length
+
+    return count > 0
+      ? [
+          {
+            id: habitatName.toLocaleLowerCase(),
+            label: habitatName,
+            count,
+            color: habitatStyles[habitatName].accent,
+          },
+        ]
+      : []
+  })
 
 export const getComfortCounts = (
   pokemon: RegionRosterPokemon[],
