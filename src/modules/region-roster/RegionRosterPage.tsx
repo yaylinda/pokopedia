@@ -325,7 +325,6 @@ export function RegionRosterPage() {
       aria-labelledby="region-roster-heading"
       component="section"
       id="region-roster-panel"
-      role="tabpanel"
       sx={{
         backgroundColor: 'oklch(0.975 0.008 250)',
         border: '1px solid oklch(0.88 0.015 250)',

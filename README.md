@@ -1,10 +1,10 @@
 # Pokopedia
 
-Pokopedia is a smart helper for all things Pokopia.
+Pokopedia is a personalized Pokémon region-roster planner for Pokopia.
 
 This repo now includes two parts:
 
-- a React + TypeScript frontend scaffold for the reference app
+- a React + TypeScript region-roster workspace
 - the source data ingestion pipeline for Serebii's Pokemon Pokopia pages
 
 ## Frontend app

@@ -1,11 +1,3 @@
-export type SavedHouse = {
-  id: string
-  name: string
-  pokemonSlugs: string[]
-  createdAt: string
-  updatedAt: string
-}
-
 export type LindaPokemonRating = 1 | 2 | 3 | 4 | 5
 
 export type LindaPokemonStats = {
@@ -15,10 +7,8 @@ export type LindaPokemonStats = {
 }
 
 export type PokopediaUserData = {
-  version: 2
+  version: 3
   updatedAt: string
-  ownedPokemonSlugs: string[]
-  savedHouses: SavedHouse[]
   pokemonStatsBySlug: Record<string, LindaPokemonStats>
   rosterRegionOverrides: Record<string, string>
 }

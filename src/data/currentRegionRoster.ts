@@ -1,15 +1,51 @@
 import currentRegionRosterJson from '../../data/current-region-roster.json'
-import {
-  pokemonBySlug,
-  specialties as specialtyCatalog,
-  type Favorite,
-  type IdealHabitat,
-  type Specialty,
-} from './pokopia'
+import pokemonJson from '../../data/pokemon.json'
+import pokemonPreferencesJson from '../../data/pokemon-preferences.json'
+import specialtiesJson from '../../data/specialties.json'
 import type {
   LindaPokemonRating,
   LindaPokemonStats,
 } from './types'
+
+type Specialty = {
+  slug: string
+  name: string
+  description?: string
+  detailUrl: string
+  pictureUrl?: string
+  iconUrl?: string
+}
+
+type Favorite = {
+  sourceOrder: number
+  favoriteId: string
+  slug: string
+  name: string
+  kind: string
+  detailUrl: string
+}
+
+type IdealHabitat = {
+  idealHabitatId: string
+  slug: string
+  name: string
+  detailUrl: string
+}
+
+type PokemonCatalogEntry = {
+  name: string
+  slug: string
+  pokopiaNumberDisplay: string
+  imageUrl: string
+  detailUrl: string
+  specialties: Specialty[]
+}
+
+type PokemonPreference = {
+  pokemonSlug: string
+  idealHabitat: IdealHabitat
+  favorites: Favorite[]
+}
 
 export const comfortLevels = [
   'awesome',
@@ -69,6 +105,34 @@ export type CurrentRegion = {
 }
 
 const roster = currentRegionRosterJson as CurrentRegionRosterJson
+const pokemonCatalog = pokemonJson as {
+  pokemon: PokemonCatalogEntry[]
+}
+const preferenceCatalog = pokemonPreferencesJson as {
+  pokemon: PokemonPreference[]
+}
+const specialtyCatalog = (specialtiesJson as { specialties: Specialty[] })
+  .specialties
+const preferenceBySlug = new Map(
+  preferenceCatalog.pokemon.map((preference) => [
+    preference.pokemonSlug,
+    preference,
+  ]),
+)
+const pokemonBySlug = new Map(
+  pokemonCatalog.pokemon.map((pokemon) => {
+    const preference = preferenceBySlug.get(pokemon.slug)
+
+    return [
+      pokemon.slug,
+      {
+        ...pokemon,
+        idealHabitat: preference?.idealHabitat ?? null,
+        favorites: preference?.favorites ?? [],
+      },
+    ]
+  }),
+)
 const specialtyBySlug = new Map(
   specialtyCatalog.map((specialty) => [specialty.slug, specialty]),
 )
