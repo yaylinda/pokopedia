@@ -3,11 +3,12 @@ import type {
   LindaPokemonStats,
   PokopediaUserData,
 } from './types'
+import { legendaryPokemonSlugs } from './currentRegionRoster'
 
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 
 export const createDefaultUserData = (): PokopediaUserData => ({
-  version: 5,
+  version: 6,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug: {},
   rosterRegionOverrides: {},
@@ -17,7 +18,7 @@ export const createUserData = (
   pokemonStatsBySlug: Record<string, LindaPokemonStats>,
   rosterRegionOverrides: Record<string, string>,
 ): PokopediaUserData => ({
-  version: 5,
+  version: 6,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug,
   rosterRegionOverrides,
@@ -75,10 +76,10 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
   const pokemonStatsBySlug = parsePokemonStatsBySlug(
     maybeData.pokemonStatsBySlug,
   )
-  const shouldNormalizeLindaRatings = maybeData.version !== 5
+  const shouldNormalizeLindaRatings = maybeData.version !== 6
 
   return {
-    version: 5,
+    version: 6,
     updatedAt:
       !shouldNormalizeLindaRatings && typeof maybeData.updatedAt === 'string'
         ? maybeData.updatedAt
@@ -87,7 +88,11 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
       ? Object.fromEntries(
           Object.entries(pokemonStatsBySlug).map(([slug, stats]) => [
             slug,
-            { ...stats, likeRating: 3, usefulnessRating: null },
+            {
+              ...stats,
+              likeRating: legendaryPokemonSlugs.has(slug) ? 5 : 3,
+              usefulnessRating: null,
+            },
           ]),
         )
       : pokemonStatsBySlug,

@@ -458,7 +458,7 @@ function RegionSummary({
           }}
         >
           <RegionLindaMetric
-            explanation="Linda's personal preference. 1 means not for me, 5 means favorite, and new ratings start at 3."
+            explanation="Linda's personal preference. 1 means not for me and 5 means favorite. Ratings start at 3, while starred legendary Pokémon start at 5."
             icon={<FavoriteRoundedIcon />}
             label="Avg. like"
             value={`${average('likeRating')}/5`}

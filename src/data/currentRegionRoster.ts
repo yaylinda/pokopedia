@@ -102,6 +102,9 @@ export type CurrentRegion = {
 }
 
 const roster = currentRegionRosterJson as CurrentRegionRosterJson
+export const legendaryPokemonSlugs = new Set(
+  Object.values(roster.regions).flatMap((region) => region.eventPokemonSlugs),
+)
 const pokemonCatalog = pokemonJson as {
   pokemon: PokemonCatalogEntry[]
 }
@@ -146,9 +149,10 @@ const scoreUsefulness = (
 
 const makeDefaultLindaStats = (
   specialties: Specialty[],
+  isLegendary: boolean,
 ): LindaPokemonStats => ({
   // Personal taste cannot be inferred from game data, so start at a friendly neutral.
-  likeRating: 3,
+  likeRating: isLegendary ? 5 : 3,
   usefulnessRating: scoreUsefulness(specialties),
   // This is Linda's call and must never be inferred from placement data.
   belongsInCurrentRegion: null,
@@ -279,7 +283,10 @@ export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).ma
               profile?.idealHabitat ?? supplementalProfile?.idealHabitat ?? null,
             favorites: profile?.favorites ?? supplementalProfile?.favorites ?? [],
             specialties,
-            lindaStats: makeDefaultLindaStats(specialties),
+            lindaStats: makeDefaultLindaStats(
+              specialties,
+              legendaryPokemonSlugs.has(slug),
+            ),
           }
         }),
     ),
