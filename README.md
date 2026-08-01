@@ -29,6 +29,23 @@ npm run build
 
 The app is configured for GitHub Pages deployment through GitHub Actions.
 
+### Frontend architecture
+
+The frontend is organized around one route without collapsing the application
+and feature layers together:
+
+- `src/App.tsx` composes the application providers and router.
+- `src/app/` owns global providers, routing, the application shell, and its
+  semantic page layout.
+- `src/modules/region-roster/RegionRosterPage.tsx` is the route-level page and
+  owns the roster heading and document structure.
+- `src/modules/region-roster/RegionRosterWorkspace.tsx` composes the interactive
+  region rail, summary, search, roster groups, and Pokémon controls.
+- `src/modules/region-roster/hooks/` owns URL state and derived roster-model
+  behavior; `regionRosterConfig.ts` owns visual vocabulary and grouping rules.
+- `src/data/` owns normalized roster data, constraints, and persisted user
+  decisions.
+
 ## Data pipeline
 
 This repo starts with a small data-ingestion pipeline for Serebii's Pokemon Pokopia pages. Scrapers write normalized JSON datasets into `data/` and may spool fetched HTML into ignored `.tmp/pokopia-html/` files while they run.

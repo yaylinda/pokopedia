@@ -84,17 +84,6 @@ export const appTheme = createTheme({
         },
       },
     },
-    MuiCard: {
-      defaultProps: {
-        variant: 'outlined',
-      },
-      styleOverrides: {
-        root: {
-          backgroundImage: 'none',
-          borderColor: '#c3d0ca',
-        },
-      },
-    },
     MuiChip: {
       styleOverrides: {
         root: {
@@ -109,6 +98,17 @@ export const appTheme = createTheme({
         '*': {
           boxSizing: 'border-box',
         },
+        ':root': {
+          '--space-xs': '4px',
+          '--space-sm': '8px',
+          '--space-md': '12px',
+          '--space-lg': '16px',
+          '--space-xl': '24px',
+          '--space-2xl': '32px',
+          '--space-3xl': '48px',
+          '--z-sticky': '200',
+          '--z-skip-link': '700',
+        },
         html: {
           minHeight: '100%',
         },
@@ -119,7 +119,8 @@ export const appTheme = createTheme({
           padding:
             'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
           background:
-            'linear-gradient(180deg, #f8fbfa 0%, #eef5f2 52%, #e6f0eb 100%)',
+            'linear-gradient(180deg, oklch(0.985 0.008 155) 0%, oklch(0.955 0.015 155) 100%)',
+          fontKerning: 'normal',
         },
         button: {
           cursor: 'pointer',
@@ -132,15 +133,6 @@ export const appTheme = createTheme({
         },
         '#root': {
           minHeight: '100vh',
-        },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          minHeight: 38,
-          paddingBlock: 4,
-          fontWeight: 800,
         },
       },
     },
