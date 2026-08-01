@@ -7,7 +7,7 @@ import type {
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 
 export const createDefaultUserData = (): PokopediaUserData => ({
-  version: 4,
+  version: 5,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug: {},
   rosterRegionOverrides: {},
@@ -17,7 +17,7 @@ export const createUserData = (
   pokemonStatsBySlug: Record<string, LindaPokemonStats>,
   rosterRegionOverrides: Record<string, string>,
 ): PokopediaUserData => ({
-  version: 4,
+  version: 5,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug,
   rosterRegionOverrides,
@@ -75,19 +75,19 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
   const pokemonStatsBySlug = parsePokemonStatsBySlug(
     maybeData.pokemonStatsBySlug,
   )
-  const shouldNormalizeLikeRatings = maybeData.version !== 4
+  const shouldNormalizeLindaRatings = maybeData.version !== 5
 
   return {
-    version: 4,
+    version: 5,
     updatedAt:
-      !shouldNormalizeLikeRatings && typeof maybeData.updatedAt === 'string'
+      !shouldNormalizeLindaRatings && typeof maybeData.updatedAt === 'string'
         ? maybeData.updatedAt
         : new Date().toISOString(),
-    pokemonStatsBySlug: shouldNormalizeLikeRatings
+    pokemonStatsBySlug: shouldNormalizeLindaRatings
       ? Object.fromEntries(
           Object.entries(pokemonStatsBySlug).map(([slug, stats]) => [
             slug,
-            { ...stats, likeRating: 3 },
+            { ...stats, likeRating: 3, usefulnessRating: null },
           ]),
         )
       : pokemonStatsBySlug,

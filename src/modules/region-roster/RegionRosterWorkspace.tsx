@@ -464,7 +464,7 @@ function RegionSummary({
             value={`${average('likeRating')}/5`}
           />
           <RegionLindaMetric
-            explanation="How useful this Pokémon's skills are to Linda. 1 means niche and 5 means essential; hype-only Pokémon start at 1."
+            explanation="How useful this Pokémon's skills are to Linda. Scores start empty, except Hype-only Pokémon start at 1 and Hype plus another ability starts at 3."
             icon={<HandymanRoundedIcon />}
             label="Avg. useful"
             value={`${average('usefulnessRating')}/5`}

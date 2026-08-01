@@ -43,10 +43,22 @@ export function useRegionRosterWorkspace() {
   const effectiveStatsBySlug = useMemo(
     () =>
       Object.fromEntries(
-        allRosterPokemon.map((pokemon) => [
-          pokemon.slug,
-          pokemonStatsBySlug[pokemon.slug] ?? pokemon.lindaStats,
-        ]),
+        allRosterPokemon.map((pokemon) => {
+          const savedStats = pokemonStatsBySlug[pokemon.slug]
+
+          return [
+            pokemon.slug,
+            savedStats
+              ? {
+                  ...pokemon.lindaStats,
+                  ...savedStats,
+                  usefulnessRating:
+                    savedStats.usefulnessRating ??
+                    pokemon.lindaStats.usefulnessRating,
+                }
+              : pokemon.lindaStats,
+          ]
+        }),
       ),
     [pokemonStatsBySlug],
   )

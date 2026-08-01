@@ -7,7 +7,7 @@ export type LindaPokemonStats = {
 }
 
 export type PokopediaUserData = {
-  version: 4
+  version: 5
   updatedAt: string
   pokemonStatsBySlug: Record<string, LindaPokemonStats>
   rosterRegionOverrides: Record<string, string>

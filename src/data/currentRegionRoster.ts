@@ -2,10 +2,7 @@ import currentRegionRosterJson from '../../data/current-region-roster.json'
 import pokemonJson from '../../data/pokemon.json'
 import pokemonPreferencesJson from '../../data/pokemon-preferences.json'
 import specialtiesJson from '../../data/specialties.json'
-import type {
-  LindaPokemonRating,
-  LindaPokemonStats,
-} from './types'
+import type { LindaPokemonStats } from './types'
 
 type Specialty = {
   slug: string
@@ -137,50 +134,14 @@ const specialtyBySlug = new Map(
   specialtyCatalog.map((specialty) => [specialty.slug, specialty]),
 )
 
-const specialtyUsefulness: Record<string, LindaPokemonRating> = {
-  appraise: 5,
-  build: 4,
-  bulldoze: 4,
-  burn: 3,
-  chop: 3,
-  collect: 5,
-  crush: 3,
-  dj: 2,
-  dreamisland: 5,
-  eat: 2,
-  engineer: 5,
-  explode: 3,
-  fly: 4,
-  gather: 4,
-  gatherhoney: 4,
-  generate: 4,
-  grow: 4,
-  hype: 1,
-  illuminate: 5,
-  litter: 4,
-  paint: 5,
-  party: 5,
-  rarify: 5,
-  recycle: 4,
-  search: 3,
-  storage: 5,
-  teleport: 5,
-  trade: 3,
-  transform: 2,
-  water: 4,
-  yawn: 2,
-}
+const scoreUsefulness = (
+  specialties: Specialty[],
+): LindaPokemonStats['usefulnessRating'] => {
+  const hasHype = specialties.some((specialty) => specialty.slug === 'hype')
 
-const scoreUsefulness = (specialties: Specialty[]): LindaPokemonRating => {
-  const strongestSkill = Math.max(
-    1,
-    ...specialties.map((specialty) => specialtyUsefulness[specialty.slug] ?? 3),
-  )
+  if (!hasHype) return null
 
-  return Math.min(
-    5,
-    strongestSkill + (specialties.length > 1 ? 1 : 0),
-  ) as LindaPokemonRating
+  return specialties.length === 1 ? 1 : 3
 }
 
 const makeDefaultLindaStats = (
