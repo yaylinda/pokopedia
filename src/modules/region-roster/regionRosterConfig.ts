@@ -1,6 +1,6 @@
 import {
+  allAvailableRosterPokemon,
   comfortLevels,
-  currentRegionRoster,
   type ComfortLevel,
   type RegionRosterPokemon,
 } from '../../data/currentRegionRoster'
@@ -180,9 +180,7 @@ export const regionOrder = [
   'palette-town',
 ]
 
-export const allRosterPokemon = currentRegionRoster.regions.flatMap(
-  (region) => region.pokemon,
-)
+export const allRosterPokemon = allAvailableRosterPokemon
 
 export const allRosterPokemonBySlug = new Map(
   allRosterPokemon.map((pokemon) => [pokemon.slug, pokemon]),

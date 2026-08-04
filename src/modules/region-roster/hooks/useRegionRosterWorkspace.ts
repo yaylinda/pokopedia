@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { currentRegionRoster } from '../../../data/currentRegionRoster'
 import {
   evolutionConstraintGroups,
   getEvolutionConstraintGroup,
 } from '../../../data/rosterConstraints'
+import { getRosterSnapshot } from '../../../data/rosterSnapshots'
 import { useUserData } from '../../../data/userDataContext'
 import {
-  allRosterPokemon,
-  allRosterPokemonBySlug,
   buildHabitatGroups,
   matchesRosterQuery,
   regionOrder,
@@ -18,12 +16,13 @@ import {
 export function useRegionRosterWorkspace() {
   const {
     pokemonStatsBySlug,
-    resetRosterModel,
     rosterRegionOverrides,
     setPokemonRosterRegion,
     updatePokemonStats,
   } = useUserData()
   const [searchParams, setSearchParams] = useSearchParams()
+  const requestedSnapshotId = searchParams.get('snapshot')
+  const selectedSnapshot = getRosterSnapshot(requestedSnapshotId)
   const requestedRegionId = searchParams.get('region')
   const selectedRegionId =
     requestedRegionId && regionOrder.includes(requestedRegionId)
@@ -31,19 +30,55 @@ export function useRegionRosterWorkspace() {
       : regionOrder[0]
   const [query, setQuery] = useState('')
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
+  const snapshotPokemon = useMemo(
+    () => selectedSnapshot.regions.flatMap((region) => region.pokemon),
+    [selectedSnapshot],
+  )
+  const snapshotPokemonBySlug = useMemo(
+    () => new Map(snapshotPokemon.map((pokemon) => [pokemon.slug, pokemon])),
+    [snapshotPokemon],
+  )
+  const getOverrideKey = useCallback(
+    (slug: string) =>
+      selectedSnapshot.kind === 'current'
+        ? slug
+        : `${selectedSnapshot.snapshotId}:${slug}`,
+    [selectedSnapshot.kind, selectedSnapshot.snapshotId],
+  )
 
   useEffect(() => {
-    if (requestedRegionId === selectedRegionId) return
-
     const nextSearchParams = new URLSearchParams(searchParams)
-    nextSearchParams.set('region', selectedRegionId)
+    let needsRepair = false
+
+    if (requestedRegionId !== selectedRegionId) {
+      nextSearchParams.set('region', selectedRegionId)
+      needsRepair = true
+    }
+
+    if (
+      requestedSnapshotId &&
+      requestedSnapshotId !== selectedSnapshot.snapshotId
+    ) {
+      nextSearchParams.delete('snapshot')
+      needsRepair = true
+    }
+
+    if (!needsRepair) return
+
     setSearchParams(nextSearchParams, { replace: true })
-  }, [requestedRegionId, searchParams, selectedRegionId, setSearchParams])
+  }, [
+    requestedRegionId,
+    requestedSnapshotId,
+    searchParams,
+    selectedRegionId,
+    selectedSnapshot.snapshotId,
+    setSearchParams,
+  ])
 
   const effectiveStatsBySlug = useMemo(
     () =>
       Object.fromEntries(
-        allRosterPokemon.map((pokemon) => {
+        snapshotPokemon.map((pokemon) => {
           const savedStats = pokemonStatsBySlug[pokemon.slug]
 
           return [
@@ -60,13 +95,13 @@ export function useRegionRosterWorkspace() {
           ]
         }),
       ),
-    [pokemonStatsBySlug],
+    [pokemonStatsBySlug, snapshotPokemon],
   )
 
   const modeledRegions = useMemo(
     () =>
       regionOrder.flatMap((regionId) => {
-        const region = currentRegionRoster.regions.find(
+        const region = selectedSnapshot.regions.find(
           (entry) => entry.regionId === regionId,
         )
 
@@ -74,16 +109,17 @@ export function useRegionRosterWorkspace() {
           ? [
               {
                 ...region,
-                pokemon: allRosterPokemon.filter(
+                pokemon: snapshotPokemon.filter(
                   (pokemon) =>
-                    (rosterRegionOverrides[pokemon.slug] ?? pokemon.regionId) ===
+                    (rosterRegionOverrides[getOverrideKey(pokemon.slug)] ??
+                      pokemon.regionId) ===
                     region.regionId,
                 ),
               },
             ]
           : []
       }),
-    [rosterRegionOverrides],
+    [getOverrideKey, rosterRegionOverrides, selectedSnapshot, snapshotPokemon],
   )
 
   const evolutionViolationCount = useMemo(
@@ -92,15 +128,18 @@ export function useRegionRosterWorkspace() {
         (group) =>
           new Set(
             group.flatMap((slug) => {
-              const pokemon = allRosterPokemonBySlug.get(slug)
+              const pokemon = snapshotPokemonBySlug.get(slug)
 
               return pokemon
-                ? [rosterRegionOverrides[slug] ?? pokemon.regionId]
+                ? [
+                    rosterRegionOverrides[getOverrideKey(slug)] ??
+                      pokemon.regionId,
+                  ]
                 : []
             }),
           ).size > 1,
       ).length,
-    [rosterRegionOverrides],
+    [getOverrideKey, rosterRegionOverrides, snapshotPokemonBySlug],
   )
 
   const selectedRegion =
@@ -128,12 +167,12 @@ export function useRegionRosterWorkspace() {
 
   const movePokemon = (pokemonSlug: string, regionId: string) => {
     getEvolutionConstraintGroup(pokemonSlug).forEach((slug) => {
-      const member = allRosterPokemonBySlug.get(slug)
+      const member = snapshotPokemonBySlug.get(slug)
 
       if (!member) return
 
       setPokemonRosterRegion(
-        slug,
+        getOverrideKey(slug),
         regionId === member.regionId ? null : regionId,
       )
       updatePokemonStats(slug, {
@@ -141,6 +180,16 @@ export function useRegionRosterWorkspace() {
         belongsInCurrentRegion: null,
       })
     })
+  }
+
+  const snapshotOverrideKeys = Object.keys(rosterRegionOverrides).filter(
+    (key) =>
+      selectedSnapshot.kind === 'current'
+        ? snapshotPokemonBySlug.has(key)
+        : key.startsWith(`${selectedSnapshot.snapshotId}:`),
+  )
+  const resetSelectedRosterModel = () => {
+    snapshotOverrideKeys.forEach((key) => setPokemonRosterRegion(key, null))
   }
 
   return {
@@ -151,12 +200,13 @@ export function useRegionRosterWorkspace() {
     filteredPokemon,
     groups,
     modeledRegions,
-    moveCount: Object.keys(rosterRegionOverrides).length,
+    moveCount: snapshotOverrideKeys.length,
     movePokemon,
     query,
     regionStyle,
-    resetRosterModel,
+    resetRosterModel: resetSelectedRosterModel,
     selectedRegion,
+    selectedSnapshot,
     setExpandedKey,
     setQuery,
     updatePokemonStats,

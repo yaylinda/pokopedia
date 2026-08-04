@@ -29,7 +29,6 @@ import Typography from '@mui/material/Typography'
 import type { ReactNode } from 'react'
 import {
   comfortLevels,
-  currentRegionRoster,
   type CurrentRegion,
   type RegionRosterPokemon,
 } from '../../data/currentRegionRoster'
@@ -70,6 +69,7 @@ export function RegionRosterWorkspace() {
     regionStyle,
     resetRosterModel,
     selectedRegion,
+    selectedSnapshot,
     setExpandedKey,
     setQuery,
     updatePokemonStats,
@@ -103,10 +103,20 @@ export function RegionRosterWorkspace() {
           }}
         >
           <RegionSelector
+            baselineRegions={selectedSnapshot.regions}
+            comfortIsAssessed={selectedSnapshot.kind === 'current'}
             onChoose={chooseRegion}
             regions={modeledRegions}
             selectedRegionId={selectedRegion.regionId}
           />
+          {selectedSnapshot.kind === 'ideation' && (
+            <SnapshotReviewStatus
+              ambiguousCount={selectedSnapshot.ambiguousPokemonCount}
+              assignedCount={selectedSnapshot.assignedPokemonCount}
+              sourceFile={selectedSnapshot.sourceFile}
+              unassignedCount={selectedSnapshot.unassignedPokemonCount}
+            />
+          )}
           <RosterModelStatus
             evolutionViolationCount={evolutionViolationCount}
             moveCount={moveCount}
@@ -116,6 +126,7 @@ export function RegionRosterWorkspace() {
 
         <Box sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
           <RegionSummary
+            comfortIsAssessed={selectedSnapshot.kind === 'current'}
             lindaStatsBySlug={effectiveStatsBySlug}
             pokemon={selectedRegion.pokemon}
             regionName={selectedRegion.name}
@@ -161,6 +172,7 @@ export function RegionRosterWorkspace() {
             {groups.map((group) => (
               <PokemonGroupSection
                 activeRegionId={selectedRegion.regionId}
+                comfortIsAssessed={selectedSnapshot.kind === 'current'}
                 expandedKey={expandedKey}
                 group={group}
                 key={group.id}
@@ -186,10 +198,14 @@ export function RegionRosterWorkspace() {
 }
 
 function RegionSelector({
+  baselineRegions,
+  comfortIsAssessed,
   onChoose,
   regions,
   selectedRegionId,
 }: {
+  baselineRegions: CurrentRegion[]
+  comfortIsAssessed: boolean
   onChoose: (regionId: string) => void
   regions: CurrentRegion[]
   selectedRegionId: string
@@ -225,7 +241,7 @@ function RegionSelector({
           const style = regionStyles[region.regionId]
           const selected = selectedRegionId === region.regionId
           const originalCount =
-            currentRegionRoster.regions.find(
+            baselineRegions.find(
               (currentRegion) => currentRegion.regionId === region.regionId,
             )?.pokemon.length ?? region.pokemon.length
           const countDelta = region.pokemon.length - originalCount
@@ -266,7 +282,11 @@ function RegionSelector({
                   {region.pokemon.length}
                 </Typography>
               </Box>
-              <ComfortBar pokemon={region.pokemon} regionId={region.regionId} />
+              <ComfortBar
+                comfortIsAssessed={comfortIsAssessed}
+                pokemon={region.pokemon}
+                regionId={region.regionId}
+              />
               {countDelta !== 0 && (
                 <Typography
                   component="span"
@@ -281,6 +301,48 @@ function RegionSelector({
           )
         })}
       </Box>
+    </Box>
+  )
+}
+
+function SnapshotReviewStatus({
+  ambiguousCount,
+  assignedCount,
+  sourceFile,
+  unassignedCount,
+}: {
+  ambiguousCount: number
+  assignedCount: number
+  sourceFile: string
+  unassignedCount: number
+}) {
+  return (
+    <Box
+      component="section"
+      sx={{
+        backgroundColor: 'oklch(0.97 0.025 88)',
+        border: '1px solid oklch(0.82 0.08 84)',
+        borderRadius: 1.5,
+        display: 'grid',
+        gap: 0.75,
+        p: 1,
+      }}
+    >
+      <Typography color="text.secondary" component="h2" variant="overline">
+        Snapshot coverage
+      </Typography>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+        <Chip label={`${assignedCount} assigned`} size="small" />
+        <Chip color="warning" label={`${ambiguousCount} ambiguous`} size="small" />
+        <Chip label={`${unassignedCount} unassigned`} size="small" variant="outlined" />
+      </Box>
+      <Typography
+        color="text.secondary"
+        sx={{ overflowWrap: 'anywhere' }}
+        variant="caption"
+      >
+        {sourceFile}
+      </Typography>
     </Box>
   )
 }
@@ -341,12 +403,14 @@ function RosterModelStatus({
 }
 
 function RegionSummary({
+  comfortIsAssessed,
   lindaStatsBySlug,
   pokemon,
   regionName,
   selectedRegionId,
   style,
 }: {
+  comfortIsAssessed: boolean
   lindaStatsBySlug: Record<string, LindaPokemonStats>
   pokemon: RegionRosterPokemon[]
   regionName: string
@@ -402,7 +466,12 @@ function RegionSummary({
       </Box>
 
       <Box sx={{ display: 'grid', gap: 1 }}>
-        <ComfortBar large pokemon={pokemon} regionId={selectedRegionId} />
+        <ComfortBar
+          comfortIsAssessed={comfortIsAssessed}
+          large
+          pokemon={pokemon}
+          regionId={selectedRegionId}
+        />
         <Box
           sx={{
             display: 'grid',
@@ -429,7 +498,9 @@ function RegionSummary({
                 {counts[level]}
               </Typography>
               <Typography color="text.secondary" noWrap variant="caption">
-                {comfortStyles[level].label}
+                {!comfortIsAssessed && level === 'no-home'
+                  ? 'Not assessed'
+                  : comfortStyles[level].label}
               </Typography>
             </Box>
           ))}
@@ -669,10 +740,12 @@ function RegionLindaMetric({
 }
 
 function ComfortBar({
+  comfortIsAssessed = true,
   large = false,
   pokemon,
   regionId,
 }: {
+  comfortIsAssessed?: boolean
   large?: boolean
   pokemon: RegionRosterPokemon[]
   regionId: string
@@ -680,7 +753,10 @@ function ComfortBar({
   const counts = getComfortCounts(pokemon, regionId)
   const movedHereCount = pokemon.filter((entry) => entry.regionId !== regionId).length
   const label = comfortLevels
-    .map((level) => `${comfortStyles[level].label}: ${counts[level]}`)
+    .map(
+      (level) =>
+        `${!comfortIsAssessed && level === 'no-home' ? 'Not assessed' : comfortStyles[level].label}: ${counts[level]}`,
+    )
     .concat(movedHereCount > 0 ? [`Comfort to recheck: ${movedHereCount}`] : [])
     .join(', ')
 
@@ -699,7 +775,10 @@ function ComfortBar({
     >
       {comfortLevels.map((level) =>
         counts[level] > 0 ? (
-          <Tooltip key={level} title={`${comfortStyles[level].label}: ${counts[level]}`}>
+          <Tooltip
+            key={level}
+            title={`${!comfortIsAssessed && level === 'no-home' ? 'Not assessed' : comfortStyles[level].label}: ${counts[level]}`}
+          >
             <Box
               sx={{
                 backgroundColor: comfortStyles[level].accent,
@@ -773,6 +852,7 @@ function RosterSearch({
 
 function PokemonGroupSection({
   activeRegionId,
+  comfortIsAssessed,
   expandedKey,
   group,
   modeledRegions,
@@ -782,6 +862,7 @@ function PokemonGroupSection({
   pokemonStatsBySlug,
 }: {
   activeRegionId: string
+  comfortIsAssessed: boolean
   expandedKey: string | null
   group: PokemonGroup
   modeledRegions: CurrentRegion[]
@@ -855,6 +936,7 @@ function PokemonGroupSection({
             return (
               <PokemonTile
                 activeRegionId={activeRegionId}
+                comfortIsAssessed={comfortIsAssessed}
                 expanded={expandedKey === cardKey}
                 key={pokemon.key}
                 lindaStats={pokemonStatsBySlug[pokemon.slug] ?? pokemon.lindaStats}
@@ -883,6 +965,7 @@ function PokemonGroupSection({
 
 function PokemonTile({
   activeRegionId,
+  comfortIsAssessed,
   expanded,
   lindaStats,
   modeledRegions,
@@ -892,6 +975,7 @@ function PokemonTile({
   pokemon,
 }: {
   activeRegionId: string
+  comfortIsAssessed: boolean
   expanded: boolean
   lindaStats: LindaPokemonStats
   modeledRegions: CurrentRegion[]
@@ -992,7 +1076,11 @@ function PokemonTile({
               sx={{ color: comfortStyle.deep, fontWeight: 750 }}
               variant="caption"
             >
-              {movedHere ? 'Comfort needs recheck' : `${comfortStyle.label} comfort`}
+              {movedHere
+                ? 'Comfort needs recheck'
+                : comfortIsAssessed
+                  ? `${comfortStyle.label} comfort`
+                  : 'Comfort not assessed'}
             </Typography>
             <Typography color="text.disabled" component="span" variant="caption">
               ·
@@ -1033,7 +1121,11 @@ function PokemonTile({
           <DetailRow
             icon={<GridViewRoundedIcon />}
             label="Current comfort"
-            values={movedHere ? ['Needs rechecking in-game'] : [comfortStyle.label]}
+            values={
+              movedHere
+                ? ['Needs rechecking in-game']
+                : [comfortIsAssessed ? comfortStyle.label : 'Not assessed in this ideation']
+            }
           />
           <DetailRow
             icon={<LandscapeRoundedIcon />}
@@ -1320,7 +1412,14 @@ function RosterMoveControl({
   originalRegionName: string
   pokemonName: string
 }) {
+  const modeledPokemonSlugs = new Set(
+    modeledRegions.flatMap((region) =>
+      region.pokemon.map((pokemon) => pokemon.slug),
+    ),
+  )
   const evolutionMembers = evolutionGroup.flatMap((slug) => {
+    if (!modeledPokemonSlugs.has(slug)) return []
+
     const member = allRosterPokemonBySlug.get(slug)
     return member ? [member.name] : []
   })

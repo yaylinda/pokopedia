@@ -110,8 +110,12 @@ export const legendaryOrMythicalPokemonSlugs = new Set([
   'raikou',
   'entei',
   'suicune',
+  'lugia',
+  'ho-oh',
+  'kyogre',
   'mew',
   'jirachi',
+  'volcanion',
 ])
 const pokemonCatalog = pokemonJson as {
   pokemon: PokemonCatalogEntry[]
@@ -248,6 +252,67 @@ const titleFromSlug = (slug: string) =>
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, (character) => character.toLocaleUpperCase())
 
+export const createRegionRosterPokemon = ({
+  comfortLevel = 'no-home',
+  regionId,
+  regionName,
+  slug,
+}: {
+  comfortLevel?: ComfortLevel
+  regionId: string
+  regionName: string
+  slug: string
+}): RegionRosterPokemon => {
+  const profile = pokemonBySlug.get(slug)
+  const supplementalProfile = supplementalProfiles[slug]
+  const specialties =
+    profile?.specialties.map(
+      (specialty) => specialtyBySlug.get(specialty.slug) ?? specialty,
+    ) ??
+    supplementalProfile?.specialtySlugs.flatMap((specialtySlug) =>
+      specialtyBySlug.get(specialtySlug)
+        ? [specialtyBySlug.get(specialtySlug)!]
+        : [],
+    ) ??
+    []
+  const isLegendaryOrMythical = legendaryOrMythicalPokemonSlugs.has(slug)
+
+  return {
+    key: `${regionId}:${slug}`,
+    regionId,
+    regionName,
+    comfortLevel,
+    isLegendaryOrMythical,
+    slug,
+    name: profile?.name ?? supplementalProfile?.name ?? titleFromSlug(slug),
+    pokopiaNumberDisplay:
+      profile?.pokopiaNumberDisplay ??
+      supplementalProfile?.pokopiaNumberDisplay ??
+      null,
+    imageUrl: profile?.imageUrl ?? supplementalProfile?.imageUrl ?? null,
+    detailUrl: profile?.detailUrl ?? supplementalProfile?.detailUrl ?? null,
+    idealHabitat:
+      profile?.idealHabitat ?? supplementalProfile?.idealHabitat ?? null,
+    favorites: profile?.favorites ?? supplementalProfile?.favorites ?? [],
+    specialties,
+    lindaStats: makeDefaultLindaStats(specialties, isLegendaryOrMythical),
+  }
+}
+
+export const allAvailableRosterPokemon = [
+  ...pokemonCatalog.pokemon.map((pokemon) => pokemon.slug),
+  ...Object.keys(supplementalProfiles),
+]
+  .filter((slug) => slug !== 'ditto')
+  .filter((slug, index, slugs) => slugs.indexOf(slug) === index)
+  .map((slug) =>
+    createRegionRosterPokemon({
+      regionId: 'unassigned',
+      regionName: 'Unassigned',
+      slug,
+    }),
+  )
+
 export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).map(
   ([regionId, region]) => ({
     regionId,
@@ -257,45 +322,14 @@ export const currentRegions: CurrentRegion[] = Object.entries(roster.regions).ma
       region.comfortLevels[comfortLevel]
         // Ditto represents the player in the captured screenshots, not a resident.
         .filter((slug) => slug !== 'ditto')
-        .map((slug) => {
-          const profile = pokemonBySlug.get(slug)
-          const supplementalProfile = supplementalProfiles[slug]
-          const specialties =
-            profile?.specialties.map(
-              (specialty) => specialtyBySlug.get(specialty.slug) ?? specialty,
-            ) ??
-            supplementalProfile?.specialtySlugs.flatMap((specialtySlug) =>
-              specialtyBySlug.get(specialtySlug)
-                ? [specialtyBySlug.get(specialtySlug)!]
-                : [],
-            ) ??
-            []
-
-          return {
-            key: `${regionId}:${slug}`,
+        .map((slug) =>
+          createRegionRosterPokemon({
+            comfortLevel,
             regionId,
             regionName: region.name,
-            comfortLevel,
-            isLegendaryOrMythical:
-              legendaryOrMythicalPokemonSlugs.has(slug),
             slug,
-            name: profile?.name ?? supplementalProfile?.name ?? titleFromSlug(slug),
-            pokopiaNumberDisplay:
-              profile?.pokopiaNumberDisplay ??
-              supplementalProfile?.pokopiaNumberDisplay ??
-              null,
-            imageUrl: profile?.imageUrl ?? supplementalProfile?.imageUrl ?? null,
-            detailUrl: profile?.detailUrl ?? supplementalProfile?.detailUrl ?? null,
-            idealHabitat:
-              profile?.idealHabitat ?? supplementalProfile?.idealHabitat ?? null,
-            favorites: profile?.favorites ?? supplementalProfile?.favorites ?? [],
-            specialties,
-            lindaStats: makeDefaultLindaStats(
-              specialties,
-              legendaryOrMythicalPokemonSlugs.has(slug),
-            ),
-          }
-        }),
+          }),
+        ),
     ),
   }),
 )

@@ -1,0 +1,4724 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "type-rules-2026-08-01T11-33-32Z",
+  "capturedAt": "2026-08-01T11:33:32.259Z",
+  "title": "Type-based roster ideation",
+  "sourceNote": "Complete immutable roster snapshot generated from Linda’s stated placement rules. No prior roster placements were carried forward.",
+  "sourceData": {
+    "pokemonCatalog": "data/pokemon.json",
+    "supplementalResidentsFrom": "data/current-region-roster.json",
+    "typeData": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_types.csv",
+    "typeNames": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/types.csv",
+    "legendaryAndMythicalData": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species.csv",
+    "fossilClassification": "Canonical revived Fossil Pokémon and their evolutions.",
+    "excludedFromResidentUniverse": [
+      {
+        "slug": "ditto",
+        "reason": "Ditto represents the player avatar in the captured roster rather than a resident Pokémon."
+      }
+    ]
+  },
+  "assignmentPolicy": {
+    "precedence": [
+      "Legendary and Eeveelution overrides",
+      "Single-destination type or fossil rules",
+      "Ambiguous review",
+      "Unassigned review"
+    ],
+    "dualTypePolicy": "Assign when all matching rules agree on one region; otherwise place the Pokémon in ambiguousPokemon.",
+    "mythicalPolicy": "Do not silently treat Mythical as Legendary; place Mythical Pokémon in ambiguousPokemon for confirmation."
+  },
+  "rules": [
+    {
+      "id": "legendary-override-to-palette-town",
+      "priority": 100,
+      "kind": "override",
+      "description": "All Legendary Pokémon go to Palette Town.",
+      "regionId": "palette-town"
+    },
+    {
+      "id": "eeveelution-override-to-palette-town",
+      "priority": 100,
+      "kind": "override",
+      "description": "All eight evolved forms of Eevee go to Palette Town.",
+      "regionId": "palette-town"
+    },
+    {
+      "id": "grass-to-withered-wastelands",
+      "priority": 10,
+      "kind": "type",
+      "description": "All Grass-type Pokémon go to Withered Wastelands.",
+      "regionId": "withered-wastelands"
+    },
+    {
+      "id": "water-to-bleak-beach",
+      "priority": 10,
+      "kind": "type",
+      "description": "All Water-type Pokémon go to Bleak Beach.",
+      "regionId": "bleak-beach"
+    },
+    {
+      "id": "fire-to-rocky-ridges",
+      "priority": 10,
+      "kind": "type",
+      "description": "All Fire-type Pokémon go to Rocky Ridges.",
+      "regionId": "rocky-ridges"
+    },
+    {
+      "id": "rock-to-rocky-ridges",
+      "priority": 10,
+      "kind": "type",
+      "description": "All Rock-type Pokémon go to Rocky Ridges.",
+      "regionId": "rocky-ridges"
+    },
+    {
+      "id": "fossil-to-rocky-ridges",
+      "priority": 10,
+      "kind": "group",
+      "description": "All Fossil Pokémon go to Rocky Ridges.",
+      "regionId": "rocky-ridges"
+    }
+  ],
+  "summary": {
+    "eligiblePokemonCount": 309,
+    "assignedPokemonCount": 130,
+    "ambiguousPokemonCount": 7,
+    "unassignedPokemonCount": 172,
+    "regionCounts": {
+      "withered-wastelands": 28,
+      "bleak-beach": 33,
+      "rocky-ridges": 51,
+      "sparkling-skylands": 0,
+      "palette-town": 18
+    }
+  },
+  "regions": {
+    "withered-wastelands": {
+      "name": "Withered Wastelands",
+      "pokemonCount": 28,
+      "pokemon": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 1,
+          "name": "Bulbasaur",
+          "slug": "bulbasaur",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 2,
+          "name": "Ivysaur",
+          "slug": "ivysaur",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 3,
+          "name": "Venusaur",
+          "slug": "venusaur",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 13,
+          "pokemonId": 43,
+          "name": "Oddish",
+          "slug": "oddish",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 14,
+          "pokemonId": 44,
+          "name": "Gloom",
+          "slug": "gloom",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 15,
+          "pokemonId": 45,
+          "name": "Vileplume",
+          "slug": "vileplume",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 16,
+          "pokemonId": 182,
+          "name": "Bellossom",
+          "slug": "bellossom",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 17,
+          "pokemonId": 46,
+          "name": "Paras",
+          "slug": "paras",
+          "types": [
+            "bug",
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 18,
+          "pokemonId": 47,
+          "name": "Parasect",
+          "slug": "parasect",
+          "types": [
+            "bug",
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 21,
+          "pokemonId": 69,
+          "name": "Bellsprout",
+          "slug": "bellsprout",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 22,
+          "pokemonId": 70,
+          "name": "Weepinbell",
+          "slug": "weepinbell",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 23,
+          "pokemonId": 71,
+          "name": "Victreebel",
+          "slug": "victreebel",
+          "types": [
+            "grass",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 40,
+          "pokemonId": 114,
+          "name": "Tangela",
+          "slug": "tangela",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 41,
+          "pokemonId": 465,
+          "name": "Professor Tangrowth",
+          "slug": "professortangrowth",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 42,
+          "pokemonId": 465,
+          "name": "Tangrowth",
+          "slug": "tangrowth",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 56,
+          "pokemonId": 331,
+          "name": "Cacnea",
+          "slug": "cacnea",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 57,
+          "pokemonId": 332,
+          "name": "Cacturne",
+          "slug": "cacturne",
+          "types": [
+            "grass",
+            "dark"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 102,
+          "pokemonId": 102,
+          "name": "Exeggcute",
+          "slug": "exeggcute",
+          "types": [
+            "grass",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 103,
+          "pokemonId": 103,
+          "name": "Exeggutor",
+          "slug": "exeggutor",
+          "types": [
+            "grass",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 192,
+          "pokemonId": 722,
+          "name": "Rowlet",
+          "slug": "rowlet",
+          "types": [
+            "grass",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 193,
+          "pokemonId": 723,
+          "name": "Dartrix",
+          "slug": "dartrix",
+          "types": [
+            "grass",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 194,
+          "pokemonId": 724,
+          "name": "Decidueye",
+          "slug": "decidueye",
+          "types": [
+            "grass",
+            "ghost"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 256,
+          "pokemonId": 495,
+          "name": "Snivy",
+          "slug": "snivy",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 257,
+          "pokemonId": 496,
+          "name": "Servine",
+          "slug": "servine",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 258,
+          "pokemonId": 497,
+          "name": "Serperior",
+          "slug": "serperior",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 271,
+          "pokemonId": 906,
+          "name": "Sprigatito",
+          "slug": "sprigatito",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 272,
+          "pokemonId": 907,
+          "name": "Floragato",
+          "slug": "floragato",
+          "types": [
+            "grass"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        },
+        {
+          "sourceOrder": 273,
+          "pokemonId": 908,
+          "name": "Meowscarada",
+          "slug": "meowscarada",
+          "types": [
+            "grass",
+            "dark"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "grass-to-withered-wastelands"
+        }
+      ]
+    },
+    "bleak-beach": {
+      "name": "Bleak Beach",
+      "pokemonCount": 33,
+      "pokemon": [
+        {
+          "sourceOrder": 7,
+          "pokemonId": 7,
+          "name": "Squirtle",
+          "slug": "squirtle",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 8,
+          "pokemonId": 8,
+          "name": "Wartortle",
+          "slug": "wartortle",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 9,
+          "pokemonId": 9,
+          "name": "Blastoise",
+          "slug": "blastoise",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 24,
+          "pokemonId": 79,
+          "name": "Slowpoke",
+          "slug": "slowpoke",
+          "types": [
+            "water",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 25,
+          "pokemonId": 80,
+          "name": "Slowbro",
+          "slug": "slowbro",
+          "types": [
+            "water",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 26,
+          "pokemonId": 199,
+          "name": "Slowking",
+          "slug": "slowking",
+          "types": [
+            "water",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 46,
+          "pokemonId": 129,
+          "name": "Magikarp",
+          "slug": "magikarp",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 47,
+          "pokemonId": 130,
+          "name": "Gyarados",
+          "slug": "gyarados",
+          "types": [
+            "water",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 60,
+          "pokemonId": 422,
+          "name": "Shellos",
+          "slug": "shellos",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 61,
+          "pokemonId": 422,
+          "name": "Shellos East Sea",
+          "slug": "shelloseastsea",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 62,
+          "pokemonId": 423,
+          "name": "Gastrodon",
+          "slug": "gastrodon",
+          "types": [
+            "water",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 63,
+          "pokemonId": 423,
+          "name": "Gastrodon East Sea",
+          "slug": "gastrodoneastsea",
+          "types": [
+            "water",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 80,
+          "pokemonId": 845,
+          "name": "Cramorant",
+          "slug": "cramorant",
+          "types": [
+            "flying",
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 90,
+          "pokemonId": 54,
+          "name": "Psyduck",
+          "slug": "psyduck",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 91,
+          "pokemonId": 55,
+          "name": "Golduck",
+          "slug": "golduck",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 110,
+          "pokemonId": 131,
+          "name": "Lapras",
+          "slug": "lapras",
+          "types": [
+            "water",
+            "ice"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 120,
+          "pokemonId": 183,
+          "name": "Marill",
+          "slug": "marill",
+          "types": [
+            "water",
+            "fairy"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 121,
+          "pokemonId": 184,
+          "name": "Azumarill",
+          "slug": "azumarill",
+          "types": [
+            "water",
+            "fairy"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 128,
+          "pokemonId": 278,
+          "name": "Wingull",
+          "slug": "wingull",
+          "types": [
+            "water",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 129,
+          "pokemonId": 279,
+          "name": "Pelipper",
+          "slug": "pelipper",
+          "types": [
+            "water",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 133,
+          "pokemonId": 393,
+          "name": "Piplup",
+          "slug": "piplup",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 134,
+          "pokemonId": 394,
+          "name": "Prinplup",
+          "slug": "prinplup",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 135,
+          "pokemonId": 395,
+          "name": "Empoleon",
+          "slug": "empoleon",
+          "types": [
+            "water",
+            "steel"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 150,
+          "pokemonId": 978,
+          "name": "Tatsugiri Curly Form",
+          "slug": "tatsugiricurlyform",
+          "types": [
+            "dragon",
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 151,
+          "pokemonId": 978,
+          "name": "Tatsugiri Droopy Form",
+          "slug": "tatsugiridroopyform",
+          "types": [
+            "dragon",
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 152,
+          "pokemonId": 978,
+          "name": "Tatsugiri Stretchy Form",
+          "slug": "tatsugiristretchyform",
+          "types": [
+            "dragon",
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 217,
+          "pokemonId": 60,
+          "name": "Poliwag",
+          "slug": "poliwag",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 218,
+          "pokemonId": 61,
+          "name": "Poliwhirl",
+          "slug": "poliwhirl",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 219,
+          "pokemonId": 62,
+          "name": "Poliwrath",
+          "slug": "poliwrath",
+          "types": [
+            "water",
+            "fighting"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 220,
+          "pokemonId": 186,
+          "name": "Politoed",
+          "slug": "politoed",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 259,
+          "pokemonId": 656,
+          "name": "Froakie",
+          "slug": "froakie",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 260,
+          "pokemonId": 657,
+          "name": "Frogadier",
+          "slug": "frogadier",
+          "types": [
+            "water"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        },
+        {
+          "sourceOrder": 261,
+          "pokemonId": 658,
+          "name": "Greninja",
+          "slug": "greninja",
+          "types": [
+            "water",
+            "dark"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "water-to-bleak-beach"
+        }
+      ]
+    },
+    "rocky-ridges": {
+      "name": "Rocky Ridges",
+      "pokemonCount": 51,
+      "pokemon": [
+        {
+          "sourceOrder": 4,
+          "pokemonId": 4,
+          "name": "Charmander",
+          "slug": "charmander",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 5,
+          "pokemonId": 5,
+          "name": "Charmeleon",
+          "slug": "charmeleon",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 6,
+          "pokemonId": 6,
+          "name": "Charizard",
+          "slug": "charizard",
+          "types": [
+            "fire",
+            "flying"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 30,
+          "pokemonId": 95,
+          "name": "Onix",
+          "slug": "onix",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 71,
+          "pokemonId": 607,
+          "name": "Litwick",
+          "slug": "litwick",
+          "types": [
+            "ghost",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 72,
+          "pokemonId": 608,
+          "name": "Lampent",
+          "slug": "lampent",
+          "types": [
+            "ghost",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 73,
+          "pokemonId": 609,
+          "name": "Chandelure",
+          "slug": "chandelure",
+          "types": [
+            "ghost",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 92,
+          "pokemonId": 58,
+          "name": "Growlithe",
+          "slug": "growlithe",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 93,
+          "pokemonId": 59,
+          "name": "Arcanine",
+          "slug": "arcanine",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 125,
+          "pokemonId": 255,
+          "name": "Torchic",
+          "slug": "torchic",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 126,
+          "pokemonId": 256,
+          "name": "Combusken",
+          "slug": "combusken",
+          "types": [
+            "fire",
+            "fighting"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 127,
+          "pokemonId": 257,
+          "name": "Blaziken",
+          "slug": "blaziken",
+          "types": [
+            "fire",
+            "fighting"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 166,
+          "pokemonId": 74,
+          "name": "Geodude",
+          "slug": "geodude",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 167,
+          "pokemonId": 75,
+          "name": "Graveler",
+          "slug": "graveler",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 168,
+          "pokemonId": 76,
+          "name": "Golem",
+          "slug": "golem",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 169,
+          "pokemonId": 240,
+          "name": "Magby",
+          "slug": "magby",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 170,
+          "pokemonId": 126,
+          "name": "Magmar",
+          "slug": "magmar",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 171,
+          "pokemonId": 467,
+          "name": "Magmortar",
+          "slug": "magmortar",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 172,
+          "pokemonId": 438,
+          "name": "Bonsly",
+          "slug": "bonsly",
+          "types": [
+            "rock"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 173,
+          "pokemonId": 185,
+          "name": "Sudowoodo",
+          "slug": "sudowoodo",
+          "types": [
+            "rock"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 176,
+          "pokemonId": 246,
+          "name": "Larvitar",
+          "slug": "larvitar",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 177,
+          "pokemonId": 247,
+          "name": "Pupitar",
+          "slug": "pupitar",
+          "types": [
+            "rock",
+            "ground"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 178,
+          "pokemonId": 248,
+          "name": "Tyranitar",
+          "slug": "tyranitar",
+          "types": [
+            "rock",
+            "dark"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 183,
+          "pokemonId": 324,
+          "name": "Torkoal",
+          "slug": "torkoal",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 190,
+          "pokemonId": 636,
+          "name": "Larvesta",
+          "slug": "larvesta",
+          "types": [
+            "bug",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 191,
+          "pokemonId": 637,
+          "name": "Volcarona",
+          "slug": "volcarona",
+          "types": [
+            "bug",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 195,
+          "pokemonId": 813,
+          "name": "Scorbunny",
+          "slug": "scorbunny",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 196,
+          "pokemonId": 814,
+          "name": "Raboot",
+          "slug": "raboot",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 197,
+          "pokemonId": 815,
+          "name": "Cinderace",
+          "slug": "cinderace",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 200,
+          "pokemonId": 837,
+          "name": "Rolycoly",
+          "slug": "rolycoly",
+          "types": [
+            "rock"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 201,
+          "pokemonId": 838,
+          "name": "Carkol",
+          "slug": "carkol",
+          "types": [
+            "rock",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges",
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 202,
+          "pokemonId": 839,
+          "name": "Coalossal",
+          "slug": "coalossal",
+          "types": [
+            "rock",
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges",
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 208,
+          "pokemonId": 935,
+          "name": "Charcadet",
+          "slug": "charcadet",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 209,
+          "pokemonId": 936,
+          "name": "Armarouge",
+          "slug": "armarouge",
+          "types": [
+            "fire",
+            "psychic"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 210,
+          "pokemonId": 937,
+          "name": "Ceruledge",
+          "slug": "ceruledge",
+          "types": [
+            "fire",
+            "ghost"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 211,
+          "pokemonId": 969,
+          "name": "Glimmet",
+          "slug": "glimmet",
+          "types": [
+            "rock",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 212,
+          "pokemonId": 970,
+          "name": "Glimmora",
+          "slug": "glimmora",
+          "types": [
+            "rock",
+            "poison"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 215,
+          "pokemonId": 37,
+          "name": "Vulpix",
+          "slug": "vulpix",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 216,
+          "pokemonId": 38,
+          "name": "Ninetales",
+          "slug": "ninetales",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 232,
+          "pokemonId": 155,
+          "name": "Cyndaquil",
+          "slug": "cyndaquil",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 233,
+          "pokemonId": 156,
+          "name": "Quilava",
+          "slug": "quilava",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 234,
+          "pokemonId": 157,
+          "name": "Typhlosion",
+          "slug": "typhlosion",
+          "types": [
+            "fire"
+          ],
+          "classifications": [],
+          "matchedRuleIds": [
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "fire-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 279,
+          "pokemonId": 142,
+          "name": "Aerodactyl",
+          "slug": "aerodactyl",
+          "types": [
+            "rock",
+            "flying"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 280,
+          "pokemonId": 408,
+          "name": "Cranidos",
+          "slug": "cranidos",
+          "types": [
+            "rock"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 281,
+          "pokemonId": 409,
+          "name": "Rampardos",
+          "slug": "rampardos",
+          "types": [
+            "rock"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 282,
+          "pokemonId": 410,
+          "name": "Shieldon",
+          "slug": "shieldon",
+          "types": [
+            "rock",
+            "steel"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 283,
+          "pokemonId": 411,
+          "name": "Bastiodon",
+          "slug": "bastiodon",
+          "types": [
+            "rock",
+            "steel"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 284,
+          "pokemonId": 696,
+          "name": "Tyrunt",
+          "slug": "tyrunt",
+          "types": [
+            "rock",
+            "dragon"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 285,
+          "pokemonId": 697,
+          "name": "Tyrantrum",
+          "slug": "tyrantrum",
+          "types": [
+            "rock",
+            "dragon"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 286,
+          "pokemonId": 698,
+          "name": "Amaura",
+          "slug": "amaura",
+          "types": [
+            "rock",
+            "ice"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        },
+        {
+          "sourceOrder": 287,
+          "pokemonId": 699,
+          "name": "Aurorus",
+          "slug": "aurorus",
+          "types": [
+            "rock",
+            "ice"
+          ],
+          "classifications": [
+            "fossil"
+          ],
+          "matchedRuleIds": [
+            "rock-to-rocky-ridges",
+            "fossil-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "rock-to-rocky-ridges"
+        }
+      ]
+    },
+    "sparkling-skylands": {
+      "name": "Sparkling Skylands",
+      "pokemonCount": 0,
+      "pokemon": []
+    },
+    "palette-town": {
+      "name": "Palette Town",
+      "pokemonCount": 18,
+      "pokemon": [
+        {
+          "sourceOrder": 289,
+          "pokemonId": 134,
+          "name": "Vaporeon",
+          "slug": "vaporeon",
+          "types": [
+            "water"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town",
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 290,
+          "pokemonId": 135,
+          "name": "Jolteon",
+          "slug": "jolteon",
+          "types": [
+            "electric"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 291,
+          "pokemonId": 136,
+          "name": "Flareon",
+          "slug": "flareon",
+          "types": [
+            "fire"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town",
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 292,
+          "pokemonId": 196,
+          "name": "Espeon",
+          "slug": "espeon",
+          "types": [
+            "psychic"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 293,
+          "pokemonId": 197,
+          "name": "Umbreon",
+          "slug": "umbreon",
+          "types": [
+            "dark"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 294,
+          "pokemonId": 470,
+          "name": "Leafeon",
+          "slug": "leafeon",
+          "types": [
+            "grass"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town",
+            "grass-to-withered-wastelands"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 295,
+          "pokemonId": 471,
+          "name": "Glaceon",
+          "slug": "glaceon",
+          "types": [
+            "ice"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 296,
+          "pokemonId": 700,
+          "name": "Sylveon",
+          "slug": "sylveon",
+          "types": [
+            "fairy"
+          ],
+          "classifications": [
+            "eeveelution"
+          ],
+          "matchedRuleIds": [
+            "eeveelution-override-to-palette-town"
+          ],
+          "assignedByRuleId": "eeveelution-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 297,
+          "pokemonId": 382,
+          "name": "Kyogre",
+          "slug": "kyogre",
+          "types": [
+            "water"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town",
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 298,
+          "pokemonId": 243,
+          "name": "Raikou",
+          "slug": "raikou",
+          "types": [
+            "electric"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 299,
+          "pokemonId": 244,
+          "name": "Entei",
+          "slug": "entei",
+          "types": [
+            "fire"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town",
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 300,
+          "pokemonId": 245,
+          "name": "Suicune",
+          "slug": "suicune",
+          "types": [
+            "water"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town",
+            "water-to-bleak-beach"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 302,
+          "pokemonId": 144,
+          "name": "Articuno",
+          "slug": "articuno",
+          "types": [
+            "ice",
+            "flying"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 303,
+          "pokemonId": 145,
+          "name": "Zapdos",
+          "slug": "zapdos",
+          "types": [
+            "electric",
+            "flying"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 304,
+          "pokemonId": 146,
+          "name": "Moltres",
+          "slug": "moltres",
+          "types": [
+            "fire",
+            "flying"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town",
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 305,
+          "pokemonId": 249,
+          "name": "Lugia",
+          "slug": "lugia",
+          "types": [
+            "psychic",
+            "flying"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 306,
+          "pokemonId": 250,
+          "name": "Ho-Oh",
+          "slug": "ho-oh",
+          "types": [
+            "fire",
+            "flying"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town",
+            "fire-to-rocky-ridges"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        },
+        {
+          "sourceOrder": 307,
+          "pokemonId": 150,
+          "name": "Mewtwo",
+          "slug": "mewtwo",
+          "types": [
+            "psychic"
+          ],
+          "classifications": [
+            "legendary"
+          ],
+          "matchedRuleIds": [
+            "legendary-override-to-palette-town"
+          ],
+          "assignedByRuleId": "legendary-override-to-palette-town"
+        }
+      ]
+    }
+  },
+  "unresolved": {
+    "ambiguousPokemon": [
+      {
+        "sourceOrder": 179,
+        "pokemonId": 270,
+        "name": "Lotad",
+        "slug": "lotad",
+        "types": [
+          "water",
+          "grass"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [
+          "grass-to-withered-wastelands",
+          "water-to-bleak-beach"
+        ],
+        "candidateRegionIds": [
+          "withered-wastelands",
+          "bleak-beach"
+        ],
+        "ambiguity": "Multiple non-override rules point to different regions.",
+        "decisionNeeded": "Choose one of the candidate regions or add an override rule."
+      },
+      {
+        "sourceOrder": 180,
+        "pokemonId": 271,
+        "name": "Lombre",
+        "slug": "lombre",
+        "types": [
+          "water",
+          "grass"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [
+          "grass-to-withered-wastelands",
+          "water-to-bleak-beach"
+        ],
+        "candidateRegionIds": [
+          "withered-wastelands",
+          "bleak-beach"
+        ],
+        "ambiguity": "Multiple non-override rules point to different regions.",
+        "decisionNeeded": "Choose one of the candidate regions or add an override rule."
+      },
+      {
+        "sourceOrder": 181,
+        "pokemonId": 272,
+        "name": "Ludicolo",
+        "slug": "ludicolo",
+        "types": [
+          "water",
+          "grass"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [
+          "grass-to-withered-wastelands",
+          "water-to-bleak-beach"
+        ],
+        "candidateRegionIds": [
+          "withered-wastelands",
+          "bleak-beach"
+        ],
+        "ambiguity": "Multiple non-override rules point to different regions.",
+        "decisionNeeded": "Choose one of the candidate regions or add an override rule."
+      },
+      {
+        "sourceOrder": 288,
+        "pokemonId": 133,
+        "name": "Eevee",
+        "slug": "eevee",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "candidateRegionIds": [
+          "palette-town"
+        ],
+        "ambiguity": "Eevee is the base species of the Eeveelution group, but is not itself an Eeveelution.",
+        "decisionNeeded": "Confirm whether the Eeveelution override should include Eevee."
+      },
+      {
+        "sourceOrder": 301,
+        "pokemonId": 721,
+        "name": "Volcanion",
+        "slug": "volcanion",
+        "types": [
+          "fire",
+          "water"
+        ],
+        "classifications": [
+          "mythical"
+        ],
+        "matchedRuleIds": [
+          "water-to-bleak-beach",
+          "fire-to-rocky-ridges"
+        ],
+        "candidateRegionIds": [
+          "palette-town",
+          "bleak-beach",
+          "rocky-ridges"
+        ],
+        "ambiguity": "The rule names Legendary Pokémon, while the source classifies this Pokémon as Mythical.",
+        "decisionNeeded": "Confirm whether the Legendary override should also include Mythical Pokémon."
+      },
+      {
+        "sourceOrder": 308,
+        "pokemonId": 151,
+        "name": "Mew",
+        "slug": "mew",
+        "types": [
+          "psychic"
+        ],
+        "classifications": [
+          "mythical"
+        ],
+        "matchedRuleIds": [],
+        "candidateRegionIds": [
+          "palette-town"
+        ],
+        "ambiguity": "The rule names Legendary Pokémon, while the source classifies this Pokémon as Mythical.",
+        "decisionNeeded": "Confirm whether the Legendary override should also include Mythical Pokémon."
+      },
+      {
+          "sourceOrder": 310,
+        "pokemonId": 385,
+        "name": "Jirachi",
+        "slug": "jirachi",
+        "types": [
+          "steel",
+          "psychic"
+        ],
+        "classifications": [
+          "mythical"
+        ],
+        "matchedRuleIds": [],
+        "candidateRegionIds": [
+          "palette-town"
+        ],
+        "ambiguity": "The rule names Legendary Pokémon, while the source classifies this Pokémon as Mythical.",
+        "decisionNeeded": "Confirm whether the Legendary override should also include Mythical Pokémon."
+      }
+    ],
+    "unassignedPokemon": [
+      {
+        "sourceOrder": 10,
+        "pokemonId": 16,
+        "name": "Pidgey",
+        "slug": "pidgey",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 11,
+        "pokemonId": 17,
+        "name": "Pidgeotto",
+        "slug": "pidgeotto",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 12,
+        "pokemonId": 18,
+        "name": "Pidgeot",
+        "slug": "pidgeot",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 19,
+        "pokemonId": 48,
+        "name": "Venonat",
+        "slug": "venonat",
+        "types": [
+          "bug",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 20,
+        "pokemonId": 49,
+        "name": "Venomoth",
+        "slug": "venomoth",
+        "types": [
+          "bug",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 27,
+        "pokemonId": 81,
+        "name": "Magnemite",
+        "slug": "magnemite",
+        "types": [
+          "electric",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 28,
+        "pokemonId": 82,
+        "name": "Magneton",
+        "slug": "magneton",
+        "types": [
+          "electric",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 29,
+        "pokemonId": 462,
+        "name": "Magnezone",
+        "slug": "magnezone",
+        "types": [
+          "electric",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 31,
+        "pokemonId": 208,
+        "name": "Steelix",
+        "slug": "steelix",
+        "types": [
+          "steel",
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 32,
+        "pokemonId": 104,
+        "name": "Cubone",
+        "slug": "cubone",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 33,
+        "pokemonId": 105,
+        "name": "Marowak",
+        "slug": "marowak",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 34,
+        "pokemonId": 236,
+        "name": "Tyrogue",
+        "slug": "tyrogue",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 35,
+        "pokemonId": 106,
+        "name": "Hitmonlee",
+        "slug": "hitmonlee",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 36,
+        "pokemonId": 107,
+        "name": "Hitmonchan",
+        "slug": "hitmonchan",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 37,
+        "pokemonId": 237,
+        "name": "Hitmontop",
+        "slug": "hitmontop",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 38,
+        "pokemonId": 109,
+        "name": "Koffing",
+        "slug": "koffing",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 39,
+        "pokemonId": 110,
+        "name": "Weezing",
+        "slug": "weezing",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 43,
+        "pokemonId": 123,
+        "name": "Scyther",
+        "slug": "scyther",
+        "types": [
+          "bug",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 44,
+        "pokemonId": 212,
+        "name": "Scizor",
+        "slug": "scizor",
+        "types": [
+          "bug",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 45,
+        "pokemonId": 127,
+        "name": "Pinsir",
+        "slug": "pinsir",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 49,
+        "pokemonId": 163,
+        "name": "Hoothoot",
+        "slug": "hoothoot",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 50,
+        "pokemonId": 164,
+        "name": "Noctowl",
+        "slug": "noctowl",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 51,
+        "pokemonId": 214,
+        "name": "Heracross",
+        "slug": "heracross",
+        "types": [
+          "bug",
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 52,
+        "pokemonId": 313,
+        "name": "Volbeat",
+        "slug": "volbeat",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 53,
+        "pokemonId": 314,
+        "name": "Illumise",
+        "slug": "illumise",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 54,
+        "pokemonId": 316,
+        "name": "Gulpin",
+        "slug": "gulpin",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 55,
+        "pokemonId": 317,
+        "name": "Swalot",
+        "slug": "swalot",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 58,
+        "pokemonId": 415,
+        "name": "Combee",
+        "slug": "combee",
+        "types": [
+          "bug",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 59,
+        "pokemonId": 416,
+        "name": "Vespiquen",
+        "slug": "vespiquen",
+        "types": [
+          "bug",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 64,
+        "pokemonId": 425,
+        "name": "Drifloon",
+        "slug": "drifloon",
+        "types": [
+          "ghost",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 65,
+        "pokemonId": 426,
+        "name": "Drifblim",
+        "slug": "drifblim",
+        "types": [
+          "ghost",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 66,
+        "pokemonId": 529,
+        "name": "Drilbur",
+        "slug": "drilbur",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 67,
+        "pokemonId": 530,
+        "name": "Excadrill",
+        "slug": "excadrill",
+        "types": [
+          "ground",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 68,
+        "pokemonId": 532,
+        "name": "Timburr",
+        "slug": "timburr",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 69,
+        "pokemonId": 533,
+        "name": "Gurdurr",
+        "slug": "gurdurr",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 70,
+        "pokemonId": 534,
+        "name": "Conkeldurr",
+        "slug": "conkeldurr",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 74,
+        "pokemonId": 610,
+        "name": "Axew",
+        "slug": "axew",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 75,
+        "pokemonId": 611,
+        "name": "Fraxure",
+        "slug": "fraxure",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 76,
+        "pokemonId": 612,
+        "name": "Haxorus",
+        "slug": "haxorus",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 77,
+        "pokemonId": 704,
+        "name": "Goomy",
+        "slug": "goomy",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 78,
+        "pokemonId": 705,
+        "name": "Sliggoo",
+        "slug": "sliggoo",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 79,
+        "pokemonId": 706,
+        "name": "Goodra",
+        "slug": "goodra",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 81,
+        "pokemonId": 172,
+        "name": "Pichu",
+        "slug": "pichu",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 82,
+        "pokemonId": 25,
+        "name": "Peakychu",
+        "slug": "peakychu",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 83,
+        "pokemonId": 25,
+        "name": "Pikachu",
+        "slug": "pikachu",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 84,
+        "pokemonId": 26,
+        "name": "Raichu",
+        "slug": "raichu",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 85,
+        "pokemonId": 41,
+        "name": "Zubat",
+        "slug": "zubat",
+        "types": [
+          "poison",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 86,
+        "pokemonId": 42,
+        "name": "Golbat",
+        "slug": "golbat",
+        "types": [
+          "poison",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 87,
+        "pokemonId": 169,
+        "name": "Crobat",
+        "slug": "crobat",
+        "types": [
+          "poison",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 88,
+        "pokemonId": 52,
+        "name": "Meowth",
+        "slug": "meowth",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 89,
+        "pokemonId": 53,
+        "name": "Persian",
+        "slug": "persian",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 94,
+        "pokemonId": 83,
+        "name": "Farfetch'd",
+        "slug": "farfetch'd",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 95,
+        "pokemonId": 88,
+        "name": "Grimer",
+        "slug": "grimer",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 96,
+        "pokemonId": 89,
+        "name": "Muk",
+        "slug": "muk",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 97,
+        "pokemonId": 92,
+        "name": "Gastly",
+        "slug": "gastly",
+        "types": [
+          "ghost",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 98,
+        "pokemonId": 93,
+        "name": "Haunter",
+        "slug": "haunter",
+        "types": [
+          "ghost",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 99,
+        "pokemonId": 94,
+        "name": "Gengar",
+        "slug": "gengar",
+        "types": [
+          "ghost",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 100,
+        "pokemonId": 100,
+        "name": "Voltorb",
+        "slug": "voltorb",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 101,
+        "pokemonId": 101,
+        "name": "Electrode",
+        "slug": "electrode",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 104,
+        "pokemonId": 440,
+        "name": "Happiny",
+        "slug": "happiny",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 105,
+        "pokemonId": 113,
+        "name": "Chansey",
+        "slug": "chansey",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 106,
+        "pokemonId": 242,
+        "name": "Blissey",
+        "slug": "blissey",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 107,
+        "pokemonId": 239,
+        "name": "Elekid",
+        "slug": "elekid",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 108,
+        "pokemonId": 125,
+        "name": "Electabuzz",
+        "slug": "electabuzz",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 109,
+        "pokemonId": 466,
+        "name": "Electivire",
+        "slug": "electivire",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 111,
+        "pokemonId": 446,
+        "name": "Munchlax",
+        "slug": "munchlax",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 112,
+        "pokemonId": 143,
+        "name": "Mosslax",
+        "slug": "mosslax",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 113,
+        "pokemonId": 143,
+        "name": "Snorlax",
+        "slug": "snorlax",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 114,
+        "pokemonId": 167,
+        "name": "Spinarak",
+        "slug": "spinarak",
+        "types": [
+          "bug",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 115,
+        "pokemonId": 168,
+        "name": "Ariados",
+        "slug": "ariados",
+        "types": [
+          "bug",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 116,
+        "pokemonId": 179,
+        "name": "Mareep",
+        "slug": "mareep",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 117,
+        "pokemonId": 180,
+        "name": "Flaaffy",
+        "slug": "flaaffy",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 118,
+        "pokemonId": 181,
+        "name": "Ampharos",
+        "slug": "ampharos",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 119,
+        "pokemonId": 298,
+        "name": "Azurill",
+        "slug": "azurill",
+        "types": [
+          "normal",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 122,
+        "pokemonId": 194,
+        "name": "Paldean Wooper",
+        "slug": "paldeanwooper",
+        "types": [
+          "poison",
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 123,
+        "pokemonId": 980,
+        "name": "Clodsire",
+        "slug": "clodsire",
+        "types": [
+          "poison",
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 124,
+        "pokemonId": 235,
+        "name": "Smeargle",
+        "slug": "smeargle",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 130,
+        "pokemonId": 296,
+        "name": "Makuhita",
+        "slug": "makuhita",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 131,
+        "pokemonId": 297,
+        "name": "Hariyama",
+        "slug": "hariyama",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 132,
+        "pokemonId": 359,
+        "name": "Absol",
+        "slug": "absol",
+        "types": [
+          "dark"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 136,
+        "pokemonId": 531,
+        "name": "Audino",
+        "slug": "audino",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 137,
+        "pokemonId": 568,
+        "name": "Trubbish",
+        "slug": "trubbish",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 138,
+        "pokemonId": 569,
+        "name": "Garbodor",
+        "slug": "garbodor",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 139,
+        "pokemonId": 570,
+        "name": "Zorua",
+        "slug": "zorua",
+        "types": [
+          "dark"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 140,
+        "pokemonId": 571,
+        "name": "Zoroark",
+        "slug": "zoroark",
+        "types": [
+          "dark"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 141,
+        "pokemonId": 572,
+        "name": "Minccino",
+        "slug": "minccino",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 142,
+        "pokemonId": 573,
+        "name": "Cinccino",
+        "slug": "cinccino",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 143,
+        "pokemonId": 736,
+        "name": "Grubbin",
+        "slug": "grubbin",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 144,
+        "pokemonId": 737,
+        "name": "Charjabug",
+        "slug": "charjabug",
+        "types": [
+          "bug",
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 145,
+        "pokemonId": 738,
+        "name": "Vikavolt",
+        "slug": "vikavolt",
+        "types": [
+          "bug",
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 146,
+        "pokemonId": 778,
+        "name": "Mimikyu",
+        "slug": "mimikyu",
+        "types": [
+          "ghost",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 147,
+        "pokemonId": 921,
+        "name": "Pawmi",
+        "slug": "pawmi",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 148,
+        "pokemonId": 922,
+        "name": "Pawmo",
+        "slug": "pawmo",
+        "types": [
+          "electric",
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 149,
+        "pokemonId": 923,
+        "name": "Pawmot",
+        "slug": "pawmot",
+        "types": [
+          "electric",
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 153,
+        "pokemonId": 23,
+        "name": "Ekans",
+        "slug": "ekans",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 154,
+        "pokemonId": 24,
+        "name": "Arbok",
+        "slug": "arbok",
+        "types": [
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 155,
+        "pokemonId": 173,
+        "name": "Cleffa",
+        "slug": "cleffa",
+        "types": [
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 156,
+        "pokemonId": 35,
+        "name": "Clefairy",
+        "slug": "clefairy",
+        "types": [
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 157,
+        "pokemonId": 36,
+        "name": "Clefable",
+        "slug": "clefable",
+        "types": [
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 158,
+        "pokemonId": 174,
+        "name": "Igglybuff",
+        "slug": "igglybuff",
+        "types": [
+          "normal",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 159,
+        "pokemonId": 39,
+        "name": "Jigglypuff",
+        "slug": "jigglypuff",
+        "types": [
+          "normal",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 160,
+        "pokemonId": 40,
+        "name": "Wigglytuff",
+        "slug": "wigglytuff",
+        "types": [
+          "normal",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 161,
+        "pokemonId": 50,
+        "name": "Diglett",
+        "slug": "diglett",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 162,
+        "pokemonId": 51,
+        "name": "Dugtrio",
+        "slug": "dugtrio",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 163,
+        "pokemonId": 66,
+        "name": "Machop",
+        "slug": "machop",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 164,
+        "pokemonId": 67,
+        "name": "Machoke",
+        "slug": "machoke",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 165,
+        "pokemonId": 68,
+        "name": "Machamp",
+        "slug": "machamp",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 174,
+        "pokemonId": 198,
+        "name": "Murkrow",
+        "slug": "murkrow",
+        "types": [
+          "dark",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 175,
+        "pokemonId": 430,
+        "name": "Honchkrow",
+        "slug": "honchkrow",
+        "types": [
+          "dark",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 182,
+        "pokemonId": 303,
+        "name": "Mawile",
+        "slug": "mawile",
+        "types": [
+          "steel",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 184,
+        "pokemonId": 401,
+        "name": "Kricketot",
+        "slug": "kricketot",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 185,
+        "pokemonId": 402,
+        "name": "Kricketune",
+        "slug": "kricketune",
+        "types": [
+          "bug"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 186,
+        "pokemonId": 441,
+        "name": "Chatot",
+        "slug": "chatot",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 187,
+        "pokemonId": 447,
+        "name": "Riolu",
+        "slug": "riolu",
+        "types": [
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 188,
+        "pokemonId": 448,
+        "name": "Lucario",
+        "slug": "lucario",
+        "types": [
+          "fighting",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 189,
+        "pokemonId": 479,
+        "name": "Stereo Rotom",
+        "slug": "stereorotom",
+        "types": [
+          "electric",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 198,
+        "pokemonId": 819,
+        "name": "Skwovet",
+        "slug": "skwovet",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 199,
+        "pokemonId": 820,
+        "name": "Greedent",
+        "slug": "greedent",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 203,
+        "pokemonId": 848,
+        "name": "Toxel",
+        "slug": "toxel",
+        "types": [
+          "electric",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 204,
+        "pokemonId": 849,
+        "name": "Toxtricity Amped Form",
+        "slug": "toxtricityampedform",
+        "types": [
+          "electric",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 205,
+        "pokemonId": 849,
+        "name": "Toxtricity Low Key Form",
+        "slug": "toxtricitylowkeyform",
+        "types": [
+          "electric",
+          "poison"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 206,
+        "pokemonId": 926,
+        "name": "Fidough",
+        "slug": "fidough",
+        "types": [
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 207,
+        "pokemonId": 927,
+        "name": "Dachsbun",
+        "slug": "dachsbun",
+        "types": [
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 213,
+        "pokemonId": 999,
+        "name": "Gimmighoul",
+        "slug": "gimmighoul",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 214,
+        "pokemonId": 1000,
+        "name": "Gholdengo",
+        "slug": "gholdengo",
+        "types": [
+          "steel",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 221,
+        "pokemonId": 63,
+        "name": "Abra",
+        "slug": "abra",
+        "types": [
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 222,
+        "pokemonId": 64,
+        "name": "Kadabra",
+        "slug": "kadabra",
+        "types": [
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 223,
+        "pokemonId": 65,
+        "name": "Alakazam",
+        "slug": "alakazam",
+        "types": [
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 224,
+        "pokemonId": 439,
+        "name": "Mime Jr.",
+        "slug": "mimejr.",
+        "types": [
+          "psychic",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 225,
+        "pokemonId": 122,
+        "name": "Mr. Mime",
+        "slug": "mr.mime",
+        "types": [
+          "psychic",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 226,
+        "pokemonId": 137,
+        "name": "Porygon",
+        "slug": "porygon",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 227,
+        "pokemonId": 233,
+        "name": "Porygon2",
+        "slug": "porygon2",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 228,
+        "pokemonId": 474,
+        "name": "Porygon-Z",
+        "slug": "porygon-z",
+        "types": [
+          "normal"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 229,
+        "pokemonId": 147,
+        "name": "Dratini",
+        "slug": "dratini",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 230,
+        "pokemonId": 148,
+        "name": "Dragonair",
+        "slug": "dragonair",
+        "types": [
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 231,
+        "pokemonId": 149,
+        "name": "Dragonite",
+        "slug": "dragonite",
+        "types": [
+          "dragon",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 235,
+        "pokemonId": 200,
+        "name": "Misdreavus",
+        "slug": "misdreavus",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 236,
+        "pokemonId": 429,
+        "name": "Mismagius",
+        "slug": "mismagius",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 237,
+        "pokemonId": 203,
+        "name": "Girafarig",
+        "slug": "girafarig",
+        "types": [
+          "normal",
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 238,
+        "pokemonId": 981,
+        "name": "Farigiraf",
+        "slug": "farigiraf",
+        "types": [
+          "normal",
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 239,
+        "pokemonId": 280,
+        "name": "Ralts",
+        "slug": "ralts",
+        "types": [
+          "psychic",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 240,
+        "pokemonId": 281,
+        "name": "Kirlia",
+        "slug": "kirlia",
+        "types": [
+          "psychic",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 241,
+        "pokemonId": 282,
+        "name": "Gardevoir",
+        "slug": "gardevoir",
+        "types": [
+          "psychic",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 242,
+        "pokemonId": 475,
+        "name": "Gallade",
+        "slug": "gallade",
+        "types": [
+          "psychic",
+          "fighting"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 243,
+        "pokemonId": 311,
+        "name": "Plusle",
+        "slug": "plusle",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 244,
+        "pokemonId": 312,
+        "name": "Minun",
+        "slug": "minun",
+        "types": [
+          "electric"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 245,
+        "pokemonId": 328,
+        "name": "Trapinch",
+        "slug": "trapinch",
+        "types": [
+          "ground"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 246,
+        "pokemonId": 329,
+        "name": "Vibrava",
+        "slug": "vibrava",
+        "types": [
+          "ground",
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 247,
+        "pokemonId": 330,
+        "name": "Flygon",
+        "slug": "flygon",
+        "types": [
+          "ground",
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 248,
+        "pokemonId": 333,
+        "name": "Swablu",
+        "slug": "swablu",
+        "types": [
+          "normal",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 249,
+        "pokemonId": 334,
+        "name": "Altaria",
+        "slug": "altaria",
+        "types": [
+          "dragon",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 250,
+        "pokemonId": 355,
+        "name": "Duskull",
+        "slug": "duskull",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 251,
+        "pokemonId": 356,
+        "name": "Dusclops",
+        "slug": "dusclops",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 252,
+        "pokemonId": 477,
+        "name": "Dusknoir",
+        "slug": "dusknoir",
+        "types": [
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 253,
+        "pokemonId": 374,
+        "name": "Beldum",
+        "slug": "beldum",
+        "types": [
+          "steel",
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 254,
+        "pokemonId": 375,
+        "name": "Metang",
+        "slug": "metang",
+        "types": [
+          "steel",
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 255,
+        "pokemonId": 376,
+        "name": "Metagross",
+        "slug": "metagross",
+        "types": [
+          "steel",
+          "psychic"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 262,
+        "pokemonId": 702,
+        "name": "Dedenne",
+        "slug": "dedenne",
+        "types": [
+          "electric",
+          "fairy"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 263,
+        "pokemonId": 714,
+        "name": "Noibat",
+        "slug": "noibat",
+        "types": [
+          "flying",
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 264,
+        "pokemonId": 715,
+        "name": "Noivern",
+        "slug": "noivern",
+        "types": [
+          "flying",
+          "dragon"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 265,
+        "pokemonId": 821,
+        "name": "Rookidee",
+        "slug": "rookidee",
+        "types": [
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 266,
+        "pokemonId": 822,
+        "name": "Corvisquire",
+        "slug": "corvisquire",
+        "types": [
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 267,
+        "pokemonId": 823,
+        "name": "Corviknight",
+        "slug": "corviknight",
+        "types": [
+          "flying",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 268,
+        "pokemonId": 885,
+        "name": "Dreepy",
+        "slug": "dreepy",
+        "types": [
+          "dragon",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 269,
+        "pokemonId": 886,
+        "name": "Drakloak",
+        "slug": "drakloak",
+        "types": [
+          "dragon",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 270,
+        "pokemonId": 887,
+        "name": "Dragapult",
+        "slug": "dragapult",
+        "types": [
+          "dragon",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 274,
+        "pokemonId": 940,
+        "name": "Wattrel",
+        "slug": "wattrel",
+        "types": [
+          "electric",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 275,
+        "pokemonId": 941,
+        "name": "Kilowattrel",
+        "slug": "kilowattrel",
+        "types": [
+          "electric",
+          "flying"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 276,
+        "pokemonId": 957,
+        "name": "Tinkatink",
+        "slug": "tinkatink",
+        "types": [
+          "fairy",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 277,
+        "pokemonId": 958,
+        "name": "Tinkatuff",
+        "slug": "tinkatuff",
+        "types": [
+          "fairy",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 278,
+        "pokemonId": 959,
+        "name": "Tinkaton",
+        "slug": "tinkaton",
+        "types": [
+          "fairy",
+          "steel"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      },
+      {
+        "sourceOrder": 309,
+        "pokemonId": 302,
+        "name": "Sableye",
+        "slug": "sableye",
+        "types": [
+          "dark",
+          "ghost"
+        ],
+        "classifications": [],
+        "matchedRuleIds": [],
+        "reason": "No supplied assignment rule matches this Pokémon."
+      }
+    ],
+    "unassignedGroups": [
+      {
+        "groupBy": "elemental-type",
+        "value": "bug",
+        "pokemonCount": 17,
+        "pokemonSlugs": [
+          "venonat",
+          "venomoth",
+          "scyther",
+          "scizor",
+          "pinsir",
+          "heracross",
+          "volbeat",
+          "illumise",
+          "combee",
+          "vespiquen",
+          "spinarak",
+          "ariados",
+          "grubbin",
+          "charjabug",
+          "vikavolt",
+          "kricketot",
+          "kricketune"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "dark",
+        "pokemonCount": 6,
+        "pokemonSlugs": [
+          "absol",
+          "zorua",
+          "zoroark",
+          "murkrow",
+          "honchkrow",
+          "sableye"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "dragon",
+        "pokemonCount": 17,
+        "pokemonSlugs": [
+          "axew",
+          "fraxure",
+          "haxorus",
+          "goomy",
+          "sliggoo",
+          "goodra",
+          "dratini",
+          "dragonair",
+          "dragonite",
+          "vibrava",
+          "flygon",
+          "altaria",
+          "noibat",
+          "noivern",
+          "dreepy",
+          "drakloak",
+          "dragapult"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "electric",
+        "pokemonCount": 29,
+        "pokemonSlugs": [
+          "magnemite",
+          "magneton",
+          "magnezone",
+          "pichu",
+          "peakychu",
+          "pikachu",
+          "raichu",
+          "voltorb",
+          "electrode",
+          "elekid",
+          "electabuzz",
+          "electivire",
+          "mareep",
+          "flaaffy",
+          "ampharos",
+          "charjabug",
+          "vikavolt",
+          "pawmi",
+          "pawmo",
+          "pawmot",
+          "stereorotom",
+          "toxel",
+          "toxtricityampedform",
+          "toxtricitylowkeyform",
+          "plusle",
+          "minun",
+          "dedenne",
+          "wattrel",
+          "kilowattrel"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "fairy",
+        "pokemonCount": 20,
+        "pokemonSlugs": [
+          "azurill",
+          "mimikyu",
+          "cleffa",
+          "clefairy",
+          "clefable",
+          "igglybuff",
+          "jigglypuff",
+          "wigglytuff",
+          "mawile",
+          "fidough",
+          "dachsbun",
+          "mimejr.",
+          "mr.mime",
+          "ralts",
+          "kirlia",
+          "gardevoir",
+          "dedenne",
+          "tinkatink",
+          "tinkatuff",
+          "tinkaton"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "fighting",
+        "pokemonCount": 18,
+        "pokemonSlugs": [
+          "tyrogue",
+          "hitmonlee",
+          "hitmonchan",
+          "hitmontop",
+          "heracross",
+          "timburr",
+          "gurdurr",
+          "conkeldurr",
+          "makuhita",
+          "hariyama",
+          "pawmo",
+          "pawmot",
+          "machop",
+          "machoke",
+          "machamp",
+          "riolu",
+          "lucario",
+          "gallade"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "flying",
+        "pokemonCount": 27,
+        "pokemonSlugs": [
+          "pidgey",
+          "pidgeotto",
+          "pidgeot",
+          "scyther",
+          "hoothoot",
+          "noctowl",
+          "combee",
+          "vespiquen",
+          "drifloon",
+          "drifblim",
+          "zubat",
+          "golbat",
+          "crobat",
+          "farfetch'd",
+          "murkrow",
+          "honchkrow",
+          "chatot",
+          "dragonite",
+          "swablu",
+          "altaria",
+          "noibat",
+          "noivern",
+          "rookidee",
+          "corvisquire",
+          "corviknight",
+          "wattrel",
+          "kilowattrel"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "ghost",
+        "pokemonCount": 18,
+        "pokemonSlugs": [
+          "drifloon",
+          "drifblim",
+          "gastly",
+          "haunter",
+          "gengar",
+          "mimikyu",
+          "stereorotom",
+          "gimmighoul",
+          "gholdengo",
+          "misdreavus",
+          "mismagius",
+          "duskull",
+          "dusclops",
+          "dusknoir",
+          "dreepy",
+          "drakloak",
+          "dragapult",
+          "sableye"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "ground",
+        "pokemonCount": 12,
+        "pokemonSlugs": [
+          "steelix",
+          "cubone",
+          "marowak",
+          "drilbur",
+          "excadrill",
+          "paldeanwooper",
+          "clodsire",
+          "diglett",
+          "dugtrio",
+          "trapinch",
+          "vibrava",
+          "flygon"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "normal",
+        "pokemonCount": 31,
+        "pokemonSlugs": [
+          "pidgey",
+          "pidgeotto",
+          "pidgeot",
+          "hoothoot",
+          "noctowl",
+          "meowth",
+          "persian",
+          "farfetch'd",
+          "happiny",
+          "chansey",
+          "blissey",
+          "munchlax",
+          "mosslax",
+          "snorlax",
+          "azurill",
+          "smeargle",
+          "audino",
+          "minccino",
+          "cinccino",
+          "igglybuff",
+          "jigglypuff",
+          "wigglytuff",
+          "chatot",
+          "skwovet",
+          "greedent",
+          "porygon",
+          "porygon2",
+          "porygon-z",
+          "girafarig",
+          "farigiraf",
+          "swablu"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "poison",
+        "pokemonCount": 25,
+        "pokemonSlugs": [
+          "venonat",
+          "venomoth",
+          "koffing",
+          "weezing",
+          "gulpin",
+          "swalot",
+          "zubat",
+          "golbat",
+          "crobat",
+          "grimer",
+          "muk",
+          "gastly",
+          "haunter",
+          "gengar",
+          "spinarak",
+          "ariados",
+          "paldeanwooper",
+          "clodsire",
+          "trubbish",
+          "garbodor",
+          "ekans",
+          "arbok",
+          "toxel",
+          "toxtricityampedform",
+          "toxtricitylowkeyform"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "psychic",
+        "pokemonCount": 14,
+        "pokemonSlugs": [
+          "abra",
+          "kadabra",
+          "alakazam",
+          "mimejr.",
+          "mr.mime",
+          "girafarig",
+          "farigiraf",
+          "ralts",
+          "kirlia",
+          "gardevoir",
+          "gallade",
+          "beldum",
+          "metang",
+          "metagross"
+        ]
+      },
+      {
+        "groupBy": "elemental-type",
+        "value": "steel",
+        "pokemonCount": 16,
+        "pokemonSlugs": [
+          "magnemite",
+          "magneton",
+          "magnezone",
+          "steelix",
+          "scizor",
+          "excadrill",
+          "mawile",
+          "lucario",
+          "gholdengo",
+          "beldum",
+          "metang",
+          "metagross",
+          "corviknight",
+          "tinkatink",
+          "tinkatuff",
+          "tinkaton"
+        ]
+      }
+    ],
+    "unassignedGroupNote": "Pokémon with two types appear in both relevant type groups."
+  },
+  "validation": {
+    "everyEligiblePokemonAccountedFor": true,
+    "duplicateAssignedSlugs": []
+  }
+}
