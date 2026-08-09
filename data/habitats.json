@@ -2,7 +2,7 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
-    "fetchedAt": "2026-08-09T08:12:56Z",
+    "fetchedAt": "2026-08-09T08:27:11Z",
     "notes": [
       "This dataset includes the main and Basin habitat catalogs from the aggregate habitats table.",
       "Habitat numbers restart in the Basin catalog, so catalogId and habitatKey identify records.",

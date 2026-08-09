@@ -2,7 +2,7 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/items.shtml",
-    "fetchedAt": "2026-08-09T08:12:31Z",
+    "fetchedAt": "2026-08-09T08:27:12Z",
     "notes": [
       "anchorId comes from the top-level items page section.",
       "tagId comes from the optional Tag column when present.",

@@ -14,7 +14,7 @@
         "page": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml"
       }
     ],
-    "fetchedAt": "2026-08-09T08:12:29Z",
+    "fetchedAt": "2026-08-09T08:27:11Z",
     "notes": [
       "The table No. column is the Pokopia number, not the Pokemon ID.",
       "pokemonId is derived from the Pokemon image filename.",
