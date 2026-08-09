@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-01",
+  "updatedAt": "2026-08-03",
   "sourceNote": "Identified from user-provided in-game region comfort details. Comfort groups are deduplicated across overlapping screenshots.",
   "regions": {
     "palette-town": {
@@ -243,7 +243,7 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 69,
+      "pokemonCount": 71,
       "eventPokemonSlugs": [],
       "comfortLevels": {
         "awesome": [
@@ -316,7 +316,9 @@
           "azumarill",
           "arbok",
           "ralts",
-          "kricketot"
+          "kricketot",
+          "swablu",
+          "altaria"
         ],
         "iffy": [
           "gastly",
@@ -335,7 +337,7 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 70,
+      "pokemonCount": 68,
       "eventPokemonSlugs": [],
       "comfortLevels": {
         "awesome": [
@@ -403,9 +405,7 @@
           "ditto",
           "paldeanwooper",
           "clodsire",
-          "volcarona",
-          "swablu",
-          "altaria"
+          "volcarona"
         ],
         "iffy": [],
         "no-home": [
