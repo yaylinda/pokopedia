@@ -227,7 +227,7 @@ function RegionSelector({
           display: 'grid',
           gap: 1,
           gridTemplateColumns: {
-            xs: 'repeat(5, minmax(172px, 1fr))',
+            xs: `repeat(${regions.length}, minmax(172px, 1fr))`,
             lg: 'minmax(0, 1fr)',
           },
           mx: { xs: -1.5, sm: -2, lg: 0 },

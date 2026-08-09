@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-31",
+  "generatedAt": "2026-08-09",
   "source": "https://pokeapi.co/api/v2/evolution-chain/",
   "constraints": [
     {
@@ -57,6 +57,10 @@
           "target": "marill"
         },
         {
+          "source": "barboach",
+          "target": "whiscash"
+        },
+        {
           "source": "bastiodon",
           "target": "shieldon"
         },
@@ -89,6 +93,18 @@
           "target": "sudowoodo"
         },
         {
+          "source": "brionne",
+          "target": "popplio"
+        },
+        {
+          "source": "brionne",
+          "target": "primarina"
+        },
+        {
+          "source": "buizel",
+          "target": "floatzel"
+        },
+        {
           "source": "bulbasaur",
           "target": "ivysaur"
         },
@@ -103,6 +119,10 @@
         {
           "source": "carkol",
           "target": "rolycoly"
+        },
+        {
+          "source": "carvanha",
+          "target": "sharpedo"
         },
         {
           "source": "ceruledge",
@@ -133,6 +153,14 @@
           "target": "charmeleon"
         },
         {
+          "source": "chewtle",
+          "target": "drednaw"
+        },
+        {
+          "source": "chinchou",
+          "target": "lanturn"
+        },
+        {
           "source": "cinccino",
           "target": "minccino"
         },
@@ -153,6 +181,10 @@
           "target": "paldeanwooper"
         },
         {
+          "source": "cloyster",
+          "target": "shellder"
+        },
+        {
           "source": "combee",
           "target": "vespiquen"
         },
@@ -163,6 +195,10 @@
         {
           "source": "conkeldurr",
           "target": "gurdurr"
+        },
+        {
+          "source": "corphish",
+          "target": "crawdaunt"
         },
         {
           "source": "corviknight",
@@ -179,6 +215,14 @@
         {
           "source": "crobat",
           "target": "golbat"
+        },
+        {
+          "source": "croconaw",
+          "target": "feraligatr"
+        },
+        {
+          "source": "croconaw",
+          "target": "totodile"
         },
         {
           "source": "cubone",
@@ -293,6 +337,10 @@
           "target": "girafarig"
         },
         {
+          "source": "finneon",
+          "target": "lumineon"
+        },
+        {
           "source": "flaaffy",
           "target": "mareep"
         },
@@ -311,6 +359,22 @@
         {
           "source": "fraxure",
           "target": "haxorus"
+        },
+        {
+          "source": "frillishfemaleform",
+          "target": "jellicentfemaleform"
+        },
+        {
+          "source": "frillishfemaleform",
+          "target": "jellicentmaleform"
+        },
+        {
+          "source": "frillishmaleform",
+          "target": "jellicentfemaleform"
+        },
+        {
+          "source": "frillishmaleform",
+          "target": "jellicentmaleform"
         },
         {
           "source": "froakie",
@@ -389,6 +453,10 @@
           "target": "graveler"
         },
         {
+          "source": "golisopod",
+          "target": "wimpod"
+        },
+        {
           "source": "goodra",
           "target": "sliggoo"
         },
@@ -441,8 +509,16 @@
           "target": "noctowl"
         },
         {
+          "source": "horsea",
+          "target": "seadra"
+        },
+        {
           "source": "igglybuff",
           "target": "jigglypuff"
+        },
+        {
+          "source": "inkay",
+          "target": "malamar"
         },
         {
           "source": "ivysaur",
@@ -455,6 +531,10 @@
         {
           "source": "kilowattrel",
           "target": "wattrel"
+        },
+        {
+          "source": "kingdra",
+          "target": "seadra"
         },
         {
           "source": "kirlia",
@@ -515,6 +595,22 @@
         {
           "source": "magneton",
           "target": "magnezone"
+        },
+        {
+          "source": "manaphy",
+          "target": "phione"
+        },
+        {
+          "source": "mareanie",
+          "target": "toxapex"
+        },
+        {
+          "source": "marshtomp",
+          "target": "mudkip"
+        },
+        {
+          "source": "marshtomp",
+          "target": "swampert"
         },
         {
           "source": "meowth",
@@ -657,6 +753,10 @@
           "target": "wartortle"
         },
         {
+          "source": "starmie",
+          "target": "staryu"
+        },
+        {
           "source": "tangela",
           "target": "tangrowth"
         },
@@ -691,6 +791,10 @@
         {
           "source": "victreebel",
           "target": "weepinbell"
+        },
+        {
+          "source": "wiglett",
+          "target": "wugtrio"
         },
         {
           "source": "zoroark",

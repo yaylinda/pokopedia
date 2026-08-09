@@ -51,6 +51,11 @@ export const regionStyles: Record<string, VisualStyle> = {
     deep: 'oklch(0.40 0.12 38)',
     soft: 'oklch(0.94 0.05 38)',
   },
+  'bubbly-basin': {
+    accent: 'oklch(0.68 0.13 225)',
+    deep: 'oklch(0.40 0.10 225)',
+    soft: 'oklch(0.94 0.05 225)',
+  },
 }
 
 export const comfortStyles: Record<
@@ -178,6 +183,7 @@ export const regionOrder = [
   'rocky-ridges',
   'sparkling-skylands',
   'palette-town',
+  'bubbly-basin',
 ]
 
 export const allRosterPokemon = allAvailableRosterPokemon

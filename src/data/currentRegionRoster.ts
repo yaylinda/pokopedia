@@ -115,6 +115,8 @@ export const legendaryOrMythicalPokemonSlugs = new Set([
   'kyogre',
   'mew',
   'jirachi',
+  'phione',
+  'manaphy',
   'volcanion',
 ])
 const pokemonCatalog = pokemonJson as {
