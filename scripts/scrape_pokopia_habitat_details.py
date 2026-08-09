@@ -75,6 +75,8 @@ def main() -> None:
         total_spawns += len(spawns)
 
         habitat_summary = {
+            "catalogId": habitat["catalogId"],
+            "habitatKey": habitat["habitatKey"],
             "habitatId": habitat["habitatId"],
             "habitatSlug": habitat["slug"],
             "habitatName": habitat["name"],
@@ -89,6 +91,7 @@ def main() -> None:
         "fetchedAt": utc_now(),
         "notes": [
             "Cloud Island is omitted from normalized spawn locations.",
+            "Bubbly Basin is included as a normalized spawn location.",
             "Requirement rows without direct item links are reconciled against the item catalog by exact name when possible.",
         ],
     }

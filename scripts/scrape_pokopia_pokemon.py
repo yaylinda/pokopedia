@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch and normalize the Serebii Pokemon Pokopia available Pokemon table."""
+"""Fetch and normalize the Serebii Pokemon Pokopia Pokemon catalogs."""
 
 from __future__ import annotations
 
@@ -13,11 +13,24 @@ from typing import Any
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
-SOURCE_URL = "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
+SOURCE_CATALOGS = [
+    {
+        "catalogId": "main",
+        "name": "Main Pokédex",
+        "url": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml",
+        "tmpFilename": "availablepokemon.html",
+    },
+    {
+        "catalogId": "basin",
+        "name": "Basin Pokédex",
+        "url": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
+        "tmpFilename": "basinpokedex.html",
+    },
+]
 BASE_URL = "https://www.serebii.net/"
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_JSON_PATH = ROOT / "data" / "pokemon.json"
-TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "availablepokemon.html"
+TMP_HTML_DIR = ROOT / ".tmp" / "pokopia-html"
 
 ROW_START_RE = re.compile(r'<td class="cen">#(?P<number>\d+)</td>')
 POKEMON_CELL_RE = re.compile(
@@ -38,13 +51,24 @@ class ParseResult:
 
 
 def main() -> None:
-    html = fetch_html(SOURCE_URL)
-    TMP_HTML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    TMP_HTML_PATH.write_text(html, encoding="utf-8")
+    pokemon: list[dict[str, Any]] = []
+    for catalog in SOURCE_CATALOGS:
+        html = fetch_html(catalog["url"])
+        tmp_html_path = TMP_HTML_DIR / catalog["tmpFilename"]
+        tmp_html_path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_html_path.write_text(html, encoding="utf-8")
+        pokemon.extend(
+            parse_rows(
+                html.splitlines(),
+                catalog_id=catalog["catalogId"],
+                source_page=catalog["url"],
+                starting_source_order=len(pokemon) + 1,
+            )
+        )
 
     result = ParseResult(
         fetched_at=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        pokemon=parse_rows(html.splitlines()),
+        pokemon=pokemon,
     )
 
     duplicate_pokopia_numbers = find_duplicate_pokopia_numbers(result.pokemon)
@@ -55,12 +79,20 @@ def main() -> None:
             {
                 "source": {
                     "name": "Serebii",
-                    "page": SOURCE_URL,
+                    "page": SOURCE_CATALOGS[0]["url"],
+                    "pages": [
+                        {
+                            "catalogId": catalog["catalogId"],
+                            "name": catalog["name"],
+                            "page": catalog["url"],
+                        }
+                        for catalog in SOURCE_CATALOGS
+                    ],
                     "fetchedAt": result.fetched_at,
                     "notes": [
                         "The table No. column is the Pokopia number, not the Pokemon ID.",
                         "pokemonId is derived from the Pokemon image filename.",
-                        "Pokopia numbers are not unique in the source table, so sourceOrder is included as a stable row identifier.",
+                        "Pokopia numbers restart in the Basin catalog and are not otherwise unique, so catalogId and sourceOrder identify rows.",
                     ],
                     "duplicatePokopiaNumbers": duplicate_pokopia_numbers,
                 },
@@ -91,7 +123,13 @@ def fetch_html(url: str) -> str:
         return response.read().decode("utf-8", errors="replace")
 
 
-def parse_rows(lines: list[str]) -> list[dict[str, Any]]:
+def parse_rows(
+    lines: list[str],
+    *,
+    catalog_id: str,
+    source_page: str,
+    starting_source_order: int,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
 
     for index, line in enumerate(lines):
@@ -103,7 +141,14 @@ def parse_rows(lines: list[str]) -> list[dict[str, Any]]:
             continue
 
         row_lines = lines[index : index + 6]
-        rows.append(parse_row(len(rows) + 1, row_lines))
+        rows.append(
+            parse_row(
+                starting_source_order + len(rows),
+                row_lines,
+                catalog_id=catalog_id,
+                source_page=source_page,
+            )
+        )
 
     if not rows:
         raise ValueError("No Pokemon rows were parsed from the page.")
@@ -111,7 +156,13 @@ def parse_rows(lines: list[str]) -> list[dict[str, Any]]:
     return rows
 
 
-def parse_row(source_order: int, row_lines: list[str]) -> dict[str, Any]:
+def parse_row(
+    source_order: int,
+    row_lines: list[str],
+    *,
+    catalog_id: str,
+    source_page: str,
+) -> dict[str, Any]:
     pokopia_line, pokemon_line, name_line, specialty_line = row_lines[1:5]
 
     pokopia_match = ROW_START_RE.search(pokopia_line)
@@ -133,6 +184,8 @@ def parse_row(source_order: int, row_lines: list[str]) -> dict[str, Any]:
 
     return {
         "sourceOrder": source_order,
+        "catalogId": catalog_id,
+        "sourcePage": source_page,
         "pokopiaNumber": pokopia_number,
         "pokopiaNumberDisplay": f"#{pokopia_number:03d}",
         "pokemonId": parsed_image["pokemonId"],

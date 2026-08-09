@@ -48,6 +48,7 @@ PRIMARY_LOCATION_NAMES = {
     "Rocky Ridges": "rocky-ridges",
     "Sparkling Skylands": "sparkling-skylands",
     "Palette Town": "palette-town",
+    "Bubbly Basin": "bubbly-basin",
 }
 
 
@@ -240,10 +241,16 @@ def parse_description(description_html: str) -> tuple[str, list[str], bool]:
     for line in lines:
         if line.startswith("Note:"):
             notes.append(line.replace("Note:", "", 1).strip())
+        elif line == "Not listed in collection":
+            notes.append(line)
         else:
             description_lines.append(line.strip())
 
-    is_registered = all("Not registered in collection" not in note for note in notes)
+    is_registered = all(
+        marker not in note
+        for note in notes
+        for marker in ("Not registered in collection", "Not listed in collection")
+    )
     return " ".join(description_lines).strip(), notes, is_registered
 
 

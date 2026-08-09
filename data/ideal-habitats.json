@@ -2,7 +2,19 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml",
-    "fetchedAt": "2026-04-30T04:03:54Z",
+    "pages": [
+      {
+        "catalogId": "main",
+        "name": "Main Pok\u00e9dex",
+        "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
+      },
+      {
+        "catalogId": "basin",
+        "name": "Basin Pok\u00e9dex",
+        "page": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml"
+      }
+    ],
+    "fetchedAt": "2026-08-09T08:20:22Z",
     "notes": [
       "Pokemon preference data is parsed from each Pokemon detail page's Stats table.",
       "Favorite item lists are parsed from linked favorite pages and the shared flavors page."
@@ -16,7 +28,7 @@
       "slug": "bright",
       "name": "Bright",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml",
-      "pokemonCount": 95
+      "pokemonCount": 112
     },
     {
       "sourceOrder": 2,
@@ -24,7 +36,7 @@
       "slug": "warm",
       "name": "Warm",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/warm.shtml",
-      "pokemonCount": 50
+      "pokemonCount": 58
     },
     {
       "sourceOrder": 3,
@@ -32,7 +44,7 @@
       "slug": "humid",
       "name": "Humid",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/humid.shtml",
-      "pokemonCount": 74
+      "pokemonCount": 86
     },
     {
       "sourceOrder": 4,
@@ -48,7 +60,7 @@
       "slug": "dark",
       "name": "Dark",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/dark.shtml",
-      "pokemonCount": 60
+      "pokemonCount": 72
     },
     {
       "sourceOrder": 6,
@@ -56,7 +68,7 @@
       "slug": "cool",
       "name": "Cool",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/cool.shtml",
-      "pokemonCount": 9
+      "pokemonCount": 12
     }
   ]
 }

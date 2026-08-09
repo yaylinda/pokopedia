@@ -29,6 +29,7 @@ PRIMARY_LOCATION_IDS = {
     "rockyridges": "rocky-ridges",
     "sparklingskylands": "sparkling-skylands",
     "palettetown": "palette-town",
+    "bubblybasin": "bubbly-basin",
 }
 
 

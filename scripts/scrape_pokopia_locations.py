@@ -41,7 +41,7 @@ def main() -> None:
                 "page": SOURCE_URL,
                 "fetchedAt": utc_now(),
                 "notes": [
-                    "This dataset includes only the five main playable locations.",
+                    "This dataset includes the six playable locations, including the Bubbly Basin expansion area.",
                     "Cloud Island is intentionally excluded from normalized location data.",
                 ],
                 "excludedLocations": excluded_locations,

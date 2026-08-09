@@ -2,16 +2,19 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
-    "fetchedAt": "2026-04-11T01:31:32Z",
+    "fetchedAt": "2026-08-09T08:13:52Z",
     "notes": [
       "Cloud Island is omitted from normalized spawn locations.",
+      "Bubbly Basin is included as a normalized spawn location.",
       "Requirement rows without direct item links are reconciled against the item catalog by exact name when possible."
     ]
   },
-  "count": 209,
-  "totalRequirements": 567,
+  "count": 245,
+  "totalRequirements": 675,
   "habitats": [
     {
+      "catalogId": "main",
+      "habitatKey": "main:001",
       "habitatId": 1,
       "habitatSlug": "tallgrass",
       "habitatName": "Tall Grass",
@@ -34,6 +37,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:002",
       "habitatId": 2,
       "habitatSlug": "tree-shadedtallgrass",
       "habitatName": "Tree-shaded tall grass",
@@ -70,6 +75,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:003",
       "habitatId": 3,
       "habitatSlug": "boulder-shadedtallgrass",
       "habitatName": "Boulder-shaded Tall Grass",
@@ -106,6 +113,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:004",
       "habitatId": 4,
       "habitatSlug": "hydratedtallgrass",
       "habitatName": "Hydrated tall grass",
@@ -142,6 +151,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:005",
       "habitatId": 5,
       "habitatSlug": "seasidetallgrass",
       "habitatName": "Seaside Tall Grass",
@@ -178,6 +189,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:006",
       "habitatId": 6,
       "habitatSlug": "elevatedtallgrass",
       "habitatName": "Elevated tall grass",
@@ -214,6 +227,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:007",
       "habitatId": 7,
       "habitatSlug": "illuminatedtallgrass",
       "habitatName": "Illuminated tall grass",
@@ -250,6 +265,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:008",
       "habitatId": 8,
       "habitatSlug": "prettyflowerbed",
       "habitatName": "Pretty flower bed",
@@ -272,6 +289,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:009",
       "habitatId": 9,
       "habitatSlug": "tree-shadedflowerbed",
       "habitatName": "Tree-shaded flower bed",
@@ -308,6 +327,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:010",
       "habitatId": 10,
       "habitatSlug": "hydratedflowerbed",
       "habitatName": "Hydrated flower bed",
@@ -330,6 +351,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:011",
       "habitatId": 11,
       "habitatSlug": "fieldofflowers",
       "habitatName": "Field of Flowers",
@@ -352,6 +375,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:012",
       "habitatId": 12,
       "habitatSlug": "elevatedflowerbed",
       "habitatName": "Elevated flower bed",
@@ -388,6 +413,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:013",
       "habitatId": 13,
       "habitatSlug": "gravewithflowers",
       "habitatName": "Grave with flowers",
@@ -424,6 +451,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:014",
       "habitatId": 14,
       "habitatSlug": "flowergarden",
       "habitatName": "Flower garden",
@@ -460,6 +489,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:015",
       "habitatId": 15,
       "habitatSlug": "freshveggiefield",
       "habitatName": "Fresh Veggie Field",
@@ -482,6 +513,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:016",
       "habitatId": 16,
       "habitatSlug": "ridingwarmupdrafts",
       "habitatName": "Riding warm updrafts",
@@ -504,6 +537,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:017",
       "habitatId": 17,
       "habitatSlug": "campsite",
       "habitatName": "Campsite",
@@ -554,6 +589,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:018",
       "habitatId": 18,
       "habitatSlug": "trainingwaterfall",
       "habitatName": "Training waterfall",
@@ -604,6 +641,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:019",
       "habitatId": 19,
       "habitatSlug": "tantalizingdiningset",
       "habitatName": "Tantalizing dining set",
@@ -654,6 +693,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:020",
       "habitatId": 20,
       "habitatSlug": "picnicset",
       "habitatName": "Picnic Set",
@@ -661,7 +702,7 @@
       "requirements": [
         {
           "sourceOrder": 1,
-          "quantity": 1,
+          "quantity": 2,
           "itemId": "seat-any",
           "itemSlug": "seat-any",
           "itemName": "Seat (any)",
@@ -704,6 +745,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:021",
       "habitatId": 21,
       "habitatSlug": "flowerytable",
       "habitatName": "Flowery table",
@@ -754,6 +797,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:022",
       "habitatId": 22,
       "habitatSlug": "benchwithgreenery",
       "habitatName": "Bench with greenery",
@@ -790,6 +835,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:023",
       "habitatId": 23,
       "habitatSlug": "illuminatedbench",
       "habitatName": "Illuminated bench",
@@ -826,6 +873,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:024",
       "habitatId": 24,
       "habitatSlug": "exerciserestingspot",
       "habitatName": "Exercise resting spot",
@@ -862,6 +911,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:025",
       "habitatId": 25,
       "habitatSlug": "urgentcare",
       "habitatName": "Urgent Care",
@@ -912,6 +963,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:026",
       "habitatId": 26,
       "habitatSlug": "gymfirstaid",
       "habitatName": "Gym first aid",
@@ -962,6 +1015,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:027",
       "habitatId": 27,
       "habitatSlug": "roadsign",
       "habitatName": "Road Sign",
@@ -998,6 +1053,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:028",
       "habitatId": 28,
       "habitatSlug": "largeluggagecarrier",
       "habitatName": "Large luggage carrier",
@@ -1034,6 +1091,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:029",
       "habitatId": 29,
       "habitatSlug": "lumberjack'sworkplace",
       "habitatName": "Lumberjack's workplace",
@@ -1098,6 +1157,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:030",
       "habitatId": 30,
       "habitatSlug": "bedwithaplush",
       "habitatName": "Bed with a plush",
@@ -1134,6 +1195,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:031",
       "habitatId": 31,
       "habitatSlug": "gentlylitbed",
       "habitatName": "Gently lit bed",
@@ -1184,6 +1247,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:032",
       "habitatId": 32,
       "habitatSlug": "graveoffering",
       "habitatName": "Grave offering",
@@ -1234,6 +1299,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:033",
       "habitatId": 33,
       "habitatSlug": "creepygraveoffering",
       "habitatName": "Creepy grave offering",
@@ -1284,6 +1351,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:034",
       "habitatId": 34,
       "habitatSlug": "chanseyrestingarea",
       "habitatName": "Chansey Resting area",
@@ -1334,6 +1403,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:035",
       "habitatId": 35,
       "habitatSlug": "irresistiblescentandglow",
       "habitatName": "Irresistible scent and glow",
@@ -1384,6 +1455,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:036",
       "habitatId": 36,
       "habitatSlug": "floatingintheshade",
       "habitatName": "Floating in the shade",
@@ -1434,6 +1507,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:037",
       "habitatId": 37,
       "habitatSlug": "smoothtallgrass",
       "habitatName": "Smooth tall grass",
@@ -1470,6 +1545,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:038",
       "habitatId": 38,
       "habitatSlug": "factorystorage",
       "habitatName": "Factory Storage",
@@ -1534,6 +1611,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:039",
       "habitatId": 39,
       "habitatSlug": "luxurychirp-chirpmeal",
       "habitatName": "Luxury chirp-chirp meal",
@@ -1570,6 +1649,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:040",
       "habitatId": 40,
       "habitatSlug": "berry-feastcampsite",
       "habitatName": "Berry-feast Campsite",
@@ -1634,6 +1715,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:041",
       "habitatId": 41,
       "habitatSlug": "raindancesite",
       "habitatName": "Rain Dance site",
@@ -1670,6 +1753,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:042",
       "habitatId": 42,
       "habitatSlug": "sunnydaysite",
       "habitatName": "Sunny Day site",
@@ -1706,6 +1791,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:043",
       "habitatId": 43,
       "habitatSlug": "professor'streasuretrove",
       "habitatName": "Professor's treasure trove",
@@ -1756,10 +1843,12 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:044",
       "habitatId": 44,
-      "habitatSlug": "crazyloghandicrafts",
-      "habitatName": "Crazy log handicrafts",
-      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/crazyloghandicrafts.shtml",
+      "habitatSlug": "cozyloghandicrafts",
+      "habitatName": "Cozy log handicrafts",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/cozyloghandicrafts.shtml",
       "requirements": [
         {
           "sourceOrder": 1,
@@ -1806,6 +1895,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:045",
       "habitatId": 45,
       "habitatSlug": "very-berryspace",
       "habitatName": "Very-berry space",
@@ -1870,6 +1961,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:046",
       "habitatId": 46,
       "habitatSlug": "gardenterrace",
       "habitatName": "Garden Terrace",
@@ -1934,6 +2027,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:047",
       "habitatId": 47,
       "habitatSlug": "tree-shadedsnoozingsnorlax",
       "habitatName": "Tree-shaded snoozing Snorlax",
@@ -1970,6 +2065,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:048",
       "habitatId": 48,
       "habitatSlug": "goodold-fashionedantiques",
       "habitatName": "Good old-fashioned antiques",
@@ -2034,6 +2131,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:049",
       "habitatId": 49,
       "habitatSlug": "nothin'butpokeballs",
       "habitatName": "Nothin' but Poke Balls",
@@ -2098,6 +2197,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:050",
       "habitatId": 50,
       "habitatSlug": "yellowtallgrass",
       "habitatName": "Yellow tall grass",
@@ -2120,6 +2221,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:051",
       "habitatId": 51,
       "habitatSlug": "tree-shadedyellowtallgrass",
       "habitatName": "Tree-shaded Yellow tall grass",
@@ -2156,6 +2259,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:052",
       "habitatId": 52,
       "habitatSlug": "elevatedyellowtallgrass",
       "habitatName": "Elevated yellow tall grass",
@@ -2192,6 +2297,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:053",
       "habitatId": 53,
       "habitatSlug": "hydratedyellowtallgrass",
       "habitatName": "Hydrated yellow tall grass",
@@ -2228,6 +2335,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:054",
       "habitatId": 54,
       "habitatSlug": "marshytallgrass",
       "habitatName": "Marshy tall grass",
@@ -2264,6 +2373,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:055",
       "habitatId": 55,
       "habitatSlug": "overgrowthvendingmachine",
       "habitatName": "Overgrowth vending machine",
@@ -2300,6 +2411,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:056",
       "habitatId": 56,
       "habitatSlug": "breezyflowerbed",
       "habitatName": "Breezy flower bed",
@@ -2322,6 +2435,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:057",
       "habitatId": 57,
       "habitatSlug": "tropicalvibes",
       "habitatName": "Tropical vibes",
@@ -2358,6 +2473,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:058",
       "habitatId": 58,
       "habitatSlug": "windyflowerbed",
       "habitatName": "Windy Flower Bed",
@@ -2394,6 +2511,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:059",
       "habitatId": 59,
       "habitatSlug": "shadedbeach",
       "habitatName": "Shaded beach",
@@ -2430,6 +2549,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:060",
       "habitatId": 60,
       "habitatSlug": "tropicalseaside",
       "habitatName": "Tropical seaside",
@@ -2480,6 +2601,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:061",
       "habitatId": 61,
       "habitatSlug": "restingspot",
       "habitatName": "Resting spot",
@@ -2516,6 +2639,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:062",
       "habitatId": 62,
       "habitatSlug": "perpetualmess",
       "habitatName": "Perpetual mess",
@@ -2552,6 +2677,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:063",
       "habitatId": 63,
       "habitatSlug": "trashcollectionsite",
       "habitatName": "Trash collection site",
@@ -2602,6 +2729,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:064",
       "habitatId": 64,
       "habitatSlug": "trashcancentral",
       "habitatName": "Trash can central",
@@ -2624,6 +2753,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:065",
       "habitatId": 65,
       "habitatSlug": "trashdisposalsite",
       "habitatName": "Trash disposal site",
@@ -2660,6 +2791,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:066",
       "habitatId": 66,
       "habitatSlug": "parkbench",
       "habitatName": "Park bench",
@@ -2696,6 +2829,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:067",
       "habitatId": 67,
       "habitatSlug": "tantalizingrestaurant",
       "habitatName": "Tantalizing restaurant",
@@ -2760,6 +2895,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:068",
       "habitatId": 68,
       "habitatSlug": "tablesidedeliverycart",
       "habitatName": "Tableside delivery cart",
@@ -2838,6 +2975,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:069",
       "habitatId": 69,
       "habitatSlug": "chirp-chirpmeal",
       "habitatName": "Chirp-chirp meal",
@@ -2888,9 +3027,11 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:070",
       "habitatId": 70,
       "habitatSlug": "cafespace",
-      "habitatName": "Café space",
+      "habitatName": "Caf\u00e9 space",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/cafespace.shtml",
       "requirements": [
         {
@@ -2966,6 +3107,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:071",
       "habitatId": 71,
       "habitatSlug": "beachset",
       "habitatName": "Beach Set",
@@ -3016,6 +3159,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:072",
       "habitatId": 72,
       "habitatSlug": "light-upstage",
       "habitatName": "Light-up stage",
@@ -3052,6 +3197,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:073",
       "habitatId": 73,
       "habitatSlug": "surpriseinstore",
       "habitatName": "Surprise in store",
@@ -3088,6 +3235,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:074",
       "habitatId": 74,
       "habitatSlug": "nightfestivalvenue",
       "habitatName": "Night festival venue",
@@ -3124,6 +3273,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:075",
       "habitatId": 75,
       "habitatSlug": "changingarea",
       "habitatName": "Changing area",
@@ -3160,6 +3311,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:076",
       "habitatId": 76,
       "habitatSlug": "privatemakeupstand",
       "habitatName": "Private makeup stand",
@@ -3210,6 +3363,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:077",
       "habitatId": 77,
       "habitatSlug": "knittingstation",
       "habitatName": "Knitting station",
@@ -3260,6 +3415,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:078",
       "habitatId": 78,
       "habitatSlug": "hot-springshower",
       "habitatName": "Hot-spring shower",
@@ -3310,6 +3467,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:079",
       "habitatId": 79,
       "habitatSlug": "resortmealprep",
       "habitatName": "Resort meal prep",
@@ -3374,6 +3533,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:080",
       "habitatId": 80,
       "habitatSlug": "allpackedup",
       "habitatName": "All packed up",
@@ -3410,6 +3571,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:081",
       "habitatId": 81,
       "habitatSlug": "fullrecovery",
       "habitatName": "Full recovery",
@@ -3460,6 +3623,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:082",
       "habitatId": 82,
       "habitatSlug": "alarmclocksleepzone",
       "habitatName": "Alarm clock sleep zone",
@@ -3510,6 +3675,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:083",
       "habitatId": 83,
       "habitatSlug": "vendingmachinebreakarea",
       "habitatName": "Vending machine break area",
@@ -3546,6 +3713,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:084",
       "habitatId": 84,
       "habitatSlug": "vendingmachineset",
       "habitatName": "Vending machine set",
@@ -3554,14 +3723,14 @@
         {
           "sourceOrder": 1,
           "quantity": 1,
-          "itemId": "waste-bin",
-          "itemSlug": "waste-bin",
-          "itemName": "Waste bin",
+          "itemId": "waste-bin-any",
+          "itemSlug": "waste-bin-any",
+          "itemName": "Waste bin (any)",
           "sourceDetailUrl": null,
           "detailUrl": null,
-          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/wastebin.png",
-          "pictureFilename": "wastebin.png",
-          "pictureAlt": "Waste bin",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/wastebin(any).png",
+          "pictureFilename": "wastebin(any).png",
+          "pictureAlt": "Waste bin (any)",
           "isCatalogLinked": false,
           "catalogMatchType": "unmatched"
         },
@@ -3582,6 +3751,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:085",
       "habitatId": 85,
       "habitatSlug": "minigamecorner",
       "habitatName": "Mini Game Corner",
@@ -3632,6 +3803,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:086",
       "habitatId": 86,
       "habitatSlug": "waterwheelspot",
       "habitatName": "Waterwheel Spot",
@@ -3682,6 +3855,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:087",
       "habitatId": 87,
       "habitatSlug": "furnacespot",
       "habitatName": "Furnace Spot",
@@ -3718,6 +3893,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:088",
       "habitatId": 88,
       "habitatSlug": "dock",
       "habitatName": "Dock",
@@ -3768,6 +3945,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:089",
       "habitatId": 89,
       "habitatSlug": "spookystudy",
       "habitatName": "Spooky study",
@@ -3832,6 +4011,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:090",
       "habitatId": 90,
       "habitatSlug": "playingpirate",
       "habitatName": "Playing pirate",
@@ -3882,6 +4063,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:091",
       "habitatId": 91,
       "habitatSlug": "workingtheregister",
       "habitatName": "Working the register",
@@ -3918,6 +4101,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:092",
       "habitatId": 92,
       "habitatSlug": "tinyatelier",
       "habitatName": "Tiny Atelier",
@@ -3954,6 +4139,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:093",
       "habitatId": 93,
       "habitatSlug": "gourmet'saltar",
       "habitatName": "Gourmet's altar",
@@ -3976,6 +4163,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:094",
       "habitatId": 94,
       "habitatSlug": "pikachuspace",
       "habitatName": "Pikachu space",
@@ -4012,6 +4201,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:095",
       "habitatId": 95,
       "habitatSlug": "cutenessoverload",
       "habitatName": "Cuteness overload",
@@ -4090,6 +4281,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:096",
       "habitatId": 96,
       "habitatSlug": "welcomingresort",
       "habitatName": "Welcoming resort",
@@ -4154,6 +4347,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:097",
       "habitatId": 97,
       "habitatSlug": "plainlife",
       "habitatName": "Plain life",
@@ -4218,6 +4413,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:098",
       "habitatId": 98,
       "habitatSlug": "redtallgrass",
       "habitatName": "Red tall grass",
@@ -4240,6 +4437,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:099",
       "habitatId": 99,
       "habitatSlug": "tree-shadedredtallgrass",
       "habitatName": "Tree-shaded red tall grass",
@@ -4276,6 +4475,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:100",
       "habitatId": 100,
       "habitatSlug": "pointytree-shadedrockytallgrass",
       "habitatName": "Pointy tree-shaded rocky tall grass",
@@ -4326,6 +4527,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:101",
       "habitatId": 101,
       "habitatSlug": "hydratedredtallgrass",
       "habitatName": "Hydrated red tall grass",
@@ -4362,6 +4565,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:102",
       "habitatId": 102,
       "habitatSlug": "elevatedredtallgrass",
       "habitatName": "Elevated red tall grass",
@@ -4398,6 +4603,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:103",
       "habitatId": 103,
       "habitatSlug": "grassytrainingfield",
       "habitatName": "Grassy training field",
@@ -4434,6 +4641,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:104",
       "habitatId": 104,
       "habitatSlug": "gracefulflowerbed",
       "habitatName": "Graceful flower bed",
@@ -4456,6 +4665,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:105",
       "habitatId": 105,
       "habitatSlug": "tree-shadedgracefulflowerbed",
       "habitatName": "Tree-shaded graceful flower bed",
@@ -4466,12 +4677,12 @@
           "quantity": 1,
           "itemId": "pointytree",
           "itemSlug": "pointytree",
-          "itemName": "Pointyt ree",
+          "itemName": "Pointy tree",
           "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/pointytree.shtml",
           "detailUrl": "https://www.serebii.net/pokemonpokopia/items/pointytree.shtml",
           "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pointytree.png",
           "pictureFilename": "pointytree.png",
-          "pictureAlt": "Pointyt ree",
+          "pictureAlt": "Pointy tree",
           "isCatalogLinked": true,
           "catalogMatchType": "source-link"
         },
@@ -4492,6 +4703,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:106",
       "habitatId": 106,
       "habitatSlug": "hydratedgracefulflowerbed",
       "habitatName": "Hydrated graceful flower bed",
@@ -4528,6 +4741,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:107",
       "habitatId": 107,
       "habitatSlug": "flowergardenstumpstage",
       "habitatName": "Flower garden stump stage",
@@ -4578,6 +4793,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:108",
       "habitatId": 108,
       "habitatSlug": "toilinthesoil",
       "habitatName": "Toil in the soil",
@@ -4614,6 +4831,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:109",
       "habitatId": 109,
       "habitatSlug": "upliftingduckweed",
       "habitatName": "Uplifting duckweed",
@@ -4650,6 +4869,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:110",
       "habitatId": 110,
       "habitatSlug": "mossyrestspot",
       "habitatName": "Mossy rest spot",
@@ -4672,6 +4893,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:111",
       "habitatId": 111,
       "habitatSlug": "mossyboulder",
       "habitatName": "Mossy boulder",
@@ -4708,6 +4931,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:112",
       "habitatId": 112,
       "habitatSlug": "mossyhotspring",
       "habitatName": "Mossy hot spring",
@@ -4744,6 +4969,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:113",
       "habitatId": 113,
       "habitatSlug": "open-airbath",
       "habitatName": "Open-air bath",
@@ -4780,6 +5007,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:114",
       "habitatId": 114,
       "habitatSlug": "harmonioushotspring",
       "habitatName": "Harmonious hot spring",
@@ -4830,6 +5059,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:115",
       "habitatId": 115,
       "habitatSlug": "piping-hotlava",
       "habitatName": "Piping-hot lava",
@@ -4866,6 +5097,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:116",
       "habitatId": 116,
       "habitatSlug": "diggingandburning",
       "habitatName": "Digging and burning",
@@ -4916,6 +5149,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:117",
       "habitatId": 117,
       "habitatSlug": "clink-clangironconstruction",
       "habitatName": "Clink-clang iron construction",
@@ -4980,6 +5215,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:118",
       "habitatId": 118,
       "habitatSlug": "creepywhiterocks",
       "habitatName": "Creepy white rocks",
@@ -5044,6 +5281,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:119",
       "habitatId": 119,
       "habitatSlug": "containersnacking",
       "habitatName": "Container snacking",
@@ -5108,6 +5347,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:120",
       "habitatId": 120,
       "habitatSlug": "dinnertablesurprise",
       "habitatName": "Dinner table surprise",
@@ -5158,6 +5399,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:121",
       "habitatId": 121,
       "habitatSlug": "bestbreadbakery",
       "habitatName": "Best bread bakery",
@@ -5208,6 +5451,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:122",
       "habitatId": 122,
       "habitatSlug": "minikitchen",
       "habitatName": "Mini kitchen",
@@ -5272,6 +5517,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:123",
       "habitatId": 123,
       "habitatSlug": "houseparty",
       "habitatName": "House party",
@@ -5322,6 +5569,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:124",
       "habitatId": 124,
       "habitatSlug": "lazy-photoalbumscrolling",
       "habitatName": "Lazy-photo album scrolling",
@@ -5358,6 +5607,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:125",
       "habitatId": 125,
       "habitatSlug": "chirpingrecital",
       "habitatName": "Chirping recital",
@@ -5394,6 +5645,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:126",
       "habitatId": 126,
       "habitatSlug": "recitalstage",
       "habitatName": "Recital stage",
@@ -5444,6 +5697,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:127",
       "habitatId": 127,
       "habitatSlug": "boxtotherhythm",
       "habitatName": "Box to the rhythm",
@@ -5494,6 +5749,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:128",
       "habitatId": 128,
       "habitatSlug": "musicandmagazines",
       "habitatName": "Music and magazines",
@@ -5544,6 +5801,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:129",
       "habitatId": 129,
       "habitatSlug": "minimuseum",
       "habitatName": "Mini museum",
@@ -5594,6 +5853,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:130",
       "habitatId": 130,
       "habitatSlug": "refreshinglockerroom",
       "habitatName": "Refreshing locker room",
@@ -5658,6 +5919,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:131",
       "habitatId": 131,
       "habitatSlug": "bronzelandmark",
       "habitatName": "Bronze landmark",
@@ -5708,6 +5971,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:132",
       "habitatId": 132,
       "habitatSlug": "railroadcrossing",
       "habitatName": "Railroad crossing",
@@ -5744,6 +6009,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:133",
       "habitatId": 133,
       "habitatSlug": "chef'skitchen",
       "habitatName": "Chef's kitchen",
@@ -5836,6 +6103,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:134",
       "habitatId": 134,
       "habitatSlug": "absoluteluxury",
       "habitatName": "Absolute luxury",
@@ -5900,6 +6169,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:135",
       "habitatId": 135,
       "habitatSlug": "heavyiron",
       "habitatName": "Heavy iron",
@@ -5964,6 +6235,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:136",
       "habitatId": 136,
       "habitatSlug": "modernliving",
       "habitatName": "Modern living",
@@ -6014,6 +6287,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:137",
       "habitatId": 137,
       "habitatSlug": "pinktallgrass",
       "habitatName": "Pink tall grass",
@@ -6036,6 +6311,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:138",
       "habitatId": 138,
       "habitatSlug": "tree-shadedpinktallgrass",
       "habitatName": "Tree-shaded pink tall grass",
@@ -6072,6 +6349,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:139",
       "habitatId": 139,
       "habitatSlug": "hydratedpinktallgrass",
       "habitatName": "Hydrated pink tall grass",
@@ -6108,6 +6387,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:140",
       "habitatId": 140,
       "habitatSlug": "elevatedpinktallgrass",
       "habitatName": "Elevated pink tall grass",
@@ -6144,6 +6425,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:141",
       "habitatId": 141,
       "habitatSlug": "concretepipesecretbase",
       "habitatName": "Concrete pipe secret base",
@@ -6180,6 +6463,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:142",
       "habitatId": 142,
       "habitatSlug": "fluffyflowerbed",
       "habitatName": "Fluffy flower bed",
@@ -6202,6 +6487,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:143",
       "habitatId": 143,
       "habitatSlug": "tree-shadedfluffyflowerbed",
       "habitatName": "Tree-shaded fluffy flower bed",
@@ -6238,6 +6525,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:144",
       "habitatId": 144,
       "habitatSlug": "hydratedfluffyflowerbed",
       "habitatName": "Hydrated fluffy flower bed",
@@ -6274,6 +6563,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:145",
       "habitatId": 145,
       "habitatSlug": "watersidedinghy",
       "habitatName": "Waterside dinghy",
@@ -6338,6 +6629,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:146",
       "habitatId": 146,
       "habitatSlug": "illuminatedwaterfall",
       "habitatName": "Illuminated waterfall",
@@ -6402,6 +6695,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:147",
       "habitatId": 147,
       "habitatSlug": "birdsonggarden",
       "habitatName": "Birdsong garden",
@@ -6438,6 +6733,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:148",
       "habitatId": 148,
       "habitatSlug": "simplebathroom",
       "habitatName": "Simple bathroom",
@@ -6474,6 +6771,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:149",
       "habitatId": 149,
       "habitatSlug": "cyclingreststop",
       "habitatName": "Cycling rest stop",
@@ -6510,6 +6809,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:150",
       "habitatId": 150,
       "habitatSlug": "fireplacenapspot",
       "habitatName": "Fireplace nap spot",
@@ -6546,6 +6847,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:151",
       "habitatId": 151,
       "habitatSlug": "surgingpsychicpower",
       "habitatName": "Surging psychic power",
@@ -6582,6 +6885,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:152",
       "habitatId": 152,
       "habitatSlug": "fortune-teller'stable",
       "habitatName": "Fortune-teller's table",
@@ -6632,6 +6937,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:153",
       "habitatId": 153,
       "habitatSlug": "trashsitetv",
       "habitatName": "Trash site TV",
@@ -6668,6 +6975,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:154",
       "habitatId": 154,
       "habitatSlug": "oversizeddumpingground",
       "habitatName": "Oversized dumping ground",
@@ -6732,6 +7041,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:155",
       "habitatId": 155,
       "habitatSlug": "interrogationdesk",
       "habitatName": "Interrogation desk",
@@ -6796,6 +7107,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:156",
       "habitatId": 156,
       "habitatSlug": "sewerholeinspection",
       "habitatName": "Sewer hole inspection",
@@ -6860,6 +7173,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:157",
       "habitatId": 157,
       "habitatSlug": "spotlesswashingstation",
       "habitatName": "Spotless Washing station",
@@ -6910,6 +7225,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:158",
       "habitatId": 158,
       "habitatSlug": "hometheater",
       "habitatName": "Home theater",
@@ -6960,6 +7277,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:159",
       "habitatId": 159,
       "habitatSlug": "studyarea",
       "habitatName": "Study Area",
@@ -7024,6 +7343,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:160",
       "habitatId": 160,
       "habitatSlug": "rhythmiclivingroom",
       "habitatName": "Rhythmic Living room",
@@ -7074,6 +7395,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:161",
       "habitatId": 161,
       "habitatSlug": "squeakyclean",
       "habitatName": "Squeaky clean",
@@ -7110,6 +7433,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:162",
       "habitatId": 162,
       "habitatSlug": "moisturizingmakeupstand",
       "habitatName": "Moisturizing makeup stand",
@@ -7160,6 +7485,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:163",
       "habitatId": 163,
       "habitatSlug": "minilibrary",
       "habitatName": "Mini library",
@@ -7224,6 +7551,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:164",
       "habitatId": 164,
       "habitatSlug": "gamecornerbattlezone",
       "habitatName": "Game Corner battle zone",
@@ -7245,7 +7574,7 @@
         },
         {
           "sourceOrder": 2,
-          "quantity": 1,
+          "quantity": 2,
           "itemId": "seat-any",
           "itemSlug": "seat-any",
           "itemName": "Seat (any)",
@@ -7260,6 +7589,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:165",
       "habitatId": 165,
       "habitatSlug": "playland",
       "habitatName": "Playland",
@@ -7296,6 +7627,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:166",
       "habitatId": 166,
       "habitatSlug": "workdesk",
       "habitatName": "Work desk",
@@ -7360,6 +7693,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:167",
       "habitatId": 167,
       "habitatSlug": "officestoreroom",
       "habitatName": "Office storeroom",
@@ -7410,6 +7745,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:168",
       "habitatId": 168,
       "habitatSlug": "experimentspace",
       "habitatName": "Experiment Space",
@@ -7460,6 +7797,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:169",
       "habitatId": 169,
       "habitatSlug": "professor'sapprenticeprogram",
       "habitatName": "Professor's apprentice program",
@@ -7524,6 +7863,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:170",
       "habitatId": 170,
       "habitatSlug": "researcher'sdesk",
       "habitatName": "Researcher's desk",
@@ -7574,6 +7915,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:171",
       "habitatId": 171,
       "habitatSlug": "publicreadingmaterial",
       "habitatName": "Public reading material",
@@ -7610,6 +7953,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:172",
       "habitatId": 172,
       "habitatSlug": "heart-poundingsurprisebox",
       "habitatName": "Heart-pounding surprise box",
@@ -7660,6 +8005,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:173",
       "habitatId": 173,
       "habitatSlug": "prankbutton",
       "habitatName": "Prank button",
@@ -7696,6 +8043,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:174",
       "habitatId": 174,
       "habitatSlug": "picturesquephotocutoutboard",
       "habitatName": "Picturesque photo cutout board",
@@ -7746,6 +8095,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:175",
       "habitatId": 175,
       "habitatSlug": "tirepark",
       "habitatName": "Tire Park",
@@ -7796,6 +8147,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:176",
       "habitatId": 176,
       "habitatSlug": "nature'smarket",
       "habitatName": "Nature's market",
@@ -7831,7 +8184,7 @@
         },
         {
           "sourceOrder": 3,
-          "quantity": 1,
+          "quantity": 2,
           "itemId": "table-any",
           "itemSlug": "table-any",
           "itemName": "Table (any)",
@@ -7860,6 +8213,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:177",
       "habitatId": 177,
       "habitatSlug": "construction-sitegenerator",
       "habitatName": "Construction-site generator",
@@ -7910,6 +8265,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:178",
       "habitatId": 178,
       "habitatSlug": "dojotraining",
       "habitatName": "Dojo training",
@@ -7946,6 +8303,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:179",
       "habitatId": 179,
       "habitatSlug": "evilorganizationhq",
       "habitatName": "Evil organization HQ",
@@ -7996,6 +8355,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:180",
       "habitatId": 180,
       "habitatSlug": "nineflames",
       "habitatName": "Nine flames",
@@ -8018,6 +8379,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:181",
       "habitatId": 181,
       "habitatSlug": "plushcentral",
       "habitatName": "Plush central",
@@ -8082,6 +8445,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:182",
       "habitatId": 182,
       "habitatSlug": "gamer'sparadise",
       "habitatName": "Gamer's paradise",
@@ -8160,6 +8525,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:183",
       "habitatId": 183,
       "habitatSlug": "toppop",
       "habitatName": "Top pop",
@@ -8210,6 +8577,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:184",
       "habitatId": 184,
       "habitatSlug": "fishingpond",
       "habitatName": "Fishing pond",
@@ -8260,6 +8629,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:185",
       "habitatId": 185,
       "habitatSlug": "oceanfishingspot",
       "habitatName": "Ocean fishing spot",
@@ -8310,6 +8681,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:186",
       "habitatId": 186,
       "habitatSlug": "marshfishingspot",
       "habitatName": "Marsh fishing spot",
@@ -8360,6 +8733,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:187",
       "habitatId": 187,
       "habitatSlug": "hot-springfishingspot",
       "habitatName": "Hot-spring Fishing Spot",
@@ -8410,6 +8785,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:188",
       "habitatId": 188,
       "habitatSlug": "magmafishingspot",
       "habitatName": "Magma fishing spot",
@@ -8460,6 +8837,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:189",
       "habitatId": 189,
       "habitatSlug": "ampedrockstage",
       "habitatName": "Amped rock stage",
@@ -8524,6 +8903,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:190",
       "habitatId": 190,
       "habitatSlug": "low-keyrockstage",
       "habitatName": "Low-key rock stage",
@@ -8588,6 +8969,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:191",
       "habitatId": 191,
       "habitatSlug": "maliciousknight'sshrine",
       "habitatName": "Malicious knight's shrine",
@@ -8596,14 +8979,14 @@
         {
           "sourceOrder": 1,
           "quantity": 1,
-          "itemId": "pedastal",
-          "itemSlug": "pedastal",
-          "itemName": "Pedastal",
+          "itemId": "pedestal",
+          "itemSlug": "pedestal",
+          "itemName": "Pedestal",
           "sourceDetailUrl": null,
           "detailUrl": null,
-          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pedastal.png",
-          "pictureFilename": "pedastal.png",
-          "pictureAlt": "Pedastal",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pedestal.png",
+          "pictureFilename": "pedestal.png",
+          "pictureAlt": "Pedestal",
           "isCatalogLinked": false,
           "catalogMatchType": "unmatched"
         },
@@ -8652,6 +9035,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:192",
       "habitatId": 192,
       "habitatSlug": "auspiciousknight'sshrine",
       "habitatName": "Auspicious knight's shrine",
@@ -8660,14 +9045,14 @@
         {
           "sourceOrder": 1,
           "quantity": 1,
-          "itemId": "pedastal",
-          "itemSlug": "pedastal",
-          "itemName": "Pedastal",
+          "itemId": "pedestal",
+          "itemSlug": "pedestal",
+          "itemName": "Pedestal",
           "sourceDetailUrl": null,
           "detailUrl": null,
-          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pedastal.png",
-          "pictureFilename": "pedastal.png",
-          "pictureAlt": "Pedastal",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pedestal.png",
+          "pictureFilename": "pedestal.png",
+          "pictureAlt": "Pedestal",
           "isCatalogLinked": false,
           "catalogMatchType": "unmatched"
         },
@@ -8716,6 +9101,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:193",
       "habitatId": 193,
       "habitatSlug": "wingfossildisplay",
       "habitatName": "Wing Fossil Display",
@@ -8808,6 +9195,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:194",
       "habitatId": 194,
       "habitatSlug": "skullfossildisplay",
       "habitatName": "Skull Fossil display",
@@ -8844,6 +9233,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:195",
       "habitatId": 195,
       "habitatSlug": "headbuttfossildisplay",
       "habitatName": "Headbutt Fossil display",
@@ -8908,6 +9299,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:196",
       "habitatId": 196,
       "habitatSlug": "armorfossildisplay",
       "habitatName": "Armor Fossil display",
@@ -8944,6 +9337,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:197",
       "habitatId": 197,
       "habitatSlug": "shieldfossildisplay",
       "habitatName": "Shield Fossil display",
@@ -9008,6 +9403,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:198",
       "habitatId": 198,
       "habitatSlug": "jawfossildisplay",
       "habitatName": "Jaw Fossil display",
@@ -9044,6 +9441,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:199",
       "habitatId": 199,
       "habitatSlug": "despotfossildisplay",
       "habitatName": "Despot fossil display",
@@ -9122,6 +9521,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:200",
       "habitatId": 200,
       "habitatSlug": "sailfossildisplay",
       "habitatName": "Sail Fossil display",
@@ -9158,6 +9559,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:201",
       "habitatId": 201,
       "habitatSlug": "tundrafossildisplay",
       "habitatName": "Tundra fossil display",
@@ -9222,6 +9625,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:202",
       "habitatId": 202,
       "habitatSlug": "boundlessbluebeverage",
       "habitatName": "Boundless blue beverage",
@@ -9272,6 +9677,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:203",
       "habitatId": 203,
       "habitatSlug": "electrifyingpotatoes",
       "habitatName": "Electrifying potatoes",
@@ -9322,6 +9729,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:204",
       "habitatId": 204,
       "habitatSlug": "burning-hotspice",
       "habitatName": "Burning-hot spice",
@@ -9372,6 +9781,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:205",
       "habitatId": 205,
       "habitatSlug": "elegantdaytimetreats",
       "habitatName": "Elegant daytime treats",
@@ -9422,6 +9833,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:206",
       "habitatId": 206,
       "habitatSlug": "dark-chocolatecookies",
       "habitatName": "Dark-chocolate cookies",
@@ -9472,6 +9885,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:207",
       "habitatId": 207,
       "habitatSlug": "leafygreenssandwich",
       "habitatName": "Leafy greens sandwich",
@@ -9522,6 +9937,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:208",
       "habitatId": 208,
       "habitatSlug": "chillyshavedice",
       "habitatName": "Chilly shaved ice",
@@ -9572,6 +9989,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:209",
       "habitatId": 209,
       "habitatSlug": "lovelyribboncake",
       "habitatName": "Lovely ribbon cake",
@@ -9616,6 +10035,1878 @@
           "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/ribboncake.png",
           "pictureFilename": "ribboncake.png",
           "pictureAlt": "Ribbon Cake",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:001",
+      "habitatId": 1,
+      "habitatSlug": "basintallgrass",
+      "habitatName": "Basin tall grass",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/basintallgrass.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": null,
+          "itemId": "seabedtallgrass",
+          "itemSlug": "seabedtallgrass",
+          "itemName": "Seabed tall grass",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.png",
+          "pictureFilename": "seabedtallgrass.png",
+          "pictureAlt": "Seabed tall grass",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:002",
+      "habitatId": 2,
+      "habitatSlug": "basintallgrassandcoral",
+      "habitatName": "Basin tall grass and coral",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/basintallgrassandcoral.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 4,
+          "itemId": "seabedtallgrass",
+          "itemSlug": "seabedtallgrass",
+          "itemName": "Seabed tall grass",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.png",
+          "pictureFilename": "seabedtallgrass.png",
+          "pictureAlt": "Seabed tall grass",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "smallcoral",
+          "itemSlug": "smallcoral",
+          "itemName": "Small coral",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.png",
+          "pictureFilename": "smallcoral.png",
+          "pictureAlt": "Small coral",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "tallcoral",
+          "itemSlug": "tallcoral",
+          "itemName": "Tall coral",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.png",
+          "pictureFilename": "tallcoral.png",
+          "pictureAlt": "Tall coral",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:003",
+      "habitatId": 3,
+      "habitatSlug": "swayingflowerbed",
+      "habitatName": "Swaying flower bed",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbed.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 4,
+          "itemId": "seabedflowers",
+          "itemSlug": "seabedflowers",
+          "itemName": "Seabed flowers",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.png",
+          "pictureFilename": "seabedflowers.png",
+          "pictureAlt": "Seabed flowers",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:004",
+      "habitatId": 4,
+      "habitatSlug": "swayingflowerbedandcoral",
+      "habitatName": "Swaying flower bed and coral",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbedandcoral.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "colorfulcorals",
+          "itemSlug": "colorfulcorals",
+          "itemName": "Colorful corals",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.png",
+          "pictureFilename": "colorfulcorals.png",
+          "pictureAlt": "Colorful corals",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 4,
+          "itemId": "seabedflowers",
+          "itemSlug": "seabedflowers",
+          "itemName": "Seabed flowers",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.png",
+          "pictureFilename": "seabedflowers.png",
+          "pictureAlt": "Seabed flowers",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:005",
+      "habitatId": 5,
+      "habitatSlug": "swayingflowerbedandseaweed",
+      "habitatName": "Swaying flower bed and seaweed",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbedandseaweed.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "chimneyrocks",
+          "itemSlug": "chimneyrocks",
+          "itemName": "Chimney rocks",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.png",
+          "pictureFilename": "chimneyrocks.png",
+          "pictureAlt": "Chimney rocks",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 4,
+          "itemId": "seabedflowers",
+          "itemSlug": "seabedflowers",
+          "itemName": "Seabed flowers",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedflowers.png",
+          "pictureFilename": "seabedflowers.png",
+          "pictureAlt": "Seabed flowers",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 2,
+          "itemId": "lushseaweed",
+          "itemSlug": "lushseaweed",
+          "itemName": "Lush seaweed",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.png",
+          "pictureFilename": "lushseaweed.png",
+          "pictureAlt": "Lush seaweed",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:006",
+      "habitatId": 6,
+      "habitatSlug": "seaweedandnetting",
+      "habitatName": "Seaweed and netting",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/seaweedandnetting.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 4,
+          "itemId": "netting",
+          "itemSlug": "netting",
+          "itemName": "Netting",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/netting.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/netting.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/netting.png",
+          "pictureFilename": "netting.png",
+          "pictureAlt": "Netting",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 2,
+          "itemId": "lushseaweed",
+          "itemSlug": "lushseaweed",
+          "itemName": "Lush seaweed",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lushseaweed.png",
+          "pictureFilename": "lushseaweed.png",
+          "pictureAlt": "Lush seaweed",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:007",
+      "habitatId": 7,
+      "habitatSlug": "coralcongregation",
+      "habitatName": "Coral congregation",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/coralcongregation.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "colorfulcorals",
+          "itemSlug": "colorfulcorals",
+          "itemName": "Colorful corals",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/colorfulcorals.png",
+          "pictureFilename": "colorfulcorals.png",
+          "pictureAlt": "Colorful corals",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "smallcoral",
+          "itemSlug": "smallcoral",
+          "itemName": "Small coral",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.png",
+          "pictureFilename": "smallcoral.png",
+          "pictureAlt": "Small coral",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "tallcoral",
+          "itemSlug": "tallcoral",
+          "itemName": "Tall coral",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/tallcoral.png",
+          "pictureFilename": "tallcoral.png",
+          "pictureAlt": "Tall coral",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:008",
+      "habitatId": 8,
+      "habitatSlug": "sandybasintallgrass",
+      "habitatName": "Sandy basin tall grass",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandybasintallgrass.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "sandpile",
+          "itemSlug": "sandpile",
+          "itemName": "Sandpile",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.png",
+          "pictureFilename": "sandpile.png",
+          "pictureAlt": "Sandpile",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 4,
+          "itemId": "seabedtallgrass",
+          "itemSlug": "seabedtallgrass",
+          "itemName": "Seabed tall grass",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seabedtallgrass.png",
+          "pictureFilename": "seabedtallgrass.png",
+          "pictureAlt": "Seabed tall grass",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:009",
+      "habitatId": 9,
+      "habitatSlug": "sandydiggingspot",
+      "habitatName": "Sandy digging spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandydiggingspot.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "sandpile",
+          "itemSlug": "sandpile",
+          "itemName": "Sandpile",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.png",
+          "pictureFilename": "sandpile.png",
+          "pictureAlt": "Sandpile",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "sandtoys",
+          "itemSlug": "sandtoys",
+          "itemName": "Sandtoys",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sandtoys.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sandtoys.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sandtoys.png",
+          "pictureFilename": "sandtoys.png",
+          "pictureAlt": "Sandtoys",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:010",
+      "habitatId": 10,
+      "habitatSlug": "sandyspeech",
+      "habitatName": "Sandy speech",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandyspeech.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "sandpile",
+          "itemSlug": "sandpile",
+          "itemName": "Sandpile",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.png",
+          "pictureFilename": "sandpile.png",
+          "pictureAlt": "Sandpile",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "table-any",
+          "itemSlug": "table-any",
+          "itemName": "Table (any)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/table(any).png",
+          "pictureFilename": "table(any).png",
+          "pictureAlt": "Table (any)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "tabletopmic",
+          "itemSlug": "tabletopmic",
+          "itemName": "Tabletop mic",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/tabletopmic.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/tabletopmic.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/tabletopmic.png",
+          "pictureFilename": "tabletopmic.png",
+          "pictureAlt": "Tabletop mic",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:011",
+      "habitatId": 11,
+      "habitatSlug": "biteablepunchingbag",
+      "habitatName": "Biteable punching bag",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/biteablepunchingbag.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "sandpile",
+          "itemSlug": "sandpile",
+          "itemName": "Sandpile",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sandpile.png",
+          "pictureFilename": "sandpile.png",
+          "pictureAlt": "Sandpile",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "punchingbag",
+          "itemSlug": "punchingbag",
+          "itemName": "Punching bag",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/punchingbag.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/punchingbag.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/punchingbag.png",
+          "pictureFilename": "punchingbag.png",
+          "pictureAlt": "Punching bag",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "table-any",
+          "itemSlug": "table-any",
+          "itemName": "Table (any)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/table(any).png",
+          "pictureFilename": "table(any).png",
+          "pictureAlt": "Table (any)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "goldteeth",
+          "itemSlug": "goldteeth",
+          "itemName": "Gold Teeth",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/goldteeth.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/goldteeth.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/goldteeth.png",
+          "pictureFilename": "goldteeth.png",
+          "pictureAlt": "Gold Teeth",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:012",
+      "habitatId": 12,
+      "habitatSlug": "marinemossyrestspot",
+      "habitatName": "Marine mossy rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marinemossyrestspot.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "seamoss",
+          "itemSlug": "seamoss",
+          "itemName": "Sea moss",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.png",
+          "pictureFilename": "seamoss.png",
+          "pictureAlt": "Sea moss",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:013",
+      "habitatId": 13,
+      "habitatSlug": "moltenmossyrestspot",
+      "habitatName": "Molten mossy rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/moltenmossyrestspot.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "moltenrock",
+          "itemSlug": "moltenrock",
+          "itemName": "Molten rock",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/moltenrock.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/moltenrock.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/moltenrock.png",
+          "pictureFilename": "moltenrock.png",
+          "pictureAlt": "Molten rock",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 4,
+          "itemId": "seamoss",
+          "itemSlug": "seamoss",
+          "itemName": "Sea moss",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.png",
+          "pictureFilename": "seamoss.png",
+          "pictureAlt": "Sea moss",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:014",
+      "habitatId": 14,
+      "habitatSlug": "creepychimneyrocks",
+      "habitatName": "Creepy chimney rocks",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/creepychimneyrocks.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "chimneyrocks",
+          "itemSlug": "chimneyrocks",
+          "itemName": "Chimney rocks",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.png",
+          "pictureFilename": "chimneyrocks.png",
+          "pictureAlt": "Chimney rocks",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 4,
+          "itemId": "seamoss",
+          "itemSlug": "seamoss",
+          "itemName": "Sea moss",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.png",
+          "pictureFilename": "seamoss.png",
+          "pictureAlt": "Sea moss",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "barrel",
+          "itemSlug": "barrel",
+          "itemName": "Barrel",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/barrel.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/barrel.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/barrel.png",
+          "pictureFilename": "barrel.png",
+          "pictureAlt": "Barrel",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "lantern",
+          "itemSlug": "lantern",
+          "itemName": "Lantern",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.png",
+          "pictureFilename": "lantern.png",
+          "pictureAlt": "Lantern",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:015",
+      "habitatId": 15,
+      "habitatSlug": "chimneyrocksdigsite",
+      "habitatName": "Chimney rocks dig site",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/chimneyrocksdigsite.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "chimneyrocks",
+          "itemSlug": "chimneyrocks",
+          "itemName": "Chimney rocks",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/chimneyrocks.png",
+          "pictureFilename": "chimneyrocks.png",
+          "pictureAlt": "Chimney rocks",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "wheelbarrow",
+          "itemSlug": "wheelbarrow",
+          "itemName": "Wheelbarrow",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/wheelbarrow.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/wheelbarrow.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/wheelbarrow.png",
+          "pictureFilename": "wheelbarrow.png",
+          "pictureAlt": "Wheelbarrow",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "excavationtools",
+          "itemSlug": "excavationtools",
+          "itemName": "Excavation tools",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/excavationtools.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/excavationtools.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/excavationtools.png",
+          "pictureFilename": "excavationtools.png",
+          "pictureAlt": "Excavation tools",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "trafficcone",
+          "itemSlug": "trafficcone",
+          "itemName": "Traffic cone",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/trafficcone.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/trafficcone.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/trafficcone.png",
+          "pictureFilename": "trafficcone.png",
+          "pictureAlt": "Traffic cone",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:016",
+      "habitatId": 16,
+      "habitatSlug": "discardedtreasure",
+      "habitatName": "Discarded treasure",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/discardedtreasure.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "bigtreasurechest",
+          "itemSlug": "bigtreasurechest",
+          "itemName": "Big treasure chest",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.png",
+          "pictureFilename": "bigtreasurechest.png",
+          "pictureAlt": "Big treasure chest",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "waste-bin",
+          "itemSlug": "waste-bin",
+          "itemName": "Waste bin",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/wastebin.png",
+          "pictureFilename": "wastebin.png",
+          "pictureAlt": "Waste bin",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "garbagebags",
+          "itemSlug": "garbagebags",
+          "itemName": "Garbage bags",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/garbagebags.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/garbagebags.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/garbagebags.png",
+          "pictureFilename": "garbagebags.png",
+          "pictureAlt": "Garbage bags",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:017",
+      "habitatId": 17,
+      "habitatSlug": "playingsailor",
+      "habitatName": "Playing sailor",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/playingsailor.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "bigtreasurechest",
+          "itemSlug": "bigtreasurechest",
+          "itemName": "Big treasure chest",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.png",
+          "pictureFilename": "bigtreasurechest.png",
+          "pictureAlt": "Big treasure chest",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "ship'swheel",
+          "itemSlug": "ship'swheel",
+          "itemName": "Ship's wheel",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/ship'swheel.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/ship'swheel.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/ship'swheel.png",
+          "pictureFilename": "ship'swheel.png",
+          "pictureAlt": "Ship's wheel",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "woodencrate",
+          "itemSlug": "woodencrate",
+          "itemName": "Wooden crate",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.png",
+          "pictureFilename": "woodencrate.png",
+          "pictureAlt": "Wooden crate",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "bottledship",
+          "itemSlug": "bottledship",
+          "itemName": "Bottled ship",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.png",
+          "pictureFilename": "bottledship.png",
+          "pictureAlt": "Bottled ship",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:018",
+      "habitatId": 18,
+      "habitatSlug": "treasurechestandsparklingjewels",
+      "habitatName": "Treasure chest and sparkling jewels",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/treasurechestandsparklingjewels.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "bigtreasurechest",
+          "itemSlug": "bigtreasurechest",
+          "itemName": "Big treasure chest",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bigtreasurechest.png",
+          "pictureFilename": "bigtreasurechest.png",
+          "pictureAlt": "Big treasure chest",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "sparklingjewelry",
+          "itemSlug": "sparklingjewelry",
+          "itemName": "Sparkling jewelry",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.png",
+          "pictureFilename": "sparklingjewelry.png",
+          "pictureAlt": "Sparkling jewelry",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "lantern",
+          "itemSlug": "lantern",
+          "itemName": "Lantern",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.png",
+          "pictureFilename": "lantern.png",
+          "pictureAlt": "Lantern",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:019",
+      "habitatId": 19,
+      "habitatSlug": "oceanrestspot",
+      "habitatName": "Ocean rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/oceanrestspot.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "smallcoral",
+          "itemSlug": "smallcoral",
+          "itemName": "Small coral",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/smallcoral.png",
+          "pictureFilename": "smallcoral.png",
+          "pictureAlt": "Small coral",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "seashellseat",
+          "itemSlug": "seashellseat",
+          "itemName": "Seashell seat",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seashellseat.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seashellseat.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seashellseat.png",
+          "pictureFilename": "seashellseat.png",
+          "pictureAlt": "Seashell seat",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "lampion",
+          "itemSlug": "lampion",
+          "itemName": "Lampion",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.png",
+          "pictureFilename": "lampion.png",
+          "pictureAlt": "Lampion",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:020",
+      "habitatId": 20,
+      "habitatSlug": "marineshop",
+      "habitatName": "Marine shop",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineshop.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "cashregister",
+          "itemSlug": "cashregister",
+          "itemName": "Cash register",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/cashregister.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/cashregister.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/cashregister.png",
+          "pictureFilename": "cashregister.png",
+          "pictureAlt": "Cash register",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 2,
+          "itemId": "table-any",
+          "itemSlug": "table-any",
+          "itemName": "Table (any)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/table(any).png",
+          "pictureFilename": "table(any).png",
+          "pictureAlt": "Table (any)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "water",
+          "itemSlug": "water",
+          "itemName": "Water",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/water.png",
+          "pictureFilename": "water.png",
+          "pictureAlt": "Water",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:021",
+      "habitatId": 21,
+      "habitatSlug": "oceantreasures",
+      "habitatName": "Ocean treasures",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/oceantreasures.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "marinechest",
+          "itemSlug": "marinechest",
+          "itemName": "Marine chest",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechest.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechest.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinechest.png",
+          "pictureFilename": "marinechest.png",
+          "pictureAlt": "Marine chest",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "bottledship",
+          "itemSlug": "bottledship",
+          "itemName": "Bottled ship",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.png",
+          "pictureFilename": "bottledship.png",
+          "pictureAlt": "Bottled ship",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "sparklingjewelry",
+          "itemSlug": "sparklingjewelry",
+          "itemName": "Sparkling jewelry",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/sparklingjewelry.png",
+          "pictureFilename": "sparklingjewelry.png",
+          "pictureAlt": "Sparkling jewelry",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:022",
+      "habitatId": 22,
+      "habitatSlug": "smoothie-makingspot",
+      "habitatName": "Smoothie-making spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/smoothie-makingspot.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "blender",
+          "itemSlug": "blender",
+          "itemName": "Blender",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/blender.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/blender.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/blender.png",
+          "pictureFilename": "blender.png",
+          "pictureAlt": "Blender",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "plated-food",
+          "itemSlug": "plated-food",
+          "itemName": "Plated food",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/platedfood.png",
+          "pictureFilename": "platedfood.png",
+          "pictureAlt": "Plated food",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "table-any",
+          "itemSlug": "table-any",
+          "itemName": "Table (any)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/table(any).png",
+          "pictureFilename": "table(any).png",
+          "pictureAlt": "Table (any)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:023",
+      "habitatId": 23,
+      "habitatSlug": "fluffyrelaxation",
+      "habitatName": "Fluffy relaxation",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/fluffyrelaxation.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "cushionbed",
+          "itemSlug": "cushionbed",
+          "itemName": "Cushion bed",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/cushionbed.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/cushionbed.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/cushionbed.png",
+          "pictureFilename": "cushionbed.png",
+          "pictureAlt": "Cushion bed",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "lighting",
+          "itemSlug": "lighting",
+          "itemName": "Lighting",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lighting.png",
+          "pictureFilename": "lighting.png",
+          "pictureAlt": "Lighting",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "doll-any",
+          "itemSlug": "doll-any",
+          "itemName": "Doll (any)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/doll(any).png",
+          "pictureFilename": "doll(any).png",
+          "pictureAlt": "Doll (any)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:024",
+      "habitatId": 24,
+      "habitatSlug": "canoedock",
+      "habitatName": "Canoe dock",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/canoedock.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "canoe",
+          "itemSlug": "canoe",
+          "itemName": "Canoe",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/canoe.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/canoe.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/canoe.png",
+          "pictureFilename": "canoe.png",
+          "pictureAlt": "Canoe",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 2,
+          "itemId": "floatinglogs",
+          "itemSlug": "floatinglogs",
+          "itemName": "Floating logs",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.png",
+          "pictureFilename": "floatinglogs.png",
+          "pictureAlt": "Floating logs",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 2,
+          "itemId": "water",
+          "itemSlug": "water",
+          "itemName": "Water",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/water.png",
+          "pictureFilename": "water.png",
+          "pictureAlt": "Water",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:025",
+      "habitatId": 25,
+      "habitatSlug": "muddyplaytime",
+      "habitatName": "Muddy playtime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/muddyplaytime.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "windupinkay",
+          "itemSlug": "windupinkay",
+          "itemName": "Windup Inkay",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/windupinkay.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/windupinkay.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/windupinkay.png",
+          "pictureFilename": "windupinkay.png",
+          "pictureAlt": "Windup Inkay",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "towelrack",
+          "itemSlug": "towelrack",
+          "itemName": "Towel rack",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/towelrack.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/towelrack.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/towelrack.png",
+          "pictureFilename": "towelrack.png",
+          "pictureAlt": "Towel rack",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "floatinglogs",
+          "itemSlug": "floatinglogs",
+          "itemName": "Floating logs",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/floatinglogs.png",
+          "pictureFilename": "floatinglogs.png",
+          "pictureAlt": "Floating logs",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 2,
+          "itemId": "muddy-water",
+          "itemSlug": "muddy-water",
+          "itemName": "Muddy water",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/muddywater.png",
+          "pictureFilename": "muddywater.png",
+          "pictureAlt": "Muddy water",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:026",
+      "habitatId": 26,
+      "habitatSlug": "muddyspa",
+      "habitatName": "Muddy spa",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/muddyspa.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "seat-widde",
+          "itemSlug": "seat-widde",
+          "itemName": "Seat (widde)",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seat(widde).png",
+          "pictureFilename": "seat(widde).png",
+          "pictureAlt": "Seat (widde)",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "gyaradosfountain",
+          "itemSlug": "gyaradosfountain",
+          "itemName": "Gyarados fountain",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/gyaradosfountain.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/gyaradosfountain.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/gyaradosfountain.png",
+          "pictureFilename": "gyaradosfountain.png",
+          "pictureAlt": "Gyarados fountain",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "bathtimeset",
+          "itemSlug": "bathtimeset",
+          "itemName": "Bathtime set",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bathtimeset.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bathtimeset.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bathtimeset.png",
+          "pictureFilename": "bathtimeset.png",
+          "pictureAlt": "Bathtime set",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 2,
+          "itemId": "muddy-water",
+          "itemSlug": "muddy-water",
+          "itemName": "Muddy water",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/muddywater.png",
+          "pictureFilename": "muddywater.png",
+          "pictureAlt": "Muddy water",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:027",
+      "habitatId": 27,
+      "habitatSlug": "topsy-turby",
+      "habitatName": "Topsy-turby",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turby.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 3,
+          "itemId": "lampion",
+          "itemSlug": "lampion",
+          "itemName": "Lampion",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lampion.png",
+          "pictureFilename": "lampion.png",
+          "pictureAlt": "Lampion",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:028",
+      "habitatId": 28,
+      "habitatSlug": "bubblybathtub",
+      "habitatName": "Bubbly bathtub",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/bubblybathtub.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "bathtub",
+          "itemSlug": "bathtub",
+          "itemName": "Bathtub",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bathtub.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bathtub.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bathtub.png",
+          "pictureFilename": "bathtub.png",
+          "pictureAlt": "Bathtub",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "bubblemachine",
+          "itemSlug": "bubblemachine",
+          "itemName": "Bubble machine",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.png",
+          "pictureFilename": "bubblemachine.png",
+          "pictureAlt": "Bubble machine",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:029",
+      "habitatId": 29,
+      "habitatSlug": "bubblystage",
+      "habitatName": "Bubbly stage",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/bubblystage.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "smallstage",
+          "itemSlug": "smallstage",
+          "itemName": "Small stage",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/smallstage.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/smallstage.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/smallstage.png",
+          "pictureFilename": "smallstage.png",
+          "pictureAlt": "Small stage",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 2,
+          "itemId": "bubblemachine",
+          "itemSlug": "bubblemachine",
+          "itemName": "Bubble machine",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bubblemachine.png",
+          "pictureFilename": "bubblemachine.png",
+          "pictureAlt": "Bubble machine",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:030",
+      "habitatId": 30,
+      "habitatSlug": "glowingstageforthree",
+      "habitatName": "Glowing stage for three",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/glowingstageforthree.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 3,
+          "itemId": "standingmic",
+          "itemSlug": "standingmic",
+          "itemName": "Standing mic",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/standingmic.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/standingmic.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/standingmic.png",
+          "pictureFilename": "standingmic.png",
+          "pictureAlt": "Standing mic",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 3,
+          "itemId": "wirelesspower-transmitterpost",
+          "itemSlug": "wirelesspower-transmitterpost",
+          "itemName": "Wireless power-transmitter post",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/wirelesspower-transmitterpost.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/wirelesspower-transmitterpost.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/wirelesspower-transmitterpost.png",
+          "pictureFilename": "wirelesspower-transmitterpost.png",
+          "pictureAlt": "Wireless power-transmitter post",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:031",
+      "habitatId": 31,
+      "habitatSlug": "elegantconcert",
+      "habitatName": "Elegant concert",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/elegantconcert.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "harp",
+          "itemSlug": "harp",
+          "itemName": "Harp",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/harp.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/harp.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/harp.png",
+          "pictureFilename": "harp.png",
+          "pictureAlt": "Harp",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "marinechair",
+          "itemSlug": "marinechair",
+          "itemName": "Marine chair",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.png",
+          "pictureFilename": "marinechair.png",
+          "pictureAlt": "Marine chair",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 2,
+          "itemId": "shelllamp",
+          "itemSlug": "shelllamp",
+          "itemName": "Shell lamp",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/shelllamp.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/shelllamp.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/shelllamp.png",
+          "pictureFilename": "shelllamp.png",
+          "pictureAlt": "Shell lamp",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:032",
+      "habitatId": 32,
+      "habitatSlug": "marineteatime",
+      "habitatName": "Marine teatime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineteatime.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "chictable",
+          "itemSlug": "chictable",
+          "itemName": "Chic table",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/chictable.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/chictable.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/chictable.png",
+          "pictureFilename": "chictable.png",
+          "pictureAlt": "Chic table",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 2,
+          "itemId": "chicchair",
+          "itemSlug": "chicchair",
+          "itemName": "Chic chair",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/chicchair.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/chicchair.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/chicchair.png",
+          "pictureFilename": "chicchair.png",
+          "pictureAlt": "Chic chair",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "pushcart",
+          "itemSlug": "pushcart",
+          "itemName": "Push cart",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/pushcart.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/pushcart.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pushcart.png",
+          "pictureFilename": "pushcart.png",
+          "pictureAlt": "Push cart",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "teaset",
+          "itemSlug": "teaset",
+          "itemName": "Tea set",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/teaset.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/teaset.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/teaset.png",
+          "pictureFilename": "teaset.png",
+          "pictureAlt": "Tea set",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 5,
+          "quantity": 1,
+          "itemId": "bottledship",
+          "itemSlug": "bottledship",
+          "itemName": "Bottled ship",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/bottledship.png",
+          "pictureFilename": "bottledship.png",
+          "pictureAlt": "Bottled ship",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:033",
+      "habitatId": 33,
+      "habitatSlug": "nostalgiazone",
+      "habitatName": "Nostalgia zone",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/nostalgiazone.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "antiquechest",
+          "itemSlug": "antiquechest",
+          "itemName": "Antique chest",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/antiquechest.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/antiquechest.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/antiquechest.png",
+          "pictureFilename": "antiquechest.png",
+          "pictureAlt": "Antique chest",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "musicbox",
+          "itemSlug": "musicbox",
+          "itemName": "Music box",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/musicbox.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/musicbox.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/musicbox.png",
+          "pictureFilename": "musicbox.png",
+          "pictureAlt": "Music box",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "photoframe",
+          "itemSlug": "photoframe",
+          "itemName": "Photo frame",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/photoframe.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/photoframe.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/photoframe.png",
+          "pictureFilename": "photoframe.png",
+          "pictureAlt": "Photo frame",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 2,
+          "itemId": "seamoss",
+          "itemSlug": "seamoss",
+          "itemName": "Sea moss",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/seamoss.png",
+          "pictureFilename": "seamoss.png",
+          "pictureAlt": "Sea moss",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 5,
+          "quantity": 1,
+          "itemId": "woodencrate",
+          "itemSlug": "woodencrate",
+          "itemName": "Wooden crate",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/woodencrate.png",
+          "pictureFilename": "woodencrate.png",
+          "pictureAlt": "Wooden crate",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 6,
+          "quantity": 1,
+          "itemId": "lantern",
+          "itemSlug": "lantern",
+          "itemName": "Lantern",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/lantern.png",
+          "pictureFilename": "lantern.png",
+          "pictureAlt": "Lantern",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:034",
+      "habitatId": 34,
+      "habitatSlug": "marinemakeupstand",
+      "habitatName": "Marine makeup stand",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marinemakeupstand.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "marinecloset",
+          "itemSlug": "marinecloset",
+          "itemName": "Marine closet",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinecloset.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinecloset.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinecloset.png",
+          "pictureFilename": "marinecloset.png",
+          "pictureAlt": "Marine closet",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "marinedresser",
+          "itemSlug": "marinedresser",
+          "itemName": "Marine dresser",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinedresser.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinedresser.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinedresser.png",
+          "pictureFilename": "marinedresser.png",
+          "pictureAlt": "Marine dresser",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "marinechair",
+          "itemSlug": "marinechair",
+          "itemName": "Marine chair",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinechair.png",
+          "pictureFilename": "marinechair.png",
+          "pictureAlt": "Marine chair",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:035",
+      "habitatId": 35,
+      "habitatSlug": "gorgeoussleepingarea",
+      "habitatName": "Gorgeous Sleeping Area",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/gorgeoussleepingarea.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "ornatepartition",
+          "itemSlug": "ornatepartition",
+          "itemName": "Ornate partition",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatepartition.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatepartition.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/ornatepartition.png",
+          "pictureFilename": "ornatepartition.png",
+          "pictureAlt": "Ornate partition",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 1,
+          "itemId": "ornatebed",
+          "itemSlug": "ornatebed",
+          "itemName": "Ornate bed",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatebed.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatebed.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/ornatebed.png",
+          "pictureFilename": "ornatebed.png",
+          "pictureAlt": "Ornate bed",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "ornatestand",
+          "itemSlug": "ornatestand",
+          "itemName": "Ornate stand",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatestand.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/ornatestand.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/ornatestand.png",
+          "pictureFilename": "ornatestand.png",
+          "pictureAlt": "Ornate stand",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:036",
+      "habitatId": 36,
+      "habitatSlug": "mermaid'sgym",
+      "habitatName": "Mermaid's Gym",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/mermaid'sgym.shtml",
+      "requirements": [
+        {
+          "sourceOrder": 1,
+          "quantity": 1,
+          "itemId": "marinesofa",
+          "itemSlug": "marinesofa",
+          "itemName": "Marine Sofa",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/marinesofa.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/marinesofa.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/marinesofa.png",
+          "pictureFilename": "marinesofa.png",
+          "pictureAlt": "Marine Sofa",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 2,
+          "quantity": 6,
+          "itemId": "pedestal",
+          "itemSlug": "pedestal",
+          "itemName": "Pedestal",
+          "sourceDetailUrl": null,
+          "detailUrl": null,
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/pedestal.png",
+          "pictureFilename": "pedestal.png",
+          "pictureAlt": "Pedestal",
+          "isCatalogLinked": false,
+          "catalogMatchType": "unmatched"
+        },
+        {
+          "sourceOrder": 3,
+          "quantity": 1,
+          "itemId": "decorativegreatball",
+          "itemSlug": "decorativegreatball",
+          "itemName": "Decorative Great Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativegreatball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativegreatball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativegreatball.png",
+          "pictureFilename": "decorativegreatball.png",
+          "pictureAlt": "Decorative Great Ball",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 4,
+          "quantity": 1,
+          "itemId": "decorativehealball",
+          "itemSlug": "decorativehealball",
+          "itemName": "Decorative Heal Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativehealball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativehealball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativehealball.png",
+          "pictureFilename": "decorativehealball.png",
+          "pictureAlt": "Decorative Heal Ball",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 5,
+          "quantity": 1,
+          "itemId": "decorativediveball",
+          "itemSlug": "decorativediveball",
+          "itemName": "Decorative Dive Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativediveball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativediveball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativediveball.png",
+          "pictureFilename": "decorativediveball.png",
+          "pictureAlt": "Decorative Dive Ball",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 6,
+          "quantity": 1,
+          "itemId": "decorativenetball",
+          "itemSlug": "decorativenetball",
+          "itemName": "Decorative Net Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativenetball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativenetball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativenetball.png",
+          "pictureFilename": "decorativenetball.png",
+          "pictureAlt": "Decorative Net Ball",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 7,
+          "quantity": 1,
+          "itemId": "decorativelureball",
+          "itemSlug": "decorativelureball",
+          "itemName": "Decorative Lure Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativelureball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativelureball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativelureball.png",
+          "pictureFilename": "decorativelureball.png",
+          "pictureAlt": "Decorative Lure Ball",
+          "isCatalogLinked": true,
+          "catalogMatchType": "source-link"
+        },
+        {
+          "sourceOrder": 8,
+          "quantity": 1,
+          "itemId": "decorativequickball",
+          "itemSlug": "decorativequickball",
+          "itemName": "Decorative Quick Ball",
+          "sourceDetailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativequickball.shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/items/decorativequickball.shtml",
+          "pictureUrl": "https://www.serebii.net/pokemonpokopia/items/decorativequickball.png",
+          "pictureFilename": "decorativequickball.png",
+          "pictureAlt": "Decorative Quick Ball",
           "isCatalogLinked": true,
           "catalogMatchType": "source-link"
         }

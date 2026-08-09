@@ -45,7 +45,8 @@ FLAVOR_ANCHORS = {
 
 
 def main() -> None:
-    pokemon = json.loads(POKEMON_INPUT_PATH.read_text(encoding="utf-8"))["pokemon"]
+    pokemon_payload = json.loads(POKEMON_INPUT_PATH.read_text(encoding="utf-8"))
+    pokemon = pokemon_payload["pokemon"]
     items = json.loads(ITEMS_INPUT_PATH.read_text(encoding="utf-8"))["items"]
     items_by_detail = {item["detailUrl"]: item for item in items}
     items_by_name = build_unique_lookup(items, "name")
@@ -60,7 +61,7 @@ def main() -> None:
         tmp_path.parent.mkdir(parents=True, exist_ok=True)
         tmp_path.write_text(html, encoding="utf-8")
 
-        ideal_habitat, favorites = parse_preferences_table(html)
+        ideal_habitat, favorites, can_go_underwater = parse_preferences_table(html)
         if ideal_habitat:
             ideal_habitats_by_id.setdefault(
                 ideal_habitat["idealHabitatId"],
@@ -89,6 +90,7 @@ def main() -> None:
                 "pokemonDetailUrl": pokemon_entry["detailUrl"],
                 "idealHabitat": ideal_habitat,
                 "favorites": favorites,
+                "canGoUnderwater": can_go_underwater,
             }
         )
 
@@ -105,6 +107,7 @@ def main() -> None:
     common_source = {
         "name": "Serebii",
         "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml",
+        "pages": pokemon_payload["source"]["pages"],
         "fetchedAt": fetched_at,
         "notes": [
             "Pokemon preference data is parsed from each Pokemon detail page's Stats table.",
@@ -158,25 +161,40 @@ def build_unique_lookup(records: list[dict[str, Any]], key: str) -> dict[str, di
     return {value: matches[0] for value, matches in grouped.items() if len(matches) == 1}
 
 
-def parse_preferences_table(html: str) -> tuple[dict[str, Any] | None, list[dict[str, Any]]]:
+def parse_preferences_table(
+    html: str,
+) -> tuple[dict[str, Any] | None, list[dict[str, Any]], bool | None]:
     table_html = stats_table_html(html)
-    match = re.search(
-        r'<td class="foo">Favorites</td>\s*</tr>\s*<tr>.*?'
-        r'<td class="cen" valign="top"><a href="(?P<habitat_href>/pokemonpokopia/pokedex/idealhabitat/[^"]+)">'
-        r"\s*<u>(?P<habitat_name>.*?)</u>\s*</a></td>\s*"
-        r'<td class="cen" valign="top">\s*(?P<favorites>.*?)</td>',
-        table_html,
-        re.DOTALL,
-    )
-    if not match:
+    ideal_header_index = table_html.find(">Ideal Habitat</td>")
+    if ideal_header_index == -1:
+        raise ValueError("Could not find the Stats header row.")
+
+    header_row_start = table_html.rfind("<tr", 0, ideal_header_index)
+    header_row_end = table_html.find("</tr>", ideal_header_index)
+    if header_row_start == -1 or header_row_end == -1:
+        raise ValueError("Could not isolate the Stats header row.")
+    header_row_end += len("</tr>")
+
+    header_cells = extract_outer_elements(table_html[header_row_start:header_row_end], "td")
+    headers = [clean_text(cell["innerHtml"]) for cell in header_cells]
+    values = extract_outer_elements(table_html[header_row_end:], "td")
+    if "Ideal Habitat" not in headers or "Favorites" not in headers or len(values) < len(headers):
         raise ValueError("Could not find the Stats data row.")
 
+    habitat_html = values[headers.index("Ideal Habitat")]["innerHtml"]
+    favorites_html = values[headers.index("Favorites")]["innerHtml"]
     ideal_habitat = parse_ideal_habitat_link(
-        href=match.group("habitat_href"),
-        name_html=match.group("habitat_name"),
+        href=first_href(habitat_html),
+        name_html=habitat_html,
     )
-    favorites = parse_favorites(match.group("favorites"))
-    return ideal_habitat, favorites
+    can_go_underwater = None
+    if "Go Underwater?" in headers:
+        underwater_text = clean_text(values[headers.index("Go Underwater?")]["innerHtml"])
+        if underwater_text not in {"Underwater capable", "No"}:
+            raise ValueError(f"Unexpected Go Underwater value: {underwater_text!r}")
+        can_go_underwater = underwater_text == "Underwater capable"
+
+    return ideal_habitat, parse_favorites(favorites_html), can_go_underwater
 
 
 def stats_table_html(html: str) -> str:

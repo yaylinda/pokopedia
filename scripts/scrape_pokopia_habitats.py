@@ -18,10 +18,12 @@ OUTPUT_JSON_PATH = ROOT / "data" / "habitats.json"
 TMP_HTML_PATH = ROOT / ".tmp" / "pokopia-html" / "habitats.html"
 
 TABLE_RE = re.compile(
-    r"<p><h2>List of Habitats</h2></p>\s*<table align=\"center\" class=\"dextable\">(?P<table>.*?)</table>",
+    r"<p><h2>List of Habitats</h2></p>.*?"
+    r"<table align=\"center\" class=\"dextable\">(?P<table>.*?)</table>",
     re.DOTALL,
 )
-EVENT_HEADER = '<tr><td class="fooevo" colspan="4">Habitats (Event)</td></tr>'
+BASIN_HEADER = '<tr><td class="fooevo" colspan="4"><a name="basin"></a>Habitats (Basin)</td></tr>'
+EVENT_HEADER = '<tr><td class="fooevo" colspan="4"><a name="event"></a>Habitats (Event)</td></tr>'
 ROW_RE = re.compile(
     r"<tr>\s*"
     r"<td class=\"cen\">#(?P<id>\d+)</td>\s*"
@@ -49,7 +51,8 @@ def main() -> None:
                     "page": SOURCE_URL,
                     "fetchedAt": utc_now(),
                     "notes": [
-                        "This dataset includes only the top-level habitats table.",
+                        "This dataset includes the main and Basin habitat catalogs from the aggregate habitats table.",
+                        "Habitat numbers restart in the Basin catalog, so catalogId and habitatKey identify records.",
                         "The separate Habitats (Event) section is intentionally excluded.",
                     ],
                 },
@@ -86,29 +89,37 @@ def parse_habitats(html: str) -> list[dict[str, object]]:
         raise ValueError("Could not find the habitats table on the page.")
 
     table_html = match.group("table")
-    table_html = table_html.split(EVENT_HEADER, 1)[0]
+    non_event_html = table_html.split(EVENT_HEADER, 1)[0]
+    main_html, separator, basin_html = non_event_html.partition(BASIN_HEADER)
+    catalog_sections = [("main", main_html)]
+    if separator:
+        catalog_sections.append(("basin", basin_html))
 
     habitats: list[dict[str, object]] = []
-    for row_match in ROW_RE.finditer(table_html):
-        habitat_id = int(row_match.group("id"))
-        detail_path = row_match.group("detail")
-        name_detail_path = row_match.group("name_detail")
-        if detail_path != name_detail_path:
-            raise ValueError(f"Mismatched habitat detail paths for habitat #{habitat_id:03d}")
+    for catalog_id, section_html in catalog_sections:
+        for row_match in ROW_RE.finditer(section_html):
+            habitat_id = int(row_match.group("id"))
+            detail_path = row_match.group("detail")
+            name_detail_path = row_match.group("name_detail")
+            if detail_path != name_detail_path:
+                raise ValueError(f"Mismatched habitat detail paths for habitat #{habitat_id:03d}")
 
-        habitats.append(
-            {
-                "habitatId": habitat_id,
-                "habitatIdDisplay": f"#{habitat_id:03d}",
-                "name": clean_text(row_match.group("name")),
-                "description": clean_text(row_match.group("description")),
-                "slug": Path(detail_path).stem,
-                "detailUrl": absolute_url(detail_path),
-                "pictureUrl": absolute_url(row_match.group("image")),
-                "pictureFilename": Path(row_match.group("image")).name,
-                "pictureAlt": clean_text(row_match.group("alt")),
-            }
-        )
+            habitats.append(
+                {
+                    "sourceOrder": len(habitats) + 1,
+                    "catalogId": catalog_id,
+                    "habitatKey": f"{catalog_id}:{habitat_id:03d}",
+                    "habitatId": habitat_id,
+                    "habitatIdDisplay": f"#{habitat_id:03d}",
+                    "name": clean_text(row_match.group("name")),
+                    "description": clean_text(row_match.group("description")),
+                    "slug": Path(detail_path).stem,
+                    "detailUrl": absolute_url(detail_path),
+                    "pictureUrl": absolute_url(row_match.group("image")),
+                    "pictureFilename": Path(row_match.group("image")).name,
+                    "pictureAlt": clean_text(row_match.group("alt")),
+                }
+            )
 
     if not habitats:
         raise ValueError("No habitats were parsed from the top-level table.")

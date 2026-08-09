@@ -2,9 +2,9 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/locations.shtml",
-    "fetchedAt": "2026-04-11T01:27:28Z",
+    "fetchedAt": "2026-08-09T08:12:30Z",
     "notes": [
-      "This dataset includes only the five main playable locations.",
+      "This dataset includes the six playable locations, including the Bubbly Basin expansion area.",
       "Cloud Island is intentionally excluded from normalized location data."
     ],
     "excludedLocations": [
@@ -19,7 +19,7 @@
       }
     ]
   },
-  "count": 5,
+  "count": 6,
   "locations": [
     {
       "locationId": "withered-wastelands",
@@ -70,6 +70,16 @@
       "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/palettetownth.jpg",
       "pictureFilename": "palettetownth.jpg",
       "pictureAlt": "Palette Town"
+    },
+    {
+      "locationId": "bubbly-basin",
+      "sourceOrder": 7,
+      "slug": "bubblybasin",
+      "name": "Bubbly Basin",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/locations/bubblybasin.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/locations/bubblybasinth.jpg",
+      "pictureFilename": "bubblybasinth.jpg",
+      "pictureAlt": "Bubbly Basin"
     }
   ]
 }

@@ -64,7 +64,7 @@ Generated files:
 - `data/region-home-plan.json` - structured assignments, scores, and source fields
 - `docs/region-home-plan.md` - a readable region-by-region home roster
 
-## Scrape the Pokemon table
+## Scrape the Pokemon catalogs
 
 ```bash
 python3 scripts/scrape_pokopia_pokemon.py
@@ -74,7 +74,10 @@ Generated files:
 
 - `data/pokemon.json`
 
-Important data note: the table's `No.` column is the Pokopia number, not the National Dex Pokemon ID. The scraper derives `pokemonId` from the sprite image filename.
+The scraper combines the main and Basin Pokédex aggregate pages. The tables'
+`No.` columns are catalog-specific Pokopia numbers, not National Pokédex IDs;
+`catalogId` distinguishes their restarted numbering, and `pokemonId` is derived
+from the sprite filename.
 
 ## Scrape the habitats table
 
@@ -86,7 +89,9 @@ Generated files:
 
 - `data/habitats.json`
 
-This scraper reads only the top-level habitats table and excludes the separate `Habitats (Event)` section later on the page.
+This scraper reads the main and Basin catalogs from the aggregate habitats table
+and excludes the separate `Habitats (Event)` section. `habitatKey` combines the
+catalog and restarted habitat number into a unique key.
 
 ## Scrape the specialties table
 
@@ -100,7 +105,7 @@ Generated files:
 
 This scraper captures the specialties reference table with image, name, and description for each specialty.
 
-## Scrape the main locations table
+## Scrape the playable locations table
 
 ```bash
 python3 scripts/scrape_pokopia_locations.py
@@ -110,7 +115,8 @@ Generated files:
 
 - `data/locations.json`
 
-This scraper keeps only the five main playable locations and excludes Cloud Island from normalized location data.
+This scraper keeps the six playable locations, including Bubbly Basin, and
+excludes Cloud Island from normalized location data.
 
 ## Scrape the items index
 
@@ -137,4 +143,21 @@ Generated files:
 - `data/habitat-requirements.json`
 - `data/habitat-spawns.json`
 
-This scraper walks every top-level habitat page, records required items and quantities, and normalizes Pokemon spawn rules by location, rarity, time of day, and weather.
+This scraper walks every main and Basin habitat page, records required items and
+quantities, and normalizes Pokemon spawn rules by location, rarity, time of day,
+and weather.
+
+## Scrape Pokemon preferences
+
+```bash
+python3 scripts/scrape_pokopia_pokemon_preferences.py
+```
+
+Generated files:
+
+- `data/ideal-habitats.json`
+- `data/favorite-categories.json`
+- `data/pokemon-preferences.json`
+
+This scraper walks every Pokémon detail page from both catalogs and records ideal
+habitats, favorites, favorite items, and whether the Pokémon can go underwater.

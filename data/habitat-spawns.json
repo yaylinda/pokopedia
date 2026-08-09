@@ -2,16 +2,19 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
-    "fetchedAt": "2026-04-11T01:31:32Z",
+    "fetchedAt": "2026-08-09T08:13:52Z",
     "notes": [
       "Cloud Island is omitted from normalized spawn locations.",
+      "Bubbly Basin is included as a normalized spawn location.",
       "Requirement rows without direct item links are reconciled against the item catalog by exact name when possible."
     ]
   },
-  "count": 209,
-  "totalSpawns": 412,
+  "count": 245,
+  "totalSpawns": 486,
   "habitats": [
     {
+      "catalogId": "main",
+      "habitatKey": "main:001",
       "habitatId": 1,
       "habitatSlug": "tallgrass",
       "habitatName": "Tall Grass",
@@ -192,6 +195,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:002",
       "habitatId": 2,
       "habitatSlug": "tree-shadedtallgrass",
       "habitatName": "Tree-shaded tall grass",
@@ -372,6 +377,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:003",
       "habitatId": 3,
       "habitatSlug": "boulder-shadedtallgrass",
       "habitatName": "Boulder-shaded Tall Grass",
@@ -466,6 +473,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:004",
       "habitatId": 4,
       "habitatSlug": "hydratedtallgrass",
       "habitatName": "Hydrated tall grass",
@@ -618,6 +627,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:005",
       "habitatId": 5,
       "habitatSlug": "seasidetallgrass",
       "habitatName": "Seaside Tall Grass",
@@ -716,6 +727,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:006",
       "habitatId": 6,
       "habitatSlug": "elevatedtallgrass",
       "habitatName": "Elevated tall grass",
@@ -836,6 +849,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:007",
       "habitatId": 7,
       "habitatSlug": "illuminatedtallgrass",
       "habitatName": "Illuminated tall grass",
@@ -898,6 +913,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:008",
       "habitatId": 8,
       "habitatSlug": "prettyflowerbed",
       "habitatName": "Pretty flower bed",
@@ -1078,6 +1095,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:009",
       "habitatId": 9,
       "habitatSlug": "tree-shadedflowerbed",
       "habitatName": "Tree-shaded flower bed",
@@ -1167,6 +1186,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:010",
       "habitatId": 10,
       "habitatSlug": "hydratedflowerbed",
       "habitatName": "Hydrated flower bed",
@@ -1235,6 +1256,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:011",
       "habitatId": 11,
       "habitatSlug": "fieldofflowers",
       "habitatName": "Field of Flowers",
@@ -1333,6 +1356,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:012",
       "habitatId": 12,
       "habitatSlug": "elevatedflowerbed",
       "habitatName": "Elevated flower bed",
@@ -1401,6 +1426,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:013",
       "habitatId": 13,
       "habitatSlug": "gravewithflowers",
       "habitatName": "Grave with flowers",
@@ -1469,6 +1496,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:014",
       "habitatId": 14,
       "habitatSlug": "flowergarden",
       "habitatName": "Flower garden",
@@ -1537,6 +1566,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:015",
       "habitatId": 15,
       "habitatSlug": "freshveggiefield",
       "habitatName": "Fresh Veggie Field",
@@ -1631,6 +1662,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:016",
       "habitatId": 16,
       "habitatSlug": "ridingwarmupdrafts",
       "habitatName": "Riding warm updrafts",
@@ -1669,6 +1702,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:017",
       "habitatId": 17,
       "habitatSlug": "campsite",
       "habitatName": "Campsite",
@@ -1707,6 +1742,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:018",
       "habitatId": 18,
       "habitatSlug": "trainingwaterfall",
       "habitatName": "Training waterfall",
@@ -1745,6 +1782,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:019",
       "habitatId": 19,
       "habitatSlug": "tantalizingdiningset",
       "habitatName": "Tantalizing dining set",
@@ -1779,6 +1818,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:020",
       "habitatId": 20,
       "habitatSlug": "picnicset",
       "habitatName": "Picnic Set",
@@ -1839,6 +1880,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:021",
       "habitatId": 21,
       "habitatSlug": "flowerytable",
       "habitatName": "Flowery table",
@@ -1907,6 +1950,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:022",
       "habitatId": 22,
       "habitatSlug": "benchwithgreenery",
       "habitatName": "Bench with greenery",
@@ -1999,6 +2044,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:023",
       "habitatId": 23,
       "habitatSlug": "illuminatedbench",
       "habitatName": "Illuminated bench",
@@ -2061,6 +2108,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:024",
       "habitatId": 24,
       "habitatSlug": "exerciserestingspot",
       "habitatName": "Exercise resting spot",
@@ -2099,6 +2148,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:025",
       "habitatId": 25,
       "habitatSlug": "urgentcare",
       "habitatName": "Urgent Care",
@@ -2137,6 +2188,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:026",
       "habitatId": 26,
       "habitatSlug": "gymfirstaid",
       "habitatName": "Gym first aid",
@@ -2175,6 +2228,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:027",
       "habitatId": 27,
       "habitatSlug": "roadsign",
       "habitatName": "Road Sign",
@@ -2243,6 +2298,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:028",
       "habitatId": 28,
       "habitatSlug": "largeluggagecarrier",
       "habitatName": "Large luggage carrier",
@@ -2333,6 +2390,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:029",
       "habitatId": 29,
       "habitatSlug": "lumberjack'sworkplace",
       "habitatName": "Lumberjack's workplace",
@@ -2431,6 +2490,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:030",
       "habitatId": 30,
       "habitatSlug": "bedwithaplush",
       "habitatName": "Bed with a plush",
@@ -2555,6 +2616,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:031",
       "habitatId": 31,
       "habitatSlug": "gentlylitbed",
       "habitatName": "Gently lit bed",
@@ -2620,6 +2683,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:032",
       "habitatId": 32,
       "habitatSlug": "graveoffering",
       "habitatName": "Grave offering",
@@ -2688,6 +2753,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:033",
       "habitatId": 33,
       "habitatSlug": "creepygraveoffering",
       "habitatName": "Creepy grave offering",
@@ -2786,6 +2853,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:034",
       "habitatId": 34,
       "habitatSlug": "chanseyrestingarea",
       "habitatName": "Chansey Resting area",
@@ -2854,6 +2923,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:035",
       "habitatId": 35,
       "habitatSlug": "irresistiblescentandglow",
       "habitatName": "Irresistible scent and glow",
@@ -2922,6 +2993,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:036",
       "habitatId": 36,
       "habitatSlug": "floatingintheshade",
       "habitatName": "Floating in the shade",
@@ -2960,6 +3033,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:037",
       "habitatId": 37,
       "habitatSlug": "smoothtallgrass",
       "habitatName": "Smooth tall grass",
@@ -2998,6 +3073,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:038",
       "habitatId": 38,
       "habitatSlug": "factorystorage",
       "habitatName": "Factory Storage",
@@ -3036,6 +3113,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:039",
       "habitatId": 39,
       "habitatSlug": "luxurychirp-chirpmeal",
       "habitatName": "Luxury chirp-chirp meal",
@@ -3073,6 +3152,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:040",
       "habitatId": 40,
       "habitatSlug": "berry-feastcampsite",
       "habitatName": "Berry-feast Campsite",
@@ -3110,6 +3191,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:041",
       "habitatId": 41,
       "habitatSlug": "raindancesite",
       "habitatName": "Rain Dance site",
@@ -3146,6 +3229,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:042",
       "habitatId": 42,
       "habitatSlug": "sunnydaysite",
       "habitatName": "Sunny Day site",
@@ -3182,6 +3267,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:043",
       "habitatId": 43,
       "habitatSlug": "professor'streasuretrove",
       "habitatName": "Professor's treasure trove",
@@ -3220,10 +3307,12 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:044",
       "habitatId": 44,
-      "habitatSlug": "crazyloghandicrafts",
-      "habitatName": "Crazy log handicrafts",
-      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/crazyloghandicrafts.shtml",
+      "habitatSlug": "cozyloghandicrafts",
+      "habitatName": "Cozy log handicrafts",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/cozyloghandicrafts.shtml",
       "spawns": [
         {
           "sourceOrder": 1,
@@ -3318,6 +3407,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:045",
       "habitatId": 45,
       "habitatSlug": "very-berryspace",
       "habitatName": "Very-berry space",
@@ -3354,6 +3445,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:046",
       "habitatId": 46,
       "habitatSlug": "gardenterrace",
       "habitatName": "Garden Terrace",
@@ -3392,6 +3485,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:047",
       "habitatId": 47,
       "habitatSlug": "tree-shadedsnoozingsnorlax",
       "habitatName": "Tree-shaded snoozing Snorlax",
@@ -3452,6 +3547,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:048",
       "habitatId": 48,
       "habitatSlug": "goodold-fashionedantiques",
       "habitatName": "Good old-fashioned antiques",
@@ -3512,6 +3609,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:049",
       "habitatId": 49,
       "habitatSlug": "nothin'butpokeballs",
       "habitatName": "Nothin' but Poke Balls",
@@ -3546,6 +3645,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:050",
       "habitatId": 50,
       "habitatSlug": "yellowtallgrass",
       "habitatName": "Yellow tall grass",
@@ -3644,6 +3745,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:051",
       "habitatId": 51,
       "habitatSlug": "tree-shadedyellowtallgrass",
       "habitatName": "Tree-shaded Yellow tall grass",
@@ -3766,6 +3869,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:052",
       "habitatId": 52,
       "habitatSlug": "elevatedyellowtallgrass",
       "habitatName": "Elevated yellow tall grass",
@@ -3859,6 +3964,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:053",
       "habitatId": 53,
       "habitatSlug": "hydratedyellowtallgrass",
       "habitatName": "Hydrated yellow tall grass",
@@ -3987,6 +4094,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:054",
       "habitatId": 54,
       "habitatSlug": "marshytallgrass",
       "habitatName": "Marshy tall grass",
@@ -4051,6 +4160,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:055",
       "habitatId": 55,
       "habitatSlug": "overgrowthvendingmachine",
       "habitatName": "Overgrowth vending machine",
@@ -4089,6 +4200,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:056",
       "habitatId": 56,
       "habitatSlug": "breezyflowerbed",
       "habitatName": "Breezy flower bed",
@@ -4187,6 +4300,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:057",
       "habitatId": 57,
       "habitatSlug": "tropicalvibes",
       "habitatName": "Tropical vibes",
@@ -4285,6 +4400,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:058",
       "habitatId": 58,
       "habitatSlug": "windyflowerbed",
       "habitatName": "Windy Flower Bed",
@@ -4351,6 +4468,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:059",
       "habitatId": 59,
       "habitatSlug": "shadedbeach",
       "habitatName": "Shaded beach",
@@ -4419,6 +4538,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:060",
       "habitatId": 60,
       "habitatSlug": "tropicalseaside",
       "habitatName": "Tropical seaside",
@@ -4457,6 +4578,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:061",
       "habitatId": 61,
       "habitatSlug": "restingspot",
       "habitatName": "Resting spot",
@@ -4495,6 +4618,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:062",
       "habitatId": 62,
       "habitatSlug": "perpetualmess",
       "habitatName": "Perpetual mess",
@@ -4563,6 +4688,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:063",
       "habitatId": 63,
       "habitatSlug": "trashcollectionsite",
       "habitatName": "Trash collection site",
@@ -4683,6 +4810,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:064",
       "habitatId": 64,
       "habitatSlug": "trashcancentral",
       "habitatName": "Trash can central",
@@ -4781,6 +4910,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:065",
       "habitatId": 65,
       "habitatSlug": "trashdisposalsite",
       "habitatName": "Trash disposal site",
@@ -4816,6 +4947,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:066",
       "habitatId": 66,
       "habitatSlug": "parkbench",
       "habitatName": "Park bench",
@@ -4911,6 +5044,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:067",
       "habitatId": 67,
       "habitatSlug": "tantalizingrestaurant",
       "habitatName": "Tantalizing restaurant",
@@ -4979,6 +5114,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:068",
       "habitatId": 68,
       "habitatSlug": "tablesidedeliverycart",
       "habitatName": "Tableside delivery cart",
@@ -5015,6 +5152,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:069",
       "habitatId": 69,
       "habitatSlug": "chirp-chirpmeal",
       "habitatName": "Chirp-chirp meal",
@@ -5083,9 +5222,11 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:070",
       "habitatId": 70,
       "habitatSlug": "cafespace",
-      "habitatName": "Café space",
+      "habitatName": "Caf\u00e9 space",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/cafespace.shtml",
       "spawns": [
         {
@@ -5151,6 +5292,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:071",
       "habitatId": 71,
       "habitatSlug": "beachset",
       "habitatName": "Beach Set",
@@ -5249,6 +5392,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:072",
       "habitatId": 72,
       "habitatSlug": "light-upstage",
       "habitatName": "Light-up stage",
@@ -5317,6 +5462,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:073",
       "habitatId": 73,
       "habitatSlug": "surpriseinstore",
       "habitatName": "Surprise in store",
@@ -5409,6 +5556,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:074",
       "habitatId": 74,
       "habitatSlug": "nightfestivalvenue",
       "habitatName": "Night festival venue",
@@ -5447,6 +5596,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:075",
       "habitatId": 75,
       "habitatSlug": "changingarea",
       "habitatName": "Changing area",
@@ -5485,6 +5636,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:076",
       "habitatId": 76,
       "habitatSlug": "privatemakeupstand",
       "habitatName": "Private makeup stand",
@@ -5553,6 +5706,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:077",
       "habitatId": 77,
       "habitatSlug": "knittingstation",
       "habitatName": "Knitting station",
@@ -5621,6 +5776,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:078",
       "habitatId": 78,
       "habitatSlug": "hot-springshower",
       "habitatName": "Hot-spring shower",
@@ -5689,6 +5846,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:079",
       "habitatId": 79,
       "habitatSlug": "resortmealprep",
       "habitatName": "Resort meal prep",
@@ -5787,6 +5946,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:080",
       "habitatId": 80,
       "habitatSlug": "allpackedup",
       "habitatName": "All packed up",
@@ -5885,6 +6046,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:081",
       "habitatId": 81,
       "habitatSlug": "fullrecovery",
       "habitatName": "Full recovery",
@@ -5953,6 +6116,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:082",
       "habitatId": 82,
       "habitatSlug": "alarmclocksleepzone",
       "habitatName": "Alarm clock sleep zone",
@@ -5991,6 +6156,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:083",
       "habitatId": 83,
       "habitatSlug": "vendingmachinebreakarea",
       "habitatName": "Vending machine break area",
@@ -6059,6 +6226,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:084",
       "habitatId": 84,
       "habitatSlug": "vendingmachineset",
       "habitatName": "Vending machine set",
@@ -6127,6 +6296,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:085",
       "habitatId": 85,
       "habitatSlug": "minigamecorner",
       "habitatName": "Mini Game Corner",
@@ -6195,6 +6366,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:086",
       "habitatId": 86,
       "habitatSlug": "waterwheelspot",
       "habitatName": "Waterwheel Spot",
@@ -6261,6 +6434,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:087",
       "habitatId": 87,
       "habitatSlug": "furnacespot",
       "habitatName": "Furnace Spot",
@@ -6329,6 +6504,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:088",
       "habitatId": 88,
       "habitatSlug": "dock",
       "habitatName": "Dock",
@@ -6395,6 +6572,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:089",
       "habitatId": 89,
       "habitatSlug": "spookystudy",
       "habitatName": "Spooky study",
@@ -6457,6 +6636,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:090",
       "habitatId": 90,
       "habitatSlug": "playingpirate",
       "habitatName": "Playing pirate",
@@ -6525,6 +6706,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:091",
       "habitatId": 91,
       "habitatSlug": "workingtheregister",
       "habitatName": "Working the register",
@@ -6649,6 +6832,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:092",
       "habitatId": 92,
       "habitatSlug": "tinyatelier",
       "habitatName": "Tiny Atelier",
@@ -6687,6 +6872,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:093",
       "habitatId": 93,
       "habitatSlug": "gourmet'saltar",
       "habitatName": "Gourmet's altar",
@@ -6725,6 +6912,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:094",
       "habitatId": 94,
       "habitatSlug": "pikachuspace",
       "habitatName": "Pikachu space",
@@ -6763,6 +6952,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:095",
       "habitatId": 95,
       "habitatSlug": "cutenessoverload",
       "habitatName": "Cuteness overload",
@@ -6801,6 +6992,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:096",
       "habitatId": 96,
       "habitatSlug": "welcomingresort",
       "habitatName": "Welcoming resort",
@@ -6839,6 +7032,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:097",
       "habitatId": 97,
       "habitatSlug": "plainlife",
       "habitatName": "Plain life",
@@ -6877,6 +7072,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:098",
       "habitatId": 98,
       "habitatSlug": "redtallgrass",
       "habitatName": "Red tall grass",
@@ -7035,6 +7232,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:099",
       "habitatId": 99,
       "habitatSlug": "tree-shadedredtallgrass",
       "habitatName": "Tree-shaded red tall grass",
@@ -7163,6 +7362,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:100",
       "habitatId": 100,
       "habitatSlug": "pointytree-shadedrockytallgrass",
       "habitatName": "Pointy tree-shaded rocky tall grass",
@@ -7231,6 +7432,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:101",
       "habitatId": 101,
       "habitatSlug": "hydratedredtallgrass",
       "habitatName": "Hydrated red tall grass",
@@ -7299,6 +7502,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:102",
       "habitatId": 102,
       "habitatSlug": "elevatedredtallgrass",
       "habitatName": "Elevated red tall grass",
@@ -7392,6 +7597,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:103",
       "habitatId": 103,
       "habitatSlug": "grassytrainingfield",
       "habitatName": "Grassy training field",
@@ -7460,6 +7667,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:104",
       "habitatId": 104,
       "habitatSlug": "gracefulflowerbed",
       "habitatName": "Graceful flower bed",
@@ -7607,6 +7816,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:105",
       "habitatId": 105,
       "habitatSlug": "tree-shadedgracefulflowerbed",
       "habitatName": "Tree-shaded graceful flower bed",
@@ -7702,6 +7913,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:106",
       "habitatId": 106,
       "habitatSlug": "hydratedgracefulflowerbed",
       "habitatName": "Hydrated graceful flower bed",
@@ -7800,6 +8013,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:107",
       "habitatId": 107,
       "habitatSlug": "flowergardenstumpstage",
       "habitatName": "Flower garden stump stage",
@@ -7898,6 +8113,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:108",
       "habitatId": 108,
       "habitatSlug": "toilinthesoil",
       "habitatName": "Toil in the soil",
@@ -7936,6 +8153,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:109",
       "habitatId": 109,
       "habitatSlug": "upliftingduckweed",
       "habitatName": "Uplifting duckweed",
@@ -8004,6 +8223,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:110",
       "habitatId": 110,
       "habitatSlug": "mossyrestspot",
       "habitatName": "Mossy rest spot",
@@ -8072,6 +8293,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:111",
       "habitatId": 111,
       "habitatSlug": "mossyboulder",
       "habitatName": "Mossy boulder",
@@ -8140,6 +8363,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:112",
       "habitatId": 112,
       "habitatSlug": "mossyhotspring",
       "habitatName": "Mossy hot spring",
@@ -8178,6 +8403,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:113",
       "habitatId": 113,
       "habitatSlug": "open-airbath",
       "habitatName": "Open-air bath",
@@ -8216,6 +8443,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:114",
       "habitatId": 114,
       "habitatSlug": "harmonioushotspring",
       "habitatName": "Harmonious hot spring",
@@ -8254,6 +8483,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:115",
       "habitatId": 115,
       "habitatSlug": "piping-hotlava",
       "habitatName": "Piping-hot lava",
@@ -8322,6 +8553,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:116",
       "habitatId": 116,
       "habitatSlug": "diggingandburning",
       "habitatName": "Digging and burning",
@@ -8360,6 +8593,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:117",
       "habitatId": 117,
       "habitatSlug": "clink-clangironconstruction",
       "habitatName": "Clink-clang iron construction",
@@ -8428,6 +8663,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:118",
       "habitatId": 118,
       "habitatSlug": "creepywhiterocks",
       "habitatName": "Creepy white rocks",
@@ -8496,6 +8733,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:119",
       "habitatId": 119,
       "habitatSlug": "containersnacking",
       "habitatName": "Container snacking",
@@ -8594,6 +8833,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:120",
       "habitatId": 120,
       "habitatSlug": "dinnertablesurprise",
       "habitatName": "Dinner table surprise",
@@ -8632,6 +8873,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:121",
       "habitatId": 121,
       "habitatSlug": "bestbreadbakery",
       "habitatName": "Best bread bakery",
@@ -8698,6 +8941,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:122",
       "habitatId": 122,
       "habitatSlug": "minikitchen",
       "habitatName": "Mini kitchen",
@@ -8736,6 +8981,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:123",
       "habitatId": 123,
       "habitatSlug": "houseparty",
       "habitatName": "House party",
@@ -8804,6 +9051,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:124",
       "habitatId": 124,
       "habitatSlug": "lazy-photoalbumscrolling",
       "habitatName": "Lazy-photo album scrolling",
@@ -8838,6 +9087,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:125",
       "habitatId": 125,
       "habitatSlug": "chirpingrecital",
       "habitatName": "Chirping recital",
@@ -8902,6 +9153,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:126",
       "habitatId": 126,
       "habitatSlug": "recitalstage",
       "habitatName": "Recital stage",
@@ -8970,6 +9223,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:127",
       "habitatId": 127,
       "habitatSlug": "boxtotherhythm",
       "habitatName": "Box to the rhythm",
@@ -9068,6 +9323,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:128",
       "habitatId": 128,
       "habitatSlug": "musicandmagazines",
       "habitatName": "Music and magazines",
@@ -9166,6 +9423,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:129",
       "habitatId": 129,
       "habitatSlug": "minimuseum",
       "habitatName": "Mini museum",
@@ -9234,6 +9493,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:130",
       "habitatId": 130,
       "habitatSlug": "refreshinglockerroom",
       "habitatName": "Refreshing locker room",
@@ -9302,6 +9563,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:131",
       "habitatId": 131,
       "habitatSlug": "bronzelandmark",
       "habitatName": "Bronze landmark",
@@ -9364,6 +9627,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:132",
       "habitatId": 132,
       "habitatSlug": "railroadcrossing",
       "habitatName": "Railroad crossing",
@@ -9462,6 +9727,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:133",
       "habitatId": 133,
       "habitatSlug": "chef'skitchen",
       "habitatName": "Chef's kitchen",
@@ -9500,6 +9767,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:134",
       "habitatId": 134,
       "habitatSlug": "absoluteluxury",
       "habitatName": "Absolute luxury",
@@ -9538,6 +9807,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:135",
       "habitatId": 135,
       "habitatSlug": "heavyiron",
       "habitatName": "Heavy iron",
@@ -9576,6 +9847,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:136",
       "habitatId": 136,
       "habitatSlug": "modernliving",
       "habitatName": "Modern living",
@@ -9614,6 +9887,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:137",
       "habitatId": 137,
       "habitatSlug": "pinktallgrass",
       "habitatName": "Pink tall grass",
@@ -9769,6 +10044,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:138",
       "habitatId": 138,
       "habitatSlug": "tree-shadedpinktallgrass",
       "habitatName": "Tree-shaded pink tall grass",
@@ -9897,6 +10174,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:139",
       "habitatId": 139,
       "habitatSlug": "hydratedpinktallgrass",
       "habitatName": "Hydrated pink tall grass",
@@ -9995,6 +10274,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:140",
       "habitatId": 140,
       "habitatSlug": "elevatedpinktallgrass",
       "habitatName": "Elevated pink tall grass",
@@ -10123,6 +10404,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:141",
       "habitatId": 141,
       "habitatSlug": "concretepipesecretbase",
       "habitatName": "Concrete pipe secret base",
@@ -10191,6 +10474,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:142",
       "habitatId": 142,
       "habitatSlug": "fluffyflowerbed",
       "habitatName": "Fluffy flower bed",
@@ -10343,6 +10628,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:143",
       "habitatId": 143,
       "habitatSlug": "tree-shadedfluffyflowerbed",
       "habitatName": "Tree-shaded fluffy flower bed",
@@ -10471,6 +10758,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:144",
       "habitatId": 144,
       "habitatSlug": "hydratedfluffyflowerbed",
       "habitatName": "Hydrated fluffy flower bed",
@@ -10569,6 +10858,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:145",
       "habitatId": 145,
       "habitatSlug": "watersidedinghy",
       "habitatName": "Waterside dinghy",
@@ -10607,6 +10898,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:146",
       "habitatId": 146,
       "habitatSlug": "illuminatedwaterfall",
       "habitatName": "Illuminated waterfall",
@@ -10641,6 +10934,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:147",
       "habitatId": 147,
       "habitatSlug": "birdsonggarden",
       "habitatName": "Birdsong garden",
@@ -10679,6 +10974,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:148",
       "habitatId": 148,
       "habitatSlug": "simplebathroom",
       "habitatName": "Simple bathroom",
@@ -10747,6 +11044,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:149",
       "habitatId": 149,
       "habitatSlug": "cyclingreststop",
       "habitatName": "Cycling rest stop",
@@ -10785,6 +11084,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:150",
       "habitatId": 150,
       "habitatSlug": "fireplacenapspot",
       "habitatName": "Fireplace nap spot",
@@ -10853,6 +11154,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:151",
       "habitatId": 151,
       "habitatSlug": "surgingpsychicpower",
       "habitatName": "Surging psychic power",
@@ -10898,13 +11201,9 @@
           "pokemonImageFilename": "065.png",
           "pokemonFormSlug": null,
           "locations": [
-            "withered-wastelands",
-            "bleak-beach",
-            "rocky-ridges",
-            "sparkling-skylands",
-            "palette-town"
+            "sparkling-skylands"
           ],
-          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rawLocationText": "Sparkling Skylands; Cloud Island",
           "rarity": "Rare",
           "timeOfDay": [
             "morning",
@@ -10921,6 +11220,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:152",
       "habitatId": 152,
       "habitatSlug": "fortune-teller'stable",
       "habitatName": "Fortune-teller's table",
@@ -10989,6 +11290,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:153",
       "habitatId": 153,
       "habitatSlug": "trashsitetv",
       "habitatName": "Trash site TV",
@@ -11051,6 +11354,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:154",
       "habitatId": 154,
       "habitatSlug": "oversizeddumpingground",
       "habitatName": "Oversized dumping ground",
@@ -11115,6 +11420,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:155",
       "habitatId": 155,
       "habitatSlug": "interrogationdesk",
       "habitatName": "Interrogation desk",
@@ -11183,6 +11490,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:156",
       "habitatId": 156,
       "habitatSlug": "sewerholeinspection",
       "habitatName": "Sewer hole inspection",
@@ -11281,6 +11590,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:157",
       "habitatId": 157,
       "habitatSlug": "spotlesswashingstation",
       "habitatName": "Spotless Washing station",
@@ -11349,6 +11660,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:158",
       "habitatId": 158,
       "habitatSlug": "hometheater",
       "habitatName": "Home theater",
@@ -11384,6 +11697,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:159",
       "habitatId": 159,
       "habitatSlug": "studyarea",
       "habitatName": "Study Area",
@@ -11452,6 +11767,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:160",
       "habitatId": 160,
       "habitatSlug": "rhythmiclivingroom",
       "habitatName": "Rhythmic Living room",
@@ -11520,6 +11837,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:161",
       "habitatId": 161,
       "habitatSlug": "squeakyclean",
       "habitatName": "Squeaky clean",
@@ -11558,6 +11877,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:162",
       "habitatId": 162,
       "habitatSlug": "moisturizingmakeupstand",
       "habitatName": "Moisturizing makeup stand",
@@ -11626,6 +11947,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:163",
       "habitatId": 163,
       "habitatSlug": "minilibrary",
       "habitatName": "Mini library",
@@ -11664,6 +11987,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:164",
       "habitatId": 164,
       "habitatSlug": "gamecornerbattlezone",
       "habitatName": "Game Corner battle zone",
@@ -11702,6 +12027,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:165",
       "habitatId": 165,
       "habitatSlug": "playland",
       "habitatName": "Playland",
@@ -11740,6 +12067,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:166",
       "habitatId": 166,
       "habitatSlug": "workdesk",
       "habitatName": "Work desk",
@@ -11778,6 +12107,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:167",
       "habitatId": 167,
       "habitatSlug": "officestoreroom",
       "habitatName": "Office storeroom",
@@ -11900,6 +12231,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:168",
       "habitatId": 168,
       "habitatSlug": "experimentspace",
       "habitatName": "Experiment Space",
@@ -11915,13 +12248,9 @@
           "pokemonImageFilename": "065.png",
           "pokemonFormSlug": null,
           "locations": [
-            "withered-wastelands",
-            "bleak-beach",
-            "rocky-ridges",
-            "sparkling-skylands",
-            "palette-town"
+            "sparkling-skylands"
           ],
-          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rawLocationText": "Sparkling Skylands; Cloud Island",
           "rarity": "Common",
           "timeOfDay": [
             "morning",
@@ -11938,6 +12267,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:169",
       "habitatId": 169,
       "habitatSlug": "professor'sapprenticeprogram",
       "habitatName": "Professor's apprentice program",
@@ -11976,6 +12307,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:170",
       "habitatId": 170,
       "habitatSlug": "researcher'sdesk",
       "habitatName": "Researcher's desk",
@@ -12014,6 +12347,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:171",
       "habitatId": 171,
       "habitatSlug": "publicreadingmaterial",
       "habitatName": "Public reading material",
@@ -12082,6 +12417,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:172",
       "habitatId": 172,
       "habitatSlug": "heart-poundingsurprisebox",
       "habitatName": "Heart-pounding surprise box",
@@ -12120,6 +12457,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:173",
       "habitatId": 173,
       "habitatSlug": "prankbutton",
       "habitatName": "Prank button",
@@ -12188,6 +12527,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:174",
       "habitatId": 174,
       "habitatSlug": "picturesquephotocutoutboard",
       "habitatName": "Picturesque photo cutout board",
@@ -12256,6 +12597,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:175",
       "habitatId": 175,
       "habitatSlug": "tirepark",
       "habitatName": "Tire Park",
@@ -12290,6 +12633,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:176",
       "habitatId": 176,
       "habitatSlug": "nature'smarket",
       "habitatName": "Nature's market",
@@ -12328,6 +12673,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:177",
       "habitatId": 177,
       "habitatSlug": "construction-sitegenerator",
       "habitatName": "Construction-site generator",
@@ -12366,6 +12713,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:178",
       "habitatId": 178,
       "habitatSlug": "dojotraining",
       "habitatName": "Dojo training",
@@ -12434,6 +12783,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:179",
       "habitatId": 179,
       "habitatSlug": "evilorganizationhq",
       "habitatName": "Evil organization HQ",
@@ -12472,6 +12823,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:180",
       "habitatId": 180,
       "habitatSlug": "nineflames",
       "habitatName": "Nine flames",
@@ -12510,6 +12863,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:181",
       "habitatId": 181,
       "habitatSlug": "plushcentral",
       "habitatName": "Plush central",
@@ -12578,6 +12933,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:182",
       "habitatId": 182,
       "habitatSlug": "gamer'sparadise",
       "habitatName": "Gamer's paradise",
@@ -12616,6 +12973,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:183",
       "habitatId": 183,
       "habitatSlug": "toppop",
       "habitatName": "Top pop",
@@ -12654,6 +13013,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:184",
       "habitatId": 184,
       "habitatSlug": "fishingpond",
       "habitatName": "Fishing pond",
@@ -12661,6 +13022,36 @@
       "spawns": [
         {
           "sourceOrder": 1,
+          "pokemonId": 80,
+          "pokemonSlug": "slowbro",
+          "pokemonName": "Slowbro",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/slowbro.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/080.png",
+          "pokemonImageFilename": "080.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
           "pokemonId": 199,
           "pokemonSlug": "slowking",
           "pokemonName": "Slowking",
@@ -12692,6 +13083,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:185",
       "habitatId": 185,
       "habitatSlug": "oceanfishingspot",
       "habitatName": "Ocean fishing spot",
@@ -12790,6 +13183,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:186",
       "habitatId": 186,
       "habitatSlug": "marshfishingspot",
       "habitatName": "Marsh fishing spot",
@@ -12888,6 +13283,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:187",
       "habitatId": 187,
       "habitatSlug": "hot-springfishingspot",
       "habitatName": "Hot-spring Fishing Spot",
@@ -12956,6 +13353,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:188",
       "habitatId": 188,
       "habitatSlug": "magmafishingspot",
       "habitatName": "Magma fishing spot",
@@ -12994,6 +13393,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:189",
       "habitatId": 189,
       "habitatSlug": "ampedrockstage",
       "habitatName": "Amped rock stage",
@@ -13032,6 +13433,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:190",
       "habitatId": 190,
       "habitatSlug": "low-keyrockstage",
       "habitatName": "Low-key rock stage",
@@ -13070,6 +13473,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:191",
       "habitatId": 191,
       "habitatSlug": "maliciousknight'sshrine",
       "habitatName": "Malicious knight's shrine",
@@ -13108,6 +13513,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:192",
       "habitatId": 192,
       "habitatSlug": "auspiciousknight'sshrine",
       "habitatName": "Auspicious knight's shrine",
@@ -13146,6 +13553,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:193",
       "habitatId": 193,
       "habitatSlug": "wingfossildisplay",
       "habitatName": "Wing Fossil Display",
@@ -13184,6 +13593,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:194",
       "habitatId": 194,
       "habitatSlug": "skullfossildisplay",
       "habitatName": "Skull Fossil display",
@@ -13222,6 +13633,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:195",
       "habitatId": 195,
       "habitatSlug": "headbuttfossildisplay",
       "habitatName": "Headbutt Fossil display",
@@ -13260,6 +13673,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:196",
       "habitatId": 196,
       "habitatSlug": "armorfossildisplay",
       "habitatName": "Armor Fossil display",
@@ -13298,6 +13713,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:197",
       "habitatId": 197,
       "habitatSlug": "shieldfossildisplay",
       "habitatName": "Shield Fossil display",
@@ -13336,6 +13753,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:198",
       "habitatId": 198,
       "habitatSlug": "jawfossildisplay",
       "habitatName": "Jaw Fossil display",
@@ -13374,6 +13793,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:199",
       "habitatId": 199,
       "habitatSlug": "despotfossildisplay",
       "habitatName": "Despot fossil display",
@@ -13412,6 +13833,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:200",
       "habitatId": 200,
       "habitatSlug": "sailfossildisplay",
       "habitatName": "Sail Fossil display",
@@ -13450,6 +13873,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:201",
       "habitatId": 201,
       "habitatSlug": "tundrafossildisplay",
       "habitatName": "Tundra fossil display",
@@ -13488,6 +13913,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:202",
       "habitatId": 202,
       "habitatSlug": "boundlessbluebeverage",
       "habitatName": "Boundless blue beverage",
@@ -13522,6 +13949,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:203",
       "habitatId": 203,
       "habitatSlug": "electrifyingpotatoes",
       "habitatName": "Electrifying potatoes",
@@ -13556,6 +13985,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:204",
       "habitatId": 204,
       "habitatSlug": "burning-hotspice",
       "habitatName": "Burning-hot spice",
@@ -13590,6 +14021,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:205",
       "habitatId": 205,
       "habitatSlug": "elegantdaytimetreats",
       "habitatName": "Elegant daytime treats",
@@ -13624,6 +14057,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:206",
       "habitatId": 206,
       "habitatSlug": "dark-chocolatecookies",
       "habitatName": "Dark-chocolate cookies",
@@ -13658,6 +14093,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:207",
       "habitatId": 207,
       "habitatSlug": "leafygreenssandwich",
       "habitatName": "Leafy greens sandwich",
@@ -13692,6 +14129,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:208",
       "habitatId": 208,
       "habitatSlug": "chillyshavedice",
       "habitatName": "Chilly shaved ice",
@@ -13726,6 +14165,8 @@
       ]
     },
     {
+      "catalogId": "main",
+      "habitatKey": "main:209",
       "habitatId": 209,
       "habitatSlug": "lovelyribboncake",
       "habitatName": "Lovely ribbon cake",
@@ -13745,6 +14186,2618 @@
           ],
           "rawLocationText": "Palette Town; Cloud Island",
           "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:001",
+      "habitatId": 1,
+      "habitatSlug": "basintallgrass",
+      "habitatName": "Basin tall grass",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/basintallgrass.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 258,
+          "pokemonSlug": "mudkip",
+          "pokemonName": "Mudkip",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/mudkip.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/258.png",
+          "pokemonImageFilename": "258.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 418,
+          "pokemonSlug": "buizel",
+          "pokemonName": "Buizel",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/buizel.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/418.png",
+          "pokemonImageFilename": "418.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 158,
+          "pokemonSlug": "totodile",
+          "pokemonName": "Totodile",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/totodile.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/158.png",
+          "pokemonImageFilename": "158.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 4,
+          "pokemonId": 160,
+          "pokemonSlug": "feraligatr",
+          "pokemonName": "Feraligatr",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/feraligatr.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/160.png",
+          "pokemonImageFilename": "160.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Very Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:002",
+      "habitatId": 2,
+      "habitatSlug": "basintallgrassandcoral",
+      "habitatName": "Basin tall grass and coral",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/basintallgrassandcoral.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 222,
+          "pokemonSlug": "corsola",
+          "pokemonName": "Corsola",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/corsola.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/222.png",
+          "pokemonImageFilename": "222.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 90,
+          "pokemonSlug": "shellder",
+          "pokemonName": "Shellder",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/shellder.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/090.png",
+          "pokemonImageFilename": "090.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 260,
+          "pokemonSlug": "swampert",
+          "pokemonName": "Swampert",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/swampert.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/260.png",
+          "pokemonImageFilename": "260.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Very Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:003",
+      "habitatId": 3,
+      "habitatSlug": "swayingflowerbed",
+      "habitatName": "Swaying flower bed",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbed.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 618,
+          "pokemonSlug": "stunfisk",
+          "pokemonName": "Stunfisk",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/stunfisk.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/618.png",
+          "pokemonImageFilename": "618.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 728,
+          "pokemonSlug": "popplio",
+          "pokemonName": "Popplio",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/popplio.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/728.png",
+          "pokemonImageFilename": "728.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 120,
+          "pokemonSlug": "staryu",
+          "pokemonName": "Staryu",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/staryu.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/120.png",
+          "pokemonImageFilename": "120.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 4,
+          "pokemonId": 456,
+          "pokemonSlug": "finneon",
+          "pokemonName": "Finneon",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/finneon.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/456.png",
+          "pokemonImageFilename": "456.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:004",
+      "habitatId": 4,
+      "habitatSlug": "swayingflowerbedandcoral",
+      "habitatName": "Swaying flower bed and coral",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbedandcoral.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 747,
+          "pokemonSlug": "mareanie",
+          "pokemonName": "Mareanie",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/mareanie.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/747.png",
+          "pokemonImageFilename": "747.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 370,
+          "pokemonSlug": "luvdisc",
+          "pokemonName": "Luvdisc",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/luvdisc.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/370.png",
+          "pokemonImageFilename": "370.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 768,
+          "pokemonSlug": "golisopod",
+          "pokemonName": "Golisopod",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/golisopod.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/768.png",
+          "pokemonImageFilename": "768.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Very Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:005",
+      "habitatId": 5,
+      "habitatSlug": "swayingflowerbedandseaweed",
+      "habitatName": "Swaying flower bed and seaweed",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/swayingflowerbedandseaweed.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 91,
+          "pokemonSlug": "cloyster",
+          "pokemonName": "Cloyster",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/cloyster.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/091.png",
+          "pokemonImageFilename": "091.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 457,
+          "pokemonSlug": "lumineon",
+          "pokemonName": "Lumineon",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/lumineon.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/457.png",
+          "pokemonImageFilename": "457.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:006",
+      "habitatId": 6,
+      "habitatSlug": "seaweedandnetting",
+      "habitatName": "Seaweed and netting",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/seaweedandnetting.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 318,
+          "pokemonSlug": "carvanha",
+          "pokemonName": "Carvanha",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/carvanha.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/318.png",
+          "pokemonImageFilename": "318.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 618,
+          "pokemonSlug": "stunfisk",
+          "pokemonName": "Stunfisk",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/stunfisk.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/618.png",
+          "pokemonImageFilename": "618.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:007",
+      "habitatId": 7,
+      "habitatSlug": "coralcongregation",
+      "habitatName": "Coral congregation",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/coralcongregation.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 116,
+          "pokemonSlug": "horsea",
+          "pokemonName": "Horsea",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/horsea.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/116.png",
+          "pokemonImageFilename": "116.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 222,
+          "pokemonSlug": "corsola",
+          "pokemonName": "Corsola",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/corsola.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/222.png",
+          "pokemonImageFilename": "222.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 117,
+          "pokemonSlug": "seadra",
+          "pokemonName": "Seadra",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/seadra.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/117.png",
+          "pokemonImageFilename": "117.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 4,
+          "pokemonId": 230,
+          "pokemonSlug": "kingdra",
+          "pokemonName": "Kingdra",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/kingdra.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/230.png",
+          "pokemonImageFilename": "230.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Very Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:008",
+      "habitatId": 8,
+      "habitatSlug": "sandybasintallgrass",
+      "habitatName": "Sandy basin tall grass",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandybasintallgrass.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 341,
+          "pokemonSlug": "corphish",
+          "pokemonName": "Corphish",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/corphish.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/341.png",
+          "pokemonImageFilename": "341.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:009",
+      "habitatId": 9,
+      "habitatSlug": "sandydiggingspot",
+      "habitatName": "Sandy digging spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandydiggingspot.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 90,
+          "pokemonSlug": "shellder",
+          "pokemonName": "Shellder",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/shellder.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/090.png",
+          "pokemonImageFilename": "090.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 341,
+          "pokemonSlug": "corphish",
+          "pokemonName": "Corphish",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/corphish.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/341.png",
+          "pokemonImageFilename": "341.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 342,
+          "pokemonSlug": "crawdaunt",
+          "pokemonName": "Crawdaunt",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/crawdaunt.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/342.png",
+          "pokemonImageFilename": "342.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:010",
+      "habitatId": 10,
+      "habitatSlug": "sandyspeech",
+      "habitatName": "Sandy speech",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/sandyspeech.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 339,
+          "pokemonSlug": "barboach",
+          "pokemonName": "Barboach",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/barboach.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/339.png",
+          "pokemonImageFilename": "339.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 960,
+          "pokemonSlug": "wiglett",
+          "pokemonName": "Wiglett",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/wiglett.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/960.png",
+          "pokemonImageFilename": "960.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:011",
+      "habitatId": 11,
+      "habitatSlug": "biteablepunchingbag",
+      "habitatName": "Biteable punching bag",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/biteablepunchingbag.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 160,
+          "pokemonSlug": "feraligatr",
+          "pokemonName": "Feraligatr",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/feraligatr.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/160.png",
+          "pokemonImageFilename": "160.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:012",
+      "habitatId": 12,
+      "habitatSlug": "marinemossyrestspot",
+      "habitatName": "Marine mossy rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marinemossyrestspot.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 456,
+          "pokemonSlug": "finneon",
+          "pokemonName": "Finneon",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/finneon.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/456.png",
+          "pokemonImageFilename": "456.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 976,
+          "pokemonSlug": "veluza",
+          "pokemonName": "Veluza",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/veluza.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/976.png",
+          "pokemonImageFilename": "976.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 457,
+          "pokemonSlug": "lumineon",
+          "pokemonName": "Lumineon",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/lumineon.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/457.png",
+          "pokemonImageFilename": "457.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:013",
+      "habitatId": 13,
+      "habitatSlug": "moltenmossyrestspot",
+      "habitatName": "Molten mossy rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/moltenmossyrestspot.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 779,
+          "pokemonSlug": "bruxish",
+          "pokemonName": "Bruxish",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/bruxish.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/779.png",
+          "pokemonImageFilename": "779.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:014",
+      "habitatId": 14,
+      "habitatSlug": "creepychimneyrocks",
+      "habitatName": "Creepy chimney rocks",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/creepychimneyrocks.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 871,
+          "pokemonSlug": "pincurchin",
+          "pokemonName": "Pincurchin",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/pincurchin.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/871.png",
+          "pokemonImageFilename": "871.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 259,
+          "pokemonSlug": "marshtomp",
+          "pokemonName": "Marshtomp",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/marshtomp.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/259.png",
+          "pokemonImageFilename": "259.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:015",
+      "habitatId": 15,
+      "habitatSlug": "chimneyrocksdigsite",
+      "habitatName": "Chimney rocks dig site",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/chimneyrocksdigsite.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 319,
+          "pokemonSlug": "sharpedo",
+          "pokemonName": "Sharpedo",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/sharpedo.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/319.png",
+          "pokemonImageFilename": "319.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 159,
+          "pokemonSlug": "croconaw",
+          "pokemonName": "Croconaw",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/croconaw.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/159.png",
+          "pokemonImageFilename": "159.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:016",
+      "habitatId": 16,
+      "habitatSlug": "discardedtreasure",
+      "habitatName": "Discarded treasure",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/discardedtreasure.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 767,
+          "pokemonSlug": "wimpod",
+          "pokemonName": "Wimpod",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/wimpod.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/767.png",
+          "pokemonImageFilename": "767.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 768,
+          "pokemonSlug": "golisopod",
+          "pokemonName": "Golisopod",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/golisopod.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/768.png",
+          "pokemonImageFilename": "768.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:017",
+      "habitatId": 17,
+      "habitatSlug": "playingsailor",
+      "habitatName": "Playing sailor",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/playingsailor.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 592,
+          "pokemonSlug": "frillishfemaleform",
+          "pokemonName": "Frillish Female Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/frillishfemaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/592-frillishfemaleform.png",
+          "pokemonImageFilename": "592-frillishfemaleform.png",
+          "pokemonFormSlug": "frillishfemaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 592,
+          "pokemonSlug": "frillishmaleform",
+          "pokemonName": "Frillish Male Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/frillishmaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/592-frillishmaleform.png",
+          "pokemonImageFilename": "592-frillishmaleform.png",
+          "pokemonFormSlug": "frillishmaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 781,
+          "pokemonSlug": "dhelmise",
+          "pokemonName": "Dhelmise",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/dhelmise.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/781.png",
+          "pokemonImageFilename": "781.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:018",
+      "habitatId": 18,
+      "habitatSlug": "treasurechestandsparklingjewels",
+      "habitatName": "Treasure chest and sparkling jewels",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/treasurechestandsparklingjewels.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 370,
+          "pokemonSlug": "luvdisc",
+          "pokemonName": "Luvdisc",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/luvdisc.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/370.png",
+          "pokemonImageFilename": "370.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 748,
+          "pokemonSlug": "toxapex",
+          "pokemonName": "Toxapex",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/toxapex.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/748.png",
+          "pokemonImageFilename": "748.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:019",
+      "habitatId": 19,
+      "habitatSlug": "oceanrestspot",
+      "habitatName": "Ocean rest spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/oceanrestspot.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 339,
+          "pokemonSlug": "barboach",
+          "pokemonName": "Barboach",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/barboach.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/339.png",
+          "pokemonImageFilename": "339.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:020",
+      "habitatId": 20,
+      "habitatSlug": "marineshop",
+      "habitatName": "Marine shop",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineshop.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 419,
+          "pokemonSlug": "floatzel",
+          "pokemonName": "Floatzel",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/floatzel.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/419.png",
+          "pokemonImageFilename": "419.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:021",
+      "habitatId": 21,
+      "habitatSlug": "oceantreasures",
+      "habitatName": "Ocean treasures",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/oceantreasures.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 592,
+          "pokemonSlug": "frillishfemaleform",
+          "pokemonName": "Frillish Female Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/frillishfemaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/592-frillishfemaleform.png",
+          "pokemonImageFilename": "592-frillishfemaleform.png",
+          "pokemonFormSlug": "frillishfemaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 592,
+          "pokemonSlug": "frillishmaleform",
+          "pokemonName": "Frillish Male Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/frillishmaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/592-frillishmaleform.png",
+          "pokemonImageFilename": "592-frillishmaleform.png",
+          "pokemonFormSlug": "frillishmaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 594,
+          "pokemonSlug": "alomomola",
+          "pokemonName": "Alomomola",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/alomomola.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/594.png",
+          "pokemonImageFilename": "594.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:022",
+      "habitatId": 22,
+      "habitatSlug": "smoothie-makingspot",
+      "habitatName": "Smoothie-making spot",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/smoothie-makingspot.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 418,
+          "pokemonSlug": "buizel",
+          "pokemonName": "Buizel",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/buizel.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/418.png",
+          "pokemonImageFilename": "418.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 833,
+          "pokemonSlug": "chewtle",
+          "pokemonName": "Chewtle",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/chewtle.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/833.png",
+          "pokemonImageFilename": "833.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:023",
+      "habitatId": 23,
+      "habitatSlug": "fluffyrelaxation",
+      "habitatName": "Fluffy relaxation",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/fluffyrelaxation.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 170,
+          "pokemonSlug": "chinchou",
+          "pokemonName": "Chinchou",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/chinchou.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/170.png",
+          "pokemonImageFilename": "170.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 258,
+          "pokemonSlug": "mudkip",
+          "pokemonName": "Mudkip",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/mudkip.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/258.png",
+          "pokemonImageFilename": "258.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 370,
+          "pokemonSlug": "luvdisc",
+          "pokemonName": "Luvdisc",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/luvdisc.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/370.png",
+          "pokemonImageFilename": "370.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:024",
+      "habitatId": 24,
+      "habitatSlug": "canoedock",
+      "habitatName": "Canoe dock",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/canoedock.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 158,
+          "pokemonSlug": "totodile",
+          "pokemonName": "Totodile",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/totodile.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/158.png",
+          "pokemonImageFilename": "158.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 159,
+          "pokemonSlug": "croconaw",
+          "pokemonName": "Croconaw",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/croconaw.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/159.png",
+          "pokemonImageFilename": "159.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 834,
+          "pokemonSlug": "drednaw",
+          "pokemonName": "Drednaw",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/drednaw.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/834.png",
+          "pokemonImageFilename": "834.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:025",
+      "habitatId": 25,
+      "habitatSlug": "muddyplaytime",
+      "habitatName": "Muddy playtime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/muddyplaytime.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 259,
+          "pokemonSlug": "marshtomp",
+          "pokemonName": "Marshtomp",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/marshtomp.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/259.png",
+          "pokemonImageFilename": "259.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 339,
+          "pokemonSlug": "barboach",
+          "pokemonName": "Barboach",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/barboach.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/339.png",
+          "pokemonImageFilename": "339.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 686,
+          "pokemonSlug": "inkay",
+          "pokemonName": "Inkay",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/inkay.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/686.png",
+          "pokemonImageFilename": "686.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:026",
+      "habitatId": 26,
+      "habitatSlug": "muddyspa",
+      "habitatName": "Muddy spa",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/muddyspa.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 260,
+          "pokemonSlug": "swampert",
+          "pokemonName": "Swampert",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/swampert.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/260.png",
+          "pokemonImageFilename": "260.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:027",
+      "habitatId": 27,
+      "habitatSlug": "topsy-turby",
+      "habitatName": "Topsy-turby",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turby.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 687,
+          "pokemonSlug": "malamar",
+          "pokemonName": "Malamar",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/malamar.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/687.png",
+          "pokemonImageFilename": "687.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:028",
+      "habitatId": 28,
+      "habitatSlug": "bubblybathtub",
+      "habitatName": "Bubbly bathtub",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/bubblybathtub.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 158,
+          "pokemonSlug": "totodile",
+          "pokemonName": "Totodile",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/totodile.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/158.png",
+          "pokemonImageFilename": "158.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:029",
+      "habitatId": 29,
+      "habitatSlug": "bubblystage",
+      "habitatName": "Bubbly stage",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/bubblystage.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 728,
+          "pokemonSlug": "popplio",
+          "pokemonName": "Popplio",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/popplio.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/728.png",
+          "pokemonImageFilename": "728.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 729,
+          "pokemonSlug": "brionne",
+          "pokemonName": "Brionne",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/brionne.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/729.png",
+          "pokemonImageFilename": "729.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:030",
+      "habitatId": 30,
+      "habitatSlug": "glowingstageforthree",
+      "habitatName": "Glowing stage for three",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/glowingstageforthree.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 961,
+          "pokemonSlug": "wugtrio",
+          "pokemonName": "Wugtrio",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/wugtrio.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/961.png",
+          "pokemonImageFilename": "961.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:031",
+      "habitatId": 31,
+      "habitatSlug": "elegantconcert",
+      "habitatName": "Elegant concert",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/elegantconcert.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 730,
+          "pokemonSlug": "primarina",
+          "pokemonName": "Primarina",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/primarina.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/730.png",
+          "pokemonImageFilename": "730.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:032",
+      "habitatId": 32,
+      "habitatSlug": "marineteatime",
+      "habitatName": "Marine teatime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineteatime.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 593,
+          "pokemonSlug": "jellicentfemaleform",
+          "pokemonName": "Jellicent Female Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jellicentfemaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/593-jellicentfemaleform.png",
+          "pokemonImageFilename": "593-jellicentfemaleform.png",
+          "pokemonFormSlug": "jellicentfemaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 593,
+          "pokemonSlug": "jellicentmaleform",
+          "pokemonName": "Jellicent Male Form",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jellicentmaleform.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/593-jellicentmaleform.png",
+          "pokemonImageFilename": "593-jellicentmaleform.png",
+          "pokemonFormSlug": "jellicentmaleform",
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:033",
+      "habitatId": 33,
+      "habitatSlug": "nostalgiazone",
+      "habitatName": "Nostalgia zone",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/nostalgiazone.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 171,
+          "pokemonSlug": "lanturn",
+          "pokemonName": "Lanturn",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/lanturn.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/171.png",
+          "pokemonImageFilename": "171.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:034",
+      "habitatId": 34,
+      "habitatSlug": "marinemakeupstand",
+      "habitatName": "Marine makeup stand",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marinemakeupstand.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 230,
+          "pokemonSlug": "kingdra",
+          "pokemonName": "Kingdra",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/kingdra.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/230.png",
+          "pokemonImageFilename": "230.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:035",
+      "habitatId": 35,
+      "habitatSlug": "gorgeoussleepingarea",
+      "habitatName": "Gorgeous Sleeping Area",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/gorgeoussleepingarea.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 340,
+          "pokemonSlug": "whiscash",
+          "pokemonName": "Whiscash",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/whiscash.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/340.png",
+          "pokemonImageFilename": "340.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "basin",
+      "habitatKey": "basin:036",
+      "habitatId": 36,
+      "habitatSlug": "mermaid'sgym",
+      "habitatName": "Mermaid's Gym",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/mermaid'sgym.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 121,
+          "pokemonSlug": "starmie",
+          "pokemonName": "Starmie",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/starmie.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/121.png",
+          "pokemonImageFilename": "121.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Rare",
           "timeOfDay": [
             "morning",
             "day",

@@ -59,7 +59,8 @@ Important note: most rows either have one of the five category badges or no tag 
 
 ### `locations.json`
 
-Use one dataset for the five main playable locations only. These are the places that matter for habitat spawn logic.
+Use one dataset for the six playable locations, including Bubbly Basin. These are
+the places that matter for habitat spawn logic.
 
 Suggested shape:
 
@@ -81,6 +82,7 @@ Recommended contents:
 - `rocky-ridges`
 - `sparkling-skylands`
 - `palette-town`
+- `bubbly-basin`
 
 Cloud Island should be ignored in the app-facing model if you do not care about it.
 
@@ -174,7 +176,7 @@ Recommended fields:
 - `itemId`: same as slug for now
 - `anchorId`: required
 - `tagId`: optional
-- `isRegisteredInCollection`: derived from source notes like `Note: Not registered in collection`
+- `isRegisteredInCollection`: derived from source notes like `Note: Not registered in collection` and `Not listed in collection`
 - `notes`: extracted footnotes or source caveats
 - `availability`: structured acquisition records
 - `rawLocationText`: original joined cell text for fallback/debugging
@@ -187,6 +189,8 @@ Suggested shape:
 
 ```json
 {
+  "catalogId": "main",
+  "habitatKey": "main:067",
   "habitatId": 67,
   "habitatSlug": "tantalizingrestaurant",
   "requirements": [
@@ -228,6 +232,8 @@ Suggested shape:
 
 ```json
 {
+  "catalogId": "main",
+  "habitatKey": "main:001",
   "habitatId": 1,
   "habitatSlug": "tallgrass",
   "spawns": [
@@ -385,8 +391,8 @@ inside every Pokemon record and makes it cheap to answer both directions:
 
 1. Use `pokemon.json` as the source of Pokemon detail URLs.
 2. Fetch each detail page, optionally spooling temporary HTML into ignored `.tmp/pokopia-html/pokedex/{slug}.html`.
-3. Parse the detail page Stats table for the ideal habitat link and favorite
-   links.
+3. Parse the detail page Stats table by header name for the ideal habitat link,
+   favorite links, and `Go Underwater?` value.
 4. Deduplicate all ideal habitats into `ideal-habitats.json`.
 5. Deduplicate all favorite links into `favorite-categories.json`.
 6. Fetch each `/favorites/*.shtml` page and parse its item table.
@@ -487,7 +493,8 @@ Suggested shapes:
 
 ### Use numeric IDs only where the source truly provides them
 
-- habitats: numeric `habitatId`
+- habitats: catalog-local numeric `habitatId`; use `habitatKey` (for example,
+  `main:001` or `basin:001`) as the globally unique key
 - Pokemon: numeric `pokemonId` from image filename, not Pokopia number
 
 ### Use slugs everywhere else
@@ -548,7 +555,10 @@ The existing files still fit:
 
 ## Recommendation
 
-For the actual implementation, I would treat `items.json` as the canonical item catalog, use `locations.json` for the five main playable locations, and keep habitat requirements and habitat spawns in separate files rather than nesting them into `habitats.json`.
+For the actual implementation, I would treat `items.json` as the canonical item
+catalog, use `locations.json` for the six playable locations, and keep habitat
+requirements and habitat spawns in separate files rather than nesting them into
+`habitats.json`.
 
 That gives us:
 
