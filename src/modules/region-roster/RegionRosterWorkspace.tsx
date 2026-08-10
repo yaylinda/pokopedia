@@ -987,6 +987,14 @@ function PokemonTile({
   const comfortStyle = comfortStyles[pokemon.comfortLevel]
   const evolutionGroup = getEvolutionConstraintGroup(pokemon.slug)
   const movedHere = activeRegionId !== pokemon.regionId
+  const skillsLabel =
+    pokemon.specialties.length > 0
+      ? pokemon.specialties.map((specialty) => specialty.name).join(', ')
+      : 'No skills listed'
+  const favoritesLabel =
+    pokemon.favorites.length > 0
+      ? pokemon.favorites.map((favorite) => favorite.name).join(', ')
+      : 'No favorites listed'
 
   return (
     <Box
@@ -1076,26 +1084,21 @@ function PokemonTile({
               sx={{ color: comfortStyle.deep, fontWeight: 750 }}
               variant="caption"
             >
-              {movedHere
-                ? 'Comfort needs recheck'
-                : comfortIsAssessed
-                  ? `${comfortStyle.label} comfort`
-                  : 'Comfort not assessed'}
+              {pokemon.idealHabitat?.name ?? 'No ideal habitat listed'}
             </Typography>
             <Typography color="text.disabled" component="span" variant="caption">
               ·
             </Typography>
             <Typography color="text.secondary" component="span" noWrap variant="caption">
-              {pokemon.specialties.length > 0
-                ? `${pokemon.specialties[0].name}${pokemon.specialties.length > 1 ? ` +${pokemon.specialties.length - 1}` : ''}`
-                : 'No skill listed'}
+              {skillsLabel}
             </Typography>
           </Stack>
-          <LindaStatsSnapshot
-            evolutionGroupSize={evolutionGroup.length}
-            movedHere={movedHere}
-            stats={lindaStats}
-          />
+          <Typography color="text.secondary" noWrap variant="caption">
+            <Box component="span" sx={{ color: 'text.primary', fontWeight: 750 }}>
+              Favorites:
+            </Box>{' '}
+            {favoritesLabel}
+          </Typography>
         </Box>
 
         <ExpandMoreRoundedIcon
@@ -1157,97 +1160,6 @@ function PokemonTile({
           />
         </Box>
       </Collapse>
-    </Box>
-  )
-}
-
-function LindaStatsSnapshot({
-  evolutionGroupSize,
-  movedHere,
-  stats,
-}: {
-  evolutionGroupSize: number
-  movedHere: boolean
-  stats: LindaPokemonStats
-}) {
-  const belongsLabel =
-    stats.belongsInCurrentRegion === null
-      ? 'Undecided'
-      : stats.belongsInCurrentRegion
-        ? 'Belongs'
-        : 'Reconsider'
-
-  return (
-    <Box
-      aria-label={`Linda ratings: like ${stats.likeRating ?? 'not rated'} of 5, usefulness ${stats.usefulnessRating ?? 'not rated'} of 5, region ${belongsLabel}`}
-      sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.375 }}
-    >
-      <LindaMiniMetric
-        color="oklch(0.52 0.16 25)"
-        icon={<FavoriteRoundedIcon />}
-        label={`Like ${stats.likeRating ?? '—'}/5`}
-      />
-      <LindaMiniMetric
-        color="oklch(0.45 0.12 235)"
-        icon={<HandymanRoundedIcon />}
-        label={`Useful ${stats.usefulnessRating ?? '—'}/5`}
-      />
-      <LindaMiniMetric
-        color={
-          stats.belongsInCurrentRegion === null
-            ? 'oklch(0.48 0.035 250)'
-            : stats.belongsInCurrentRegion
-              ? 'oklch(0.42 0.11 145)'
-              : 'oklch(0.46 0.14 42)'
-        }
-        icon={<PlaceRoundedIcon />}
-        label={belongsLabel}
-      />
-      {evolutionGroupSize > 1 && (
-        <LindaMiniMetric
-          color="oklch(0.42 0.10 285)"
-          icon={<LinkRoundedIcon />}
-          label={`${evolutionGroupSize} linked`}
-        />
-      )}
-      {movedHere && (
-        <LindaMiniMetric
-          color="oklch(0.42 0.10 250)"
-          icon={<RestartAltRoundedIcon />}
-          label="Moved"
-        />
-      )}
-    </Box>
-  )
-}
-
-function LindaMiniMetric({
-  color,
-  icon,
-  label,
-}: {
-  color: string
-  icon: ReactNode
-  label: string
-}) {
-  return (
-    <Box
-      sx={{
-        alignItems: 'center',
-        backgroundColor: 'oklch(0.955 0.012 250)',
-        borderRadius: 8,
-        color,
-        display: 'flex',
-        gap: 0.25,
-        minHeight: 20,
-        px: 0.625,
-        '& svg': { fontSize: 12 },
-      }}
-    >
-      {icon}
-      <Typography component="span" sx={{ color: 'inherit', fontSize: '0.66rem', fontWeight: 800 }}>
-        {label}
-      </Typography>
     </Box>
   )
 }
