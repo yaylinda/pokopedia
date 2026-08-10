@@ -2,26 +2,31 @@ import type {
   LindaPokemonRating,
   LindaPokemonStats,
   PokopediaUserData,
+  RosterGroup,
+  RosterGroupsByScope,
 } from './types'
 import { legendaryOrMythicalPokemonSlugs } from './currentRegionRoster'
 
 export const USER_DATA_STORAGE_KEY = 'pokopedia:user-data:v1'
 
 export const createDefaultUserData = (): PokopediaUserData => ({
-  version: 7,
+  version: 8,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug: {},
   rosterRegionOverrides: {},
+  rosterGroupsByScope: {},
 })
 
 export const createUserData = (
   pokemonStatsBySlug: Record<string, LindaPokemonStats>,
   rosterRegionOverrides: Record<string, string>,
+  rosterGroupsByScope: RosterGroupsByScope,
 ): PokopediaUserData => ({
-  version: 7,
+  version: 8,
   updatedAt: new Date().toISOString(),
   pokemonStatsBySlug,
   rosterRegionOverrides,
+  rosterGroupsByScope,
 })
 
 const parseRating = (value: unknown): LindaPokemonRating | null =>
@@ -67,6 +72,56 @@ const parseStringRecord = (value: unknown): Record<string, string> => {
   )
 }
 
+const parseRosterGroupsByScope = (value: unknown): RosterGroupsByScope => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+
+  return Object.fromEntries(
+    Object.entries(value).flatMap(([scopeKey, maybeGroups]) => {
+      if (!scopeKey || !Array.isArray(maybeGroups)) return []
+
+      const seenGroupIds = new Set<string>()
+      const assignedPokemon = new Set<string>()
+      const groups = maybeGroups.flatMap((maybeGroup, index): RosterGroup[] => {
+        if (!maybeGroup || typeof maybeGroup !== 'object') return []
+
+        const candidate = maybeGroup as Partial<RosterGroup>
+        const groupId =
+          typeof candidate.groupId === 'string' ? candidate.groupId.trim() : ''
+
+        if (!groupId || seenGroupIds.has(groupId)) return []
+        seenGroupIds.add(groupId)
+
+        const pokemonSlugs: string[] = []
+
+        if (Array.isArray(candidate.pokemonSlugs)) {
+          candidate.pokemonSlugs.forEach((slug) => {
+            if (
+              typeof slug !== 'string' ||
+              !slug ||
+              assignedPokemon.has(slug) ||
+              pokemonSlugs.includes(slug) ||
+              pokemonSlugs.length >= 4
+            ) {
+              return
+            }
+
+            assignedPokemon.add(slug)
+            pokemonSlugs.push(slug)
+          })
+        }
+        const name =
+          typeof candidate.name === 'string' && candidate.name.trim()
+            ? candidate.name.trim()
+            : `Group ${index + 1}`
+
+        return [{ groupId, name, pokemonSlugs }]
+      })
+
+      return groups.length > 0 ? [[scopeKey, groups]] : []
+    }),
+  )
+}
+
 export const parseUserData = (value: unknown): PokopediaUserData | null => {
   if (!value || typeof value !== 'object') {
     return null
@@ -76,10 +131,12 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
   const pokemonStatsBySlug = parsePokemonStatsBySlug(
     maybeData.pokemonStatsBySlug,
   )
-  const shouldNormalizeLindaRatings = maybeData.version !== 7
+  const storedVersion =
+    typeof maybeData.version === 'number' ? Number(maybeData.version) : 0
+  const shouldNormalizeLindaRatings = storedVersion < 7
 
   return {
-    version: 7,
+    version: 8,
     updatedAt:
       !shouldNormalizeLindaRatings && typeof maybeData.updatedAt === 'string'
         ? maybeData.updatedAt
@@ -97,6 +154,9 @@ export const parseUserData = (value: unknown): PokopediaUserData | null => {
         )
       : pokemonStatsBySlug,
     rosterRegionOverrides: parseStringRecord(maybeData.rosterRegionOverrides),
+    rosterGroupsByScope: parseRosterGroupsByScope(
+      maybeData.rosterGroupsByScope,
+    ),
   }
 }
 

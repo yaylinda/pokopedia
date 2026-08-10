@@ -4,7 +4,7 @@ import {
   readUserData,
   writeUserData,
 } from './userData'
-import type { LindaPokemonStats } from './types'
+import type { LindaPokemonStats, RosterGroup } from './types'
 import { UserDataContext, type UserDataContextValue } from './userDataContext'
 
 export function UserDataProvider({ children }: { children: ReactNode }) {
@@ -38,7 +38,11 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         delete pokemonStatsBySlug[slug]
       }
 
-      return createUserData(pokemonStatsBySlug, current.rosterRegionOverrides)
+      return createUserData(
+        pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+        current.rosterGroupsByScope,
+      )
     })
   }
 
@@ -52,20 +56,48 @@ export function UserDataProvider({ children }: { children: ReactNode }) {
         delete rosterRegionOverrides[slug]
       }
 
-      return createUserData(current.pokemonStatsBySlug, rosterRegionOverrides)
+      return createUserData(
+        current.pokemonStatsBySlug,
+        rosterRegionOverrides,
+        current.rosterGroupsByScope,
+      )
+    })
+  }
+
+  const setRosterGroups = (scopeKey: string, groups: RosterGroup[]) => {
+    setUserData((current) => {
+      const rosterGroupsByScope = { ...current.rosterGroupsByScope }
+
+      if (groups.length > 0) {
+        rosterGroupsByScope[scopeKey] = groups
+      } else {
+        delete rosterGroupsByScope[scopeKey]
+      }
+
+      return createUserData(
+        current.pokemonStatsBySlug,
+        current.rosterRegionOverrides,
+        rosterGroupsByScope,
+      )
     })
   }
 
   const resetRosterModel = () => {
     setUserData((current) =>
-      createUserData(current.pokemonStatsBySlug, {}),
+      createUserData(
+        current.pokemonStatsBySlug,
+        {},
+        current.rosterGroupsByScope,
+      ),
     )
   }
 
   const value: UserDataContextValue = {
     pokemonStatsBySlug: userData.pokemonStatsBySlug,
     resetRosterModel,
+    rosterGroupsByScope: userData.rosterGroupsByScope,
     rosterRegionOverrides: userData.rosterRegionOverrides,
+    setRosterGroups,
     setPokemonRosterRegion,
     updatePokemonStats,
   }

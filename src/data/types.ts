@@ -6,9 +6,18 @@ export type LindaPokemonStats = {
   belongsInCurrentRegion: boolean | null
 }
 
+export type RosterGroup = {
+  groupId: string
+  name: string
+  pokemonSlugs: string[]
+}
+
+export type RosterGroupsByScope = Record<string, RosterGroup[]>
+
 export type PokopediaUserData = {
-  version: 7
+  version: 8
   updatedAt: string
   pokemonStatsBySlug: Record<string, LindaPokemonStats>
   rosterRegionOverrides: Record<string, string>
+  rosterGroupsByScope: RosterGroupsByScope
 }
