@@ -1140,6 +1140,11 @@ function PokemonTile({
             label="Skills"
             values={pokemon.specialties.map((specialty) => specialty.name)}
           />
+          <DetailRow
+            icon={<AutoAwesomeRoundedIcon />}
+            label="Favorites"
+            values={pokemon.favorites.map((favorite) => favorite.name)}
+          />
           <LindaStatsEditor
             onChange={onUpdateLindaStats}
             pokemonName={pokemon.name}
@@ -1152,11 +1157,6 @@ function PokemonTile({
             onMove={onMove}
             originalRegionName={pokemon.regionName}
             pokemonName={pokemon.name}
-          />
-          <DetailRow
-            icon={<AutoAwesomeRoundedIcon />}
-            label="Favorites"
-            values={pokemon.favorites.map((favorite) => favorite.name)}
           />
         </Box>
       </Collapse>
