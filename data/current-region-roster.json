@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-09",
+  "updatedAt": "2026-08-13",
   "sourceNote": "Identified from user-provided in-game region comfort details. Comfort groups are deduplicated across overlapping screenshots.",
   "regions": {
     "palette-town": {
@@ -424,52 +424,68 @@
     "bubbly-basin": {
       "name": "Bubbly Basin",
       "environmentLevel": {
-        "current": 4,
+        "current": 9,
         "isMax": false
       },
-      "pokemonCount": 29,
+      "pokemonCount": 45,
       "eventPokemonSlugs": [],
       "comfortLevels": {
-        "awesome": [],
+        "awesome": [
+          "greedent",
+          "mudkip",
+          "luvdisc",
+          "manaphy"
+        ],
         "great": [
-          "barboach",
-          "stunfisk"
+          "shellder",
+          "kingdra",
+          "staryu",
+          "starmie",
+          "whiscash",
+          "marshtomp",
+          "carvanha",
+          "toxapex",
+          "golisopod",
+          "veluza"
         ],
         "nice": [
+          "ditto",
+          "smeargle",
+          "tinkaton",
+          "cloyster",
+          "horsea",
           "totodile",
           "croconaw",
+          "feraligatr",
           "chinchou",
           "corsola",
           "sharpedo",
-          "luvdisc",
+          "barboach",
           "buizel",
+          "floatzel",
+          "finneon",
           "frillishfemaleform",
           "frillishmaleform",
-          "inkay",
-          "wiglett"
+          "alomomola",
+          "mareanie",
+          "wimpod",
+          "bruxish",
+          "dhelmise",
+          "chewtle",
+          "pincurchin",
+          "wiglett",
+          "wugtrio",
+          "phione"
         ],
         "average": [
-          "smeargle",
-          "horsea",
-          "seadra",
-          "staryu",
-          "mudkip",
           "corphish",
-          "mareanie",
-          "golisopod",
-          "bruxish"
+          "stunfisk",
+          "drednaw"
         ],
         "iffy": [
-          "cloyster",
-          "wimpod",
-          "veluza"
+          "lumineon"
         ],
-        "no-home": [
-          "ditto",
-          "shellder",
-          "carvanha",
-          "manaphy"
-        ]
+        "no-home": []
       }
     }
   }
