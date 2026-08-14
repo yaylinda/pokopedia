@@ -424,14 +424,15 @@
     "bubbly-basin": {
       "name": "Bubbly Basin",
       "environmentLevel": {
-        "current": 9,
-        "isMax": false
+        "current": 10,
+        "isMax": true
       },
-      "pokemonCount": 45,
+      "pokemonCount": 53,
       "eventPokemonSlugs": [],
       "comfortLevels": {
         "awesome": [
           "greedent",
+          "gyarados",
           "mudkip",
           "luvdisc",
           "manaphy"
@@ -441,11 +442,17 @@
           "kingdra",
           "staryu",
           "starmie",
+          "croconaw",
           "whiscash",
           "marshtomp",
           "carvanha",
+          "sharpedo",
+          "jellicentfemaleform",
+          "primarina",
           "toxapex",
           "golisopod",
+          "pincurchin",
+          "wiglett",
           "veluza"
         ],
         "nice": [
@@ -455,31 +462,32 @@
           "cloyster",
           "horsea",
           "totodile",
-          "croconaw",
           "feraligatr",
           "chinchou",
           "corsola",
-          "sharpedo",
           "barboach",
+          "lanturn",
+          "crawdaunt",
           "buizel",
           "floatzel",
           "finneon",
-          "frillishfemaleform",
           "frillishmaleform",
+          "frillishfemaleform",
+          "jellicentmaleform",
           "alomomola",
+          "stunfisk",
+          "lapras",
           "mareanie",
           "wimpod",
           "bruxish",
           "dhelmise",
           "chewtle",
-          "pincurchin",
-          "wiglett",
           "wugtrio",
           "phione"
         ],
         "average": [
+          "swampert",
           "corphish",
-          "stunfisk",
           "drednaw"
         ],
         "iffy": [
