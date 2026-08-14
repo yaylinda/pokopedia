@@ -32,9 +32,13 @@ import {
 import { comfortStyles, type VisualStyle } from './regionRosterConfig'
 import {
   FavoriteItemPicture,
+  IdealHabitatBadge,
   PokemonPortrait,
 } from './components/PlannerVisuals'
-import { getResidentNames } from './plannerDisplayUtils'
+import {
+  getIdealHabitatSummaries,
+  getResidentNames,
+} from './plannerDisplayUtils'
 
 const itemPreviewCount = 12
 
@@ -286,6 +290,10 @@ function EvolutionFamilyCard({
     0,
     family.canonicalPokemonSlugs.length - family.pokemon.length,
   )
+  const habitatSummaries = useMemo(
+    () => getIdealHabitatSummaries(family.pokemon),
+    [family.pokemon],
+  )
 
   return (
     <Box
@@ -333,23 +341,55 @@ function EvolutionFamilyCard({
                 : `${absentRelativeCount} relative${absentRelativeCount === 1 ? '' : 's'} elsewhere`}
           </Typography>
         </Box>
-        <Stack
-          direction="row"
-          spacing={0.5}
+        <Box
           sx={{
-            flexWrap: 'wrap',
+            display: 'grid',
+            gap: 0.625,
             gridColumn: { xs: '1 / -1', md: 'auto' },
+            minWidth: 0,
           }}
-          useFlexGap
         >
-          {family.pokemon.map((resident) => (
-            <Tooltip key={resident.slug} title={resident.name}>
-              <Box>
-                <PokemonPortrait pokemon={resident} size={46} />
-              </Box>
-            </Tooltip>
-          ))}
-        </Stack>
+          <Stack
+            direction="row"
+            spacing={0.5}
+            sx={{ flexWrap: 'wrap' }}
+            useFlexGap
+          >
+            {family.pokemon.map((resident) => (
+              <Tooltip key={resident.slug} title={resident.name}>
+                <Box>
+                  <PokemonPortrait pokemon={resident} size={46} />
+                </Box>
+              </Tooltip>
+            ))}
+          </Stack>
+          {habitatSummaries.length > 0 && (
+            <Box sx={{ display: 'grid', gap: 0.25 }}>
+              <Typography
+                color="text.secondary"
+                sx={{ fontWeight: 750 }}
+                variant="caption"
+              >
+                Ideal habitats
+              </Typography>
+              <Stack
+                direction="row"
+                spacing={0.5}
+                sx={{ flexWrap: 'wrap' }}
+                useFlexGap
+              >
+                {habitatSummaries.map((summary) => (
+                  <IdealHabitatBadge
+                    groupSize={family.pokemon.length}
+                    habitat={summary.habitat}
+                    key={summary.habitat.idealHabitatId}
+                    residentCount={summary.residentCount}
+                  />
+                ))}
+              </Stack>
+            </Box>
+          )}
+        </Box>
         <ExpandMoreRoundedIcon
           sx={{
             color: 'text.secondary',

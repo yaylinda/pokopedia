@@ -25,6 +25,12 @@ let getEvolutionLinePregroups: (
 let getGroupCompatibilityAnalysis: (
   pokemon: RegionRosterPokemon[],
 ) => GroupCompatibilityAnalysis
+let getIdealHabitatSummaries: (
+  pokemon: RegionRosterPokemon[],
+) => {
+  habitat: NonNullable<RegionRosterPokemon['idealHabitat']>
+  residentCount: number
+}[]
 
 test.beforeAll(async () => {
   server = await createServer({
@@ -40,6 +46,9 @@ test.beforeAll(async () => {
   const modelModule = await server.ssrLoadModule(
     '/src/modules/region-roster/groupPlannerModel.ts',
   )
+  const displayModule = await server.ssrLoadModule(
+    '/src/modules/region-roster/plannerDisplayUtils.ts',
+  )
 
   createRegionRosterPokemon = rosterModule.createRegionRosterPokemon
   currentRegionRoster = rosterModule.currentRegionRoster
@@ -48,6 +57,7 @@ test.beforeAll(async () => {
   favoriteCategoryById = categoryModule.favoriteCategoryById
   getEvolutionLinePregroups = modelModule.getEvolutionLinePregroups
   getGroupCompatibilityAnalysis = modelModule.getGroupCompatibilityAnalysis
+  getIdealHabitatSummaries = displayModule.getIdealHabitatSummaries
 })
 
 test.afterAll(async () => {
@@ -241,6 +251,24 @@ test('retains direct and multi-category labels when the same residents share bot
       (entry) => entry.item.itemId === itemId,
     ),
   ).toBe(true)
+})
+
+test('summarizes every group habitat by resident coverage', () => {
+  const summaries = getIdealHabitatSummaries([
+    makeResident({ slug: 'resident-a', habitatId: 'humid' }),
+    makeResident({ slug: 'resident-b', habitatId: 'bright' }),
+    makeResident({ slug: 'resident-c', habitatId: 'humid' }),
+  ])
+
+  expect(
+    summaries.map((summary) => ({
+      habitatId: summary.habitat.idealHabitatId,
+      residentCount: summary.residentCount,
+    })),
+  ).toEqual([
+    { habitatId: 'humid', residentCount: 2 },
+    { habitatId: 'bright', residentCount: 1 },
+  ])
 })
 
 test('continues to exclude Ditto from every processed region roster', () => {

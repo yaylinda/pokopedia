@@ -27,6 +27,7 @@ import type { RosterGroup } from '../../data/types'
 import { useUserData } from '../../data/userDataContext'
 import {
   FavoriteItemPicture,
+  IdealHabitatBadge,
   PokemonPortrait,
 } from './components/PlannerVisuals'
 import { RegionSelector } from './components/RegionSelector'
@@ -39,7 +40,10 @@ import {
   type FavoriteItemOverlap,
 } from './groupPlannerModel'
 import { useRegionRosterWorkspace } from './hooks/useRegionRosterWorkspace'
-import { getResidentNames } from './plannerDisplayUtils'
+import {
+  getIdealHabitatSummaries,
+  getResidentNames,
+} from './plannerDisplayUtils'
 import {
   matchesRosterQuery,
   type VisualStyle,
@@ -642,6 +646,7 @@ function RosterGroupCard({
     () => getGroupFavoriteOverlaps(residents),
     [residents],
   )
+  const habitatSummaries = getIdealHabitatSummaries(residents)
   const openSlotCount = Math.max(0, 4 - residents.length)
 
   return (
@@ -709,6 +714,32 @@ function RosterGroupCard({
         <Typography component="h3" sx={{ fontWeight: 850 }} variant="subtitle2">
           Residents
         </Typography>
+        {habitatSummaries.length > 0 && (
+          <Box sx={{ display: 'grid', gap: 0.375 }}>
+            <Typography
+              color="text.secondary"
+              sx={{ fontWeight: 750 }}
+              variant="caption"
+            >
+              Ideal habitats
+            </Typography>
+            <Stack
+              direction="row"
+              spacing={0.5}
+              sx={{ flexWrap: 'wrap' }}
+              useFlexGap
+            >
+              {habitatSummaries.map((summary) => (
+                <IdealHabitatBadge
+                  groupSize={residents.length}
+                  habitat={summary.habitat}
+                  key={summary.habitat.idealHabitatId}
+                  residentCount={summary.residentCount}
+                />
+              ))}
+            </Stack>
+          </Box>
+        )}
         <Box
           sx={{
             display: 'grid',
