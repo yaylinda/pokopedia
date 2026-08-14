@@ -30,6 +30,7 @@ type IdealHabitat = {
 }
 
 type PokemonCatalogEntry = {
+  sourceOrder: number
   name: string
   slug: string
   pokopiaNumberDisplay: string
@@ -82,6 +83,7 @@ export type RegionRosterPokemon = {
   isLegendaryOrMythical: boolean
   slug: string
   name: string
+  sourceOrder: number | null
   pokopiaNumberDisplay: string | null
   imageUrl: string | null
   detailUrl: string | null
@@ -287,6 +289,7 @@ export const createRegionRosterPokemon = ({
     isLegendaryOrMythical,
     slug,
     name: profile?.name ?? supplementalProfile?.name ?? titleFromSlug(slug),
+    sourceOrder: profile?.sourceOrder ?? null,
     pokopiaNumberDisplay:
       profile?.pokopiaNumberDisplay ??
       supplementalProfile?.pokopiaNumberDisplay ??

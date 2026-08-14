@@ -1,9 +1,12 @@
 import {
+  favoriteCategoriesByItemId,
   favoriteCategoryById,
+  favoriteItemById,
   type FavoriteCategory,
   type FavoriteItem,
 } from '../../data/favoriteCategories'
 import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
+import { getCanonicalEvolutionLine } from '../../data/rosterConstraints'
 import type { RosterGroup } from '../../data/types'
 
 export type FavoriteItemOverlap = {
@@ -17,6 +20,58 @@ export type FavoriteCategoryOverlap = {
   residentCount: number
   residentSlugs: string[]
   items: FavoriteItemOverlap[]
+}
+
+export type CompatibilityCoverage = {
+  residentCount: number
+  residentSlugs: string[]
+  sharedByAll: boolean
+}
+
+export type AbilityCompatibility = CompatibilityCoverage & {
+  ability: RegionRosterPokemon['specialties'][number]
+}
+
+export type HabitatCompatibility = CompatibilityCoverage & {
+  habitat: NonNullable<RegionRosterPokemon['idealHabitat']>
+}
+
+export type FavoriteCompatibility = CompatibilityCoverage & {
+  favorite: RegionRosterPokemon['favorites'][number]
+}
+
+export type ItemCategoryCompatibility = FavoriteCompatibility & {
+  category: FavoriteCategory
+}
+
+export type ItemCategoryContribution = CompatibilityCoverage & {
+  category: FavoriteCategory
+}
+
+export type SharedItemCompatibility = CompatibilityCoverage & {
+  contributingCategories: ItemCategoryContribution[]
+  item: FavoriteItem
+}
+
+export type GroupCompatibilityAnalysis = {
+  abilities: AbilityCompatibility[]
+  habitats: HabitatCompatibility[]
+  itemCategories: ItemCategoryCompatibility[]
+  flavors: FavoriteCompatibility[]
+  directSharedItems: SharedItemCompatibility[]
+  multiCategoryOverlapItems: SharedItemCompatibility[]
+}
+
+export type EvolutionLinePregroup = {
+  /** Stable, order-neutral identity derived from the complete canonical family. */
+  familyId: string
+  /** The complete catalog family, including relatives absent from this region. */
+  canonicalPokemonSlugs: string[]
+  /** Every selected-region resident in this family; this is never house-size limited. */
+  pokemon: RegionRosterPokemon[]
+  residentSlugs: string[]
+  isCompleteFamily: boolean
+  compatibility: GroupCompatibilityAnalysis
 }
 
 export const getRosterGroupScopeKey = (
@@ -43,6 +98,283 @@ export const makeRosterGroup = (groups: RosterGroup[]): RosterGroup => {
     name: `Group ${groupNumber}`,
     pokemonSlugs: [],
   }
+}
+
+const makeCoverage = (
+  residentSlugs: Iterable<string>,
+  groupSize: number,
+): CompatibilityCoverage => {
+  const sortedResidentSlugs = Array.from(new Set(residentSlugs)).sort((left, right) =>
+    left.localeCompare(right),
+  )
+
+  return {
+    residentCount: sortedResidentSlugs.length,
+    residentSlugs: sortedResidentSlugs,
+    sharedByAll:
+      groupSize > 0 && sortedResidentSlugs.length === groupSize,
+  }
+}
+
+const hasMultiCategoryResidentOverlap = (
+  contributions: ItemCategoryContribution[],
+) =>
+  contributions.some((left, leftIndex) =>
+    contributions.slice(leftIndex + 1).some((right) =>
+      left.residentSlugs.some((leftSlug) =>
+        right.residentSlugs.some((rightSlug) => leftSlug !== rightSlug),
+      ),
+    ),
+  )
+
+/**
+ * Finds group-level common ground. Feature arrays contain values shared by at
+ * least two residents. A direct item has at least one category shared by two
+ * residents; a multi-category item reaches at least two residents through two
+ * or more favorite categories. An item may intentionally appear in both arrays.
+ */
+export const getGroupCompatibilityAnalysis = (
+  pokemon: RegionRosterPokemon[],
+): GroupCompatibilityAnalysis => {
+  const groupSize = pokemon.length
+  const abilityResidents = new Map<
+    string,
+    {
+      ability: RegionRosterPokemon['specialties'][number]
+      residents: Set<string>
+    }
+  >()
+  const habitatResidents = new Map<
+    string,
+    {
+      habitat: NonNullable<RegionRosterPokemon['idealHabitat']>
+      residents: Set<string>
+    }
+  >()
+  const favoriteResidents = new Map<
+    string,
+    {
+      favorite: RegionRosterPokemon['favorites'][number]
+      residents: Set<string>
+    }
+  >()
+  const favoriteIdsByResident = new Map<string, Set<string>>()
+
+  pokemon.forEach((resident) => {
+    resident.specialties.forEach((ability) => {
+      const entry = abilityResidents.get(ability.slug) ?? {
+        ability,
+        residents: new Set<string>(),
+      }
+      entry.residents.add(resident.slug)
+      abilityResidents.set(ability.slug, entry)
+    })
+
+    if (resident.idealHabitat) {
+      const habitatId = resident.idealHabitat.idealHabitatId
+      const entry = habitatResidents.get(habitatId) ?? {
+        habitat: resident.idealHabitat,
+        residents: new Set<string>(),
+      }
+      entry.residents.add(resident.slug)
+      habitatResidents.set(habitatId, entry)
+    }
+
+    const categoryIds = new Set<string>()
+    resident.favorites.forEach((favorite) => {
+      const entry = favoriteResidents.get(favorite.favoriteId) ?? {
+        favorite,
+        residents: new Set<string>(),
+      }
+      entry.residents.add(resident.slug)
+      favoriteResidents.set(favorite.favoriteId, entry)
+
+      const category = favoriteCategoryById.get(favorite.favoriteId)
+      if (category && category.kind !== 'flavor' && category.kind !== 'none') {
+        categoryIds.add(category.favoriteId)
+      }
+    })
+    favoriteIdsByResident.set(resident.slug, categoryIds)
+  })
+
+  const abilities = Array.from(abilityResidents.values())
+    .filter(({ residents }) => residents.size >= 2)
+    .map(({ ability, residents }) => ({
+      ability,
+      ...makeCoverage(residents, groupSize),
+    }))
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.ability.name.localeCompare(right.ability.name),
+    )
+
+  const habitats = Array.from(habitatResidents.values())
+    .filter(({ residents }) => residents.size >= 2)
+    .map(({ habitat, residents }) => ({
+      habitat,
+      ...makeCoverage(residents, groupSize),
+    }))
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.habitat.name.localeCompare(right.habitat.name),
+    )
+
+  const sharedFavorites = Array.from(favoriteResidents.values())
+    .filter(({ residents }) => residents.size >= 2)
+    .map(({ favorite, residents }) => ({
+      favorite,
+      ...makeCoverage(residents, groupSize),
+    }))
+
+  const itemCategories = sharedFavorites
+    .flatMap(({ favorite, ...coverage }): ItemCategoryCompatibility[] => {
+      const category = favoriteCategoryById.get(favorite.favoriteId)
+      if (!category || category.kind === 'flavor' || category.kind === 'none') {
+        return []
+      }
+
+      return [{ category, favorite, ...coverage }]
+    })
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.favorite.sourceOrder - right.favorite.sourceOrder ||
+        left.favorite.name.localeCompare(right.favorite.name),
+    )
+
+  const flavors = sharedFavorites
+    .filter(({ favorite }) => favorite.kind === 'flavor')
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.favorite.sourceOrder - right.favorite.sourceOrder ||
+        left.favorite.name.localeCompare(right.favorite.name),
+    )
+
+  const sharedItems = Array.from(favoriteCategoriesByItemId.entries())
+    .flatMap(([itemId, categories]): SharedItemCompatibility[] => {
+      const item = favoriteItemById.get(itemId)
+      if (!item) return []
+
+      const contributingCategories = categories
+        .flatMap((category): ItemCategoryContribution[] => {
+          const residents = pokemon
+            .filter((resident) =>
+              favoriteIdsByResident
+                .get(resident.slug)
+                ?.has(category.favoriteId),
+            )
+            .map((resident) => resident.slug)
+          if (residents.length === 0) return []
+
+          return [
+            {
+              category,
+              ...makeCoverage(residents, groupSize),
+            },
+          ]
+        })
+        .sort(
+          (left, right) =>
+            right.residentCount - left.residentCount ||
+            left.category.sourceOrder - right.category.sourceOrder ||
+            left.category.name.localeCompare(right.category.name),
+        )
+      const residentSlugs = contributingCategories.flatMap(
+        (contribution) => contribution.residentSlugs,
+      )
+      const coverage = makeCoverage(residentSlugs, groupSize)
+      if (coverage.residentCount < 2) return []
+
+      return [
+        {
+          item,
+          contributingCategories,
+          ...coverage,
+        },
+      ]
+    })
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.item.itemName.localeCompare(right.item.itemName),
+    )
+
+  return {
+    abilities,
+    habitats,
+    itemCategories,
+    flavors,
+    directSharedItems: sharedItems.filter((item) =>
+      item.contributingCategories.some(
+        (contribution) => contribution.residentCount >= 2,
+      ),
+    ),
+    multiCategoryOverlapItems: sharedItems.filter(
+      (item) =>
+        item.contributingCategories.length >= 2 &&
+        hasMultiCategoryResidentOverlap(item.contributingCategories),
+    ),
+  }
+}
+
+/**
+ * Pre-groups selected residents into complete, unordered evolution families.
+ * Canonical members are alphabetized because the checked-in constraint graph
+ * intentionally models family membership, not evolution direction.
+ */
+export const getEvolutionLinePregroups = (
+  pokemon: RegionRosterPokemon[],
+): EvolutionLinePregroup[] => {
+  const pokemonBySlug = new Map(pokemon.map((resident) => [resident.slug, resident]))
+  const familiesById = new Map<
+    string,
+    {
+      canonicalPokemonSlugs: string[]
+      residentSlugs: Set<string>
+    }
+  >()
+
+  pokemon.forEach((resident) => {
+    const canonicalPokemonSlugs = [...getCanonicalEvolutionLine(resident.slug)]
+      .sort((left, right) => left.localeCompare(right))
+    const familyId = canonicalPokemonSlugs.join(':')
+    const family = familiesById.get(familyId) ?? {
+      canonicalPokemonSlugs,
+      residentSlugs: new Set<string>(),
+    }
+    family.residentSlugs.add(resident.slug)
+    familiesById.set(familyId, family)
+  })
+
+  return Array.from(familiesById, ([familyId, family]) => {
+    const residentSlugs = family.canonicalPokemonSlugs.filter((slug) =>
+      family.residentSlugs.has(slug),
+    )
+    const familyPokemon = residentSlugs
+      .flatMap((slug) => {
+        const resident = pokemonBySlug.get(slug)
+        return resident ? [resident] : []
+      })
+      .sort(
+        (left, right) =>
+          (left.sourceOrder ?? Number.MAX_SAFE_INTEGER) -
+            (right.sourceOrder ?? Number.MAX_SAFE_INTEGER) ||
+          left.name.localeCompare(right.name),
+      )
+
+    return {
+      familyId,
+      canonicalPokemonSlugs: family.canonicalPokemonSlugs,
+      pokemon: familyPokemon,
+      residentSlugs,
+      isCompleteFamily:
+        residentSlugs.length === family.canonicalPokemonSlugs.length,
+      compatibility: getGroupCompatibilityAnalysis(familyPokemon),
+    }
+  }).sort((left, right) => left.familyId.localeCompare(right.familyId))
 }
 
 export const getGroupFavoriteOverlaps = (

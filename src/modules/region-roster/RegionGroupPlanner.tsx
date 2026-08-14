@@ -1,5 +1,6 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
+import DeviceHubRoundedIcon from '@mui/icons-material/DeviceHubRounded'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import HomeWorkRoundedIcon from '@mui/icons-material/HomeWorkRounded'
@@ -15,15 +16,21 @@ import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Snackbar from '@mui/material/Snackbar'
 import Stack from '@mui/material/Stack'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import { useMemo, useState } from 'react'
 import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
-import type { FavoriteItem } from '../../data/favoriteCategories'
 import type { RosterGroup } from '../../data/types'
 import { useUserData } from '../../data/userDataContext'
+import {
+  FavoriteItemPicture,
+  PokemonPortrait,
+} from './components/PlannerVisuals'
 import { RegionSelector } from './components/RegionSelector'
+import { EvolutionPregroupWorkspace } from './EvolutionPregroupWorkspace'
 import {
   getGroupFavoriteOverlaps,
   getRosterGroupScopeKey,
@@ -32,6 +39,7 @@ import {
   type FavoriteItemOverlap,
 } from './groupPlannerModel'
 import { useRegionRosterWorkspace } from './hooks/useRegionRosterWorkspace'
+import { getResidentNames } from './plannerDisplayUtils'
 import {
   matchesRosterQuery,
   type VisualStyle,
@@ -39,6 +47,7 @@ import {
 
 const emptyGroups: RosterGroup[] = []
 const previewItemCount = 12
+type PlannerMode = 'evolution' | 'saved'
 
 type UndoState = {
   groups: RosterGroup[]
@@ -96,6 +105,7 @@ export function RegionGroupPlanner() {
   const [requestedActiveGroupId, setRequestedActiveGroupId] = useState<string | null>(null)
   const [searchState, setSearchState] = useState({ query: '', scopeKey })
   const [undoState, setUndoState] = useState<UndoState | null>(null)
+  const [plannerMode, setPlannerMode] = useState<PlannerMode>('evolution')
   const activeGroup =
     groups.find((group) => group.groupId === requestedActiveGroupId) ??
     groups[0] ??
@@ -212,93 +222,109 @@ export function RegionGroupPlanner() {
       </Box>
 
       <Box sx={{ display: 'grid', gap: 2, minWidth: 0 }}>
-        <PlannerHeader
-          groupedCount={assignedPokemonSlugs.size}
-          groupCount={groups.length}
-          onAddGroup={addGroup}
-          onClearGroups={clearGroups}
+        <PlannerModeHeader
+          mode={plannerMode}
+          onChange={setPlannerMode}
           regionName={selectedRegion.name}
           style={regionStyle}
-          ungroupedCount={ungroupedPokemon.length}
         />
 
-        {groups.length === 0 && (
-          <Box
-            component="section"
-            sx={{
-              alignItems: { xs: 'start', sm: 'center' },
-              backgroundColor: 'oklch(0.98 0.01 82)',
-              border: '1px dashed oklch(0.76 0.08 82)',
-              borderRadius: 1.5,
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
-              gap: 1.5,
-              justifyContent: 'space-between',
-              p: 2,
-            }}
-          >
-            <Box sx={{ display: 'grid', gap: 0.375 }}>
-              <Typography component="h3" sx={{ fontWeight: 850 }} variant="h6">
-                Start a house group
-              </Typography>
-              <Typography color="text.secondary" variant="body2">
-                Add a group, then choose up to four residents from the ungrouped pool.
-              </Typography>
-            </Box>
-            <Button onClick={addGroup} startIcon={<AddRoundedIcon />} variant="contained">
-              Add first group
-            </Button>
-          </Box>
-        )}
+        {plannerMode === 'evolution' ? (
+          <EvolutionPregroupWorkspace
+            key={`${selectedSnapshot.snapshotId}:${selectedRegion.regionId}`}
+            pokemon={selectedRegion.pokemon}
+            style={regionStyle}
+          />
+        ) : (
+          <>
+            <PlannerHeader
+              groupedCount={assignedPokemonSlugs.size}
+              groupCount={groups.length}
+              onAddGroup={addGroup}
+              onClearGroups={clearGroups}
+              style={regionStyle}
+              ungroupedCount={ungroupedPokemon.length}
+            />
 
-        <UngroupedPokemonPool
-          activeGroup={activeGroup}
-          activeGroupIsFull={activeGroupIsFull}
-          filteredPokemon={filteredUngroupedPokemon}
-          onAssign={(pokemonSlug) => assignPokemon(pokemonSlug, activeGroupId)}
-          onQueryChange={setQuery}
-          query={query}
-          totalCount={ungroupedPokemon.length}
-        />
+            {groups.length === 0 && (
+              <Box
+                component="section"
+                sx={{
+                  alignItems: { xs: 'start', sm: 'center' },
+                  backgroundColor: 'oklch(0.98 0.01 82)',
+                  border: '1px dashed oklch(0.76 0.08 82)',
+                  borderRadius: 1.5,
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  gap: 1.5,
+                  justifyContent: 'space-between',
+                  p: 2,
+                }}
+              >
+                <Box sx={{ display: 'grid', gap: 0.375 }}>
+                  <Typography component="h3" sx={{ fontWeight: 850 }} variant="h6">
+                    Start a house group
+                  </Typography>
+                  <Typography color="text.secondary" variant="body2">
+                    Add a group, then choose up to four residents from the ungrouped pool.
+                  </Typography>
+                </Box>
+                <Button onClick={addGroup} startIcon={<AddRoundedIcon />} variant="contained">
+                  Add first group
+                </Button>
+              </Box>
+            )}
 
-        {groups.length > 0 && (
-          <Box
-            component="section"
-            sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}
-          >
-            <Box sx={{ alignItems: 'baseline', display: 'flex', gap: 1, justifyContent: 'space-between' }}>
-              <Typography component="h2" sx={{ fontWeight: 850 }} variant="h5">
-                Saved groups
-              </Typography>
-              <Typography color="text.secondary" variant="caption">
-                Select a group to add residents
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'grid',
-                gap: 1.5,
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))',
-                minWidth: 0,
-              }}
-            >
-              {groups.map((group) => (
-                <RosterGroupCard
-                  active={group.groupId === activeGroupId}
-                  allGroups={groups}
-                  group={group}
-                  key={group.groupId}
-                  onAssignPokemon={assignPokemon}
-                  onDelete={() => deleteGroup(group.groupId)}
-                  onFinishRenaming={() => finishRenamingGroup(group.groupId)}
-                  onRename={(name) => renameGroup(group.groupId, name)}
-                  onSelect={() => setRequestedActiveGroupId(group.groupId)}
-                  pokemonBySlug={availablePokemonBySlug}
-                  style={regionStyle}
-                />
-              ))}
-            </Box>
-          </Box>
+            <UngroupedPokemonPool
+              activeGroup={activeGroup}
+              activeGroupIsFull={activeGroupIsFull}
+              filteredPokemon={filteredUngroupedPokemon}
+              onAssign={(pokemonSlug) => assignPokemon(pokemonSlug, activeGroupId)}
+              onQueryChange={setQuery}
+              query={query}
+              totalCount={ungroupedPokemon.length}
+            />
+
+            {groups.length > 0 && (
+              <Box
+                component="section"
+                sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}
+              >
+                <Box sx={{ alignItems: 'baseline', display: 'flex', gap: 1, justifyContent: 'space-between' }}>
+                  <Typography component="h2" sx={{ fontWeight: 850 }} variant="h5">
+                    Saved groups
+                  </Typography>
+                  <Typography color="text.secondary" variant="caption">
+                    Select a group to add residents
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gap: 1.5,
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))',
+                    minWidth: 0,
+                  }}
+                >
+                  {groups.map((group) => (
+                    <RosterGroupCard
+                      active={group.groupId === activeGroupId}
+                      allGroups={groups}
+                      group={group}
+                      key={group.groupId}
+                      onAssignPokemon={assignPokemon}
+                      onDelete={() => deleteGroup(group.groupId)}
+                      onFinishRenaming={() => finishRenamingGroup(group.groupId)}
+                      onRename={(name) => renameGroup(group.groupId, name)}
+                      onSelect={() => setRequestedActiveGroupId(group.groupId)}
+                      pokemonBySlug={availablePokemonBySlug}
+                      style={regionStyle}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+          </>
         )}
       </Box>
 
@@ -317,12 +343,71 @@ export function RegionGroupPlanner() {
   )
 }
 
+function PlannerModeHeader({
+  mode,
+  onChange,
+  regionName,
+  style,
+}: {
+  mode: PlannerMode
+  onChange: (mode: PlannerMode) => void
+  regionName: string
+  style: VisualStyle
+}) {
+  return (
+    <Box
+      component="header"
+      sx={{
+        backgroundColor: style.soft,
+        border: `1px solid ${style.accent}`,
+        borderRadius: 1.5,
+        display: 'grid',
+        gap: 1.5,
+        overflow: 'hidden',
+        px: { xs: 1.5, sm: 2 },
+        pt: { xs: 1.5, sm: 2 },
+      }}
+    >
+      <Box sx={{ display: 'grid', gap: 0.375 }}>
+        <Typography component="h2" sx={{ color: style.deep }} variant="h4">
+          {regionName} grouping studio
+        </Typography>
+        <Typography sx={{ color: style.deep, maxWidth: '72ch' }} variant="body2">
+          Start with evolution families, compare what they share, then shape the homes you want to save.
+        </Typography>
+      </Box>
+      <Tabs
+        aria-label="Grouping approach"
+        onChange={(_event, nextMode: PlannerMode) => onChange(nextMode)}
+        sx={{
+          minHeight: 44,
+          '& .MuiTab-root': { minHeight: 44, px: { xs: 1, sm: 2 } },
+        }}
+        value={mode}
+        variant="scrollable"
+      >
+        <Tab
+          icon={<DeviceHubRoundedIcon fontSize="small" />}
+          iconPosition="start"
+          label="Evolution starting points"
+          value="evolution"
+        />
+        <Tab
+          icon={<HomeWorkRoundedIcon fontSize="small" />}
+          iconPosition="start"
+          label="Saved home groups"
+          value="saved"
+        />
+      </Tabs>
+    </Box>
+  )
+}
+
 function PlannerHeader({
   groupedCount,
   groupCount,
   onAddGroup,
   onClearGroups,
-  regionName,
   style,
   ungroupedCount,
 }: {
@@ -330,7 +415,6 @@ function PlannerHeader({
   groupCount: number
   onAddGroup: () => void
   onClearGroups: () => void
-  regionName: string
   style: VisualStyle
   ungroupedCount: number
 }) {
@@ -356,8 +440,8 @@ function PlannerHeader({
         }}
       >
         <Box sx={{ display: 'grid', gap: 0.375 }}>
-          <Typography component="h2" sx={{ color: style.deep }} variant="h4">
-            {regionName} group planner
+          <Typography component="h2" sx={{ color: style.deep }} variant="h5">
+            Saved home groups
           </Typography>
           <Typography sx={{ color: style.deep, maxWidth: '68ch' }} variant="body2">
             Try housemates together and compare the favorite categories and exact items they share.
@@ -759,40 +843,6 @@ function ResidentSlot({
   )
 }
 
-function PokemonPortrait({
-  pokemon,
-  size,
-}: {
-  pokemon: RegionRosterPokemon
-  size: number
-}) {
-  return (
-    <Box
-      sx={{
-        alignItems: 'center',
-        backgroundColor: 'oklch(0.95 0.02 155)',
-        borderRadius: 1,
-        display: 'flex',
-        height: size,
-        justifyContent: 'center',
-        width: size,
-      }}
-    >
-      {pokemon.imageUrl ? (
-        <Box
-          alt=""
-          component="img"
-          loading="lazy"
-          src={pokemon.imageUrl}
-          sx={{ height: size - 4, objectFit: 'contain', width: size - 4 }}
-        />
-      ) : (
-        <Typography sx={{ fontWeight: 850 }}>{pokemon.name.charAt(0)}</Typography>
-      )}
-    </Box>
-  )
-}
-
 function FavoriteOverlapList({
   groupSize,
   overlaps,
@@ -964,43 +1014,4 @@ function FavoriteItemRow({
       </Box>
     </Tooltip>
   )
-}
-
-function FavoriteItemPicture({ item }: { item: FavoriteItem }) {
-  return (
-    <Box
-      sx={{
-        alignItems: 'center',
-        backgroundColor: 'oklch(0.96 0.012 82)',
-        borderRadius: 0.75,
-        display: 'flex',
-        height: 34,
-        justifyContent: 'center',
-        width: 34,
-      }}
-    >
-      {item.pictureUrl ? (
-        <Box
-          alt=""
-          component="img"
-          loading="lazy"
-          src={item.pictureUrl}
-          sx={{ height: 30, objectFit: 'contain', width: 30 }}
-        />
-      ) : (
-        <Typography sx={{ fontWeight: 850 }} variant="caption">
-          {item.itemName.charAt(0)}
-        </Typography>
-      )}
-    </Box>
-  )
-}
-
-function getResidentNames(
-  residentSlugs: string[],
-  pokemonBySlug: Map<string, RegionRosterPokemon>,
-) {
-  return residentSlugs
-    .map((slug) => pokemonBySlug.get(slug)?.name ?? slug)
-    .join(', ')
 }
