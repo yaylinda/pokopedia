@@ -5,6 +5,7 @@ import type { FavoriteCategory } from '../src/data/favoriteCategories'
 import type {
   EvolutionLinePregroup,
   GroupCompatibilityAnalysis,
+  SoloHabitatPregroup,
 } from '../src/modules/region-roster/groupPlannerModel'
 
 let server: ViteDevServer
@@ -25,12 +26,24 @@ let getEvolutionLinePregroups: (
 let getGroupCompatibilityAnalysis: (
   pokemon: RegionRosterPokemon[],
 ) => GroupCompatibilityAnalysis
+let getSoloHabitatPregroups: (
+  families: EvolutionLinePregroup[],
+) => SoloHabitatPregroup[]
 let getIdealHabitatSummaries: (
   pokemon: RegionRosterPokemon[],
 ) => {
   habitat: NonNullable<RegionRosterPokemon['idealHabitat']>
   residentCount: number
 }[]
+let getAbilitySummaries: (
+  pokemon: RegionRosterPokemon[],
+) => {
+  ability: RegionRosterPokemon['specialties'][number]
+  residentCount: number
+}[]
+let getIdealHabitatGrouping: (pokemon: RegionRosterPokemon[]) => {
+  groupingId: string
+}
 
 test.beforeAll(async () => {
   server = await createServer({
@@ -57,7 +70,10 @@ test.beforeAll(async () => {
   favoriteCategoryById = categoryModule.favoriteCategoryById
   getEvolutionLinePregroups = modelModule.getEvolutionLinePregroups
   getGroupCompatibilityAnalysis = modelModule.getGroupCompatibilityAnalysis
+  getSoloHabitatPregroups = modelModule.getSoloHabitatPregroups
   getIdealHabitatSummaries = displayModule.getIdealHabitatSummaries
+  getAbilitySummaries = displayModule.getAbilitySummaries
+  getIdealHabitatGrouping = displayModule.getIdealHabitatGrouping
 })
 
 test.afterAll(async () => {
@@ -269,6 +285,53 @@ test('summarizes every group habitat by resident coverage', () => {
     { habitatId: 'humid', residentCount: 2 },
     { habitatId: 'bright', residentCount: 1 },
   ])
+})
+
+test('balances solo residents into habitat groups of four or fewer', () => {
+  const residents = [
+    ...Array.from({ length: 5 }, (_value, index) =>
+      makeResident({ slug: `warm-${index}`, habitatId: 'warm' }),
+    ),
+    ...Array.from({ length: 2 }, (_value, index) =>
+      makeResident({ slug: `bright-${index}`, habitatId: 'bright' }),
+    ),
+  ]
+  const groups = getSoloHabitatPregroups(
+    getEvolutionLinePregroups(residents),
+  )
+  const warmGroupSizes = groups
+    .filter((group) => group.habitat?.idealHabitatId === 'warm')
+    .map((group) => group.pokemon.length)
+
+  expect(warmGroupSizes).toEqual([3, 2])
+  expect(groups.every((group) => group.pokemon.length <= 4)).toBe(true)
+  expect(groups.flatMap((group) => group.pokemon)).toHaveLength(7)
+})
+
+test('summarizes ability coverage and marks tied habitats as mixed', () => {
+  const residents = [
+    makeResident({
+      slug: 'resident-a',
+      abilitySlugs: ['swim', 'search'],
+      habitatId: 'humid',
+    }),
+    makeResident({
+      slug: 'resident-b',
+      abilitySlugs: ['swim'],
+      habitatId: 'bright',
+    }),
+  ]
+
+  expect(
+    getAbilitySummaries(residents).map((summary) => ({
+      ability: summary.ability.slug,
+      residentCount: summary.residentCount,
+    })),
+  ).toEqual([
+    { ability: 'swim', residentCount: 2 },
+    { ability: 'search', residentCount: 1 },
+  ])
+  expect(getIdealHabitatGrouping(residents).groupingId).toBe('mixed')
 })
 
 test('continues to exclude Ditto from every processed region roster', () => {

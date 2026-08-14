@@ -1,4 +1,5 @@
 import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded'
+import BoltRoundedIcon from '@mui/icons-material/BoltRounded'
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
 import LocalFireDepartmentRoundedIcon from '@mui/icons-material/LocalFireDepartmentRounded'
@@ -118,13 +119,15 @@ export function FavoriteItemPicture({ item }: { item: FavoriteItem }) {
 }
 
 export function IdealHabitatBadge({
+  detail,
   groupSize,
   habitat,
   residentCount,
 }: {
-  groupSize: number
+  detail?: string
+  groupSize?: number
   habitat: IdealHabitat
-  residentCount: number
+  residentCount?: number
 }) {
   const visual =
     habitatVisuals[habitat.idealHabitatId as keyof typeof habitatVisuals]
@@ -132,10 +135,11 @@ export function IdealHabitatBadge({
   const background = visual?.background ?? 'oklch(0.95 0.025 155)'
   const border = visual?.border ?? 'oklch(0.78 0.055 155)'
   const foreground = visual?.foreground ?? 'oklch(0.37 0.075 155)'
+  const metadata = detail ?? `${residentCount ?? 0}/${groupSize ?? 0}`
 
   return (
     <Box
-      aria-label={`${habitat.name} ideal habitat, ${residentCount} of ${groupSize} residents`}
+      aria-label={`${habitat.name} ideal habitat, ${metadata}`}
       component="span"
       sx={{
         alignItems: 'center',
@@ -169,6 +173,90 @@ export function IdealHabitatBadge({
         variant="caption"
       >
         {habitat.name}
+      </Typography>
+      <Typography
+        component="span"
+        sx={{
+          color: 'inherit',
+          fontVariantNumeric: 'tabular-nums',
+          fontWeight: 650,
+          lineHeight: 1.1,
+          opacity: 0.82,
+        }}
+        variant="caption"
+      >
+        {metadata}
+      </Typography>
+    </Box>
+  )
+}
+
+export function AbilityBadge({
+  ability,
+  groupSize,
+  residentCount,
+}: {
+  ability: RegionRosterPokemon['specialties'][number]
+  groupSize: number
+  residentCount: number
+}) {
+  const sharedByAll = groupSize > 0 && residentCount === groupSize
+  const background = sharedByAll
+    ? 'oklch(0.94 0.04 155)'
+    : 'oklch(0.96 0.018 285)'
+  const border = sharedByAll
+    ? 'oklch(0.76 0.08 155)'
+    : 'oklch(0.82 0.045 285)'
+  const foreground = sharedByAll
+    ? 'oklch(0.34 0.085 155)'
+    : 'oklch(0.38 0.075 285)'
+
+  return (
+    <Box
+      aria-label={`${ability.name} ability, ${residentCount} of ${groupSize} residents`}
+      component="span"
+      sx={{
+        alignItems: 'center',
+        backgroundColor: background,
+        border: `1px solid ${border}`,
+        borderRadius: 1.25,
+        color: foreground,
+        display: 'inline-flex',
+        flex: '0 0 auto',
+        gap: 0.625,
+        minHeight: 34,
+        px: 0.625,
+        py: 0.375,
+      }}
+    >
+      <Box
+        component="span"
+        sx={{
+          alignItems: 'center',
+          display: 'inline-flex',
+          height: 24,
+          justifyContent: 'center',
+          width: 24,
+        }}
+      >
+        {ability.pictureUrl ?? ability.iconUrl ? (
+          <Box
+            alt=""
+            component="img"
+            loading="lazy"
+            src={ability.pictureUrl ?? ability.iconUrl}
+            sx={{ height: 22, objectFit: 'contain', width: 22 }}
+          />
+        ) : (
+          <BoltRoundedIcon sx={{ fontSize: 20 }} />
+        )}
+      </Box>
+      <Typography
+        component="span"
+        sx={{ color: 'inherit', fontWeight: 800, lineHeight: 1.1 }}
+        variant="caption"
+      >
+        {ability.name}
       </Typography>
       <Typography
         component="span"

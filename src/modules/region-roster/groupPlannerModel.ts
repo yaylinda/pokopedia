@@ -74,6 +74,16 @@ export type EvolutionLinePregroup = {
   compatibility: GroupCompatibilityAnalysis
 }
 
+export type SoloHabitatPregroup = {
+  groupId: string
+  habitat: RegionRosterPokemon['idealHabitat']
+  pokemon: RegionRosterPokemon[]
+  residentSlugs: string[]
+  cohortIndex: number
+  cohortCount: number
+  compatibility: GroupCompatibilityAnalysis
+}
+
 export const getRosterGroupScopeKey = (
   snapshotId: string,
   regionId: string,
@@ -375,6 +385,75 @@ export const getEvolutionLinePregroups = (
       compatibility: getGroupCompatibilityAnalysis(familyPokemon),
     }
   }).sort((left, right) => left.familyId.localeCompare(right.familyId))
+}
+
+/**
+ * Combines residents who have no selected-region evolution relative into
+ * habitat-first cohorts. Cohorts are balanced and never exceed a saved home's
+ * four-resident capacity, avoiding a 4+1 split when a 3+2 split is possible.
+ */
+export const getSoloHabitatPregroups = (
+  evolutionFamilies: EvolutionLinePregroup[],
+): SoloHabitatPregroup[] => {
+  const residentsByHabitat = new Map<
+    string,
+    {
+      habitat: RegionRosterPokemon['idealHabitat']
+      pokemon: RegionRosterPokemon[]
+    }
+  >()
+
+  evolutionFamilies
+    .filter((family) => family.pokemon.length === 1)
+    .forEach((family) => {
+      const resident = family.pokemon[0]
+      const habitatId = resident.idealHabitat?.idealHabitatId ?? 'unknown'
+      const group = residentsByHabitat.get(habitatId) ?? {
+        habitat: resident.idealHabitat,
+        pokemon: [],
+      }
+      group.pokemon.push(resident)
+      residentsByHabitat.set(habitatId, group)
+    })
+
+  return Array.from(residentsByHabitat.entries())
+    .sort(([, left], [, right]) =>
+      (left.habitat?.name ?? 'Unknown').localeCompare(
+        right.habitat?.name ?? 'Unknown',
+      ),
+    )
+    .flatMap(([habitatId, group]) => {
+      const sortedPokemon = [...group.pokemon].sort(
+        (left, right) =>
+          (left.sourceOrder ?? Number.MAX_SAFE_INTEGER) -
+            (right.sourceOrder ?? Number.MAX_SAFE_INTEGER) ||
+          left.name.localeCompare(right.name),
+      )
+      const cohortCount = Math.ceil(sortedPokemon.length / 4)
+      const baseCohortSize = Math.floor(sortedPokemon.length / cohortCount)
+      const largerCohortCount = sortedPokemon.length % cohortCount
+      let startIndex = 0
+
+      return Array.from({ length: cohortCount }, (_value, cohortIndex) => {
+        const cohortSize =
+          baseCohortSize + (cohortIndex < largerCohortCount ? 1 : 0)
+        const pokemon = sortedPokemon.slice(
+          startIndex,
+          startIndex + cohortSize,
+        )
+        startIndex += cohortSize
+
+        return {
+          groupId: `solo-habitat:${habitatId}:${cohortIndex + 1}`,
+          habitat: group.habitat,
+          pokemon,
+          residentSlugs: pokemon.map((resident) => resident.slug),
+          cohortIndex: cohortIndex + 1,
+          cohortCount,
+          compatibility: getGroupCompatibilityAnalysis(pokemon),
+        }
+      })
+    })
 }
 
 export const getGroupFavoriteOverlaps = (

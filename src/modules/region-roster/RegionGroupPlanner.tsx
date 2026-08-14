@@ -26,6 +26,7 @@ import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
 import type { RosterGroup } from '../../data/types'
 import { useUserData } from '../../data/userDataContext'
 import {
+  AbilityBadge,
   FavoriteItemPicture,
   IdealHabitatBadge,
   PokemonPortrait,
@@ -41,6 +42,7 @@ import {
 } from './groupPlannerModel'
 import { useRegionRosterWorkspace } from './hooks/useRegionRosterWorkspace'
 import {
+  getAbilitySummaries,
   getIdealHabitatSummaries,
   getResidentNames,
 } from './plannerDisplayUtils'
@@ -647,6 +649,7 @@ function RosterGroupCard({
     [residents],
   )
   const habitatSummaries = getIdealHabitatSummaries(residents)
+  const abilitySummaries = getAbilitySummaries(residents)
   const openSlotCount = Math.max(0, 4 - residents.length)
 
   return (
@@ -734,6 +737,32 @@ function RosterGroupCard({
                   groupSize={residents.length}
                   habitat={summary.habitat}
                   key={summary.habitat.idealHabitatId}
+                  residentCount={summary.residentCount}
+                />
+              ))}
+            </Stack>
+          </Box>
+        )}
+        {abilitySummaries.length > 0 && (
+          <Box sx={{ display: 'grid', gap: 0.375 }}>
+            <Typography
+              color="text.secondary"
+              sx={{ fontWeight: 750 }}
+              variant="caption"
+            >
+              Abilities
+            </Typography>
+            <Stack
+              direction="row"
+              spacing={0.5}
+              sx={{ flexWrap: 'wrap' }}
+              useFlexGap
+            >
+              {abilitySummaries.map((summary) => (
+                <AbilityBadge
+                  ability={summary.ability}
+                  groupSize={residents.length}
+                  key={summary.ability.slug}
                   residentCount={summary.residentCount}
                 />
               ))}

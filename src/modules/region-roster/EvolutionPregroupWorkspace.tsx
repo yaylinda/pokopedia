@@ -24,20 +24,26 @@ import {
 } from '../../data/favoriteCategories'
 import {
   getEvolutionLinePregroups,
+  getSoloHabitatPregroups,
   type CompatibilityCoverage,
   type EvolutionLinePregroup,
   type GroupCompatibilityAnalysis,
   type SharedItemCompatibility,
+  type SoloHabitatPregroup,
 } from './groupPlannerModel'
 import { comfortStyles, type VisualStyle } from './regionRosterConfig'
 import {
+  AbilityBadge,
   FavoriteItemPicture,
   IdealHabitatBadge,
   PokemonPortrait,
 } from './components/PlannerVisuals'
 import {
+  getAbilitySummaries,
+  getIdealHabitatGrouping,
   getIdealHabitatSummaries,
   getResidentNames,
+  type IdealHabitatGrouping,
 } from './plannerDisplayUtils'
 
 const itemPreviewCount = 12
@@ -59,25 +65,18 @@ export function EvolutionPregroupWorkspace({
   const categoryTriggerRef = useRef<HTMLElement | null>(null)
   const useWideCatalogLayout = useMediaQuery('(min-width:1536px)')
   const families = useMemo(() => getEvolutionLinePregroups(pokemon), [pokemon])
+  const soloHabitatGroups = useMemo(
+    () => getSoloHabitatPregroups(families),
+    [families],
+  )
   const normalizedQuery = query.trim().toLocaleLowerCase()
-  const visibleFamilies = useMemo(
+  const visibleEvolutionFamilies = useMemo(
     () =>
       families
         .filter(
           (family) =>
-            !normalizedQuery ||
-            family.pokemon.some((resident) =>
-              [
-                resident.name,
-                resident.idealHabitat?.name,
-                ...resident.specialties.map((ability) => ability.name),
-                ...resident.favorites.map((favorite) => favorite.name),
-              ]
-                .filter(Boolean)
-                .some((value) =>
-                  value!.toLocaleLowerCase().includes(normalizedQuery),
-                ),
-            ),
+            family.pokemon.length > 1 &&
+            matchesPokemonQuery(family.pokemon, normalizedQuery),
         )
         .sort(
           (left, right) =>
@@ -86,11 +85,16 @@ export function EvolutionPregroupWorkspace({
         ),
     [families, normalizedQuery],
   )
-  const multiMemberFamilies = visibleFamilies.filter(
-    (family) => family.pokemon.length > 1,
+  const visibleSoloHabitatGroups = useMemo(
+    () =>
+      soloHabitatGroups.filter((group) =>
+        matchesPokemonQuery(group.pokemon, normalizedQuery),
+      ),
+    [normalizedQuery, soloHabitatGroups],
   )
-  const singletons = visibleFamilies.filter(
-    (family) => family.pokemon.length === 1,
+  const visibleSoloResidentCount = visibleSoloHabitatGroups.reduce(
+    (total, group) => total + group.pokemon.length,
+    0,
   )
   const selectedCategory = selectedCategoryId
     ? favoriteCategoryById.get(selectedCategoryId) ?? null
@@ -140,8 +144,14 @@ export function EvolutionPregroupWorkspace({
             These families are derived from the roster, not saved homes. Open a family to compare every resident and inspect its item catalogs.
           </Typography>
           <Stack direction="row" spacing={0.75} sx={{ pt: 0.5 }} useFlexGap>
-            <Chip label={`${multiMemberFamilies.length} shared lines`} size="small" />
-            <Chip label={`${singletons.length} solo residents`} size="small" />
+            <Chip
+              label={`${visibleEvolutionFamilies.length} evolution lines`}
+              size="small"
+            />
+            <Chip
+              label={`${visibleSoloResidentCount} solo residents · ${visibleSoloHabitatGroups.length} habitat groups`}
+              size="small"
+            />
           </Stack>
         </Box>
         <TextField
@@ -182,30 +192,30 @@ export function EvolutionPregroupWorkspace({
         )}
 
         <Box sx={{ display: 'grid', gap: 2, minWidth: 0 }}>
-          {multiMemberFamilies.length > 0 && (
+          {visibleEvolutionFamilies.length > 0 && (
             <FamilySection
               expandedFamilyIds={expandedFamilyIds}
-              families={multiMemberFamilies}
+              families={visibleEvolutionFamilies}
               onInspectCategory={inspectCategory}
               onToggleFamily={toggleFamily}
               style={style}
-              title="Roster evolution lines"
+              subtitle="Evolution families stay together, then sit near families with the same strongest habitat match. Ties appear under Mixed habitats."
+              title="Evolution lines by habitat"
             />
           )}
 
-          {singletons.length > 0 && (
-            <FamilySection
+          {visibleSoloHabitatGroups.length > 0 && (
+            <SoloHabitatSection
               expandedFamilyIds={expandedFamilyIds}
-              families={singletons}
+              groups={visibleSoloHabitatGroups}
               onInspectCategory={inspectCategory}
               onToggleFamily={toggleFamily}
               style={style}
-              subtitle="No other member of the evolution family currently lives in this region."
-              title="Solo residents"
             />
           )}
 
-          {visibleFamilies.length === 0 && (
+          {visibleEvolutionFamilies.length === 0 &&
+            visibleSoloHabitatGroups.length === 0 && (
             <Typography color="text.secondary" sx={{ py: 3 }} variant="body2">
               No residents or traits match “{query}”.
             </Typography>
@@ -241,8 +251,96 @@ function FamilySection({
   subtitle?: string
   title: string
 }) {
+  const cards = families.map((family): PregroupCardData => {
+    const absentRelativeCount = Math.max(
+      0,
+      family.canonicalPokemonSlugs.length - family.pokemon.length,
+    )
+
+    return {
+      compatibility: family.compatibility,
+      groupId: family.familyId,
+      pokemon: family.pokemon,
+      subtitle: family.isCompleteFamily
+        ? 'Complete line in this region'
+        : `${absentRelativeCount} relative${absentRelativeCount === 1 ? '' : 's'} elsewhere`,
+      title: getFamilyName(family),
+    }
+  })
+
   return (
-    <Box component="section" sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
+    <PregroupSection
+      cards={cards}
+      expandedGroupIds={expandedFamilyIds}
+      onInspectCategory={onInspectCategory}
+      onToggleGroup={onToggleFamily}
+      style={style}
+      subtitle={subtitle}
+      title={title}
+    />
+  )
+}
+
+function SoloHabitatSection({
+  expandedFamilyIds,
+  groups,
+  onInspectCategory,
+  onToggleFamily,
+  style,
+}: {
+  expandedFamilyIds: Set<string>
+  groups: SoloHabitatPregroup[]
+  onInspectCategory: (categoryId: string) => void
+  onToggleFamily: (familyId: string) => void
+  style: VisualStyle
+}) {
+  const cards = groups.map((group): PregroupCardData => ({
+    compatibility: group.compatibility,
+    groupId: group.groupId,
+    pokemon: group.pokemon,
+    subtitle:
+      group.pokemon.length === 1
+        ? 'Only solo resident with this ideal habitat'
+        : group.cohortCount > 1
+          ? `Habitat group ${group.cohortIndex} of ${group.cohortCount}`
+          : 'Grouped from solo residents by ideal habitat',
+    title: group.pokemon.map((resident) => resident.name).join(' · '),
+  }))
+
+  return (
+    <PregroupSection
+      cards={cards}
+      expandedGroupIds={expandedFamilyIds}
+      onInspectCategory={onInspectCategory}
+      onToggleGroup={onToggleFamily}
+      style={style}
+      subtitle="Residents without a roster-relative are combined by ideal habitat, with up to four residents per group."
+      title="Solo habitat groups"
+    />
+  )
+}
+
+function PregroupSection({
+  cards,
+  expandedGroupIds,
+  onInspectCategory,
+  onToggleGroup,
+  style,
+  subtitle,
+  title,
+}: {
+  cards: PregroupCardData[]
+  expandedGroupIds: Set<string>
+  onInspectCategory: (categoryId: string) => void
+  onToggleGroup: (groupId: string) => void
+  style: VisualStyle
+  subtitle?: string
+  title: string
+}) {
+  const clusters = getHabitatCardClusters(cards)
+
+  return (
+    <Box component="section" sx={{ display: 'grid', gap: 1.5, minWidth: 0 }}>
       <Box sx={{ display: 'grid', gap: 0.25 }}>
         <Typography component="h3" sx={{ fontWeight: 850 }} variant="h6">
           {title}
@@ -253,46 +351,116 @@ function FamilySection({
           </Typography>
         )}
       </Box>
-      <Box sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
-        {families.map((family) => (
-          <EvolutionFamilyCard
-            expanded={expandedFamilyIds.has(family.familyId)}
-            family={family}
-            key={family.familyId}
-            onInspectCategory={onInspectCategory}
-            onToggle={() => onToggleFamily(family.familyId)}
-            style={style}
-          />
+      <Box sx={{ display: 'grid', gap: 2, minWidth: 0 }}>
+        {clusters.map((cluster) => (
+          <Box
+            key={cluster.grouping.groupingId}
+            sx={{ display: 'grid', gap: 1, minWidth: 0 }}
+          >
+            <HabitatClusterHeading
+              cardCount={cluster.cards.length}
+              grouping={cluster.grouping}
+            />
+            <Box sx={{ display: 'grid', gap: 1, minWidth: 0 }}>
+              {cluster.cards.map((card) => (
+                <PregroupCard
+                  card={card}
+                  expanded={expandedGroupIds.has(card.groupId)}
+                  key={card.groupId}
+                  onInspectCategory={onInspectCategory}
+                  onToggle={() => onToggleGroup(card.groupId)}
+                  style={style}
+                />
+              ))}
+            </Box>
+          </Box>
         ))}
       </Box>
     </Box>
   )
 }
 
-function EvolutionFamilyCard({
+function HabitatClusterHeading({
+  cardCount,
+  grouping,
+}: {
+  cardCount: number
+  grouping: IdealHabitatGrouping
+}) {
+  const detail = `${cardCount} ${cardCount === 1 ? 'group' : 'groups'}`
+
+  return (
+    <Box
+      component="h4"
+      sx={{ alignItems: 'center', display: 'flex', gap: 1, m: 0, minWidth: 0 }}
+    >
+      {grouping.habitat ? (
+        <IdealHabitatBadge detail={detail} habitat={grouping.habitat} />
+      ) : (
+        <Box
+          component="span"
+          sx={{
+            alignItems: 'center',
+            backgroundColor: 'oklch(0.955 0.012 250)',
+            border: '1px solid oklch(0.82 0.03 250)',
+            borderRadius: 1.25,
+            color: 'oklch(0.38 0.055 250)',
+            display: 'inline-flex',
+            flex: '0 0 auto',
+            gap: 0.625,
+            minHeight: 34,
+            px: 0.75,
+          }}
+        >
+          <HubRoundedIcon sx={{ fontSize: 20 }} />
+          <Typography
+            component="span"
+            sx={{ color: 'inherit', fontWeight: 800 }}
+            variant="caption"
+          >
+            {grouping.label}
+          </Typography>
+          <Typography
+            component="span"
+            sx={{ color: 'inherit', fontWeight: 650, opacity: 0.82 }}
+            variant="caption"
+          >
+            {detail}
+          </Typography>
+        </Box>
+      )}
+      <Box
+        aria-hidden="true"
+        sx={{ borderTop: '1px solid oklch(0.87 0.018 225)', flex: 1 }}
+      />
+    </Box>
+  )
+}
+
+function PregroupCard({
+  card,
   expanded,
-  family,
   onInspectCategory,
   onToggle,
   style,
 }: {
+  card: PregroupCardData
   expanded: boolean
-  family: EvolutionLinePregroup
   onInspectCategory: (categoryId: string) => void
   onToggle: () => void
   style: VisualStyle
 }) {
   const pokemonBySlug = useMemo(
-    () => new Map(family.pokemon.map((resident) => [resident.slug, resident])),
-    [family.pokemon],
-  )
-  const absentRelativeCount = Math.max(
-    0,
-    family.canonicalPokemonSlugs.length - family.pokemon.length,
+    () => new Map(card.pokemon.map((resident) => [resident.slug, resident])),
+    [card.pokemon],
   )
   const habitatSummaries = useMemo(
-    () => getIdealHabitatSummaries(family.pokemon),
-    [family.pokemon],
+    () => getIdealHabitatSummaries(card.pokemon),
+    [card.pokemon],
+  )
+  const abilitySummaries = useMemo(
+    () => getAbilitySummaries(card.pokemon),
+    [card.pokemon],
   )
 
   return (
@@ -328,17 +496,11 @@ function EvolutionFamilyCard({
         }}
       >
         <Box sx={{ minWidth: 0 }}>
-          <Typography component="h4" sx={{ fontWeight: 850 }}>
-            {getFamilyName(family)}
+          <Typography component="h5" sx={{ fontWeight: 850 }}>
+            {card.title}
           </Typography>
           <Typography color="text.secondary" variant="caption">
-            {family.pokemon.length === 1
-              ? absentRelativeCount > 0
-                ? `${absentRelativeCount} relative${absentRelativeCount === 1 ? '' : 's'} elsewhere`
-                : 'No known evolutions'
-              : family.isCompleteFamily
-                ? 'Complete line in this region'
-                : `${absentRelativeCount} relative${absentRelativeCount === 1 ? '' : 's'} elsewhere`}
+            {card.subtitle}
           </Typography>
         </Box>
         <Box
@@ -355,7 +517,7 @@ function EvolutionFamilyCard({
             sx={{ flexWrap: 'wrap' }}
             useFlexGap
           >
-            {family.pokemon.map((resident) => (
+            {card.pokemon.map((resident) => (
               <Tooltip key={resident.slug} title={resident.name}>
                 <Box>
                   <PokemonPortrait pokemon={resident} size={46} />
@@ -380,9 +542,35 @@ function EvolutionFamilyCard({
               >
                 {habitatSummaries.map((summary) => (
                   <IdealHabitatBadge
-                    groupSize={family.pokemon.length}
+                    groupSize={card.pokemon.length}
                     habitat={summary.habitat}
                     key={summary.habitat.idealHabitatId}
+                    residentCount={summary.residentCount}
+                  />
+                ))}
+              </Stack>
+            </Box>
+          )}
+          {abilitySummaries.length > 0 && (
+            <Box sx={{ display: 'grid', gap: 0.25 }}>
+              <Typography
+                color="text.secondary"
+                sx={{ fontWeight: 750 }}
+                variant="caption"
+              >
+                Abilities
+              </Typography>
+              <Stack
+                direction="row"
+                spacing={0.5}
+                sx={{ flexWrap: 'wrap' }}
+                useFlexGap
+              >
+                {abilitySummaries.map((summary) => (
+                  <AbilityBadge
+                    ability={summary.ability}
+                    groupSize={card.pokemon.length}
+                    key={summary.ability.slug}
                     residentCount={summary.residentCount}
                   />
                 ))}
@@ -399,10 +587,10 @@ function EvolutionFamilyCard({
         />
       </ButtonBase>
 
-      {family.pokemon.length > 1 && (
+      {card.pokemon.length > 1 && (
         <CommonGroundSummary
-          analysis={family.compatibility}
-          groupSize={family.pokemon.length}
+          analysis={card.compatibility}
+          groupSize={card.pokemon.length}
           onInspectCategory={onInspectCategory}
           pokemonBySlug={pokemonBySlug}
         />
@@ -418,7 +606,7 @@ function EvolutionFamilyCard({
           }}
         >
           <Box sx={{ display: 'grid', gap: 1 }}>
-            <Typography component="h5" sx={{ fontWeight: 850 }} variant="subtitle2">
+            <Typography component="h6" sx={{ fontWeight: 850 }} variant="subtitle2">
               Resident comparison
             </Typography>
             <Box
@@ -428,7 +616,7 @@ function EvolutionFamilyCard({
                 gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
               }}
             >
-              {family.pokemon.map((resident) => (
+              {card.pokemon.map((resident) => (
                 <PokemonTraitPanel
                   key={resident.slug}
                   onInspectCategory={onInspectCategory}
@@ -438,10 +626,10 @@ function EvolutionFamilyCard({
             </Box>
           </Box>
 
-          {family.pokemon.length > 1 && (
+          {card.pokemon.length > 1 && (
             <SharedItemSections
-              analysis={family.compatibility}
-              groupSize={family.pokemon.length}
+              analysis={card.compatibility}
+              groupSize={card.pokemon.length}
               pokemonBySlug={pokemonBySlug}
             />
           )}
@@ -449,6 +637,48 @@ function EvolutionFamilyCard({
       </Collapse>
     </Box>
   )
+}
+
+type PregroupCardData = {
+  compatibility: GroupCompatibilityAnalysis
+  groupId: string
+  pokemon: RegionRosterPokemon[]
+  subtitle: string
+  title: string
+}
+
+type HabitatCardCluster = {
+  grouping: IdealHabitatGrouping
+  cards: PregroupCardData[]
+}
+
+function getHabitatCardClusters(cards: PregroupCardData[]): HabitatCardCluster[] {
+  const clustersById = new Map<string, HabitatCardCluster>()
+
+  cards.forEach((card) => {
+    const grouping = getIdealHabitatGrouping(card.pokemon)
+    const cluster = clustersById.get(grouping.groupingId) ?? {
+      grouping,
+      cards: [],
+    }
+    cluster.cards.push(card)
+    clustersById.set(grouping.groupingId, cluster)
+  })
+
+  return Array.from(clustersById.values())
+    .map((cluster) => ({
+      ...cluster,
+      cards: cluster.cards.sort(
+        (left, right) =>
+          right.pokemon.length - left.pokemon.length ||
+          left.title.localeCompare(right.title),
+      ),
+    }))
+    .sort(
+      (left, right) =>
+        left.grouping.sortOrder - right.grouping.sortOrder ||
+        left.grouping.label.localeCompare(right.grouping.label),
+    )
 }
 
 function CommonGroundSummary({
@@ -773,7 +1003,7 @@ function SharedItemList({
   return (
     <Box sx={{ display: 'grid', gap: 0.75 }}>
       <Box sx={{ display: 'grid', gap: 0.125 }}>
-        <Typography component="h5" sx={{ fontWeight: 850 }} variant="subtitle2">
+        <Typography component="h6" sx={{ fontWeight: 850 }} variant="subtitle2">
           {title} · {items.length}
         </Typography>
         <Typography color="text.secondary" variant="caption">
@@ -1035,6 +1265,24 @@ function CategoryItemRow({ item }: { item: FavoriteItem }) {
 function getFamilyName(family: EvolutionLinePregroup) {
   if (family.pokemon.length === 1) return family.pokemon[0].name
   return family.pokemon.map((resident) => resident.name).join(' · ')
+}
+
+function matchesPokemonQuery(
+  pokemon: RegionRosterPokemon[],
+  normalizedQuery: string,
+) {
+  if (!normalizedQuery) return true
+
+  return pokemon.some((resident) =>
+    [
+      resident.name,
+      resident.idealHabitat?.name,
+      ...resident.specialties.map((ability) => ability.name),
+      ...resident.favorites.map((favorite) => favorite.name),
+    ].some((value) =>
+      value?.toLocaleLowerCase().includes(normalizedQuery),
+    ),
+  )
 }
 
 type CoverageValue = {
