@@ -24,9 +24,11 @@ import {
 } from '../../data/favoriteCategories'
 import {
   getEvolutionLinePregroups,
+  getGroupFavoriteOverlaps,
   getSoloHabitatPregroups,
-  type CompatibilityCoverage,
   type EvolutionLinePregroup,
+  type FavoriteCategoryOverlap,
+  type FavoriteItemOverlap,
   type GroupCompatibilityAnalysis,
   type SharedItemCompatibility,
   type SoloHabitatPregroup,
@@ -141,7 +143,7 @@ export function EvolutionPregroupWorkspace({
             Evolution starting points
           </Typography>
           <Typography color="text.secondary" sx={{ maxWidth: '70ch' }} variant="body2">
-            These families are derived from the roster, not saved homes. Open a family to compare every resident and inspect its item catalogs.
+            Scan portraits, habitats, and abilities in the compact cards. Hover or focus for a favorite-overlap preview, then open a group for every matching category and item.
           </Typography>
           <Stack direction="row" spacing={0.75} sx={{ pt: 0.5 }} useFlexGap>
             <Chip
@@ -361,7 +363,16 @@ function PregroupSection({
               cardCount={cluster.cards.length}
               grouping={cluster.grouping}
             />
-            <Box sx={{ display: 'grid', gap: 1, minWidth: 0 }}>
+            <Box
+              sx={{
+                alignItems: 'start',
+                display: 'grid',
+                gap: 1,
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(min(100%, 330px), 1fr))',
+                minWidth: 0,
+              }}
+            >
               {cluster.cards.map((card) => (
                 <PregroupCard
                   card={card}
@@ -462,6 +473,10 @@ function PregroupCard({
     () => getAbilitySummaries(card.pokemon),
     [card.pokemon],
   )
+  const favoriteOverlaps = useMemo(
+    () => getGroupFavoriteOverlaps(card.pokemon),
+    [card.pokemon],
+  )
 
   return (
     <Box
@@ -470,47 +485,82 @@ function PregroupCard({
         backgroundColor: 'oklch(0.995 0.003 225)',
         border: '1px solid oklch(0.84 0.022 225)',
         borderRadius: 1.5,
+        gridColumn: expanded ? '1 / -1' : 'auto',
         minWidth: 0,
         overflow: 'hidden',
       }}
     >
-      <ButtonBase
-        aria-expanded={expanded}
-        onClick={onToggle}
-        sx={{
-          alignItems: 'center',
-          backgroundColor: expanded ? style.soft : 'oklch(0.975 0.009 225)',
-          display: 'grid',
-          gap: 1,
-          gridTemplateColumns: { xs: 'minmax(0, 1fr) auto', md: 'minmax(220px, 0.8fr) minmax(260px, 1.2fr) auto' },
-          justifyItems: 'start',
-          minHeight: 72,
-          px: { xs: 1.25, sm: 1.5 },
-          py: 1,
-          textAlign: 'left',
-          width: '100%',
-          '&:focus-visible': {
-            outline: `3px solid ${style.accent}`,
-            outlineOffset: -3,
+      <Tooltip
+        arrow
+        disableFocusListener={expanded}
+        disableHoverListener={expanded}
+        enterDelay={450}
+        placement="right"
+        slotProps={{
+          arrow: {
+            sx: { color: 'oklch(0.985 0.006 82)' },
+          },
+          tooltip: {
+            sx: {
+              backgroundColor: 'oklch(0.985 0.006 82)',
+              border: '1px solid oklch(0.80 0.045 82)',
+              boxShadow: '0 12px 32px oklch(0.30 0.025 225 / 0.18)',
+              color: 'oklch(0.25 0.025 225)',
+              maxWidth: 380,
+              p: 1.25,
+            },
           },
         }}
+        title={
+          <FavoriteOverlapPreview
+            groupSize={card.pokemon.length}
+            overlaps={favoriteOverlaps}
+          />
+        }
       >
-        <Box sx={{ minWidth: 0 }}>
-          <Typography component="h5" sx={{ fontWeight: 850 }}>
-            {card.title}
-          </Typography>
-          <Typography color="text.secondary" variant="caption">
-            {card.subtitle}
-          </Typography>
-        </Box>
-        <Box
+        <ButtonBase
+          aria-expanded={expanded}
+          onClick={onToggle}
           sx={{
+            alignItems: 'stretch',
+            backgroundColor: expanded ? style.soft : 'oklch(0.975 0.009 225)',
             display: 'grid',
-            gap: 0.625,
-            gridColumn: { xs: '1 / -1', md: 'auto' },
-            minWidth: 0,
+            gap: 1,
+            minHeight: 236,
+            p: 1.25,
+            textAlign: 'left',
+            transition: 'background-color 140ms ease-out, transform 140ms ease-out',
+            width: '100%',
+            '&:hover': {
+              backgroundColor: expanded
+                ? style.soft
+                : 'oklch(0.955 0.016 225)',
+              transform: 'translateY(-1px)',
+            },
+            '&:active': { transform: 'translateY(0)' },
+            '&:focus-visible': {
+              outline: `3px solid ${style.accent}`,
+              outlineOffset: -3,
+            },
           }}
         >
+          <Box sx={{ minWidth: 0 }}>
+            <Typography
+              component="h5"
+              sx={{
+                display: '-webkit-box',
+                fontWeight: 850,
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+              }}
+            >
+              {card.title}
+            </Typography>
+            <Typography color="text.secondary" variant="caption">
+              {card.subtitle}
+            </Typography>
+          </Box>
           <Stack
             direction="row"
             spacing={0.5}
@@ -518,11 +568,7 @@ function PregroupCard({
             useFlexGap
           >
             {card.pokemon.map((resident) => (
-              <Tooltip key={resident.slug} title={resident.name}>
-                <Box>
-                  <PokemonPortrait pokemon={resident} size={46} />
-                </Box>
-              </Tooltip>
+              <PokemonPortrait key={resident.slug} pokemon={resident} size={50} />
             ))}
           </Stack>
           {habitatSummaries.length > 0 && (
@@ -577,24 +623,29 @@ function PregroupCard({
               </Stack>
             </Box>
           )}
-        </Box>
-        <ExpandMoreRoundedIcon
-          sx={{
-            color: 'text.secondary',
-            transform: expanded ? 'rotate(180deg)' : 'none',
-            transition: 'transform 150ms ease-out',
-          }}
-        />
-      </ButtonBase>
-
-      {card.pokemon.length > 1 && (
-        <CommonGroundSummary
-          analysis={card.compatibility}
-          groupSize={card.pokemon.length}
-          onInspectCategory={onInspectCategory}
-          pokemonBySlug={pokemonBySlug}
-        />
-      )}
+          <Box
+            sx={{
+              alignItems: 'center',
+              alignSelf: 'end',
+              display: 'flex',
+              gap: 0.5,
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <Typography color="text.secondary" variant="caption">
+              Favorite overlap · hover or open
+            </Typography>
+            <ExpandMoreRoundedIcon
+              sx={{
+                color: 'text.secondary',
+                transform: expanded ? 'rotate(180deg)' : 'none',
+                transition: 'transform 150ms ease-out',
+              }}
+            />
+          </Box>
+        </ButtonBase>
+      </Tooltip>
 
       <Collapse in={expanded} unmountOnExit>
         <Box
@@ -605,15 +656,45 @@ function PregroupCard({
             p: { xs: 1.25, sm: 1.5 },
           }}
         >
-          <Box sx={{ display: 'grid', gap: 1 }}>
-            <Typography component="h6" sx={{ fontWeight: 850 }} variant="subtitle2">
-              Resident comparison
+          <FavoriteOverlapDetails
+            groupSize={card.pokemon.length}
+            onInspectCategory={onInspectCategory}
+            overlaps={favoriteOverlaps}
+            pokemonBySlug={pokemonBySlug}
+          />
+
+          {card.compatibility.multiCategoryOverlapItems.length > 0 && (
+            <SharedItemList
+              description="These items connect multiple favorite categories represented across the group."
+              groupSize={card.pokemon.length}
+              items={card.compatibility.multiCategoryOverlapItems}
+              pokemonBySlug={pokemonBySlug}
+              title="Multi-category overlap items"
+            />
+          )}
+
+          <Box
+            component="details"
+            sx={{ borderTop: '1px solid oklch(0.87 0.018 225)', pt: 1 }}
+          >
+            <Typography
+              component="summary"
+              sx={{
+                cursor: 'pointer',
+                fontWeight: 850,
+                minHeight: 44,
+                py: 1,
+              }}
+              variant="subtitle2"
+            >
+              Individual resident details
             </Typography>
             <Box
               sx={{
                 display: 'grid',
                 gap: 1,
                 gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+                pt: 1,
               }}
             >
               {card.pokemon.map((resident) => (
@@ -625,14 +706,6 @@ function PregroupCard({
               ))}
             </Box>
           </Box>
-
-          {card.pokemon.length > 1 && (
-            <SharedItemSections
-              analysis={card.compatibility}
-              groupSize={card.pokemon.length}
-              pokemonBySlug={pokemonBySlug}
-            />
-          )}
         </Box>
       </Collapse>
     </Box>
@@ -645,6 +718,270 @@ type PregroupCardData = {
   pokemon: RegionRosterPokemon[]
   subtitle: string
   title: string
+}
+
+function FavoriteOverlapPreview({
+  groupSize,
+  overlaps,
+}: {
+  groupSize: number
+  overlaps: FavoriteCategoryOverlap[]
+}) {
+  const visibleOverlaps = overlaps.slice(0, 4)
+
+  return (
+    <Box sx={{ display: 'grid', gap: 0.75, minWidth: 260 }}>
+      <Box sx={{ display: 'grid', gap: 0.125 }}>
+        <Typography sx={{ fontWeight: 850 }} variant="subtitle2">
+          Favorite overlap
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          Shared by at least two residents
+        </Typography>
+      </Box>
+
+      {groupSize < 2 ? (
+        <Typography color="text.secondary" variant="body2">
+          Favorite overlap starts when a group has two residents.
+        </Typography>
+      ) : visibleOverlaps.length === 0 ? (
+        <Typography color="text.secondary" variant="body2">
+          No favorite categories are shared by two residents.
+        </Typography>
+      ) : (
+        visibleOverlaps.map((overlap) => (
+          <Box
+            key={overlap.category.favoriteId}
+            sx={{
+              borderTop: '1px solid oklch(0.88 0.024 82)',
+              display: 'grid',
+              gap: 0.125,
+              pt: 0.625,
+            }}
+          >
+            <Box
+              sx={{
+                alignItems: 'baseline',
+                display: 'flex',
+                gap: 0.75,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Typography sx={{ fontWeight: 800 }} variant="body2">
+                {overlap.category.name}
+              </Typography>
+              <Typography color="text.secondary" variant="caption">
+                {overlap.residentCount}/{groupSize}
+              </Typography>
+            </Box>
+            <Typography color="text.secondary" variant="caption">
+              {overlap.items.length > 0
+                ? `${overlap.items
+                    .slice(0, 3)
+                    .map((entry) => entry.item.itemName)
+                    .join(', ')}${overlap.items.length > 3 ? ` +${overlap.items.length - 3}` : ''}`
+                : 'No exact cataloged items overlap'}
+            </Typography>
+          </Box>
+        ))
+      )}
+
+      {overlaps.length > visibleOverlaps.length && (
+        <Typography color="text.secondary" variant="caption">
+          +{overlaps.length - visibleOverlaps.length} more shared categories
+        </Typography>
+      )}
+      <Typography sx={{ fontWeight: 750 }} variant="caption">
+        Click to open the full overlap.
+      </Typography>
+    </Box>
+  )
+}
+
+function FavoriteOverlapDetails({
+  groupSize,
+  onInspectCategory,
+  overlaps,
+  pokemonBySlug,
+}: {
+  groupSize: number
+  onInspectCategory: (categoryId: string) => void
+  overlaps: FavoriteCategoryOverlap[]
+  pokemonBySlug: Map<string, RegionRosterPokemon>
+}) {
+  return (
+    <Box sx={{ display: 'grid', gap: 1 }}>
+      <Box sx={{ display: 'grid', gap: 0.125 }}>
+        <Typography component="h6" sx={{ fontWeight: 850 }} variant="subtitle1">
+          Favorite item overlap
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          Categories shared by two or more residents, with the exact items those
+          category preferences put in common.
+        </Typography>
+      </Box>
+
+      {groupSize < 2 ? (
+        <Typography color="text.secondary" variant="body2">
+          Add another resident to compare favorite categories and items.
+        </Typography>
+      ) : overlaps.length === 0 ? (
+        <Typography color="text.secondary" variant="body2">
+          This group has no favorite categories shared by two residents.
+        </Typography>
+      ) : (
+        <Box sx={{ display: 'grid' }}>
+          {overlaps.map((overlap) => (
+            <FavoriteOverlapCategory
+              groupSize={groupSize}
+              key={overlap.category.favoriteId}
+              onInspect={() => onInspectCategory(overlap.category.favoriteId)}
+              overlap={overlap}
+              pokemonBySlug={pokemonBySlug}
+            />
+          ))}
+        </Box>
+      )}
+    </Box>
+  )
+}
+
+function FavoriteOverlapCategory({
+  groupSize,
+  onInspect,
+  overlap,
+  pokemonBySlug,
+}: {
+  groupSize: number
+  onInspect: () => void
+  overlap: FavoriteCategoryOverlap
+  pokemonBySlug: Map<string, RegionRosterPokemon>
+}) {
+  const [showAll, setShowAll] = useState(false)
+  const visibleItems = showAll
+    ? overlap.items
+    : overlap.items.slice(0, itemPreviewCount)
+
+  return (
+    <Box
+      component="section"
+      sx={{
+        borderTop: '1px solid oklch(0.87 0.018 225)',
+        display: 'grid',
+        gap: 0.75,
+        py: 1.25,
+      }}
+    >
+      <Box
+        sx={{
+          alignItems: { xs: 'start', sm: 'center' },
+          display: 'grid',
+          gap: 0.75,
+          gridTemplateColumns: { xs: 'minmax(0, 1fr)', sm: 'minmax(0, 1fr) auto' },
+        }}
+      >
+        <Box sx={{ display: 'grid', gap: 0.125, minWidth: 0 }}>
+          <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Typography component="h6" sx={{ fontWeight: 850 }} variant="subtitle2">
+              {overlap.category.name}
+            </Typography>
+            <Chip
+              color={overlap.residentCount === groupSize ? 'secondary' : 'default'}
+              label={`${overlap.residentCount}/${groupSize} residents`}
+              size="small"
+              variant={overlap.residentCount === groupSize ? 'filled' : 'outlined'}
+            />
+          </Box>
+          <Typography color="text.secondary" variant="caption">
+            {getResidentNames(overlap.residentSlugs, pokemonBySlug)}
+          </Typography>
+        </Box>
+        <Button
+          color="inherit"
+          onClick={onInspect}
+          size="small"
+          sx={{ justifySelf: { xs: 'start', sm: 'end' }, minHeight: 44, px: 1.25 }}
+          variant="outlined"
+        >
+          Browse all {overlap.category.itemCount} items
+        </Button>
+      </Box>
+
+      {visibleItems.length > 0 ? (
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 0.75,
+            gridTemplateColumns:
+              'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
+          }}
+        >
+          {visibleItems.map((entry) => (
+            <FavoriteOverlapItem
+              entry={entry}
+              groupSize={groupSize}
+              key={entry.item.itemId}
+              pokemonBySlug={pokemonBySlug}
+            />
+          ))}
+        </Box>
+      ) : (
+        <Typography color="text.secondary" variant="body2">
+          The category is shared, but no exact cataloged items overlap.
+        </Typography>
+      )}
+
+      {overlap.items.length > itemPreviewCount && (
+        <Button
+          color="inherit"
+          onClick={() => setShowAll((current) => !current)}
+          size="small"
+          sx={{ justifySelf: 'start', minHeight: 44, px: 1.5 }}
+          variant="text"
+        >
+          {showAll ? 'Show fewer' : `Show all ${overlap.items.length} overlapping items`}
+        </Button>
+      )}
+    </Box>
+  )
+}
+
+function FavoriteOverlapItem({
+  entry,
+  groupSize,
+  pokemonBySlug,
+}: {
+  entry: FavoriteItemOverlap
+  groupSize: number
+  pokemonBySlug: Map<string, RegionRosterPokemon>
+}) {
+  return (
+    <Box
+      sx={{
+        alignItems: 'start',
+        display: 'grid',
+        gap: 0.625,
+        gridTemplateColumns: '36px minmax(0, 1fr) auto',
+        minHeight: 56,
+        py: 0.5,
+      }}
+    >
+      <FavoriteItemPicture item={entry.item} />
+      <Box sx={{ display: 'grid', gap: 0.125, minWidth: 0 }}>
+        <Typography sx={{ fontWeight: 750 }} variant="body2">
+          {entry.item.itemName}
+        </Typography>
+        <Typography color="text.secondary" variant="caption">
+          {getResidentNames(entry.residentSlugs, pokemonBySlug)}
+        </Typography>
+      </Box>
+      <Chip
+        color={entry.residentCount === groupSize ? 'secondary' : 'default'}
+        label={`${entry.residentCount}/${groupSize}`}
+        size="small"
+      />
+    </Box>
+  )
 }
 
 type HabitatCardCluster = {
@@ -679,134 +1016,6 @@ function getHabitatCardClusters(cards: PregroupCardData[]): HabitatCardCluster[]
         left.grouping.sortOrder - right.grouping.sortOrder ||
         left.grouping.label.localeCompare(right.grouping.label),
     )
-}
-
-function CommonGroundSummary({
-  analysis,
-  groupSize,
-  onInspectCategory,
-  pokemonBySlug,
-}: {
-  analysis: GroupCompatibilityAnalysis
-  groupSize: number
-  onInspectCategory: (categoryId: string) => void
-  pokemonBySlug: Map<string, RegionRosterPokemon>
-}) {
-  const commonRows: {
-    label: string
-    values: CoverageValue[]
-  }[] = [
-    {
-      label: 'Habitat',
-      values: analysis.habitats.map((entry) => ({
-        coverage: entry,
-        id: entry.habitat.idealHabitatId,
-        label: entry.habitat.name,
-      })),
-    },
-    {
-      label: 'Abilities',
-      values: analysis.abilities.map((entry) => ({
-        coverage: entry,
-        id: entry.ability.slug,
-        label: entry.ability.name,
-      })),
-    },
-    {
-      label: 'Favorite categories',
-      values: analysis.itemCategories.map((entry) => ({
-        categoryId: entry.category.favoriteId,
-        coverage: entry,
-        id: entry.category.favoriteId,
-        label: entry.category.name,
-      })),
-    },
-    {
-      label: 'Food flavor',
-      values: analysis.flavors.map((entry) => ({
-        categoryId: entry.favorite.favoriteId,
-        coverage: entry,
-        id: entry.favorite.favoriteId,
-        label: entry.favorite.name.replace(/ flavors$/i, ''),
-      })),
-    },
-  ]
-
-  return (
-    <Box
-      aria-label="Family common ground"
-      sx={{
-        backgroundColor: 'oklch(0.985 0.006 155)',
-        borderTop: '1px solid oklch(0.87 0.018 225)',
-        display: 'grid',
-        gap: 0.75,
-        p: { xs: 1, sm: 1.25 },
-      }}
-    >
-      <Box sx={{ alignItems: 'center', display: 'flex', gap: 0.75 }}>
-        <HubRoundedIcon color="primary" sx={{ fontSize: 18 }} />
-        <Typography sx={{ fontWeight: 850 }} variant="caption">
-          Common ground
-        </Typography>
-        <Typography color="text.secondary" variant="caption">
-          2+ residents
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: 'grid',
-          gap: 0.75,
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        }}
-      >
-        {commonRows.map((row) => (
-          <Box key={row.label} sx={{ display: 'grid', gap: 0.375, minWidth: 0 }}>
-            <Typography color="text.secondary" variant="caption">
-              {row.label}
-            </Typography>
-            <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
-              {row.values.length > 0 ? (
-                row.values.map((value) => (
-                  <Box key={value.id} sx={{ display: 'grid', gap: 0.125 }}>
-                    <Chip
-                      clickable={Boolean(value.categoryId)}
-                      color={value.coverage.sharedByAll ? 'primary' : 'default'}
-                      label={`${value.label} ${value.coverage.residentCount}/${groupSize}`}
-                      onClick={
-                        value.categoryId
-                          ? () => onInspectCategory(value.categoryId!)
-                          : undefined
-                      }
-                      size="small"
-                      sx={{ justifySelf: 'start', minHeight: 44 }}
-                      variant={value.coverage.sharedByAll ? 'filled' : 'outlined'}
-                    />
-                    <Typography color="text.secondary" variant="caption">
-                      {getResidentNames(
-                        value.coverage.residentSlugs,
-                        pokemonBySlug,
-                      )}
-                    </Typography>
-                  </Box>
-                ))
-              ) : (
-                <Typography color="text.secondary" variant="caption">
-                  No overlap
-                </Typography>
-              )}
-            </Stack>
-          </Box>
-        ))}
-      </Box>
-      {(analysis.directSharedItems.length > 0 ||
-        analysis.multiCategoryOverlapItems.length > 0) && (
-        <Typography color="text.secondary" variant="caption">
-          {analysis.directSharedItems.length} directly shared items ·{' '}
-          {analysis.multiCategoryOverlapItems.length} multi-category overlaps
-        </Typography>
-      )}
-    </Box>
-  )
 }
 
 function PokemonTraitPanel({
@@ -928,57 +1137,6 @@ function TraitCategoryLine({
         <Typography color="text.secondary" variant="body2">
           {emptyLabel}
         </Typography>
-      )}
-    </Box>
-  )
-}
-
-function SharedItemSections({
-  analysis,
-  groupSize,
-  pokemonBySlug,
-}: {
-  analysis: GroupCompatibilityAnalysis
-  groupSize: number
-  pokemonBySlug: Map<string, RegionRosterPokemon>
-}) {
-  const bridgeItemIds = new Set(
-    analysis.multiCategoryOverlapItems.map((entry) => entry.item.itemId),
-  )
-  const directOnlyItems = analysis.directSharedItems.filter(
-    (entry) => !bridgeItemIds.has(entry.item.itemId),
-  )
-
-  if (
-    analysis.multiCategoryOverlapItems.length === 0 &&
-    directOnlyItems.length === 0
-  ) {
-    return (
-      <Typography color="text.secondary" variant="body2">
-        This family has no cataloged favorite items shared by two residents.
-      </Typography>
-    )
-  }
-
-  return (
-    <Box sx={{ display: 'grid', gap: 1.5 }}>
-      {analysis.multiCategoryOverlapItems.length > 0 && (
-        <SharedItemList
-          description="These items belong to multiple favorite categories represented across the family."
-          groupSize={groupSize}
-          items={analysis.multiCategoryOverlapItems}
-          pokemonBySlug={pokemonBySlug}
-          title="Multi-category overlap items"
-        />
-      )}
-      {directOnlyItems.length > 0 && (
-        <SharedItemList
-          description="Residents reach these items through at least one category they share directly."
-          groupSize={groupSize}
-          items={directOnlyItems}
-          pokemonBySlug={pokemonBySlug}
-          title="Other shared items"
-        />
       )}
     </Box>
   )
@@ -1283,11 +1441,4 @@ function matchesPokemonQuery(
       value?.toLocaleLowerCase().includes(normalizedQuery),
     ),
   )
-}
-
-type CoverageValue = {
-  categoryId?: string
-  coverage: CompatibilityCoverage
-  id: string
-  label: string
 }
