@@ -4,8 +4,8 @@ import type { RegionRosterPokemon } from '../src/data/currentRegionRoster'
 import type { FavoriteCategory } from '../src/data/favoriteCategories'
 import type {
   EvolutionLinePregroup,
+  FavoriteCategoryCoverage,
   GroupCompatibilityAnalysis,
-  SoloHabitatPregroup,
 } from '../src/modules/region-roster/groupPlannerModel'
 
 let server: ViteDevServer
@@ -26,9 +26,9 @@ let getEvolutionLinePregroups: (
 let getGroupCompatibilityAnalysis: (
   pokemon: RegionRosterPokemon[],
 ) => GroupCompatibilityAnalysis
-let getSoloHabitatPregroups: (
-  families: EvolutionLinePregroup[],
-) => SoloHabitatPregroup[]
+let getGroupFavoriteCategoryCoverage: (
+  pokemon: RegionRosterPokemon[],
+) => FavoriteCategoryCoverage[]
 let getIdealHabitatSummaries: (
   pokemon: RegionRosterPokemon[],
 ) => {
@@ -70,7 +70,8 @@ test.beforeAll(async () => {
   favoriteCategoryById = categoryModule.favoriteCategoryById
   getEvolutionLinePregroups = modelModule.getEvolutionLinePregroups
   getGroupCompatibilityAnalysis = modelModule.getGroupCompatibilityAnalysis
-  getSoloHabitatPregroups = modelModule.getSoloHabitatPregroups
+  getGroupFavoriteCategoryCoverage =
+    modelModule.getGroupFavoriteCategoryCoverage
   getIdealHabitatSummaries = displayModule.getIdealHabitatSummaries
   getAbilitySummaries = displayModule.getAbilitySummaries
   getIdealHabitatGrouping = displayModule.getIdealHabitatGrouping
@@ -238,6 +239,7 @@ test('separates common traits and deduplicates multi-category item coverage', ()
   expect(analysis.itemCategories).toHaveLength(0)
   expect(overlapItem).toMatchObject({ residentCount: 2, sharedByAll: true })
   expect(overlapItem?.residentSlugs).toEqual(['resident-a', 'resident-b'])
+  expect(overlapItem?.score).toBe(2)
 })
 
 test('retains direct and multi-category labels when the same residents share both categories', () => {
@@ -287,25 +289,57 @@ test('summarizes every group habitat by resident coverage', () => {
   ])
 })
 
-test('balances solo residents into habitat groups of four or fewer', () => {
-  const residents = [
-    ...Array.from({ length: 5 }, (_value, index) =>
-      makeResident({ slug: `warm-${index}`, habitatId: 'warm' }),
-    ),
-    ...Array.from({ length: 2 }, (_value, index) =>
-      makeResident({ slug: `bright-${index}`, habitatId: 'bright' }),
-    ),
-  ]
-  const groups = getSoloHabitatPregroups(
-    getEvolutionLinePregroups(residents),
+test('scores top items by every resident-category match', () => {
+  const multiCategoryEntry = Array.from(
+    favoriteCategoriesByItemId.entries(),
+  ).find(
+    ([, categories]) =>
+      categories.filter((category) => category.kind === 'favorite-category')
+        .length >= 2,
   )
-  const warmGroupSizes = groups
-    .filter((group) => group.habitat?.idealHabitatId === 'warm')
-    .map((group) => group.pokemon.length)
+  if (!multiCategoryEntry) throw new Error('Expected multi-category item fixture')
+  const [itemId, allItemCategories] = multiCategoryEntry
+  const favoriteIds = allItemCategories
+    .filter((category) => category.kind === 'favorite-category')
+    .slice(0, 2)
+    .map((category) => category.favoriteId)
+  const residents = ['resident-a', 'resident-b', 'resident-c'].map((slug) =>
+    makeResident({ slug, favoriteIds }),
+  )
 
-  expect(warmGroupSizes).toEqual([3, 2])
-  expect(groups.every((group) => group.pokemon.length <= 4)).toBe(true)
-  expect(groups.flatMap((group) => group.pokemon)).toHaveLength(7)
+  const analysis = getGroupCompatibilityAnalysis(residents)
+  const topItem = analysis.topItems.find(
+    (entry) => entry.item.itemId === itemId,
+  )
+
+  expect(topItem).toMatchObject({
+    residentCount: 3,
+    score: 6,
+    sharedByAll: true,
+  })
+  expect(topItem?.contributingCategories).toHaveLength(2)
+  expect(
+    topItem?.contributingCategories.map((entry) => entry.residentCount),
+  ).toEqual([3, 3])
+})
+
+test('keeps solo favorite categories available for card popups', () => {
+  const category = favoriteCategories.find(
+    (entry) => entry.kind === 'favorite-category' && entry.items.length > 0,
+  )
+  if (!category) throw new Error('Expected favorite category fixture')
+
+  const coverage = getGroupFavoriteCategoryCoverage([
+    makeResident({ slug: 'solo', favoriteIds: [category.favoriteId] }),
+  ])
+
+  expect(coverage).toHaveLength(1)
+  expect(coverage[0]).toMatchObject({
+    category: { favoriteId: category.favoriteId },
+    residentCount: 1,
+    residentSlugs: ['solo'],
+    sharedByAll: true,
+  })
 })
 
 test('summarizes ability coverage and marks tied habitats as mixed', () => {

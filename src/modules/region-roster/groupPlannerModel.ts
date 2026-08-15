@@ -51,6 +51,12 @@ export type ItemCategoryContribution = CompatibilityCoverage & {
 export type SharedItemCompatibility = CompatibilityCoverage & {
   contributingCategories: ItemCategoryContribution[]
   item: FavoriteItem
+  /** One point for each resident/category preference that contains this item. */
+  score: number
+}
+
+export type FavoriteCategoryCoverage = CompatibilityCoverage & {
+  category: FavoriteCategory
 }
 
 export type GroupCompatibilityAnalysis = {
@@ -60,6 +66,7 @@ export type GroupCompatibilityAnalysis = {
   flavors: FavoriteCompatibility[]
   directSharedItems: SharedItemCompatibility[]
   multiCategoryOverlapItems: SharedItemCompatibility[]
+  topItems: SharedItemCompatibility[]
 }
 
 export type EvolutionLinePregroup = {
@@ -71,16 +78,6 @@ export type EvolutionLinePregroup = {
   pokemon: RegionRosterPokemon[]
   residentSlugs: string[]
   isCompleteFamily: boolean
-  compatibility: GroupCompatibilityAnalysis
-}
-
-export type SoloHabitatPregroup = {
-  groupId: string
-  habitat: RegionRosterPokemon['idealHabitat']
-  pokemon: RegionRosterPokemon[]
-  residentSlugs: string[]
-  cohortIndex: number
-  cohortCount: number
   compatibility: GroupCompatibilityAnalysis
 }
 
@@ -263,7 +260,7 @@ export const getGroupCompatibilityAnalysis = (
         left.favorite.name.localeCompare(right.favorite.name),
     )
 
-  const sharedItems = Array.from(favoriteCategoriesByItemId.entries())
+  const scoredItems = Array.from(favoriteCategoriesByItemId.entries())
     .flatMap(([itemId, categories]): SharedItemCompatibility[] => {
       const item = favoriteItemById.get(itemId)
       if (!item) return []
@@ -296,19 +293,28 @@ export const getGroupCompatibilityAnalysis = (
         (contribution) => contribution.residentSlugs,
       )
       const coverage = makeCoverage(residentSlugs, groupSize)
-      if (coverage.residentCount < 2) return []
+      const score = contributingCategories.reduce(
+        (total, contribution) => total + contribution.residentCount,
+        0,
+      )
+      if (score === 0) return []
 
       return [
         {
           item,
           contributingCategories,
+          score,
           ...coverage,
         },
       ]
     })
     .sort(
       (left, right) =>
+        right.score - left.score ||
         right.residentCount - left.residentCount ||
+        right.contributingCategories.length -
+          left.contributingCategories.length ||
+        left.item.sourceOrder - right.item.sourceOrder ||
         left.item.itemName.localeCompare(right.item.itemName),
     )
 
@@ -317,16 +323,20 @@ export const getGroupCompatibilityAnalysis = (
     habitats,
     itemCategories,
     flavors,
-    directSharedItems: sharedItems.filter((item) =>
-      item.contributingCategories.some(
-        (contribution) => contribution.residentCount >= 2,
-      ),
-    ),
-    multiCategoryOverlapItems: sharedItems.filter(
+    directSharedItems: scoredItems.filter(
       (item) =>
+        item.residentCount >= 2 &&
+        item.contributingCategories.some(
+          (contribution) => contribution.residentCount >= 2,
+        ),
+    ),
+    multiCategoryOverlapItems: scoredItems.filter(
+      (item) =>
+        item.residentCount >= 2 &&
         item.contributingCategories.length >= 2 &&
         hasMultiCategoryResidentOverlap(item.contributingCategories),
     ),
+    topItems: scoredItems,
   }
 }
 
@@ -385,75 +395,6 @@ export const getEvolutionLinePregroups = (
       compatibility: getGroupCompatibilityAnalysis(familyPokemon),
     }
   }).sort((left, right) => left.familyId.localeCompare(right.familyId))
-}
-
-/**
- * Combines residents who have no selected-region evolution relative into
- * habitat-first cohorts. Cohorts are balanced and never exceed a saved home's
- * four-resident capacity, avoiding a 4+1 split when a 3+2 split is possible.
- */
-export const getSoloHabitatPregroups = (
-  evolutionFamilies: EvolutionLinePregroup[],
-): SoloHabitatPregroup[] => {
-  const residentsByHabitat = new Map<
-    string,
-    {
-      habitat: RegionRosterPokemon['idealHabitat']
-      pokemon: RegionRosterPokemon[]
-    }
-  >()
-
-  evolutionFamilies
-    .filter((family) => family.pokemon.length === 1)
-    .forEach((family) => {
-      const resident = family.pokemon[0]
-      const habitatId = resident.idealHabitat?.idealHabitatId ?? 'unknown'
-      const group = residentsByHabitat.get(habitatId) ?? {
-        habitat: resident.idealHabitat,
-        pokemon: [],
-      }
-      group.pokemon.push(resident)
-      residentsByHabitat.set(habitatId, group)
-    })
-
-  return Array.from(residentsByHabitat.entries())
-    .sort(([, left], [, right]) =>
-      (left.habitat?.name ?? 'Unknown').localeCompare(
-        right.habitat?.name ?? 'Unknown',
-      ),
-    )
-    .flatMap(([habitatId, group]) => {
-      const sortedPokemon = [...group.pokemon].sort(
-        (left, right) =>
-          (left.sourceOrder ?? Number.MAX_SAFE_INTEGER) -
-            (right.sourceOrder ?? Number.MAX_SAFE_INTEGER) ||
-          left.name.localeCompare(right.name),
-      )
-      const cohortCount = Math.ceil(sortedPokemon.length / 4)
-      const baseCohortSize = Math.floor(sortedPokemon.length / cohortCount)
-      const largerCohortCount = sortedPokemon.length % cohortCount
-      let startIndex = 0
-
-      return Array.from({ length: cohortCount }, (_value, cohortIndex) => {
-        const cohortSize =
-          baseCohortSize + (cohortIndex < largerCohortCount ? 1 : 0)
-        const pokemon = sortedPokemon.slice(
-          startIndex,
-          startIndex + cohortSize,
-        )
-        startIndex += cohortSize
-
-        return {
-          groupId: `solo-habitat:${habitatId}:${cohortIndex + 1}`,
-          habitat: group.habitat,
-          pokemon,
-          residentSlugs: pokemon.map((resident) => resident.slug),
-          cohortIndex: cohortIndex + 1,
-          cohortCount,
-          compatibility: getGroupCompatibilityAnalysis(pokemon),
-        }
-      })
-    })
 }
 
 export const getGroupFavoriteOverlaps = (
@@ -517,6 +458,46 @@ export const getGroupFavoriteOverlaps = (
         },
       ]
     })
+    .sort(
+      (left, right) =>
+        right.residentCount - left.residentCount ||
+        left.category.sourceOrder - right.category.sourceOrder ||
+        left.category.name.localeCompare(right.category.name),
+    )
+}
+
+/**
+ * Returns every item-bearing favorite category represented in a group. Unlike
+ * overlap analysis, single-resident categories are included so solo cards can
+ * still explain where their ranked items come from.
+ */
+export const getGroupFavoriteCategoryCoverage = (
+  pokemon: RegionRosterPokemon[],
+): FavoriteCategoryCoverage[] => {
+  const categoryResidents = new Map<
+    string,
+    { category: FavoriteCategory; residents: Set<string> }
+  >()
+
+  pokemon.forEach((resident) => {
+    resident.favorites.forEach((favorite) => {
+      const category = favoriteCategoryById.get(favorite.favoriteId)
+      if (!category || category.kind !== 'favorite-category') return
+
+      const entry = categoryResidents.get(category.favoriteId) ?? {
+        category,
+        residents: new Set<string>(),
+      }
+      entry.residents.add(resident.slug)
+      categoryResidents.set(category.favoriteId, entry)
+    })
+  })
+
+  return Array.from(categoryResidents.values())
+    .map(({ category, residents }) => ({
+      category,
+      ...makeCoverage(residents, pokemon.length),
+    }))
     .sort(
       (left, right) =>
         right.residentCount - left.residentCount ||

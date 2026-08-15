@@ -1,56 +1,11 @@
-import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded'
 import BoltRoundedIcon from '@mui/icons-material/BoltRounded'
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
-import LocalFireDepartmentRoundedIcon from '@mui/icons-material/LocalFireDepartmentRounded'
-import NatureRoundedIcon from '@mui/icons-material/NatureRounded'
-import TerrainRoundedIcon from '@mui/icons-material/TerrainRounded'
-import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import type { RegionRosterPokemon } from '../../../data/currentRegionRoster'
 import type { FavoriteItem } from '../../../data/favoriteCategories'
+import { getHabitatVisual } from './plannerHabitatVisuals'
 
 type IdealHabitat = NonNullable<RegionRosterPokemon['idealHabitat']>
-
-const habitatVisuals = {
-  bright: {
-    background: 'oklch(0.95 0.055 96)',
-    border: 'oklch(0.79 0.105 89)',
-    foreground: 'oklch(0.39 0.105 72)',
-    Icon: LightModeRoundedIcon,
-  },
-  warm: {
-    background: 'oklch(0.95 0.055 48)',
-    border: 'oklch(0.78 0.105 43)',
-    foreground: 'oklch(0.40 0.13 34)',
-    Icon: LocalFireDepartmentRoundedIcon,
-  },
-  humid: {
-    background: 'oklch(0.95 0.045 206)',
-    border: 'oklch(0.78 0.085 211)',
-    foreground: 'oklch(0.38 0.095 221)',
-    Icon: WaterDropRoundedIcon,
-  },
-  dry: {
-    background: 'oklch(0.95 0.045 74)',
-    border: 'oklch(0.78 0.085 69)',
-    foreground: 'oklch(0.39 0.085 61)',
-    Icon: TerrainRoundedIcon,
-  },
-  dark: {
-    background: 'oklch(0.93 0.035 288)',
-    border: 'oklch(0.73 0.075 286)',
-    foreground: 'oklch(0.34 0.085 286)',
-    Icon: DarkModeRoundedIcon,
-  },
-  cool: {
-    background: 'oklch(0.96 0.035 232)',
-    border: 'oklch(0.79 0.075 236)',
-    foreground: 'oklch(0.39 0.09 242)',
-    Icon: AcUnitRoundedIcon,
-  },
-} as const
 
 export function PokemonPortrait({
   pokemon,
@@ -87,7 +42,13 @@ export function PokemonPortrait({
   )
 }
 
-export function FavoriteItemPicture({ item }: { item: FavoriteItem }) {
+export function FavoriteItemPicture({
+  item,
+  size = 34,
+}: {
+  item: FavoriteItem
+  size?: number
+}) {
   return (
     <Box
       sx={{
@@ -96,9 +57,9 @@ export function FavoriteItemPicture({ item }: { item: FavoriteItem }) {
         borderRadius: 0.75,
         display: 'flex',
         flex: '0 0 auto',
-        height: 34,
+        height: size,
         justifyContent: 'center',
-        width: 34,
+        width: size,
       }}
     >
       {item.pictureUrl ? (
@@ -107,7 +68,7 @@ export function FavoriteItemPicture({ item }: { item: FavoriteItem }) {
           component="img"
           loading="lazy"
           src={item.pictureUrl}
-          sx={{ height: 30, objectFit: 'contain', width: 30 }}
+          sx={{ height: size - 4, objectFit: 'contain', width: size - 4 }}
         />
       ) : (
         <Typography sx={{ fontWeight: 850 }} variant="caption">
@@ -129,12 +90,11 @@ export function IdealHabitatBadge({
   habitat: IdealHabitat
   residentCount?: number
 }) {
-  const visual =
-    habitatVisuals[habitat.idealHabitatId as keyof typeof habitatVisuals]
-  const Icon = visual?.Icon ?? NatureRoundedIcon
-  const background = visual?.background ?? 'oklch(0.95 0.025 155)'
-  const border = visual?.border ?? 'oklch(0.78 0.055 155)'
-  const foreground = visual?.foreground ?? 'oklch(0.37 0.075 155)'
+  const visual = getHabitatVisual(habitat.idealHabitatId)
+  const Icon = visual.Icon
+  const background = visual.background
+  const border = visual.border
+  const foreground = visual.foreground
   const metadata = detail ?? `${residentCount ?? 0}/${groupSize ?? 0}`
 
   return (
