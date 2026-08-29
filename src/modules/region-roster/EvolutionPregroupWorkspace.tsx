@@ -357,7 +357,7 @@ function PregroupCard({
             {topItems.length > 0 ? (
               <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap' }} useFlexGap>
                 {topItems.map((entry) => (
-                  <ScoredItemIcon entry={entry} key={entry.item.itemId} />
+                  <ScoredItemPreview entry={entry} key={entry.item.itemId} />
                 ))}
               </Stack>
             ) : (
@@ -376,37 +376,45 @@ function PregroupCard({
   )
 }
 
-function ScoredItemIcon({ entry }: { entry: SharedItemCompatibility }) {
+function ScoredItemPreview({ entry }: { entry: SharedItemCompatibility }) {
   return (
     <Box
       aria-label={`${entry.item.itemName}, score ${entry.score}`}
-      component="span"
-      sx={{ display: 'inline-flex', position: 'relative' }}
+      sx={{
+        alignItems: 'center',
+        display: 'inline-grid',
+        gap: 0.5,
+        justifyItems: 'center',
+        maxWidth: 112,
+      }}
     >
-      <FavoriteItemPicture item={entry.item} size={32} />
-      <Box
-        component="span"
-        sx={{
-          alignItems: 'center',
-          backgroundColor: 'oklch(0.34 0.075 155)',
-          border: '2px solid oklch(0.995 0.003 225)',
-          borderRadius: '50%',
-          bottom: -5,
-          color: 'oklch(0.98 0.01 155)',
-          display: 'inline-flex',
-          fontSize: '0.625rem',
-          fontVariantNumeric: 'tabular-nums',
-          fontWeight: 850,
-          height: 19,
-          justifyContent: 'center',
-          lineHeight: 1,
-          position: 'absolute',
-          right: -5,
-          width: 19,
-        }}
-      >
-        {entry.score}
+      <Box sx={{ display: 'inline-flex', position: 'relative' }}>
+        <FavoriteItemPicture item={entry.item} size={32} />
+        <Box
+          component="span"
+          sx={{
+            alignItems: 'center',
+            backgroundColor: 'oklch(0.34 0.075 155)',
+            border: '2px solid oklch(0.995 0.003 225)',
+            borderRadius: '50%',
+            bottom: -5,
+            color: 'oklch(0.98 0.01 155)',
+            display: 'inline-flex',
+            fontSize: '0.625rem',
+            fontVariantNumeric: 'tabular-nums',
+            fontWeight: 850,
+            height: 19,
+            justifyContent: 'center',
+            lineHeight: 1,
+            position: 'absolute',
+            right: -5,
+            width: 19,
+          }}
+        >
+          {entry.score}
+        </Box>
       </Box>
+      <ItemCategoryBadges compact entry={entry} />
     </Box>
   )
 }
@@ -503,14 +511,77 @@ function TopItemRow({
         <Typography sx={{ fontWeight: 800 }} variant="body2">
           {entry.item.itemName}
         </Typography>
+        <ItemCategoryBadges entry={entry} />
         <Typography color="text.secondary" variant="caption">
-          {entry.residentCount}/{groupSize} residents ·{' '}
-          {entry.contributingCategories.length}{' '}
-          {entry.contributingCategories.length === 1 ? 'category' : 'categories'}
+          {entry.residentCount}/{groupSize} residents
         </Typography>
       </Box>
       <Chip label={`${entry.score} pts`} size="small" />
     </Box>
+  )
+}
+
+function ItemCategoryBadges({
+  compact = false,
+  entry,
+}: {
+  compact?: boolean
+  entry: SharedItemCompatibility
+}) {
+  const visibleCategories = compact
+    ? entry.contributingCategories.slice(0, 1)
+    : entry.contributingCategories
+  const hiddenCategoryCount =
+    entry.contributingCategories.length - visibleCategories.length
+
+  return (
+    <Stack
+      direction="row"
+      spacing={0.375}
+      sx={{ flexWrap: 'wrap', minWidth: 0 }}
+      useFlexGap
+    >
+      {visibleCategories.map(({ category }) => (
+        <Chip
+          key={category.favoriteId}
+          label={category.name}
+          size="small"
+          title={category.name}
+          variant="outlined"
+          sx={{
+            backgroundColor: 'oklch(0.97 0.018 82)',
+            borderColor: 'oklch(0.80 0.045 82)',
+            color: 'oklch(0.36 0.055 68)',
+            fontSize: '0.65rem',
+            fontWeight: 750,
+            height: 20,
+            maxWidth: compact ? 96 : 160,
+            '& .MuiChip-label': {
+              overflow: 'hidden',
+              px: 0.625,
+              textOverflow: 'ellipsis',
+            },
+          }}
+        />
+      ))}
+      {hiddenCategoryCount > 0 && (
+        <Chip
+          aria-label={`${hiddenCategoryCount} more contributing ${
+            hiddenCategoryCount === 1 ? 'category' : 'categories'
+          }`}
+          label={`+${hiddenCategoryCount}`}
+          size="small"
+          sx={{
+            backgroundColor: 'oklch(0.94 0.025 82)',
+            color: 'oklch(0.36 0.055 68)',
+            fontSize: '0.65rem',
+            fontWeight: 850,
+            height: 20,
+            '& .MuiChip-label': { px: 0.625 },
+          }}
+        />
+      )}
+    </Stack>
   )
 }
 
