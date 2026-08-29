@@ -2,15 +2,15 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
-    "fetchedAt": "2026-08-09T08:28:14Z",
+    "fetchedAt": "2026-08-29T23:30:17Z",
     "notes": [
       "Cloud Island is omitted from normalized spawn locations.",
       "Bubbly Basin is included as a normalized spawn location.",
       "Requirement rows without direct item links are reconciled against the item catalog by exact name when possible."
     ]
   },
-  "count": 245,
-  "totalSpawns": 486,
+  "count": 252,
+  "totalSpawns": 495,
   "habitats": [
     {
       "catalogId": "main",
@@ -16344,9 +16344,9 @@
       "catalogId": "basin",
       "habitatKey": "basin:027",
       "habitatId": 27,
-      "habitatSlug": "topsy-turby",
-      "habitatName": "Topsy-turby",
-      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turby.shtml",
+      "habitatSlug": "topsy-turvy",
+      "habitatName": "Topsy-turvy",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turvy.shtml",
       "spawns": [
         {
           "sourceOrder": 1,
@@ -16798,6 +16798,348 @@
           ],
           "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
           "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:001",
+      "habitatId": 1,
+      "habitatSlug": "yellowcarpet",
+      "habitatName": "Yellow carpet",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/yellowcarpet.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 187,
+          "pokemonSlug": "hoppip",
+          "pokemonName": "Hoppip",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/hoppip.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/187.png",
+          "pokemonImageFilename": "187.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 2,
+          "pokemonId": 188,
+          "pokemonSlug": "skiploom",
+          "pokemonName": "Skiploom",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/skiploom.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/188.png",
+          "pokemonImageFilename": "188.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        },
+        {
+          "sourceOrder": 3,
+          "pokemonId": 189,
+          "pokemonSlug": "jumpluff",
+          "pokemonName": "Jumpluff",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jumpluff.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/189.png",
+          "pokemonImageFilename": "189.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Very Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:002",
+      "habitatId": 2,
+      "habitatSlug": "field-tripfriends",
+      "habitatName": "Field-trip friends",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/field-tripfriends.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 188,
+          "pokemonSlug": "skiploom",
+          "pokemonName": "Skiploom",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/skiploom.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/188.png",
+          "pokemonImageFilename": "188.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:003",
+      "habitatId": 3,
+      "habitatSlug": "dandelionlunchtime",
+      "habitatName": "Dandelion lunchtime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/dandelionlunchtime.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 189,
+          "pokemonSlug": "jumpluff",
+          "pokemonName": "Jumpluff",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jumpluff.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/189.png",
+          "pokemonImageFilename": "189.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Rare",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:004",
+      "habitatId": 4,
+      "habitatSlug": "treasure-huntingset",
+      "habitatName": "Treasure-hunting set",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/treasure-huntingset.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 302,
+          "pokemonSlug": "sableye",
+          "pokemonName": "Sableye",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/sableye.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/302.png",
+          "pokemonImageFilename": "302.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:005",
+      "habitatId": 5,
+      "habitatSlug": "surroundedbystars",
+      "habitatName": "Surrounded by stars",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/surroundedbystars.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 385,
+          "pokemonSlug": "jirachi",
+          "pokemonName": "Jirachi",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jirachi.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/385.png",
+          "pokemonImageFilename": "385.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:006",
+      "habitatId": 6,
+      "habitatSlug": "excitingbeach",
+      "habitatName": "Exciting beach",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/excitingbeach.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 349,
+          "pokemonSlug": "feebas",
+          "pokemonName": "Feebas",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/feebas.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/349.png",
+          "pokemonImageFilename": "349.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
+          "timeOfDay": [
+            "morning",
+            "day",
+            "evening",
+            "night"
+          ],
+          "weather": [
+            "sun",
+            "cloud",
+            "rain"
+          ]
+        }
+      ]
+    },
+    {
+      "catalogId": "event",
+      "habitatKey": "event:007",
+      "habitatId": 7,
+      "habitatSlug": "marineleisureactivities",
+      "habitatName": "Marine leisure activities",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineleisureactivities.shtml",
+      "spawns": [
+        {
+          "sourceOrder": 1,
+          "pokemonId": 350,
+          "pokemonSlug": "milotic",
+          "pokemonName": "Milotic",
+          "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/milotic.shtml",
+          "pokemonImageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/350.png",
+          "pokemonImageFilename": "350.png",
+          "pokemonFormSlug": null,
+          "locations": [
+            "withered-wastelands",
+            "bleak-beach",
+            "rocky-ridges",
+            "sparkling-skylands",
+            "palette-town",
+            "bubbly-basin"
+          ],
+          "rawLocationText": "Withered Wastelands; Bleak Beach; Rocky Ridges; Sparkling Skylands; Palette Town; Cloud Island; Bubbly Basin",
+          "rarity": "Common",
           "timeOfDay": [
             "morning",
             "day",

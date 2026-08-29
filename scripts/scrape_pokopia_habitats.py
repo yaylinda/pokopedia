@@ -51,9 +51,8 @@ def main() -> None:
                     "page": SOURCE_URL,
                     "fetchedAt": utc_now(),
                     "notes": [
-                        "This dataset includes the main and Basin habitat catalogs from the aggregate habitats table.",
-                        "Habitat numbers restart in the Basin catalog, so catalogId and habitatKey identify records.",
-                        "The separate Habitats (Event) section is intentionally excluded.",
+                        "This dataset includes the main, Basin, and Event habitat catalogs from the aggregate habitats table.",
+                        "Habitat numbers restart in the Basin and Event catalogs, so catalogId and habitatKey identify records.",
                     ],
                 },
                 "count": len(habitats),
@@ -89,11 +88,13 @@ def parse_habitats(html: str) -> list[dict[str, object]]:
         raise ValueError("Could not find the habitats table on the page.")
 
     table_html = match.group("table")
-    non_event_html = table_html.split(EVENT_HEADER, 1)[0]
-    main_html, separator, basin_html = non_event_html.partition(BASIN_HEADER)
+    main_and_basin_html, event_separator, event_html = table_html.partition(EVENT_HEADER)
+    main_html, basin_separator, basin_html = main_and_basin_html.partition(BASIN_HEADER)
     catalog_sections = [("main", main_html)]
-    if separator:
+    if basin_separator:
         catalog_sections.append(("basin", basin_html))
+    if event_separator:
+        catalog_sections.append(("event", event_html))
 
     habitats: list[dict[str, object]] = []
     for catalog_id, section_html in catalog_sections:

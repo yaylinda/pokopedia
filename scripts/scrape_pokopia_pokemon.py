@@ -21,6 +21,12 @@ SOURCE_CATALOGS = [
         "tmpFilename": "availablepokemon.html",
     },
     {
+        "catalogId": "event",
+        "name": "Event Pokédex",
+        "url": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+        "tmpFilename": "eventpokedex.html",
+    },
+    {
         "catalogId": "basin",
         "name": "Basin Pokédex",
         "url": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
@@ -92,7 +98,7 @@ def main() -> None:
                     "notes": [
                         "The table No. column is the Pokopia number, not the Pokemon ID.",
                         "pokemonId is derived from the Pokemon image filename.",
-                        "Pokopia numbers restart in the Basin catalog and are not otherwise unique, so catalogId and sourceOrder identify rows.",
+                        "Pokopia numbers restart in the Event and Basin catalogs and are not otherwise unique, so catalogId and sourceOrder identify rows.",
                     ],
                     "duplicatePokopiaNumbers": duplicate_pokopia_numbers,
                 },

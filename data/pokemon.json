@@ -9,16 +9,21 @@
         "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
       },
       {
+        "catalogId": "event",
+        "name": "Event Pok\u00e9dex",
+        "page": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml"
+      },
+      {
         "catalogId": "basin",
         "name": "Basin Pok\u00e9dex",
         "page": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml"
       }
     ],
-    "fetchedAt": "2026-08-09T08:27:11Z",
+    "fetchedAt": "2026-08-29T23:29:16Z",
     "notes": [
       "The table No. column is the Pokopia number, not the Pokemon ID.",
       "pokemonId is derived from the Pokemon image filename.",
-      "Pokopia numbers restart in the Basin catalog and are not otherwise unique, so catalogId and sourceOrder identify rows."
+      "Pokopia numbers restart in the Event and Basin catalogs and are not otherwise unique, so catalogId and sourceOrder identify rows."
     ],
     "duplicatePokopiaNumbers": [
       "#001",
@@ -79,7 +84,7 @@
       "#197"
     ]
   },
-  "count": 360,
+  "count": 367,
   "pokemon": [
     {
       "sourceOrder": 1,
@@ -1318,10 +1323,10 @@
       "specialties": [
         {
           "name": "???",
-          "slug": "???",
-          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.shtml",
-          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.png",
-          "iconFilename": "???.png"
+          "slug": ".shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.png",
+          "iconFilename": ".png"
         }
       ]
     },
@@ -8126,10 +8131,10 @@
       "specialties": [
         {
           "name": "???",
-          "slug": "???",
-          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.shtml",
-          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.png",
-          "iconFilename": "???.png"
+          "slug": ".shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.png",
+          "iconFilename": ".png"
         }
       ]
     },
@@ -8318,10 +8323,10 @@
       "specialties": [
         {
           "name": "???",
-          "slug": "???",
-          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.shtml",
-          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.png",
-          "iconFilename": "???.png"
+          "slug": ".shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.png",
+          "iconFilename": ".png"
         }
       ]
     },
@@ -8342,10 +8347,10 @@
       "specialties": [
         {
           "name": "???",
-          "slug": "???",
-          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.shtml",
-          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/???.png",
-          "iconFilename": "???.png"
+          "slug": ".shtml",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/.png",
+          "iconFilename": ".png"
         }
       ]
     },
@@ -8399,6 +8404,188 @@
     },
     {
       "sourceOrder": 309,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 1,
+      "pokopiaNumberDisplay": "#001",
+      "pokemonId": 187,
+      "pokemonIdDisplay": "187",
+      "pokemonFormSlug": null,
+      "name": "Hoppip",
+      "slug": "hoppip",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/hoppip.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/187.png",
+      "imageFilename": "187.png",
+      "specialties": [
+        {
+          "name": "Grow",
+          "slug": "grow",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.png",
+          "iconFilename": "grow.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 310,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 2,
+      "pokopiaNumberDisplay": "#002",
+      "pokemonId": 188,
+      "pokemonIdDisplay": "188",
+      "pokemonFormSlug": null,
+      "name": "Skiploom",
+      "slug": "skiploom",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/skiploom.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/188.png",
+      "imageFilename": "188.png",
+      "specialties": [
+        {
+          "name": "Grow",
+          "slug": "grow",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.png",
+          "iconFilename": "grow.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 311,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 3,
+      "pokopiaNumberDisplay": "#003",
+      "pokemonId": 189,
+      "pokemonIdDisplay": "189",
+      "pokemonFormSlug": null,
+      "name": "Jumpluff",
+      "slug": "jumpluff",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jumpluff.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/189.png",
+      "imageFilename": "189.png",
+      "specialties": [
+        {
+          "name": "Grow",
+          "slug": "grow",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/grow.png",
+          "iconFilename": "grow.png"
+        },
+        {
+          "name": "Litter",
+          "slug": "litter",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.png",
+          "iconFilename": "litter.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 312,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 4,
+      "pokopiaNumberDisplay": "#004",
+      "pokemonId": 302,
+      "pokemonIdDisplay": "302",
+      "pokemonFormSlug": null,
+      "name": "Sableye",
+      "slug": "sableye",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/sableye.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/302.png",
+      "imageFilename": "302.png",
+      "specialties": [
+        {
+          "name": "Search",
+          "slug": "search",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/search.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/search.png",
+          "iconFilename": "search.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 313,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 5,
+      "pokopiaNumberDisplay": "#005",
+      "pokemonId": 385,
+      "pokemonIdDisplay": "385",
+      "pokemonFormSlug": null,
+      "name": "Jirachi",
+      "slug": "jirachi",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jirachi.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/385.png",
+      "imageFilename": "385.png",
+      "specialties": [
+        {
+          "name": "Litter",
+          "slug": "litter",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/litter.png",
+          "iconFilename": "litter.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 314,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 6,
+      "pokopiaNumberDisplay": "#006",
+      "pokemonId": 349,
+      "pokemonIdDisplay": "349",
+      "pokemonFormSlug": null,
+      "name": "Feebas",
+      "slug": "feebas",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/feebas.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/349.png",
+      "imageFilename": "349.png",
+      "specialties": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.png",
+          "iconFilename": "water.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 315,
+      "catalogId": "event",
+      "sourcePage": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml",
+      "pokopiaNumber": 7,
+      "pokopiaNumberDisplay": "#007",
+      "pokemonId": 350,
+      "pokemonIdDisplay": "350",
+      "pokemonFormSlug": null,
+      "name": "Milotic",
+      "slug": "milotic",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/milotic.shtml",
+      "imageUrl": "https://www.serebii.net/pokemonpokopia/pokemon/small/350.png",
+      "imageFilename": "350.png",
+      "specialties": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/water.png",
+          "iconFilename": "water.png"
+        },
+        {
+          "name": "Hype",
+          "slug": "hype",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/hype.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/hype.png",
+          "iconFilename": "hype.png"
+        }
+      ]
+    },
+    {
+      "sourceOrder": 316,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 1,
@@ -8429,7 +8616,7 @@
       ]
     },
     {
-      "sourceOrder": 310,
+      "sourceOrder": 317,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 2,
@@ -8460,7 +8647,7 @@
       ]
     },
     {
-      "sourceOrder": 311,
+      "sourceOrder": 318,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 3,
@@ -8484,7 +8671,7 @@
       ]
     },
     {
-      "sourceOrder": 312,
+      "sourceOrder": 319,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 4,
@@ -8515,7 +8702,7 @@
       ]
     },
     {
-      "sourceOrder": 313,
+      "sourceOrder": 320,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 5,
@@ -8546,7 +8733,7 @@
       ]
     },
     {
-      "sourceOrder": 314,
+      "sourceOrder": 321,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 6,
@@ -8570,7 +8757,7 @@
       ]
     },
     {
-      "sourceOrder": 315,
+      "sourceOrder": 322,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 7,
@@ -8601,7 +8788,7 @@
       ]
     },
     {
-      "sourceOrder": 316,
+      "sourceOrder": 323,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 8,
@@ -8625,7 +8812,7 @@
       ]
     },
     {
-      "sourceOrder": 317,
+      "sourceOrder": 324,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 9,
@@ -8656,7 +8843,7 @@
       ]
     },
     {
-      "sourceOrder": 318,
+      "sourceOrder": 325,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 10,
@@ -8687,7 +8874,7 @@
       ]
     },
     {
-      "sourceOrder": 319,
+      "sourceOrder": 326,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 11,
@@ -8711,7 +8898,7 @@
       ]
     },
     {
-      "sourceOrder": 320,
+      "sourceOrder": 327,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 12,
@@ -8742,7 +8929,7 @@
       ]
     },
     {
-      "sourceOrder": 321,
+      "sourceOrder": 328,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 13,
@@ -8766,7 +8953,7 @@
       ]
     },
     {
-      "sourceOrder": 322,
+      "sourceOrder": 329,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 14,
@@ -8790,7 +8977,7 @@
       ]
     },
     {
-      "sourceOrder": 323,
+      "sourceOrder": 330,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 15,
@@ -8821,7 +9008,7 @@
       ]
     },
     {
-      "sourceOrder": 324,
+      "sourceOrder": 331,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 16,
@@ -8852,7 +9039,7 @@
       ]
     },
     {
-      "sourceOrder": 325,
+      "sourceOrder": 332,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 17,
@@ -8876,7 +9063,7 @@
       ]
     },
     {
-      "sourceOrder": 326,
+      "sourceOrder": 333,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 18,
@@ -8891,11 +9078,11 @@
       "imageFilename": "319.png",
       "specialties": [
         {
-          "name": "Chop",
-          "slug": "chop",
-          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/chop.shtml",
-          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/chop.png",
-          "iconFilename": "chop.png"
+          "name": "Crush",
+          "slug": "crush",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/crush.shtml",
+          "iconUrl": "https://www.serebii.net/pokemonpokopia/pokedex/specialty/crush.png",
+          "iconFilename": "crush.png"
         },
         {
           "name": "Scrub",
@@ -8907,7 +9094,7 @@
       ]
     },
     {
-      "sourceOrder": 327,
+      "sourceOrder": 334,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 19,
@@ -8931,7 +9118,7 @@
       ]
     },
     {
-      "sourceOrder": 328,
+      "sourceOrder": 335,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 20,
@@ -8962,7 +9149,7 @@
       ]
     },
     {
-      "sourceOrder": 329,
+      "sourceOrder": 336,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 21,
@@ -8986,7 +9173,7 @@
       ]
     },
     {
-      "sourceOrder": 330,
+      "sourceOrder": 337,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 22,
@@ -9017,7 +9204,7 @@
       ]
     },
     {
-      "sourceOrder": 331,
+      "sourceOrder": 338,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 23,
@@ -9041,7 +9228,7 @@
       ]
     },
     {
-      "sourceOrder": 332,
+      "sourceOrder": 339,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 24,
@@ -9072,7 +9259,7 @@
       ]
     },
     {
-      "sourceOrder": 333,
+      "sourceOrder": 340,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 25,
@@ -9103,7 +9290,7 @@
       ]
     },
     {
-      "sourceOrder": 334,
+      "sourceOrder": 341,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 26,
@@ -9127,7 +9314,7 @@
       ]
     },
     {
-      "sourceOrder": 335,
+      "sourceOrder": 342,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 27,
@@ -9158,7 +9345,7 @@
       ]
     },
     {
-      "sourceOrder": 336,
+      "sourceOrder": 343,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 28,
@@ -9189,7 +9376,7 @@
       ]
     },
     {
-      "sourceOrder": 337,
+      "sourceOrder": 344,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 28,
@@ -9220,7 +9407,7 @@
       ]
     },
     {
-      "sourceOrder": 338,
+      "sourceOrder": 345,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 29,
@@ -9251,7 +9438,7 @@
       ]
     },
     {
-      "sourceOrder": 339,
+      "sourceOrder": 346,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 29,
@@ -9282,7 +9469,7 @@
       ]
     },
     {
-      "sourceOrder": 340,
+      "sourceOrder": 347,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 30,
@@ -9313,7 +9500,7 @@
       ]
     },
     {
-      "sourceOrder": 341,
+      "sourceOrder": 348,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 31,
@@ -9344,7 +9531,7 @@
       ]
     },
     {
-      "sourceOrder": 342,
+      "sourceOrder": 349,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 32,
@@ -9375,7 +9562,7 @@
       ]
     },
     {
-      "sourceOrder": 343,
+      "sourceOrder": 350,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 33,
@@ -9406,7 +9593,7 @@
       ]
     },
     {
-      "sourceOrder": 344,
+      "sourceOrder": 351,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 34,
@@ -9437,7 +9624,7 @@
       ]
     },
     {
-      "sourceOrder": 345,
+      "sourceOrder": 352,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 35,
@@ -9468,7 +9655,7 @@
       ]
     },
     {
-      "sourceOrder": 346,
+      "sourceOrder": 353,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 36,
@@ -9499,7 +9686,7 @@
       ]
     },
     {
-      "sourceOrder": 347,
+      "sourceOrder": 354,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 37,
@@ -9523,7 +9710,7 @@
       ]
     },
     {
-      "sourceOrder": 348,
+      "sourceOrder": 355,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 38,
@@ -9554,7 +9741,7 @@
       ]
     },
     {
-      "sourceOrder": 349,
+      "sourceOrder": 356,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 39,
@@ -9578,7 +9765,7 @@
       ]
     },
     {
-      "sourceOrder": 350,
+      "sourceOrder": 357,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 40,
@@ -9609,7 +9796,7 @@
       ]
     },
     {
-      "sourceOrder": 351,
+      "sourceOrder": 358,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 41,
@@ -9640,7 +9827,7 @@
       ]
     },
     {
-      "sourceOrder": 352,
+      "sourceOrder": 359,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 42,
@@ -9671,7 +9858,7 @@
       ]
     },
     {
-      "sourceOrder": 353,
+      "sourceOrder": 360,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 43,
@@ -9695,7 +9882,7 @@
       ]
     },
     {
-      "sourceOrder": 354,
+      "sourceOrder": 361,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 44,
@@ -9726,7 +9913,7 @@
       ]
     },
     {
-      "sourceOrder": 355,
+      "sourceOrder": 362,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 45,
@@ -9750,7 +9937,7 @@
       ]
     },
     {
-      "sourceOrder": 356,
+      "sourceOrder": 363,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 46,
@@ -9774,7 +9961,7 @@
       ]
     },
     {
-      "sourceOrder": 357,
+      "sourceOrder": 364,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 47,
@@ -9805,7 +9992,7 @@
       ]
     },
     {
-      "sourceOrder": 358,
+      "sourceOrder": 365,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 48,
@@ -9836,7 +10023,7 @@
       ]
     },
     {
-      "sourceOrder": 359,
+      "sourceOrder": 366,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 49,
@@ -9860,7 +10047,7 @@
       ]
     },
     {
-      "sourceOrder": 360,
+      "sourceOrder": 367,
       "catalogId": "basin",
       "sourcePage": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml",
       "pokopiaNumber": 50,

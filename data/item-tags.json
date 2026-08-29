@@ -2,7 +2,7 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/items.shtml",
-    "fetchedAt": "2026-08-09T08:27:12Z",
+    "fetchedAt": "2026-08-29T23:29:18Z",
     "notes": [
       "Standard item tags come from the categories table at the top of the page.",
       "Additional non-standard tags are discovered from item rows when present."

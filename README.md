@@ -74,10 +74,10 @@ Generated files:
 
 - `data/pokemon.json`
 
-The scraper combines the main and Basin Pokédex aggregate pages. The tables'
-`No.` columns are catalog-specific Pokopia numbers, not National Pokédex IDs;
-`catalogId` distinguishes their restarted numbering, and `pokemonId` is derived
-from the sprite filename.
+The scraper combines the main, Event, and Basin Pokédex aggregate pages. The
+tables' `No.` columns are catalog-specific Pokopia numbers, not National Pokédex
+IDs; `catalogId` distinguishes their restarted numbering, and `pokemonId` is
+derived from the sprite filename.
 
 ## Scrape the habitats table
 
@@ -89,9 +89,9 @@ Generated files:
 
 - `data/habitats.json`
 
-This scraper reads the main and Basin catalogs from the aggregate habitats table
-and excludes the separate `Habitats (Event)` section. `habitatKey` combines the
-catalog and restarted habitat number into a unique key.
+This scraper reads the main, Basin, and Event catalogs from the aggregate
+habitats table. `habitatKey` combines the catalog and restarted habitat number
+into a unique key.
 
 ## Scrape the specialties table
 
@@ -143,9 +143,9 @@ Generated files:
 - `data/habitat-requirements.json`
 - `data/habitat-spawns.json`
 
-This scraper walks every main and Basin habitat page, records required items and
-quantities, and normalizes Pokemon spawn rules by location, rarity, time of day,
-and weather.
+This scraper walks every main, Basin, and Event habitat page, records required
+items and quantities, and normalizes Pokemon spawn rules by location, rarity,
+time of day, and weather.
 
 ## Scrape Pokemon preferences
 
@@ -159,5 +159,6 @@ Generated files:
 - `data/favorite-categories.json`
 - `data/pokemon-preferences.json`
 
-This scraper walks every Pokémon detail page from both catalogs and records ideal
-habitats, favorites, favorite items, and whether the Pokémon can go underwater.
+This scraper walks every Pokémon detail page from all three catalogs and records
+ideal habitats, favorites, favorite items, and whether the Pokémon can go
+underwater.

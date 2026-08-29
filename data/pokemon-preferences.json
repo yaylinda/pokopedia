@@ -9,18 +9,23 @@
         "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
       },
       {
+        "catalogId": "event",
+        "name": "Event Pok\u00e9dex",
+        "page": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml"
+      },
+      {
         "catalogId": "basin",
         "name": "Basin Pok\u00e9dex",
         "page": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml"
       }
     ],
-    "fetchedAt": "2026-08-09T08:29:46Z",
+    "fetchedAt": "2026-08-29T23:31:52Z",
     "notes": [
       "Pokemon preference data is parsed from each Pokemon detail page's Stats table.",
       "Favorite item lists are parsed from linked favorite pages and the shared flavors page."
     ]
   },
-  "count": 360,
+  "count": 367,
   "pokemon": [
     {
       "sourceOrder": 1,
@@ -21847,6 +21852,503 @@
     },
     {
       "sourceOrder": 309,
+      "pokemonSlug": "hoppip",
+      "pokemonId": 187,
+      "pokemonIdDisplay": "187",
+      "pokemonName": "Hoppip",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/hoppip.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "bright",
+        "slug": "bright",
+        "name": "Bright",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "softstuff",
+          "slug": "softstuff",
+          "name": "Soft stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/softstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/softstuff.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "lotsofnature",
+          "slug": "lotsofnature",
+          "name": "Lots of nature",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofnature.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "nicebreezes",
+          "slug": "nicebreezes",
+          "name": "Nice breezes",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/nicebreezes.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/nicebreezes.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "prettyflowers",
+          "slug": "prettyflowers",
+          "name": "Pretty flowers",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/prettyflowers.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/prettyflowers.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "wobblystuff",
+          "slug": "wobblystuff",
+          "name": "Wobbly stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/wobblystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/wobblystuff.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sweet-flavors",
+          "slug": "sweet-flavors",
+          "name": "Sweet flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sweet",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": false
+    },
+    {
+      "sourceOrder": 310,
+      "pokemonSlug": "skiploom",
+      "pokemonId": 188,
+      "pokemonIdDisplay": "188",
+      "pokemonName": "Skiploom",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/skiploom.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "bright",
+        "slug": "bright",
+        "name": "Bright",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "softstuff",
+          "slug": "softstuff",
+          "name": "Soft stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/softstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/softstuff.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "lotsofnature",
+          "slug": "lotsofnature",
+          "name": "Lots of nature",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofnature.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "nicebreezes",
+          "slug": "nicebreezes",
+          "name": "Nice breezes",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/nicebreezes.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/nicebreezes.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "prettyflowers",
+          "slug": "prettyflowers",
+          "name": "Pretty flowers",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/prettyflowers.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/prettyflowers.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "spinningstuff",
+          "slug": "spinningstuff",
+          "name": "Spinning stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/spinningstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/spinningstuff.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "dry-flavors",
+          "slug": "dry-flavors",
+          "name": "Dry flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#dry",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": false
+    },
+    {
+      "sourceOrder": 311,
+      "pokemonSlug": "jumpluff",
+      "pokemonId": 189,
+      "pokemonIdDisplay": "189",
+      "pokemonName": "Jumpluff",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jumpluff.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "bright",
+        "slug": "bright",
+        "name": "Bright",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "softstuff",
+          "slug": "softstuff",
+          "name": "Soft stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/softstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/softstuff.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "lotsofnature",
+          "slug": "lotsofnature",
+          "name": "Lots of nature",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofnature.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "nicebreezes",
+          "slug": "nicebreezes",
+          "name": "Nice breezes",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/nicebreezes.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/nicebreezes.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "prettyflowers",
+          "slug": "prettyflowers",
+          "name": "Pretty flowers",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/prettyflowers.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/prettyflowers.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "roundstuff",
+          "slug": "roundstuff",
+          "name": "Round stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/roundstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/roundstuff.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sour-flavors",
+          "slug": "sour-flavors",
+          "name": "Sour flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sour",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": false
+    },
+    {
+      "sourceOrder": 312,
+      "pokemonSlug": "sableye",
+      "pokemonId": 302,
+      "pokemonIdDisplay": "302",
+      "pokemonName": "Sableye",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/sableye.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "dark",
+        "slug": "dark",
+        "name": "Dark",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/dark.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "spookystuff",
+          "slug": "spookystuff",
+          "name": "Spooky stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/spookystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/spookystuff.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "shinystuff",
+          "slug": "shinystuff",
+          "name": "Shiny stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/shinystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/shinystuff.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "luxury",
+          "slug": "luxury",
+          "name": "Luxury",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/luxury.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/luxury.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "lookslikefood",
+          "slug": "lookslikefood",
+          "name": "Looks like food",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lookslikefood.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lookslikefood.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "watchingstuff",
+          "slug": "watchingstuff",
+          "name": "Watching stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/watchingstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/watchingstuff.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sour-flavors",
+          "slug": "sour-flavors",
+          "name": "Sour flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sour",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": false
+    },
+    {
+      "sourceOrder": 313,
+      "pokemonSlug": "jirachi",
+      "pokemonId": 385,
+      "pokemonIdDisplay": "385",
+      "pokemonName": "Jirachi",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/jirachi.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "bright",
+        "slug": "bright",
+        "name": "Bright",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "metalstuff",
+          "slug": "metalstuff",
+          "name": "Metal stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/metalstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/metalstuff.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "strangestuff",
+          "slug": "strangestuff",
+          "name": "Strange stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/strangestuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/strangestuff.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "shinystuff",
+          "slug": "shinystuff",
+          "name": "Shiny stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/shinystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/shinystuff.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "watchingstuff",
+          "slug": "watchingstuff",
+          "name": "Watching stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/watchingstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/watchingstuff.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "wobblystuff",
+          "slug": "wobblystuff",
+          "name": "Wobbly stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/wobblystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/wobblystuff.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sweet-flavors",
+          "slug": "sweet-flavors",
+          "name": "Sweet flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sweet",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": false
+    },
+    {
+      "sourceOrder": 314,
+      "pokemonSlug": "feebas",
+      "pokemonId": 349,
+      "pokemonIdDisplay": "349",
+      "pokemonName": "Feebas",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/feebas.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "humid",
+        "slug": "humid",
+        "name": "Humid",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/humid.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "lotsofwater",
+          "slug": "lotsofwater",
+          "name": "Lots of water",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofwater.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofwater.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "shinystuff",
+          "slug": "shinystuff",
+          "name": "Shiny stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/shinystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/shinystuff.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "glassstuff",
+          "slug": "glassstuff",
+          "name": "Glass stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/glassstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/glassstuff.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "lotsofnature",
+          "slug": "lotsofnature",
+          "name": "Lots of nature",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofnature.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofnature.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "groupactivities",
+          "slug": "groupactivities",
+          "name": "Group activities",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/groupactivities.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/groupactivities.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sweet-flavors",
+          "slug": "sweet-flavors",
+          "name": "Sweet Flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sweet",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": true
+    },
+    {
+      "sourceOrder": 315,
+      "pokemonSlug": "milotic",
+      "pokemonId": 350,
+      "pokemonIdDisplay": "350",
+      "pokemonName": "Milotic",
+      "pokemonDetailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/milotic.shtml",
+      "idealHabitat": {
+        "idealHabitatId": "humid",
+        "slug": "humid",
+        "name": "Humid",
+        "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/humid.shtml"
+      },
+      "favorites": [
+        {
+          "sourceOrder": 1,
+          "favoriteId": "lotsofwater",
+          "slug": "lotsofwater",
+          "name": "Lots of water",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/lotsofwater.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/lotsofwater.shtml"
+        },
+        {
+          "sourceOrder": 2,
+          "favoriteId": "shinystuff",
+          "slug": "shinystuff",
+          "name": "Shiny stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/shinystuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/shinystuff.shtml"
+        },
+        {
+          "sourceOrder": 3,
+          "favoriteId": "glassstuff",
+          "slug": "glassstuff",
+          "name": "Glass stuff",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/glassstuff.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/glassstuff.shtml"
+        },
+        {
+          "sourceOrder": 4,
+          "favoriteId": "luxury",
+          "slug": "luxury",
+          "name": "Luxury",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/luxury.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/luxury.shtml"
+        },
+        {
+          "sourceOrder": 5,
+          "favoriteId": "cleanliness",
+          "slug": "cleanliness",
+          "name": "Cleanliness",
+          "kind": "favorite-category",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/favorites/cleanliness.shtml",
+          "sourceHref": "/pokemonpokopia/favorites/cleanliness.shtml"
+        },
+        {
+          "sourceOrder": 6,
+          "favoriteId": "sour-flavors",
+          "slug": "sour-flavors",
+          "name": "Sour Flavors",
+          "kind": "flavor",
+          "detailUrl": "https://www.serebii.net/pokemonpokopia/flavors.shtml#sour",
+          "sourceHref": "/pokemonpokopia/flavors.shtml"
+        }
+      ],
+      "canGoUnderwater": true
+    },
+    {
+      "sourceOrder": 316,
       "pokemonSlug": "shellder",
       "pokemonId": 90,
       "pokemonIdDisplay": "090",
@@ -21917,7 +22419,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 310,
+      "sourceOrder": 317,
       "pokemonSlug": "cloyster",
       "pokemonId": 91,
       "pokemonIdDisplay": "091",
@@ -21988,7 +22490,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 311,
+      "sourceOrder": 318,
       "pokemonSlug": "horsea",
       "pokemonId": 116,
       "pokemonIdDisplay": "116",
@@ -22059,7 +22561,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 312,
+      "sourceOrder": 319,
       "pokemonSlug": "seadra",
       "pokemonId": 117,
       "pokemonIdDisplay": "117",
@@ -22130,7 +22632,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 313,
+      "sourceOrder": 320,
       "pokemonSlug": "kingdra",
       "pokemonId": 230,
       "pokemonIdDisplay": "230",
@@ -22201,7 +22703,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 314,
+      "sourceOrder": 321,
       "pokemonSlug": "staryu",
       "pokemonId": 120,
       "pokemonIdDisplay": "120",
@@ -22272,7 +22774,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 315,
+      "sourceOrder": 322,
       "pokemonSlug": "starmie",
       "pokemonId": 121,
       "pokemonIdDisplay": "121",
@@ -22343,7 +22845,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 316,
+      "sourceOrder": 323,
       "pokemonSlug": "totodile",
       "pokemonId": 158,
       "pokemonIdDisplay": "158",
@@ -22414,7 +22916,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 317,
+      "sourceOrder": 324,
       "pokemonSlug": "croconaw",
       "pokemonId": 159,
       "pokemonIdDisplay": "159",
@@ -22485,7 +22987,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 318,
+      "sourceOrder": 325,
       "pokemonSlug": "feraligatr",
       "pokemonId": 160,
       "pokemonIdDisplay": "160",
@@ -22556,7 +23058,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 319,
+      "sourceOrder": 326,
       "pokemonSlug": "chinchou",
       "pokemonId": 170,
       "pokemonIdDisplay": "170",
@@ -22627,7 +23129,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 320,
+      "sourceOrder": 327,
       "pokemonSlug": "lanturn",
       "pokemonId": 171,
       "pokemonIdDisplay": "171",
@@ -22698,7 +23200,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 321,
+      "sourceOrder": 328,
       "pokemonSlug": "corsola",
       "pokemonId": 222,
       "pokemonIdDisplay": "222",
@@ -22769,7 +23271,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 322,
+      "sourceOrder": 329,
       "pokemonSlug": "mudkip",
       "pokemonId": 258,
       "pokemonIdDisplay": "258",
@@ -22840,7 +23342,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 323,
+      "sourceOrder": 330,
       "pokemonSlug": "marshtomp",
       "pokemonId": 259,
       "pokemonIdDisplay": "259",
@@ -22911,7 +23413,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 324,
+      "sourceOrder": 331,
       "pokemonSlug": "swampert",
       "pokemonId": 260,
       "pokemonIdDisplay": "260",
@@ -22982,7 +23484,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 325,
+      "sourceOrder": 332,
       "pokemonSlug": "carvanha",
       "pokemonId": 318,
       "pokemonIdDisplay": "318",
@@ -23053,7 +23555,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 326,
+      "sourceOrder": 333,
       "pokemonSlug": "sharpedo",
       "pokemonId": 319,
       "pokemonIdDisplay": "319",
@@ -23124,7 +23626,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 327,
+      "sourceOrder": 334,
       "pokemonSlug": "barboach",
       "pokemonId": 339,
       "pokemonIdDisplay": "339",
@@ -23195,7 +23697,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 328,
+      "sourceOrder": 335,
       "pokemonSlug": "whiscash",
       "pokemonId": 340,
       "pokemonIdDisplay": "340",
@@ -23266,7 +23768,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 329,
+      "sourceOrder": 336,
       "pokemonSlug": "corphish",
       "pokemonId": 341,
       "pokemonIdDisplay": "341",
@@ -23337,7 +23839,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 330,
+      "sourceOrder": 337,
       "pokemonSlug": "crawdaunt",
       "pokemonId": 342,
       "pokemonIdDisplay": "342",
@@ -23408,7 +23910,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 331,
+      "sourceOrder": 338,
       "pokemonSlug": "luvdisc",
       "pokemonId": 370,
       "pokemonIdDisplay": "370",
@@ -23479,7 +23981,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 332,
+      "sourceOrder": 339,
       "pokemonSlug": "buizel",
       "pokemonId": 418,
       "pokemonIdDisplay": "418",
@@ -23550,7 +24052,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 333,
+      "sourceOrder": 340,
       "pokemonSlug": "floatzel",
       "pokemonId": 419,
       "pokemonIdDisplay": "419",
@@ -23621,7 +24123,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 334,
+      "sourceOrder": 341,
       "pokemonSlug": "finneon",
       "pokemonId": 456,
       "pokemonIdDisplay": "456",
@@ -23692,7 +24194,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 335,
+      "sourceOrder": 342,
       "pokemonSlug": "lumineon",
       "pokemonId": 457,
       "pokemonIdDisplay": "457",
@@ -23763,7 +24265,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 336,
+      "sourceOrder": 343,
       "pokemonSlug": "frillishmaleform",
       "pokemonId": 592,
       "pokemonIdDisplay": "592",
@@ -23834,7 +24336,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 337,
+      "sourceOrder": 344,
       "pokemonSlug": "frillishfemaleform",
       "pokemonId": 592,
       "pokemonIdDisplay": "592",
@@ -23905,7 +24407,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 338,
+      "sourceOrder": 345,
       "pokemonSlug": "jellicentmaleform",
       "pokemonId": 593,
       "pokemonIdDisplay": "593",
@@ -23976,7 +24478,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 339,
+      "sourceOrder": 346,
       "pokemonSlug": "jellicentfemaleform",
       "pokemonId": 593,
       "pokemonIdDisplay": "593",
@@ -24047,7 +24549,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 340,
+      "sourceOrder": 347,
       "pokemonSlug": "alomomola",
       "pokemonId": 594,
       "pokemonIdDisplay": "594",
@@ -24118,7 +24620,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 341,
+      "sourceOrder": 348,
       "pokemonSlug": "stunfisk",
       "pokemonId": 618,
       "pokemonIdDisplay": "618",
@@ -24189,7 +24691,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 342,
+      "sourceOrder": 349,
       "pokemonSlug": "inkay",
       "pokemonId": 686,
       "pokemonIdDisplay": "686",
@@ -24260,7 +24762,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 343,
+      "sourceOrder": 350,
       "pokemonSlug": "malamar",
       "pokemonId": 687,
       "pokemonIdDisplay": "687",
@@ -24331,7 +24833,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 344,
+      "sourceOrder": 351,
       "pokemonSlug": "popplio",
       "pokemonId": 728,
       "pokemonIdDisplay": "728",
@@ -24402,7 +24904,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 345,
+      "sourceOrder": 352,
       "pokemonSlug": "brionne",
       "pokemonId": 729,
       "pokemonIdDisplay": "729",
@@ -24473,7 +24975,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 346,
+      "sourceOrder": 353,
       "pokemonSlug": "primarina",
       "pokemonId": 730,
       "pokemonIdDisplay": "730",
@@ -24544,7 +25046,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 347,
+      "sourceOrder": 354,
       "pokemonSlug": "mareanie",
       "pokemonId": 747,
       "pokemonIdDisplay": "747",
@@ -24615,7 +25117,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 348,
+      "sourceOrder": 355,
       "pokemonSlug": "toxapex",
       "pokemonId": 748,
       "pokemonIdDisplay": "748",
@@ -24686,7 +25188,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 349,
+      "sourceOrder": 356,
       "pokemonSlug": "wimpod",
       "pokemonId": 767,
       "pokemonIdDisplay": "767",
@@ -24757,7 +25259,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 350,
+      "sourceOrder": 357,
       "pokemonSlug": "golisopod",
       "pokemonId": 768,
       "pokemonIdDisplay": "768",
@@ -24828,7 +25330,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 351,
+      "sourceOrder": 358,
       "pokemonSlug": "bruxish",
       "pokemonId": 779,
       "pokemonIdDisplay": "779",
@@ -24899,7 +25401,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 352,
+      "sourceOrder": 359,
       "pokemonSlug": "dhelmise",
       "pokemonId": 781,
       "pokemonIdDisplay": "781",
@@ -24970,7 +25472,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 353,
+      "sourceOrder": 360,
       "pokemonSlug": "chewtle",
       "pokemonId": 833,
       "pokemonIdDisplay": "833",
@@ -25041,7 +25543,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 354,
+      "sourceOrder": 361,
       "pokemonSlug": "drednaw",
       "pokemonId": 834,
       "pokemonIdDisplay": "834",
@@ -25112,7 +25614,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 355,
+      "sourceOrder": 362,
       "pokemonSlug": "pincurchin",
       "pokemonId": 871,
       "pokemonIdDisplay": "871",
@@ -25183,7 +25685,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 356,
+      "sourceOrder": 363,
       "pokemonSlug": "wiglett",
       "pokemonId": 960,
       "pokemonIdDisplay": "960",
@@ -25254,7 +25756,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 357,
+      "sourceOrder": 364,
       "pokemonSlug": "wugtrio",
       "pokemonId": 961,
       "pokemonIdDisplay": "961",
@@ -25325,7 +25827,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 358,
+      "sourceOrder": 365,
       "pokemonSlug": "veluza",
       "pokemonId": 976,
       "pokemonIdDisplay": "976",
@@ -25396,7 +25898,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 359,
+      "sourceOrder": 366,
       "pokemonSlug": "phione",
       "pokemonId": 489,
       "pokemonIdDisplay": "489",
@@ -25467,7 +25969,7 @@
       "canGoUnderwater": true
     },
     {
-      "sourceOrder": 360,
+      "sourceOrder": 367,
       "pokemonSlug": "manaphy",
       "pokemonId": 490,
       "pokemonIdDisplay": "490",

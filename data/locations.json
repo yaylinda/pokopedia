@@ -2,7 +2,7 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/locations.shtml",
-    "fetchedAt": "2026-08-09T08:27:11Z",
+    "fetchedAt": "2026-08-29T23:29:17Z",
     "notes": [
       "This dataset includes the six playable locations, including the Bubbly Basin expansion area.",
       "Cloud Island is intentionally excluded from normalized location data."

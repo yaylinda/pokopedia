@@ -2,14 +2,13 @@
   "source": {
     "name": "Serebii",
     "page": "https://www.serebii.net/pokemonpokopia/habitats.shtml",
-    "fetchedAt": "2026-08-09T08:27:11Z",
+    "fetchedAt": "2026-08-29T23:29:17Z",
     "notes": [
-      "This dataset includes the main and Basin habitat catalogs from the aggregate habitats table.",
-      "Habitat numbers restart in the Basin catalog, so catalogId and habitatKey identify records.",
-      "The separate Habitats (Event) section is intentionally excluded."
+      "This dataset includes the main, Basin, and Event habitat catalogs from the aggregate habitats table.",
+      "Habitat numbers restart in the Basin and Event catalogs, so catalogId and habitatKey identify records."
     ]
   },
-  "count": 245,
+  "count": 252,
   "habitats": [
     {
       "sourceOrder": 1,
@@ -3182,7 +3181,7 @@
       "habitatId": 18,
       "habitatIdDisplay": "#018",
       "name": "Treasure chest and sparkling jewels",
-      "description": "Take the jewls out of the chest and illuminate them with the lantern.",
+      "description": "Take the jewels out of the chest and illuminate them with the lantern.",
       "slug": "treasurechestandsparklingjewels",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/treasurechestandsparklingjewels.shtml",
       "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/b18.png",
@@ -3307,13 +3306,13 @@
       "habitatKey": "basin:027",
       "habitatId": 27,
       "habitatIdDisplay": "#027",
-      "name": "Topsy-turby",
+      "name": "Topsy-turvy",
       "description": "A row of lampions hanging upside down, but that's fine as long as they shine brightly",
-      "slug": "topsy-turby",
-      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turby.shtml",
+      "slug": "topsy-turvy",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/topsy-turvy.shtml",
       "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/b27.png",
       "pictureFilename": "b27.png",
-      "pictureAlt": "Topsy-turby"
+      "pictureAlt": "Topsy-turvy"
     },
     {
       "sourceOrder": 237,
@@ -3440,6 +3439,104 @@
       "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/b36.png",
       "pictureFilename": "b36.png",
       "pictureAlt": "Mermaid's Gym"
+    },
+    {
+      "sourceOrder": 246,
+      "catalogId": "event",
+      "habitatKey": "event:001",
+      "habitatId": 1,
+      "habitatIdDisplay": "#001",
+      "name": "Yellow carpet",
+      "description": "A field of warm, blooming yellow flowers. Just looking at it seems to fill you with energy",
+      "slug": "yellowcarpet",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/yellowcarpet.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e1.png",
+      "pictureFilename": "e1.png",
+      "pictureAlt": "Yellow carpet"
+    },
+    {
+      "sourceOrder": 247,
+      "catalogId": "event",
+      "habitatKey": "event:002",
+      "habitatId": 2,
+      "habitatIdDisplay": "#002",
+      "name": "Field-trip friends",
+      "description": "Pack a lunch box and canteen inside your backpack, and you're all set for a field trip",
+      "slug": "field-tripfriends",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/field-tripfriends.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e2.png",
+      "pictureFilename": "e2.png",
+      "pictureAlt": "Field-trip friends"
+    },
+    {
+      "sourceOrder": 248,
+      "catalogId": "event",
+      "habitatKey": "event:003",
+      "habitatId": 3,
+      "habitatIdDisplay": "#003",
+      "name": "Dandelion lunchtime",
+      "description": "Lunch box? Check. Tableware? Check. Time for a picnic lunch break!",
+      "slug": "dandelionlunchtime",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/dandelionlunchtime.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e3.png",
+      "pictureFilename": "e3.png",
+      "pictureAlt": "Dandelion lunchtime"
+    },
+    {
+      "sourceOrder": 249,
+      "catalogId": "event",
+      "habitatKey": "event:004",
+      "habitatId": 4,
+      "habitatIdDisplay": "#004",
+      "name": "Treasure-hunting set",
+      "description": "A map and compass are essential treasure-hunting tools. Time to set off in search of jewels",
+      "slug": "treasure-huntingset",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/treasure-huntingset.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e4.png",
+      "pictureFilename": "e4.png",
+      "pictureAlt": "Treasure-hunting set"
+    },
+    {
+      "sourceOrder": 250,
+      "catalogId": "event",
+      "habitatKey": "event:005",
+      "habitatId": 5,
+      "habitatIdDisplay": "#005",
+      "name": "Surrounded by stars",
+      "description": "Surrounded by shining stars and fluffy clouds, you'll feel like you're living in a dream",
+      "slug": "surroundedbystars",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/surroundedbystars.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e5.png",
+      "pictureFilename": "e5.png",
+      "pictureAlt": "Surrounded by stars"
+    },
+    {
+      "sourceOrder": 251,
+      "catalogId": "event",
+      "habitatKey": "event:006",
+      "habitatId": 6,
+      "habitatIdDisplay": "#006",
+      "name": "Exciting beach",
+      "description": "Relax in the cute sand bed or play with the huge swim ring",
+      "slug": "excitingbeach",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/excitingbeach.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e6.png",
+      "pictureFilename": "e6.png",
+      "pictureAlt": "Exciting beach"
+    },
+    {
+      "sourceOrder": 252,
+      "catalogId": "event",
+      "habitatKey": "event:007",
+      "habitatId": 7,
+      "habitatIdDisplay": "#007",
+      "name": "Marine leisure activities",
+      "description": "Enjoy the beach to the fullest by playing volleyball or relaxing on the swim ring.",
+      "slug": "marineleisureactivities",
+      "detailUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/marineleisureactivities.shtml",
+      "pictureUrl": "https://www.serebii.net/pokemonpokopia/habitatdex/th/e7.png",
+      "pictureFilename": "e7.png",
+      "pictureAlt": "Marine leisure activities"
     }
   ]
 }

@@ -9,12 +9,17 @@
         "page": "https://www.serebii.net/pokemonpokopia/availablepokemon.shtml"
       },
       {
+        "catalogId": "event",
+        "name": "Event Pok\u00e9dex",
+        "page": "https://www.serebii.net/pokemonpokopia/eventpokedex.shtml"
+      },
+      {
         "catalogId": "basin",
         "name": "Basin Pok\u00e9dex",
         "page": "https://www.serebii.net/pokemonpokopia/basinpokedex.shtml"
       }
     ],
-    "fetchedAt": "2026-08-09T08:29:46Z",
+    "fetchedAt": "2026-08-29T23:31:52Z",
     "notes": [
       "Pokemon preference data is parsed from each Pokemon detail page's Stats table.",
       "Favorite item lists are parsed from linked favorite pages and the shared flavors page."
@@ -28,7 +33,7 @@
       "slug": "bright",
       "name": "Bright",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/bright.shtml",
-      "pokemonCount": 112
+      "pokemonCount": 116
     },
     {
       "sourceOrder": 2,
@@ -44,7 +49,7 @@
       "slug": "humid",
       "name": "Humid",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/humid.shtml",
-      "pokemonCount": 86
+      "pokemonCount": 88
     },
     {
       "sourceOrder": 4,
@@ -60,7 +65,7 @@
       "slug": "dark",
       "name": "Dark",
       "detailUrl": "https://www.serebii.net/pokemonpokopia/pokedex/idealhabitat/dark.shtml",
-      "pokemonCount": 72
+      "pokemonCount": 73
     },
     {
       "sourceOrder": 6,
