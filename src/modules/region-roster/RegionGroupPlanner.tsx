@@ -4,6 +4,7 @@ import DeviceHubRoundedIcon from '@mui/icons-material/DeviceHubRounded'
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import HomeWorkRoundedIcon from '@mui/icons-material/HomeWorkRounded'
+import LocationCityRoundedIcon from '@mui/icons-material/LocationCityRounded'
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import Box from '@mui/material/Box'
@@ -33,6 +34,7 @@ import {
 } from './components/PlannerVisuals'
 import { RegionSelector } from './components/RegionSelector'
 import { EvolutionPregroupWorkspace } from './EvolutionPregroupWorkspace'
+import { NeighborhoodWorkspace } from './NeighborhoodWorkspace'
 import {
   getGroupFavoriteOverlaps,
   getRosterGroupScopeKey,
@@ -53,7 +55,7 @@ import {
 
 const emptyGroups: RosterGroup[] = []
 const previewItemCount = 12
-type PlannerMode = 'evolution' | 'saved'
+type PlannerMode = 'evolution' | 'neighborhoods' | 'saved'
 
 type UndoState = {
   groups: RosterGroup[]
@@ -64,6 +66,7 @@ type UndoState = {
 export function RegionGroupPlanner() {
   const {
     chooseRegion,
+    effectiveStatsBySlug,
     modeledRegions,
     regionStyle,
     selectedRegion,
@@ -125,6 +128,14 @@ export function RegionGroupPlanner() {
     () =>
       ungroupedPokemon.filter((pokemon) => matchesRosterQuery(pokemon, query)),
     [query, ungroupedPokemon],
+  )
+  const neighborhoodPokemon = useMemo(
+    () =>
+      selectedRegion.pokemon.map((pokemon) => ({
+        ...pokemon,
+        lindaStats: effectiveStatsBySlug[pokemon.slug] ?? pokemon.lindaStats,
+      })),
+    [effectiveStatsBySlug, selectedRegion.pokemon],
   )
 
   const addGroup = () => {
@@ -239,6 +250,12 @@ export function RegionGroupPlanner() {
           <EvolutionPregroupWorkspace
             key={`${selectedSnapshot.snapshotId}:${selectedRegion.regionId}`}
             pokemon={selectedRegion.pokemon}
+            style={regionStyle}
+          />
+        ) : plannerMode === 'neighborhoods' ? (
+          <NeighborhoodWorkspace
+            key={`${selectedSnapshot.snapshotId}:${selectedRegion.regionId}`}
+            pokemon={neighborhoodPokemon}
             style={regionStyle}
           />
         ) : (
@@ -397,6 +414,12 @@ function PlannerModeHeader({
           iconPosition="start"
           label="Evolution starting points"
           value="evolution"
+        />
+        <Tab
+          icon={<LocationCityRoundedIcon fontSize="small" />}
+          iconPosition="start"
+          label="Neighborhood ideas"
+          value="neighborhoods"
         />
         <Tab
           icon={<HomeWorkRoundedIcon fontSize="small" />}
