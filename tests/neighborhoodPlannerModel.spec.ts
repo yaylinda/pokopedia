@@ -113,8 +113,11 @@ test('creates garden, balanced service, and far-main neighborhoods', () => {
     neighborhood.pokemon.some((resident) => resident.slug === 'test-low-like'),
   )
 
-  expect(garden?.growCount).toBe(2)
+  expect(garden?.growCount).toBe(1)
   expect(garden?.waterCount).toBe(1)
+  expect(garden?.purpose).toBe('garden-hub')
+  expect(garden?.neighborhoodId).not.toBe(litterNeighborhood?.neighborhoodId)
+  expect(garden?.littererCount).toBe(0)
   expect(plan.litterNeighborhoodCount).toBe(1)
   expect(litterNeighborhood?.purpose).toBe('litter-hub')
   expect(litterNeighborhood?.littererCount).toBe(2)
@@ -179,6 +182,19 @@ test('accounts for every regional evo group and exposes impossible gather rules'
         ]),
       )
     }
+
+    plan.neighborhoods.forEach((neighborhood) => {
+      neighborhood.families.forEach((family) => {
+        const isLitterFamily = family.abilitySlugs.includes('litter')
+        const isGardenFamily = family.abilitySlugs.some(
+          (abilitySlug) => abilitySlug === 'grow' || abilitySlug === 'water',
+        )
+
+        if (isGardenFamily && !isLitterFamily) {
+          expect(neighborhood.placement).toBe('garden')
+        }
+      })
+    })
 
     if (!regionHasGatherer && plan.litterNeighborhoodCount > 0) {
       expect(plan.issues).toHaveLength(1)

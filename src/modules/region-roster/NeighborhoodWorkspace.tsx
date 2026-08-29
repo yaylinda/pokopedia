@@ -119,8 +119,9 @@ function NeighborhoodPlanSummary({
             sx={{ maxWidth: '72ch' }}
             variant="body2"
           >
-            Evo groups stay intact. Garden utility comes first, then habitat and
-            favorite-category affinity; saved home groups are not changed.
+            Evo groups stay intact. Litter service and garden utility form two
+            separate neighborhoods before the remaining habitat-led clusters;
+            saved home groups are not changed.
           </Typography>
         </Box>
         <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap' }} useFlexGap>
@@ -476,10 +477,24 @@ function getSynergyNotes(
     )
   }
 
-  if (neighborhood.waterCount > 0 && neighborhood.growCount > 0) {
+  if (
+    neighborhood.purpose !== 'litter-hub' &&
+    neighborhood.waterCount > 0 &&
+    neighborhood.growCount > 0
+  ) {
     notes.push('Water and Grow families share one garden-side cluster.')
-  } else if (neighborhood.waterCount > 0 || neighborhood.growCount > 0) {
+  } else if (
+    neighborhood.purpose !== 'litter-hub' &&
+    (neighborhood.waterCount > 0 || neighborhood.growCount > 0)
+  ) {
     notes.push('Garden utility keeps this evo group beside crops and plants.')
+  } else if (
+    neighborhood.purpose === 'litter-hub' &&
+    (neighborhood.waterCount > 0 || neighborhood.growCount > 0)
+  ) {
+    notes.push(
+      'Water/Grow specialists in this neighborhood stay with their littering evo groups.',
+    )
   }
 
   if (neighborhood.littererCount > 0 && neighborhood.gathererCount > 0) {

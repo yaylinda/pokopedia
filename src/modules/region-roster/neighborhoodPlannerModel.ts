@@ -11,7 +11,7 @@ import {
 } from './plannerDisplayUtils'
 
 export type NeighborhoodPlacement = 'garden' | 'main' | 'far-main'
-export type NeighborhoodPurpose = 'affinity' | 'litter-hub'
+export type NeighborhoodPurpose = 'affinity' | 'garden-hub' | 'litter-hub'
 
 export type NeighborhoodFamily = EvolutionLinePregroup & {
   abilitySlugs: string[]
@@ -203,7 +203,7 @@ const makePlacementDrafts = (
   // The garden is intentionally one shared utility cluster so Water and Grow
   // families reinforce the same crop and plant area.
   if (placement === 'garden') {
-    return [{ placement, purpose: 'affinity', families }]
+    return [{ placement, purpose: 'garden-hub', families }]
   }
 
   const familiesByHabitat = new Map<string, FamilyProfile[]>()
@@ -227,7 +227,6 @@ const makePlacementDrafts = (
 const getLitterHubPlacement = (
   litterFamilies: FamilyProfile[],
 ): NeighborhoodPlacement => {
-  if (litterFamilies.some((family) => family.isGardenFamily)) return 'garden'
   if (litterFamilies.every((family) => family.isLowPreference)) {
     return 'far-main'
   }
@@ -254,19 +253,6 @@ const makeLitterHub = (families: FamilyProfile[]) => {
 
   const placement = getLitterHubPlacement(litterFamilies)
   const hubFamilies = [...litterFamilies]
-
-  // If any littering family works the garden, keep the complete Water/Grow
-  // utility cluster here instead of creating a second garden neighborhood.
-  if (placement === 'garden') {
-    families.forEach((family) => {
-      if (
-        family.isGardenFamily &&
-        !hubFamilies.some((entry) => entry.familyId === family.familyId)
-      ) {
-        hubFamilies.push(family)
-      }
-    })
-  }
 
   const hubFamilyIds = new Set(hubFamilies.map((family) => family.familyId))
   let remainingFamilies = families.filter(
@@ -370,6 +356,7 @@ const getNeighborhoodBaseName = (
     if (placement === 'far-main') return 'Outskirts litter loop'
     return 'Litter loop'
   }
+  if (purpose === 'garden-hub') return 'Water & Grow garden'
 
   const habitatName =
     grouping.groupingId === 'mixed' || grouping.groupingId === 'unknown'
