@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09",
+  "generatedAt": "2026-08-29",
   "source": "https://pokeapi.co/api/v2/evolution-chain/",
   "constraints": [
     {
@@ -337,6 +337,10 @@
           "target": "girafarig"
         },
         {
+          "source": "feebas",
+          "target": "milotic"
+        },
+        {
           "source": "finneon",
           "target": "lumineon"
         },
@@ -509,6 +513,10 @@
           "target": "noctowl"
         },
         {
+          "source": "hoppip",
+          "target": "skiploom"
+        },
+        {
           "source": "horsea",
           "target": "seadra"
         },
@@ -527,6 +535,10 @@
         {
           "source": "jigglypuff",
           "target": "wigglytuff"
+        },
+        {
+          "source": "jumpluff",
+          "target": "skiploom"
         },
         {
           "source": "kilowattrel",

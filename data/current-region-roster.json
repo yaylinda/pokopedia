@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-08-29",
   "sourceNote": "Identified from user-provided in-game region comfort details. Comfort groups are deduplicated across overlapping screenshots.",
   "regions": {
     "palette-town": {
@@ -243,8 +243,11 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 71,
-      "eventPokemonSlugs": [],
+      "pokemonCount": 75,
+      "eventPokemonSlugs": [
+        "feebas",
+        "milotic"
+      ],
       "comfortLevels": {
         "awesome": [
           "crobat",
@@ -327,7 +330,11 @@
         ],
         "no-home": [
           "farfetch'd",
-          "azurill"
+          "azurill",
+          "popplio",
+          "brionne",
+          "feebas",
+          "milotic"
         ]
       }
     },
