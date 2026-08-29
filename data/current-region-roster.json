@@ -243,11 +243,8 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 75,
-      "eventPokemonSlugs": [
-        "feebas",
-        "milotic"
-      ],
+      "pokemonCount": 71,
+      "eventPokemonSlugs": [],
       "comfortLevels": {
         "awesome": [
           "crobat",
@@ -330,11 +327,7 @@
         ],
         "no-home": [
           "farfetch'd",
-          "azurill",
-          "popplio",
-          "brionne",
-          "feebas",
-          "milotic"
+          "azurill"
         ]
       }
     },
@@ -434,8 +427,11 @@
         "current": 10,
         "isMax": true
       },
-      "pokemonCount": 53,
-      "eventPokemonSlugs": [],
+      "pokemonCount": 57,
+      "eventPokemonSlugs": [
+        "feebas",
+        "milotic"
+      ],
       "comfortLevels": {
         "awesome": [
           "greedent",
@@ -500,7 +496,12 @@
         "iffy": [
           "lumineon"
         ],
-        "no-home": []
+        "no-home": [
+          "popplio",
+          "brionne",
+          "feebas",
+          "milotic"
+        ]
       }
     }
   }
