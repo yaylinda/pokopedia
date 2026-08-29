@@ -85,7 +85,9 @@ function NeighborhoodPlanSummary({
   const balanceLabel =
     plan.litterNeighborhoodCount === 0
       ? 'No litter neighborhoods'
-      : `${plan.balancedLitterNeighborhoodCount}/${plan.litterNeighborhoodCount} litter neighborhoods balanced`
+      : plan.balancedLitterNeighborhoodCount === 1
+        ? 'One litter neighborhood · Gather covered'
+        : 'One litter neighborhood · Gather needed'
 
   return (
     <Box
@@ -462,6 +464,17 @@ function getSynergyNotes(
   primaryHabitatCount: number | null,
 ) {
   const notes: string[] = []
+  const gatherFamilyCount = neighborhood.families.filter((family) =>
+    family.abilitySlugs.includes('gather'),
+  ).length
+
+  if (neighborhood.purpose === 'litter-hub') {
+    notes.push(
+      `All ${neighborhood.littererCount} regional litterer${
+        neighborhood.littererCount === 1 ? '' : 's'
+      } share this one service neighborhood.`,
+    )
+  }
 
   if (neighborhood.waterCount > 0 && neighborhood.growCount > 0) {
     notes.push('Water and Grow families share one garden-side cluster.')
@@ -471,8 +484,8 @@ function getSynergyNotes(
 
   if (neighborhood.littererCount > 0 && neighborhood.gathererCount > 0) {
     notes.push(
-      `${neighborhood.gathererCount} Gather ${
-        neighborhood.gathererCount === 1 ? 'Pokémon balances' : 'Pokémon balance'
+      `${gatherFamilyCount} Gather evo ${
+        gatherFamilyCount === 1 ? 'group balances' : 'groups balance'
       } ${neighborhood.littererCount} litterer${
         neighborhood.littererCount === 1 ? '' : 's'
       }.`,

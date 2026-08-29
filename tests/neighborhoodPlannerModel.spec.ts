@@ -82,8 +82,13 @@ test('creates garden, balanced service, and far-main neighborhoods', () => {
     }),
     makeResident({
       slug: 'test-litterer',
-      abilitySlugs: ['litter'],
+      abilitySlugs: ['grow', 'litter'],
       habitatId: 'dry',
+    }),
+    makeResident({
+      slug: 'test-litterer-two',
+      abilitySlugs: ['litter'],
+      habitatId: 'dark',
     }),
     makeResident({
       slug: 'test-gatherer',
@@ -108,9 +113,19 @@ test('creates garden, balanced service, and far-main neighborhoods', () => {
     neighborhood.pokemon.some((resident) => resident.slug === 'test-low-like'),
   )
 
-  expect(garden?.growCount).toBe(1)
+  expect(garden?.growCount).toBe(2)
   expect(garden?.waterCount).toBe(1)
+  expect(plan.litterNeighborhoodCount).toBe(1)
+  expect(litterNeighborhood?.purpose).toBe('litter-hub')
+  expect(litterNeighborhood?.littererCount).toBe(2)
   expect(litterNeighborhood?.gathererCount).toBe(1)
+  expect(litterNeighborhood?.families).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ familyId: 'test-litterer' }),
+      expect.objectContaining({ familyId: 'test-litterer-two' }),
+      expect.objectContaining({ familyId: 'test-gatherer' }),
+    ]),
+  )
   expect(lowLikeNeighborhood?.placement).toBe('far-main')
   expect(plan.issues).toHaveLength(0)
 })
@@ -141,20 +156,32 @@ test('accounts for every regional evo group and exposes impossible gather rules'
     const regionHasGatherer = region.pokemon.some((resident) =>
       resident.specialties.some((ability) => ability.slug === 'gather'),
     )
+    const regionLittererCount = region.pokemon.filter((resident) =>
+      resident.specialties.some((ability) => ability.slug === 'litter'),
+    ).length
 
     expect(plannedPokemonSlugs).toHaveLength(region.pokemon.length)
     expect(uniquePlannedPokemonSlugs.size).toBe(region.pokemon.length)
 
-    plan.neighborhoods
-      .filter((neighborhood) => neighborhood.littererCount > 0)
-      .forEach((neighborhood) => {
-        if (regionHasGatherer) {
-          expect(neighborhood.gathererCount).toBeGreaterThan(0)
-        }
-      })
+    expect(plan.litterNeighborhoodCount).toBe(regionLittererCount > 0 ? 1 : 0)
+
+    const litterNeighborhood = plan.neighborhoods.find(
+      (neighborhood) => neighborhood.purpose === 'litter-hub',
+    )
+    expect(litterNeighborhood?.littererCount ?? 0).toBe(regionLittererCount)
+
+    if (regionLittererCount > 0 && regionHasGatherer) {
+      expect(litterNeighborhood?.families).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            abilitySlugs: expect.arrayContaining(['gather']),
+          }),
+        ]),
+      )
+    }
 
     if (!regionHasGatherer && plan.litterNeighborhoodCount > 0) {
-      expect(plan.issues).toHaveLength(plan.litterNeighborhoodCount)
+      expect(plan.issues).toHaveLength(1)
     }
   })
 })

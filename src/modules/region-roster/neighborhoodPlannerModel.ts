@@ -11,6 +11,7 @@ import {
 } from './plannerDisplayUtils'
 
 export type NeighborhoodPlacement = 'garden' | 'main' | 'far-main'
+export type NeighborhoodPurpose = 'affinity' | 'litter-hub'
 
 export type NeighborhoodFamily = EvolutionLinePregroup & {
   abilitySlugs: string[]
@@ -23,6 +24,7 @@ export type Neighborhood = {
   neighborhoodId: string
   name: string
   placement: NeighborhoodPlacement
+  purpose: NeighborhoodPurpose
   families: NeighborhoodFamily[]
   pokemon: RegionRosterPokemon[]
   habitatGrouping: IdealHabitatGrouping
@@ -57,6 +59,7 @@ type FamilyProfile = NeighborhoodFamily & {
 
 type NeighborhoodDraft = {
   placement: NeighborhoodPlacement
+  purpose: NeighborhoodPurpose
   families: FamilyProfile[]
 }
 
@@ -199,7 +202,9 @@ const makePlacementDrafts = (
 
   // The garden is intentionally one shared utility cluster so Water and Grow
   // families reinforce the same crop and plant area.
-  if (placement === 'garden') return [{ placement, families }]
+  if (placement === 'garden') {
+    return [{ placement, purpose: 'affinity', families }]
+  }
 
   const familiesByHabitat = new Map<string, FamilyProfile[]>()
   families.forEach((family) => {
@@ -213,144 +218,90 @@ const makePlacementDrafts = (
     .flatMap(([, habitatFamilies]) =>
       makeAffinityClusters(habitatFamilies).map((cluster) => ({
         placement,
+        purpose: 'affinity' as const,
         families: cluster,
       })),
     )
 }
 
-const canMoveGatherFamily = (
-  source: NeighborhoodDraft,
-  family: FamilyProfile,
-  targetPlacement: NeighborhoodPlacement,
-) => {
-  if (!hasAbility(family, 'gather')) return false
-  if (
-    family.preferredPlacement !== targetPlacement &&
-    family.preferredPlacement !== 'main'
-  ) {
-    return false
+const getLitterHubPlacement = (
+  litterFamilies: FamilyProfile[],
+): NeighborhoodPlacement => {
+  if (litterFamilies.some((family) => family.isGardenFamily)) return 'garden'
+  if (litterFamilies.every((family) => family.isLowPreference)) {
+    return 'far-main'
   }
-
-  const sourceWouldStillHaveLitter = source.families
-    .filter((entry) => entry.familyId !== family.familyId)
-    .some((entry) => hasAbility(entry, 'litter'))
-  const sourceWouldStillHaveGather = source.families
-    .filter((entry) => entry.familyId !== family.familyId)
-    .some((entry) => hasAbility(entry, 'gather'))
-
-  return !sourceWouldStillHaveLitter || sourceWouldStillHaveGather
+  return 'main'
 }
 
-const repairLitterGatherBalance = (drafts: NeighborhoodDraft[]) => {
-  const mutableDrafts = drafts.map((draft) => ({
-    ...draft,
-    families: [...draft.families],
-  }))
-  const priority: NeighborhoodPlacement[] = ['garden', 'far-main', 'main']
-  let didChange = true
+const getGatherPlacementRank = (
+  family: FamilyProfile,
+  placement: NeighborhoodPlacement,
+) => {
+  if (family.preferredPlacement === placement) return 0
+  if (family.preferredPlacement === 'main') return 1
+  return 2
+}
 
-  while (didChange) {
-    didChange = false
-    const unbalancedDrafts = mutableDrafts
-      .filter(
-        (draft) =>
-          hasDraftAbility(draft, 'litter') &&
-          !hasDraftAbility(draft, 'gather'),
-      )
+const makeLitterHub = (families: FamilyProfile[]) => {
+  const litterFamilies = families.filter((family) =>
+    hasAbility(family, 'litter'),
+  )
+
+  if (litterFamilies.length === 0) {
+    return { draft: null, remainingFamilies: families }
+  }
+
+  const placement = getLitterHubPlacement(litterFamilies)
+  const hubFamilies = [...litterFamilies]
+
+  // If any littering family works the garden, keep the complete Water/Grow
+  // utility cluster here instead of creating a second garden neighborhood.
+  if (placement === 'garden') {
+    families.forEach((family) => {
+      if (
+        family.isGardenFamily &&
+        !hubFamilies.some((entry) => entry.familyId === family.familyId)
+      ) {
+        hubFamilies.push(family)
+      }
+    })
+  }
+
+  const hubFamilyIds = new Set(hubFamilies.map((family) => family.familyId))
+  let remainingFamilies = families.filter(
+    (family) => !hubFamilyIds.has(family.familyId),
+  )
+
+  if (!hubFamilies.some((family) => hasAbility(family, 'gather'))) {
+    const gatherFamily = remainingFamilies
+      .filter((family) => hasAbility(family, 'gather'))
       .sort(
         (left, right) =>
-          priority.indexOf(left.placement) -
-            priority.indexOf(right.placement) ||
-          left.families[0].familyId.localeCompare(right.families[0].familyId),
+          getGatherPlacementRank(left, placement) -
+            getGatherPlacementRank(right, placement) ||
+          left.pokemon.length - right.pokemon.length ||
+          familySimilarity(hubFamilies, right) -
+            familySimilarity(hubFamilies, left) ||
+          left.familyId.localeCompare(right.familyId),
+      )[0]
+
+    if (gatherFamily) {
+      hubFamilies.push(gatherFamily)
+      remainingFamilies = remainingFamilies.filter(
+        (family) => family.familyId !== gatherFamily.familyId,
       )
-
-    for (const target of unbalancedDrafts) {
-      if (hasDraftAbility(target, 'gather')) continue
-
-      const candidates = mutableDrafts
-        .filter((source) => source !== target)
-        .flatMap((source) =>
-          source.families.flatMap((family) =>
-            canMoveGatherFamily(source, family, target.placement)
-              ? [
-                  {
-                    family,
-                    source,
-                    score:
-                      familySimilarity(target.families, family) +
-                      (source.placement === target.placement ? 5 : 0),
-                  },
-                ]
-              : [],
-          ),
-        )
-        .sort(
-          (left, right) =>
-            right.score - left.score ||
-            left.family.familyId.localeCompare(right.family.familyId),
-        )
-      const candidate = candidates[0]
-
-      if (candidate) {
-        candidate.source.families = candidate.source.families.filter(
-          (family) => family.familyId !== candidate.family.familyId,
-        )
-        target.families.push(candidate.family)
-        didChange = true
-        continue
-      }
-
-      const litterFamilies = target.families.filter((family) =>
-        hasAbility(family, 'litter'),
-      )
-      const balancedLitterDrafts = mutableDrafts.filter(
-        (draft) =>
-          draft !== target &&
-          draft.placement === target.placement &&
-          hasDraftAbility(draft, 'litter') &&
-          hasDraftAbility(draft, 'gather'),
-      )
-
-      if (balancedLitterDrafts.length > 0) {
-        litterFamilies.forEach((family) => {
-          const destination = [...balancedLitterDrafts].sort(
-            (left, right) => {
-              const leftScore =
-                familySimilarity(left.families, family) -
-                left.families.length * 3
-              const rightScore =
-                familySimilarity(right.families, family) -
-                right.families.length * 3
-
-              return (
-                rightScore - leftScore ||
-                left.families.length - right.families.length ||
-                left.families[0].familyId.localeCompare(
-                  right.families[0].familyId,
-                )
-              )
-            },
-          )[0]
-          destination.families.push(family)
-        })
-        const movedFamilyIds = new Set(
-          litterFamilies.map((family) => family.familyId),
-        )
-        target.families = target.families.filter(
-          (family) => !movedFamilyIds.has(family.familyId),
-        )
-        didChange = true
-      }
-    }
-
-    for (let index = mutableDrafts.length - 1; index >= 0; index -= 1) {
-      if (mutableDrafts[index].families.length === 0) {
-        mutableDrafts.splice(index, 1)
-      }
     }
   }
 
-  return mutableDrafts
+  return {
+    draft: {
+      placement,
+      purpose: 'litter-hub' as const,
+      families: hubFamilies,
+    },
+    remainingFamilies,
+  }
 }
 
 const mergeSingletonDrafts = (drafts: NeighborhoodDraft[]) => {
@@ -360,7 +311,9 @@ const mergeSingletonDrafts = (drafts: NeighborhoodDraft[]) => {
   }))
 
   mutableDrafts
-    .filter((draft) => draft.families.length === 1)
+    .filter(
+      (draft) => draft.purpose === 'affinity' && draft.families.length === 1,
+    )
     .forEach((source) => {
       if (source.families.length !== 1) return
       const family = source.families[0]
@@ -369,6 +322,7 @@ const mergeSingletonDrafts = (drafts: NeighborhoodDraft[]) => {
         .filter(
           (target) =>
             target !== source &&
+            target.purpose === 'affinity' &&
             target.placement === source.placement &&
             target.families.length > 0 &&
             target.families.length < maxFamiliesPerAffinityNeighborhood &&
@@ -409,7 +363,14 @@ const countPokemonWithAbility = (
 const getNeighborhoodBaseName = (
   placement: NeighborhoodPlacement,
   grouping: IdealHabitatGrouping,
+  purpose: NeighborhoodPurpose,
 ) => {
+  if (purpose === 'litter-hub') {
+    if (placement === 'garden') return 'Garden litter loop'
+    if (placement === 'far-main') return 'Outskirts litter loop'
+    return 'Litter loop'
+  }
+
   const habitatName =
     grouping.groupingId === 'mixed' || grouping.groupingId === 'unknown'
       ? 'Mixed'
@@ -453,6 +414,7 @@ const finalizeNeighborhoods = (
     const baseName = getNeighborhoodBaseName(
       draft.placement,
       draft.habitatGrouping,
+      draft.purpose,
     )
     const nameCount = (nameCounts.get(baseName) ?? 0) + 1
     nameCounts.set(baseName, nameCount)
@@ -462,6 +424,7 @@ const finalizeNeighborhoods = (
       neighborhoodId: `neighborhood-${draft.placement}-${index + 1}`,
       name,
       placement: draft.placement,
+      purpose: draft.purpose,
       families: [...draft.families].sort((left, right) =>
         left.familyId.localeCompare(right.familyId),
       ),
@@ -487,16 +450,20 @@ export const getNeighborhoodPlan = (
   pokemon: RegionRosterPokemon[],
 ): NeighborhoodPlan => {
   const familyProfiles = makeFamilyProfiles(pokemon)
+  const { draft: litterHub, remainingFamilies } =
+    makeLitterHub(familyProfiles)
   const initialDrafts = placementOrder.flatMap((placement) =>
     makePlacementDrafts(
-      familyProfiles.filter(
+      remainingFamilies.filter(
         (family) => family.preferredPlacement === placement,
       ),
       placement,
     ),
   )
   const neighborhoods = finalizeNeighborhoods(
-    mergeSingletonDrafts(repairLitterGatherBalance(initialDrafts)),
+    mergeSingletonDrafts(
+      litterHub ? [litterHub, ...initialDrafts] : initialDrafts,
+    ),
   )
   const litterNeighborhoods = neighborhoods.filter(
     (neighborhood) => neighborhood.littererCount > 0,
@@ -509,7 +476,7 @@ export const getNeighborhoodPlan = (
             {
               kind: 'missing-gatherer',
               neighborhoodId: neighborhood.neighborhoodId,
-              message: `${neighborhood.name} has litterers but no Gather family could be paired under the current placement rules.`,
+              message: `${neighborhood.name} has litterers but no Gather evo group is available in this region.`,
             },
           ],
   )
