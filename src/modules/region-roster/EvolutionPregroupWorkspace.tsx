@@ -460,10 +460,14 @@ function AbilityHeader({
       direction="row"
       spacing={0.375}
       sx={{
-        flexWrap: 'wrap',
-        justifyContent: 'flex-end',
-        maxWidth: '60%',
+        flexWrap: 'nowrap',
+        justifyContent: 'safe flex-end',
+        justifySelf: 'end',
+        maxWidth: '68%',
         minWidth: 0,
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        '&::-webkit-scrollbar': { display: 'none' },
       }}
       useFlexGap
     >
