@@ -466,13 +466,9 @@ export const getGroupFavoriteOverlaps = (
     )
 }
 
-/**
- * Returns every item-bearing favorite category represented in a group. Unlike
- * overlap analysis, single-resident categories are included so solo cards can
- * still explain where their ranked items come from.
- */
-export const getGroupFavoriteCategoryCoverage = (
+const getGroupCategoryCoverage = (
   pokemon: RegionRosterPokemon[],
+  categoryKind: 'favorite-category' | 'flavor',
 ): FavoriteCategoryCoverage[] => {
   const categoryResidents = new Map<
     string,
@@ -482,7 +478,7 @@ export const getGroupFavoriteCategoryCoverage = (
   pokemon.forEach((resident) => {
     resident.favorites.forEach((favorite) => {
       const category = favoriteCategoryById.get(favorite.favoriteId)
-      if (!category || category.kind !== 'favorite-category') return
+      if (!category || category.kind !== categoryKind) return
 
       const entry = categoryResidents.get(category.favoriteId) ?? {
         category,
@@ -505,3 +501,20 @@ export const getGroupFavoriteCategoryCoverage = (
         left.category.name.localeCompare(right.category.name),
     )
 }
+
+/**
+ * Returns every item-bearing favorite category represented in a group. Unlike
+ * overlap analysis, single-resident categories are included so solo cards can
+ * still explain where their ranked items come from.
+ */
+export const getGroupFavoriteCategoryCoverage = (
+  pokemon: RegionRosterPokemon[],
+) => getGroupCategoryCoverage(pokemon, 'favorite-category')
+
+/**
+ * Returns every favorite flavor represented in a group, including flavors
+ * that belong to only one resident. The canonical flavor category carries the
+ * complete food-item catalog used by the group cards.
+ */
+export const getGroupFlavorCoverage = (pokemon: RegionRosterPokemon[]) =>
+  getGroupCategoryCoverage(pokemon, 'flavor')

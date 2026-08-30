@@ -1,3 +1,4 @@
+import BoltRoundedIcon from '@mui/icons-material/BoltRounded'
 import HubRoundedIcon from '@mui/icons-material/HubRounded'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import Box from '@mui/material/Box'
@@ -14,15 +15,14 @@ import type {
   FavoriteItem,
 } from '../../data/favoriteCategories'
 import {
-  AbilityBadge,
   FavoriteItemPicture,
-  IdealHabitatBadge,
   PokemonPortrait,
 } from './components/PlannerVisuals'
 import { getHabitatVisual } from './components/plannerHabitatVisuals'
 import {
   getEvolutionLinePregroups,
   getGroupFavoriteCategoryCoverage,
+  getGroupFlavorCoverage,
   type FavoriteCategoryCoverage,
   type GroupCompatibilityAnalysis,
   type SharedItemCompatibility,
@@ -31,6 +31,9 @@ import {
   getAbilitySummaries,
   getIdealHabitatGrouping,
   getIdealHabitatSummaries,
+  getResidentNames,
+  type AbilitySummary,
+  type IdealHabitatSummary,
   type IdealHabitatGrouping,
 } from './plannerDisplayUtils'
 import type { VisualStyle } from './regionRosterConfig'
@@ -206,70 +209,37 @@ function PregroupCard({
     () => getGroupFavoriteCategoryCoverage(card.pokemon),
     [card.pokemon],
   )
+  const flavorCoverage = useMemo(
+    () => getGroupFlavorCoverage(card.pokemon),
+    [card.pokemon],
+  )
   const topItems = card.compatibility.topItems.slice(0, topItemCount)
   const visual = getHabitatVisual(grouping.habitat?.idealHabitatId)
-  const HabitatIcon = grouping.habitat ? visual.Icon : HubRoundedIcon
-  const primaryHabitatCount = grouping.habitat
-    ? habitatSummaries.find(
-        (summary) =>
-          summary.habitat.idealHabitatId ===
-          grouping.habitat?.idealHabitatId,
-      )?.residentCount ?? 0
-    : null
   const residentNames = card.pokemon.map((resident) => resident.name).join(', ')
 
   return (
-    <Tooltip
-      arrow
-      disableInteractive={false}
-      enterDelay={350}
-      leaveDelay={200}
-      placement="right"
-      slotProps={{
-        arrow: { sx: { color: 'oklch(0.985 0.006 82)' } },
-        tooltip: {
-          sx: {
-            backgroundColor: 'oklch(0.985 0.006 82)',
-            border: '1px solid oklch(0.80 0.045 82)',
-            boxShadow: '0 12px 32px oklch(0.30 0.025 225 / 0.18)',
-            color: 'oklch(0.25 0.025 225)',
-            maxWidth: 440,
-            p: 1.25,
-          },
+    <Box
+      aria-label={`${residentNames} group`}
+      component="article"
+      sx={{
+        backgroundColor: 'oklch(0.995 0.003 225)',
+        border: `2px solid ${
+          grouping.groupingId === 'mixed'
+            ? 'oklch(0.76 0.035 250)'
+            : visual.border
+        }`,
+        borderRadius: 1.5,
+        minHeight: 220,
+        minWidth: 0,
+        overflow: 'hidden',
+        transition: 'border-color 140ms ease-out, transform 140ms ease-out',
+        '&:hover': { transform: 'translateY(-1px)' },
+        '&:focus-within': {
+          outline: `3px solid ${style.accent}`,
+          outlineOffset: 2,
         },
       }}
-      title={
-        <GroupCardPopup
-          categories={favoriteCategories}
-          groupSize={card.pokemon.length}
-          pokemon={card.pokemon}
-          topItems={topItems}
-        />
-      }
     >
-      <Box
-        aria-label={`${residentNames} group. Hover or focus for favorite details.`}
-        component="article"
-        tabIndex={0}
-        sx={{
-          backgroundColor: 'oklch(0.995 0.003 225)',
-          border: `2px solid ${
-            grouping.groupingId === 'mixed'
-              ? 'oklch(0.76 0.035 250)'
-              : visual.border
-          }`,
-          borderRadius: 1.5,
-          minHeight: 220,
-          minWidth: 0,
-          overflow: 'hidden',
-          transition: 'border-color 140ms ease-out, transform 140ms ease-out',
-          '&:hover': { transform: 'translateY(-1px)' },
-          '&:focus-visible': {
-            outline: `3px solid ${style.accent}`,
-            outlineOffset: 2,
-          },
-        }}
-      >
         <Box
           sx={{
             alignItems: 'center',
@@ -286,68 +256,34 @@ function PregroupCard({
               grouping.groupingId === 'mixed'
                 ? 'oklch(0.34 0.055 250)'
                 : visual.foreground,
-            display: 'flex',
-            gap: 0.625,
-            minHeight: 38,
+            display: 'grid',
+            gap: 0.75,
+            gridTemplateColumns: 'minmax(0, 1fr) auto',
+            minHeight: 42,
             px: 1,
+            py: 0.5,
           }}
         >
-          <HabitatIcon sx={{ fontSize: 20 }} />
-          <Typography
-            component="span"
-            sx={{ color: 'inherit', fontWeight: 850 }}
-            variant="caption"
-          >
-            {grouping.label}
-          </Typography>
-          <Typography
-            component="span"
-            sx={{
-              color: 'inherit',
-              fontVariantNumeric: 'tabular-nums',
-              fontWeight: 700,
-              ml: 'auto',
-              opacity: 0.78,
-            }}
-            variant="caption"
-          >
-            {primaryHabitatCount === null
-              ? `${card.pokemon.length} residents`
-              : `${primaryHabitatCount}/${card.pokemon.length}`}
-          </Typography>
+          <HabitatHeader
+            grouping={grouping}
+            pokemon={card.pokemon}
+            summaries={habitatSummaries}
+          />
+          <AbilityHeader pokemon={card.pokemon} summaries={abilitySummaries} />
         </Box>
 
-        <Box sx={{ display: 'grid', gap: 1, p: 1.25 }}>
+        <Box sx={{ display: 'grid', gap: 1.125, p: 1.25 }}>
           <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
             {card.pokemon.map((resident) => (
               <PokemonPortrait key={resident.slug} pokemon={resident} size={52} />
             ))}
           </Stack>
 
-          {habitatSummaries.length > 1 && (
-            <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
-              {habitatSummaries.map((summary) => (
-                <IdealHabitatBadge
-                  groupSize={card.pokemon.length}
-                  habitat={summary.habitat}
-                  key={summary.habitat.idealHabitatId}
-                  residentCount={summary.residentCount}
-                />
-              ))}
-            </Stack>
-          )}
-
-          {abilitySummaries.length > 0 && (
-            <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
-              {abilitySummaries.map((summary) => (
-                <AbilityBadge
-                  ability={summary.ability}
-                  groupSize={card.pokemon.length}
-                  key={summary.ability.slug}
-                  residentCount={summary.residentCount}
-                />
-              ))}
-            </Stack>
+          {flavorCoverage.length > 0 && (
+            <FavoriteFlavorSection
+              flavors={flavorCoverage}
+              pokemon={card.pokemon}
+            />
           )}
 
           <Box sx={{ alignSelf: 'end', display: 'grid', gap: 0.5 }}>
@@ -367,10 +303,348 @@ function PregroupCard({
             )}
           </Box>
 
-          <Typography color="text.secondary" variant="caption">
-            Hover for favorite details
-          </Typography>
+          <Tooltip
+            arrow
+            disableInteractive={false}
+            enterDelay={250}
+            leaveDelay={200}
+            placement="right"
+            slotProps={{
+              arrow: { sx: { color: 'oklch(0.985 0.006 82)' } },
+              tooltip: {
+                sx: {
+                  backgroundColor: 'oklch(0.985 0.006 82)',
+                  border: '1px solid oklch(0.80 0.045 82)',
+                  boxShadow: '0 12px 32px oklch(0.30 0.025 225 / 0.18)',
+                  color: 'oklch(0.25 0.025 225)',
+                  maxWidth: 440,
+                  p: 1.25,
+                },
+              },
+            }}
+            title={
+              <GroupCardPopup
+                categories={favoriteCategories}
+                pokemon={card.pokemon}
+                topItems={topItems}
+              />
+            }
+          >
+            <Typography
+              aria-label={`Favorite details for ${residentNames}`}
+              color="text.secondary"
+              component="span"
+              sx={{
+                borderBottom: '1px dotted currentColor',
+                cursor: 'help',
+                justifySelf: 'start',
+                outlineOffset: 3,
+              }}
+              tabIndex={0}
+              variant="caption"
+            >
+              Hover for favorite details
+            </Typography>
+          </Tooltip>
         </Box>
+      </Box>
+  )
+}
+
+function HabitatHeader({
+  grouping,
+  pokemon,
+  summaries,
+}: {
+  grouping: IdealHabitatGrouping
+  pokemon: RegionRosterPokemon[]
+  summaries: IdealHabitatSummary[]
+}) {
+  const pokemonBySlug = new Map(
+    pokemon.map((resident) => [resident.slug, resident]),
+  )
+
+  return (
+    <Box
+      sx={{
+        alignItems: 'center',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 0.375,
+        minWidth: 0,
+      }}
+    >
+      {summaries.length > 0 ? (
+        summaries.map((summary) => {
+          const habitatVisual = getHabitatVisual(
+            summary.habitat.idealHabitatId,
+          )
+          const Icon = habitatVisual.Icon
+          const residentSlugs = pokemon
+            .filter(
+              (resident) =>
+                resident.idealHabitat?.idealHabitatId ===
+                summary.habitat.idealHabitatId,
+            )
+            .map((resident) => resident.slug)
+          const names = getResidentNames(residentSlugs, pokemonBySlug)
+
+          return (
+            <Tooltip
+              arrow
+              key={summary.habitat.idealHabitatId}
+              placement="top"
+              title={
+                <Box sx={{ display: 'grid', gap: 0.125 }}>
+                  <Typography sx={{ fontWeight: 850 }} variant="caption">
+                    {summary.habitat.name} habitat
+                  </Typography>
+                  <Typography variant="caption">{names}</Typography>
+                </Box>
+              }
+            >
+              <Box
+                aria-label={`${summary.habitat.name} habitat: ${names}`}
+                component="span"
+                sx={{
+                  alignItems: 'center',
+                  backgroundColor: 'oklch(0.995 0.003 225 / 0.62)',
+                  border: '1px solid currentColor',
+                  borderRadius: '50%',
+                  display: 'inline-flex',
+                  flex: '0 0 auto',
+                  height: 28,
+                  justifyContent: 'center',
+                  outlineOffset: 2,
+                  width: 28,
+                }}
+                tabIndex={0}
+              >
+                <Icon sx={{ fontSize: 18 }} />
+              </Box>
+            </Tooltip>
+          )
+        })
+      ) : (
+        <HubRoundedIcon sx={{ fontSize: 20 }} />
+      )}
+      <Typography
+        component="span"
+        sx={{
+          color: 'inherit',
+          fontWeight: 850,
+          ml: 0.25,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+        variant="caption"
+      >
+        {grouping.label}
+      </Typography>
+    </Box>
+  )
+}
+
+function AbilityHeader({
+  pokemon,
+  summaries,
+}: {
+  pokemon: RegionRosterPokemon[]
+  summaries: AbilitySummary[]
+}) {
+  if (summaries.length === 0) return null
+
+  return (
+    <Stack
+      direction="row"
+      spacing={0.375}
+      sx={{
+        flexWrap: 'wrap',
+        justifyContent: 'flex-end',
+        maxWidth: '60%',
+        minWidth: 0,
+      }}
+      useFlexGap
+    >
+      {summaries.map((summary) => {
+        const matchingPokemon = pokemon.filter((resident) =>
+          resident.specialties.some(
+            (ability) => ability.slug === summary.ability.slug,
+          ),
+        )
+        const names = matchingPokemon
+          .map((resident) => resident.name)
+          .join(', ')
+        const iconUrl = summary.ability.pictureUrl ?? summary.ability.iconUrl
+
+        return (
+          <Tooltip
+            arrow
+            key={summary.ability.slug}
+            placement="top"
+            title={
+              <Box sx={{ display: 'grid', gap: 0.125 }}>
+                <Typography sx={{ fontWeight: 850 }} variant="caption">
+                  {summary.ability.name}
+                </Typography>
+                <Typography variant="caption">{names}</Typography>
+              </Box>
+            }
+          >
+            <Box
+              aria-label={`${summary.ability.name}: ${names}`}
+              component="span"
+              sx={{
+                alignItems: 'center',
+                backgroundColor: 'oklch(0.995 0.003 225 / 0.74)',
+                border: '1px solid currentColor',
+                borderRadius: 1,
+                display: 'inline-flex',
+                flex: '0 0 auto',
+                height: 28,
+                justifyContent: 'center',
+                outlineOffset: 2,
+                width: 28,
+              }}
+              tabIndex={0}
+            >
+              {iconUrl ? (
+                <Box
+                  alt=""
+                  component="img"
+                  loading="lazy"
+                  src={iconUrl}
+                  sx={{ height: 21, objectFit: 'contain', width: 21 }}
+                />
+              ) : (
+                <BoltRoundedIcon sx={{ fontSize: 19 }} />
+              )}
+            </Box>
+          </Tooltip>
+        )
+      })}
+    </Stack>
+  )
+}
+
+function FavoriteFlavorSection({
+  flavors,
+  pokemon,
+}: {
+  flavors: FavoriteCategoryCoverage[]
+  pokemon: RegionRosterPokemon[]
+}) {
+  return (
+    <Box sx={{ display: 'grid', gap: 0.5 }}>
+      <Typography color="text.secondary" sx={{ fontWeight: 750 }} variant="caption">
+        Favorite flavors
+      </Typography>
+      <Box sx={{ display: 'grid', gap: 0.625 }}>
+        {flavors.map((coverage) => (
+          <FavoriteFlavorPreview
+            coverage={coverage}
+            key={coverage.category.favoriteId}
+            pokemon={pokemon}
+          />
+        ))}
+      </Box>
+    </Box>
+  )
+}
+
+function FavoriteFlavorPreview({
+  coverage,
+  pokemon,
+}: {
+  coverage: FavoriteCategoryCoverage
+  pokemon: RegionRosterPokemon[]
+}) {
+  const visibleItems = coverage.category.items.slice(0, categoryIconPreviewCount)
+  const hiddenItemCount = Math.max(
+    0,
+    coverage.category.items.length - visibleItems.length,
+  )
+  const pokemonBySlug = new Map(
+    pokemon.map((resident) => [resident.slug, resident]),
+  )
+  const names = getResidentNames(coverage.residentSlugs, pokemonBySlug)
+
+  return (
+    <Tooltip
+      arrow
+      disableInteractive={false}
+      enterDelay={200}
+      leaveDelay={150}
+      placement="right"
+      slotProps={{
+        tooltip: {
+          sx: {
+            backgroundColor: 'oklch(0.99 0.004 82)',
+            border: '1px solid oklch(0.80 0.045 82)',
+            boxShadow: '0 12px 32px oklch(0.30 0.025 225 / 0.18)',
+            color: 'oklch(0.25 0.025 225)',
+            maxWidth: 520,
+            p: 1.25,
+          },
+        },
+      }}
+      title={
+        <Box sx={{ display: 'grid', gap: 0.75, minWidth: 300 }}>
+          <Box sx={{ display: 'grid', gap: 0.125 }}>
+            <Typography sx={{ fontWeight: 850 }} variant="subtitle2">
+              {coverage.category.name}
+            </Typography>
+            <Typography color="text.secondary" variant="caption">
+              Preferred by {names}
+            </Typography>
+          </Box>
+          <CategoryItemsGrid category={coverage.category} />
+        </Box>
+      }
+    >
+      <Box
+        aria-label={`${coverage.category.name}, preferred by ${names}: ${coverage.category.items
+          .map((item) => item.itemName)
+          .join(', ')}`}
+        component="span"
+        sx={{
+          alignItems: 'center',
+          backgroundColor: 'oklch(0.975 0.018 82)',
+          border: '1px solid oklch(0.86 0.035 82)',
+          borderRadius: 1,
+          display: 'grid',
+          gap: 0.625,
+          gridTemplateColumns: 'auto minmax(0, 1fr)',
+          minWidth: 0,
+          outlineOffset: 3,
+          px: 0.625,
+          py: 0.5,
+        }}
+        tabIndex={0}
+      >
+        <Typography
+          component="span"
+          sx={{ color: 'oklch(0.36 0.055 68)', fontWeight: 850 }}
+          variant="caption"
+        >
+          {coverage.category.name.replace(/ flavors$/i, '')}
+        </Typography>
+        <Stack
+          direction="row"
+          spacing={0.375}
+          sx={{ alignItems: 'center', flexWrap: 'wrap', minWidth: 0 }}
+          useFlexGap
+        >
+          {visibleItems.map((item) => (
+            <FavoriteItemPicture item={item} key={item.itemId} size={26} />
+          ))}
+          {hiddenItemCount > 0 && (
+            <Typography color="text.secondary" variant="caption">
+              +{hiddenItemCount}
+            </Typography>
+          )}
+        </Stack>
       </Box>
     </Tooltip>
   )
@@ -421,20 +695,22 @@ function ScoredItemPreview({ entry }: { entry: SharedItemCompatibility }) {
 
 function GroupCardPopup({
   categories,
-  groupSize,
   pokemon,
   topItems,
 }: {
   categories: FavoriteCategoryCoverage[]
-  groupSize: number
   pokemon: RegionRosterPokemon[]
   topItems: SharedItemCompatibility[]
 }) {
+  const pokemonBySlug = new Map(
+    pokemon.map((resident) => [resident.slug, resident]),
+  )
+
   return (
     <Box sx={{ display: 'grid', gap: 1.25, minWidth: 320 }}>
       <Box sx={{ display: 'grid', gap: 0.25 }}>
         <Typography sx={{ fontWeight: 850 }} variant="subtitle2">
-          {groupSize} {groupSize === 1 ? 'resident' : 'residents'}
+          Pokémon in this group
         </Typography>
         <Typography color="text.secondary" variant="caption">
           {pokemon.map((resident) => resident.name).join(', ')}
@@ -452,7 +728,11 @@ function GroupCardPopup({
         </Box>
         {topItems.length > 0 ? (
           topItems.map((entry) => (
-            <TopItemRow entry={entry} groupSize={groupSize} key={entry.item.itemId} />
+            <TopItemRow
+              entry={entry}
+              key={entry.item.itemId}
+              pokemonBySlug={pokemonBySlug}
+            />
           ))
         ) : (
           <Typography color="text.secondary" variant="body2">
@@ -474,8 +754,8 @@ function GroupCardPopup({
           categories.map((coverage) => (
             <FavoriteCategoryPreview
               coverage={coverage}
-              groupSize={groupSize}
               key={coverage.category.favoriteId}
+              pokemonBySlug={pokemonBySlug}
             />
           ))
         ) : (
@@ -490,10 +770,10 @@ function GroupCardPopup({
 
 function TopItemRow({
   entry,
-  groupSize,
+  pokemonBySlug,
 }: {
   entry: SharedItemCompatibility
-  groupSize: number
+  pokemonBySlug: Map<string, RegionRosterPokemon>
 }) {
   return (
     <Box
@@ -513,7 +793,7 @@ function TopItemRow({
         </Typography>
         <ItemCategoryBadges entry={entry} />
         <Typography color="text.secondary" variant="caption">
-          {entry.residentCount}/{groupSize} residents
+          For {getResidentNames(entry.residentSlugs, pokemonBySlug)}
         </Typography>
       </Box>
       <Chip label={`${entry.score} pts`} size="small" />
@@ -587,10 +867,10 @@ function ItemCategoryBadges({
 
 function FavoriteCategoryPreview({
   coverage,
-  groupSize,
+  pokemonBySlug,
 }: {
   coverage: FavoriteCategoryCoverage
-  groupSize: number
+  pokemonBySlug: Map<string, RegionRosterPokemon>
 }) {
   const visibleItems = coverage.category.items.slice(0, categoryIconPreviewCount)
   const hiddenItemCount = Math.max(
@@ -609,10 +889,8 @@ function FavoriteCategoryPreview({
     >
       <Box
         sx={{
-          alignItems: 'center',
           display: 'grid',
-          gap: 0.75,
-          gridTemplateColumns: 'minmax(0, 1fr) auto',
+          gap: 0.25,
         }}
       >
         <Tooltip
@@ -651,7 +929,7 @@ function FavoriteCategoryPreview({
           </Typography>
         </Tooltip>
         <Typography color="text.secondary" variant="caption">
-          {coverage.residentCount}/{groupSize}
+          For {getResidentNames(coverage.residentSlugs, pokemonBySlug)}
         </Typography>
       </Box>
 
@@ -686,27 +964,35 @@ function CategoryItemsPopup({ category }: { category: FavoriteCategory }) {
           {category.itemCount} cataloged {category.itemCount === 1 ? 'item' : 'items'}
         </Typography>
       </Box>
-      {category.items.length > 0 ? (
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 0.5,
-            gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-            maxHeight: 360,
-            overflowY: 'auto',
-            pr: 0.5,
-            scrollbarWidth: 'thin',
-          }}
-        >
-          {category.items.map((item) => (
-            <CategoryItem item={item} key={item.itemId} />
-          ))}
-        </Box>
-      ) : (
-        <Typography color="text.secondary" variant="body2">
-          No cataloged items are available for this category yet.
-        </Typography>
-      )}
+      <CategoryItemsGrid category={category} />
+    </Box>
+  )
+}
+
+function CategoryItemsGrid({ category }: { category: FavoriteCategory }) {
+  if (category.items.length === 0) {
+    return (
+      <Typography color="text.secondary" variant="body2">
+        No cataloged items are available for this category yet.
+      </Typography>
+    )
+  }
+
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gap: 0.5,
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+        maxHeight: 360,
+        overflowY: 'auto',
+        pr: 0.5,
+        scrollbarWidth: 'thin',
+      }}
+    >
+      {category.items.map((item) => (
+        <CategoryItem item={item} key={item.itemId} />
+      ))}
     </Box>
   )
 }

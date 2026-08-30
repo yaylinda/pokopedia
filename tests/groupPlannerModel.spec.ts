@@ -29,6 +29,9 @@ let getGroupCompatibilityAnalysis: (
 let getGroupFavoriteCategoryCoverage: (
   pokemon: RegionRosterPokemon[],
 ) => FavoriteCategoryCoverage[]
+let getGroupFlavorCoverage: (
+  pokemon: RegionRosterPokemon[],
+) => FavoriteCategoryCoverage[]
 let getIdealHabitatSummaries: (
   pokemon: RegionRosterPokemon[],
 ) => {
@@ -72,6 +75,7 @@ test.beforeAll(async () => {
   getGroupCompatibilityAnalysis = modelModule.getGroupCompatibilityAnalysis
   getGroupFavoriteCategoryCoverage =
     modelModule.getGroupFavoriteCategoryCoverage
+  getGroupFlavorCoverage = modelModule.getGroupFlavorCoverage
   getIdealHabitatSummaries = displayModule.getIdealHabitatSummaries
   getAbilitySummaries = displayModule.getAbilitySummaries
   getIdealHabitatGrouping = displayModule.getIdealHabitatGrouping
@@ -339,6 +343,44 @@ test('keeps solo favorite categories available for card popups', () => {
     residentCount: 1,
     residentSlugs: ['solo'],
     sharedByAll: true,
+  })
+})
+
+test('includes every represented flavor and its canonical food catalog', () => {
+  const flavors = favoriteCategories
+    .filter((entry) => entry.kind === 'flavor' && entry.items.length > 0)
+    .slice(0, 2)
+  if (flavors.length < 2) throw new Error('Expected two flavor fixtures')
+
+  const coverage = getGroupFlavorCoverage([
+    makeResident({
+      slug: 'resident-a',
+      favoriteIds: flavors.map((flavor) => flavor.favoriteId),
+    }),
+    makeResident({
+      slug: 'resident-b',
+      favoriteIds: [flavors[0].favoriteId],
+    }),
+  ])
+
+  expect(coverage).toHaveLength(2)
+  expect(coverage[0]).toMatchObject({
+    category: {
+      favoriteId: flavors[0].favoriteId,
+      itemCount: flavors[0].items.length,
+    },
+    residentCount: 2,
+    residentSlugs: ['resident-a', 'resident-b'],
+    sharedByAll: true,
+  })
+  expect(coverage[1]).toMatchObject({
+    category: {
+      favoriteId: flavors[1].favoriteId,
+      itemCount: flavors[1].items.length,
+    },
+    residentCount: 1,
+    residentSlugs: ['resident-a'],
+    sharedByAll: false,
   })
 })
 
