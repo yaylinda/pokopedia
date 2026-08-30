@@ -461,13 +461,9 @@ function AbilityHeader({
       spacing={0.375}
       sx={{
         flexWrap: 'nowrap',
-        justifyContent: 'safe flex-end',
+        justifyContent: 'flex-end',
         justifySelf: 'end',
-        maxWidth: '68%',
         minWidth: 0,
-        overflowX: 'auto',
-        scrollbarWidth: 'none',
-        '&::-webkit-scrollbar': { display: 'none' },
       }}
       useFlexGap
     >
