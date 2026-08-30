@@ -274,9 +274,11 @@ export function EvolutionGroupCard({
             display: 'grid',
             gap: 0.75,
             gridTemplateAreas: actions
-              ? '"habitat actions" "abilities abilities"'
+              ? '"habitat actions abilities"'
               : '"habitat abilities"',
-            gridTemplateColumns: 'minmax(0, 1fr) auto',
+            gridTemplateColumns: actions
+              ? 'minmax(0, 1fr) auto auto'
+              : 'minmax(0, 1fr) auto',
             minHeight: 42,
             px: 1,
             py: 0.5,
@@ -287,8 +289,8 @@ export function EvolutionGroupCard({
             pokemon={card.pokemon}
             summaries={habitatSummaries}
           />
-          <AbilityHeader pokemon={card.pokemon} summaries={abilitySummaries} />
           {actions && <Box sx={{ gridArea: 'actions' }}>{actions}</Box>}
+          <AbilityHeader pokemon={card.pokemon} summaries={abilitySummaries} />
         </Box>
 
         <Box sx={{ display: 'grid', gap: 1.125, p: 1.25 }}>
@@ -485,6 +487,9 @@ function AbilityHeader({
         justifyContent: 'flex-end',
         justifySelf: 'end',
         minWidth: 0,
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        '&::-webkit-scrollbar': { display: 'none' },
       }}
       useFlexGap
     >

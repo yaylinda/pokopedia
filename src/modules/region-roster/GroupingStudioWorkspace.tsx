@@ -65,6 +65,8 @@ type StudioFamily = EvolutionLinePregroup & {
 type SaveStatus = 'error' | 'loading' | 'read-only' | 'saved' | 'saving'
 
 const unassignedDropTarget = 'unassigned'
+const familyCardGridColumns =
+  'repeat(auto-fit, minmax(min(100%, 310px), 1fr))'
 
 export function GroupingStudioWorkspace({
   onChooseRegion,
@@ -533,8 +535,7 @@ export function GroupingStudioWorkspace({
                   alignItems: 'start',
                   display: 'grid',
                   gap: 1.5,
-                  gridTemplateColumns:
-                    'repeat(auto-fit, minmax(min(100%, 410px), 1fr))',
+                  gridTemplateColumns: 'minmax(0, 1fr)',
                   minWidth: 0,
                 }}
               >
@@ -924,7 +925,7 @@ function FamilySection({
           alignItems: 'start',
           display: 'grid',
           gap: 1,
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 310px), 1fr))',
+          gridTemplateColumns: familyCardGridColumns,
           minWidth: 0,
         }}
       >
@@ -1012,20 +1013,22 @@ function MoveFamilyMenu({
 
   return (
     <>
-      <Button
-        aria-label={`Move ${residentNames}`}
-        color="inherit"
-        disabled={disabled}
-        endIcon={<ArrowDropDownRoundedIcon />}
-        onClick={(event: MouseEvent<HTMLButtonElement>) =>
-          setAnchorElement(event.currentTarget)
-        }
-        size="small"
-        startIcon={<DragIndicatorRoundedIcon />}
-        sx={{ minHeight: 36, minWidth: 92 }}
-      >
-        Move
-      </Button>
+      <Tooltip title={`Move ${residentNames}`}>
+        <span>
+          <IconButton
+            aria-label={`Move ${residentNames}`}
+            color="inherit"
+            disabled={disabled}
+            onClick={(event: MouseEvent<HTMLButtonElement>) =>
+              setAnchorElement(event.currentTarget)
+            }
+            size="small"
+            sx={{ minHeight: 36, minWidth: 36 }}
+          >
+            <ArrowDropDownRoundedIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
       <Menu
         anchorEl={anchorElement}
         onClose={() => setAnchorElement(null)}
@@ -1152,7 +1155,15 @@ function NeighborhoodCanvas({
       </Stack>
 
       {families.length > 0 ? (
-        <Box sx={{ display: 'grid', gap: 1, minWidth: 0 }}>
+        <Box
+          sx={{
+            alignItems: 'start',
+            display: 'grid',
+            gap: 1,
+            gridTemplateColumns: familyCardGridColumns,
+            minWidth: 0,
+          }}
+        >
           {families.map((family) => (
             <StudioFamilyCard
               family={family}
