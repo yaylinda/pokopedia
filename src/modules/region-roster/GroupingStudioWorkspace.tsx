@@ -435,7 +435,6 @@ export function GroupingStudioWorkspace({
                 onDragEnd={resetDragging}
                 onDragStart={startDragging}
                 onMove={moveFamily}
-                showUsefulSkills
                 style={style}
                 writable={writable}
               />
@@ -451,7 +450,6 @@ export function GroupingStudioWorkspace({
                 onDragEnd={resetDragging}
                 onDragStart={startDragging}
                 onMove={moveFamily}
-                showUsefulSkills={false}
                 style={style}
                 writable={writable}
               />
@@ -897,7 +895,6 @@ function FamilySection({
   onDragEnd,
   onDragStart,
   onMove,
-  showUsefulSkills,
   style,
   writable,
 }: {
@@ -909,7 +906,6 @@ function FamilySection({
   onDragEnd: () => void
   onDragStart: (event: DragEvent<HTMLElement>, familyId: string) => void
   onMove: (familyId: string, neighborhoodId: string | null) => void
-  showUsefulSkills: boolean
   style: VisualStyle
   writable: boolean
 }) {
@@ -941,7 +937,6 @@ function FamilySection({
             onDragEnd={onDragEnd}
             onDragStart={onDragStart}
             onMove={onMove}
-            showUsefulSkills={showUsefulSkills}
             style={style}
             writable={writable}
           />
@@ -958,7 +953,6 @@ function StudioFamilyCard({
   onDragEnd,
   onDragStart,
   onMove,
-  showUsefulSkills,
   style,
   writable,
 }: {
@@ -968,7 +962,6 @@ function StudioFamilyCard({
   onDragEnd: () => void
   onDragStart: (event: DragEvent<HTMLElement>, familyId: string) => void
   onMove: (familyId: string, neighborhoodId: string | null) => void
-  showUsefulSkills: boolean
   style: VisualStyle
   writable: boolean
 }) {
@@ -988,43 +981,6 @@ function StudioFamilyCard({
         groupId: family.familyId,
         pokemon: family.pokemon,
       }}
-      context={
-        showUsefulSkills && family.usefulAbilitySlugs.length > 0 ? (
-          <Stack
-            direction="row"
-            spacing={0.5}
-            sx={{
-              alignItems: 'center',
-              backgroundColor: 'oklch(0.975 0.02 155)',
-              borderBottom: '1px solid oklch(0.86 0.045 155)',
-              flexWrap: 'wrap',
-              px: 1,
-              py: 0.625,
-            }}
-            useFlexGap
-          >
-            <Typography
-              sx={{ color: 'oklch(0.35 0.075 155)', fontWeight: 850 }}
-              variant="caption"
-            >
-              Useful
-            </Typography>
-            {family.usefulAbilitySlugs.map((skill) => (
-              <Chip
-                key={skill}
-                label={titleFromSlug(skill)}
-                size="small"
-                sx={{
-                  backgroundColor: 'oklch(0.94 0.045 155)',
-                  color: 'oklch(0.32 0.085 155)',
-                  fontWeight: 800,
-                  height: 23,
-                }}
-              />
-            ))}
-          </Stack>
-        ) : undefined
-      }
       draggable={writable}
       onDragEnd={onDragEnd}
       onDragStart={(event) => onDragStart(event, family.familyId)}
@@ -1206,7 +1162,6 @@ function NeighborhoodCanvas({
               onDragEnd={onDragEnd}
               onDragStart={onDragStart}
               onMove={onMove}
-              showUsefulSkills={false}
               style={style}
               writable={writable}
             />

@@ -189,7 +189,6 @@ function MixedHabitatHeading({ cardCount }: { cardCount: number }) {
 export function EvolutionGroupCard({
   actions,
   card,
-  context,
   draggable = false,
   dragging = false,
   onDragEnd,
@@ -198,7 +197,6 @@ export function EvolutionGroupCard({
 }: {
   actions?: ReactNode
   card: EvolutionGroupCardData
-  context?: ReactNode
   draggable?: boolean
   dragging?: boolean
   onDragEnd?: DragEventHandler<HTMLElement>
@@ -292,8 +290,6 @@ export function EvolutionGroupCard({
           <AbilityHeader pokemon={card.pokemon} summaries={abilitySummaries} />
           {actions && <Box sx={{ gridArea: 'actions' }}>{actions}</Box>}
         </Box>
-
-        {context}
 
         <Box sx={{ display: 'grid', gap: 1.125, p: 1.25 }}>
           <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
