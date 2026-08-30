@@ -7,7 +7,6 @@ import {
 } from '../../data/favoriteCategories'
 import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
 import { getCanonicalEvolutionLine } from '../../data/rosterConstraints'
-import type { RosterGroup } from '../../data/types'
 
 export type FavoriteItemOverlap = {
   item: FavoriteItem
@@ -79,32 +78,6 @@ export type EvolutionLinePregroup = {
   residentSlugs: string[]
   isCompleteFamily: boolean
   compatibility: GroupCompatibilityAnalysis
-}
-
-export const getRosterGroupScopeKey = (
-  snapshotId: string,
-  regionId: string,
-) => `${snapshotId}:${regionId}`
-
-export const getAvailableGroupNumber = (groups: RosterGroup[]) => {
-  const usedNames = new Set(groups.map((group) => group.name.toLowerCase()))
-  let groupNumber = 1
-
-  while (usedNames.has(`group ${groupNumber}`)) {
-    groupNumber += 1
-  }
-
-  return groupNumber
-}
-
-export const makeRosterGroup = (groups: RosterGroup[]): RosterGroup => {
-  const groupNumber = getAvailableGroupNumber(groups)
-
-  return {
-    groupId: crypto.randomUUID(),
-    name: `Group ${groupNumber}`,
-    pokemonSlugs: [],
-  }
 }
 
 const makeCoverage = (

@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type DragEventHandler, type ReactNode } from 'react'
 import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
 import type {
   FavoriteCategory,
@@ -57,7 +57,7 @@ export function EvolutionPregroupWorkspace({
           matchesPokemonQuery(family.pokemon, normalizedQuery),
         )
         .map(
-          (family): PregroupCardData => ({
+          (family): EvolutionGroupCardData => ({
             compatibility: family.compatibility,
             groupId: family.familyId,
             pokemon: family.pokemon,
@@ -120,7 +120,7 @@ function CardGrid({
   cards,
   style,
 }: {
-  cards: PregroupCardData[]
+  cards: EvolutionGroupCardData[]
   style: VisualStyle
 }) {
   return (
@@ -135,7 +135,7 @@ function CardGrid({
       }}
     >
       {cards.map((card) => (
-        <PregroupCard card={card} key={card.groupId} style={style} />
+        <EvolutionGroupCard card={card} key={card.groupId} style={style} />
       ))}
     </Box>
   )
@@ -186,11 +186,23 @@ function MixedHabitatHeading({ cardCount }: { cardCount: number }) {
   )
 }
 
-function PregroupCard({
+export function EvolutionGroupCard({
+  actions,
   card,
+  context,
+  draggable = false,
+  dragging = false,
+  onDragEnd,
+  onDragStart,
   style,
 }: {
-  card: PregroupCardData
+  actions?: ReactNode
+  card: EvolutionGroupCardData
+  context?: ReactNode
+  draggable?: boolean
+  dragging?: boolean
+  onDragEnd?: DragEventHandler<HTMLElement>
+  onDragStart?: DragEventHandler<HTMLElement>
   style: VisualStyle
 }) {
   const grouping = useMemo(
@@ -221,6 +233,9 @@ function PregroupCard({
     <Box
       aria-label={`${residentNames} group`}
       component="article"
+      draggable={draggable}
+      onDragEnd={onDragEnd}
+      onDragStart={onDragStart}
       sx={{
         backgroundColor: 'oklch(0.995 0.003 225)',
         border: `2px solid ${
@@ -229,11 +244,13 @@ function PregroupCard({
             : visual.border
         }`,
         borderRadius: 1.5,
+        cursor: draggable ? 'grab' : undefined,
         minHeight: 220,
         minWidth: 0,
+        opacity: dragging ? 0.48 : 1,
         overflow: 'hidden',
         transition: 'border-color 140ms ease-out, transform 140ms ease-out',
-        '&:hover': { transform: 'translateY(-1px)' },
+        '&:hover': { transform: dragging ? 'none' : 'translateY(-1px)' },
         '&:focus-within': {
           outline: `3px solid ${style.accent}`,
           outlineOffset: 2,
@@ -258,6 +275,9 @@ function PregroupCard({
                 : visual.foreground,
             display: 'grid',
             gap: 0.75,
+            gridTemplateAreas: actions
+              ? '"habitat actions" "abilities abilities"'
+              : '"habitat abilities"',
             gridTemplateColumns: 'minmax(0, 1fr) auto',
             minHeight: 42,
             px: 1,
@@ -270,7 +290,10 @@ function PregroupCard({
             summaries={habitatSummaries}
           />
           <AbilityHeader pokemon={card.pokemon} summaries={abilitySummaries} />
+          {actions && <Box sx={{ gridArea: 'actions' }}>{actions}</Box>}
         </Box>
+
+        {context}
 
         <Box sx={{ display: 'grid', gap: 1.125, p: 1.25 }}>
           <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }} useFlexGap>
@@ -371,6 +394,7 @@ function HabitatHeader({
         display: 'flex',
         flexWrap: 'wrap',
         gap: 0.375,
+        gridArea: 'habitat',
         minWidth: 0,
       }}
     >
@@ -461,6 +485,7 @@ function AbilityHeader({
       spacing={0.375}
       sx={{
         flexWrap: 'nowrap',
+        gridArea: 'abilities',
         justifyContent: 'flex-end',
         justifySelf: 'end',
         minWidth: 0,
@@ -1016,18 +1041,18 @@ function CategoryItem({ item }: { item: FavoriteItem }) {
   )
 }
 
-type PregroupCardData = {
+export type EvolutionGroupCardData = {
   compatibility: GroupCompatibilityAnalysis
   groupId: string
   pokemon: RegionRosterPokemon[]
 }
 
 type HabitatCard = {
-  card: PregroupCardData
+  card: EvolutionGroupCardData
   grouping: IdealHabitatGrouping
 }
 
-function getHabitatCardLayout(cards: PregroupCardData[]) {
+function getHabitatCardLayout(cards: EvolutionGroupCardData[]) {
   const orderedCards: HabitatCard[] = cards
     .map((card) => ({
       card,
@@ -1050,7 +1075,7 @@ function getHabitatCardLayout(cards: PregroupCardData[]) {
   }
 }
 
-function getCardSortName(card: PregroupCardData) {
+function getCardSortName(card: EvolutionGroupCardData) {
   return card.pokemon.map((resident) => resident.name).join(':')
 }
 
