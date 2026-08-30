@@ -1,6 +1,7 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded'
 import FolderOpenRoundedIcon from '@mui/icons-material/FolderOpenRounded'
@@ -30,7 +31,10 @@ import {
   type DragEvent,
   type MouseEvent,
 } from 'react'
-import type { RegionRosterPokemon } from '../../data/currentRegionRoster'
+import type {
+  CurrentRegion,
+  RegionRosterPokemon,
+} from '../../data/currentRegionRoster'
 import {
   EvolutionGroupCard,
 } from './EvolutionPregroupWorkspace'
@@ -63,15 +67,19 @@ type SaveStatus = 'error' | 'loading' | 'read-only' | 'saved' | 'saving'
 const unassignedDropTarget = 'unassigned'
 
 export function GroupingStudioWorkspace({
+  onChooseRegion,
+  onClose,
   pokemon,
   regionId,
-  regionName,
+  regions,
   snapshotId,
   style,
 }: {
+  onChooseRegion: (regionId: string) => void
+  onClose: () => void
   pokemon: RegionRosterPokemon[]
   regionId: string
-  regionName: string
+  regions: CurrentRegion[]
   snapshotId: string
   style: VisualStyle
 }) {
@@ -326,183 +334,269 @@ export function GroupingStudioWorkspace({
     setDropTargetId((current) => (current === targetId ? null : current))
   }
 
+  const resetDragging = () => {
+    setDraggedFamilyId(null)
+    setDropTargetId(null)
+  }
+
   return (
-    <Box sx={{ display: 'grid', gap: 2.5, minWidth: 0 }}>
-      <StudioHeader
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateRows: 'auto minmax(0, 1fr)',
+        height: '100dvh',
+        minHeight: 0,
+        minWidth: 0,
+        overflow: 'hidden',
+      }}
+    >
+      <StudioToolbar
         assignedCount={assignedCount}
         familyCount={families.length}
-        newNeighborhoodName={newNeighborhoodName}
         neighborhoodCount={scope.neighborhoods.length}
-        onCreateNeighborhood={createNeighborhood}
-        onNewNeighborhoodNameChange={setNewNeighborhoodName}
-        regionName={regionName}
+        onChooseRegion={onChooseRegion}
+        onClose={onClose}
+        regionId={regionId}
+        regions={regions}
         saveError={saveError}
         saveStatus={saveStatus}
         style={style}
         unassignedCount={unassignedFamilies.length}
-        writable={writable}
       />
 
       <Box
-        component="section"
-        onDragLeave={(event) => leaveDropTarget(event, unassignedDropTarget)}
-        onDragOver={(event) => dragOverTarget(event, unassignedDropTarget)}
-        onDrop={(event) => finishDrop(event, null)}
+        component="main"
         sx={{
-          backgroundColor:
-            dropTargetId === unassignedDropTarget
-              ? 'oklch(0.955 0.035 245)'
-              : 'oklch(0.985 0.007 245)',
-          border: `1px ${draggedFamilyId ? 'dashed' : 'solid'} ${
-            dropTargetId === unassignedDropTarget
-              ? style.accent
-              : 'oklch(0.85 0.025 245)'
-          }`,
-          borderRadius: 1.5,
           display: 'grid',
-          gap: 1.5,
+          gridTemplateColumns: 'minmax(360px, 0.9fr) minmax(520px, 1.35fr)',
+          minHeight: 0,
           minWidth: 0,
-          p: { xs: 1.25, sm: 1.5 },
-          transition: 'background-color 140ms ease-out, border-color 140ms ease-out',
+          overflowX: 'auto',
+          overflowY: 'hidden',
         }}
       >
-        <UnassignedHeader
-          abilityNameBySlug={abilityNameBySlug}
-          onQueryChange={setQuery}
-          onSkillChange={setSelectedSkill}
-          query={query}
-          selectedSkill={selectedSkill}
-          unassignedFamilies={unassignedFamilies}
-        />
-
-        {usefulUnassignedFamilies.length > 0 && (
-          <FamilySection
-            description="These groups have at least one skill worth planning around."
-            families={usefulUnassignedFamilies}
-            heading="Useful to place"
-            locationId={null}
-            neighborhoods={scope.neighborhoods}
-            onDragEnd={() => {
-              setDraggedFamilyId(null)
-              setDropTargetId(null)
-            }}
-            onDragStart={startDragging}
-            onMove={moveFamily}
-            showUsefulSkills
-            style={style}
-            writable={writable}
-          />
-        )}
-
-        {otherUnassignedFamilies.length > 0 && !selectedSkill && (
-          <FamilySection
-            description="No priority utility skill. These can stay parked until you care about them."
-            families={otherUnassignedFamilies}
-            heading="Okay to leave unassigned"
-            locationId={null}
-            neighborhoods={scope.neighborhoods}
-            onDragEnd={() => {
-              setDraggedFamilyId(null)
-              setDropTargetId(null)
-            }}
-            onDragStart={startDragging}
-            onMove={moveFamily}
-            showUsefulSkills={false}
-            style={style}
-            writable={writable}
-          />
-        )}
-
-        {matchingUnassignedFamilies.length === 0 && (
-          <Box sx={{ display: 'grid', gap: 0.5, justifyItems: 'start', py: 2 }}>
-            <Inventory2OutlinedIcon sx={{ color: 'text.secondary' }} />
-            <Typography sx={{ fontWeight: 850 }} variant="body2">
-              No unassigned groups match this view
-            </Typography>
-            <Typography color="text.secondary" variant="caption">
-              Clear the search or skill filter, or move a group back from a neighborhood.
-            </Typography>
-          </Box>
-        )}
-      </Box>
-
-      <Box component="section" sx={{ display: 'grid', gap: 1.25, minWidth: 0 }}>
-        <Box sx={{ alignItems: 'baseline', display: 'flex', gap: 1, justifyContent: 'space-between' }}>
-          <Typography component="h2" sx={{ fontWeight: 900 }} variant="h5">
-            Neighborhoods
-          </Typography>
-          <Typography color="text.secondary" variant="caption">
-            No capacity limit while you are ideating
-          </Typography>
-        </Box>
-
-        {scope.neighborhoods.length > 0 ? (
+        <Box
+          component="section"
+          onDragLeave={(event) => leaveDropTarget(event, unassignedDropTarget)}
+          onDragOver={(event) => dragOverTarget(event, unassignedDropTarget)}
+          onDrop={(event) => finishDrop(event, null)}
+          sx={{
+            backgroundColor:
+              dropTargetId === unassignedDropTarget
+                ? 'oklch(0.955 0.035 245)'
+                : 'oklch(0.985 0.007 245)',
+            borderRight: `1px solid ${
+              dropTargetId === unassignedDropTarget
+                ? style.accent
+                : 'oklch(0.82 0.025 225)'
+            }`,
+            display: 'grid',
+            gridTemplateRows: 'auto minmax(0, 1fr)',
+            minHeight: 0,
+            minWidth: 360,
+            transition: 'background-color 140ms ease-out, border-color 140ms ease-out',
+          }}
+        >
           <Box
             sx={{
-              alignItems: 'start',
-              display: 'grid',
-              gap: 1.5,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 410px), 1fr))',
-              minWidth: 0,
+              backgroundColor: 'oklch(0.975 0.009 245)',
+              borderBottom: '1px solid oklch(0.84 0.022 245)',
+              p: 1.5,
             }}
           >
-            {scope.neighborhoods.map((neighborhood) => (
-              <NeighborhoodCanvas
-                dropActive={dropTargetId === neighborhood.neighborhoodId}
-                dragging={Boolean(draggedFamilyId)}
-                families={neighborhood.familyIds.flatMap((familyId) => {
-                  const family = familyById.get(familyId)
-                  return family ? [family] : []
-                })}
-                key={neighborhood.neighborhoodId}
-                neighborhood={neighborhood}
+            <UnassignedHeader
+              abilityNameBySlug={abilityNameBySlug}
+              onQueryChange={setQuery}
+              onSkillChange={setSelectedSkill}
+              query={query}
+              selectedSkill={selectedSkill}
+              unassignedFamilies={unassignedFamilies}
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: 'grid',
+              gap: 2,
+              minHeight: 0,
+              overflowY: 'auto',
+              overscrollBehavior: 'contain',
+              p: 1.5,
+              scrollbarGutter: 'stable',
+            }}
+          >
+            {usefulUnassignedFamilies.length > 0 && (
+              <FamilySection
+                description="These groups have at least one skill worth planning around."
+                families={usefulUnassignedFamilies}
+                heading="Useful to place"
+                locationId={null}
                 neighborhoods={scope.neighborhoods}
-                onDelete={() => deleteNeighborhood(neighborhood.neighborhoodId)}
-                onDragEnd={() => {
-                  setDraggedFamilyId(null)
-                  setDropTargetId(null)
-                }}
-                onDragLeave={(event) =>
-                  leaveDropTarget(event, neighborhood.neighborhoodId)
-                }
-                onDragOver={(event) =>
-                  dragOverTarget(event, neighborhood.neighborhoodId)
-                }
+                onDragEnd={resetDragging}
                 onDragStart={startDragging}
-                onDrop={(event) =>
-                  finishDrop(event, neighborhood.neighborhoodId)
-                }
                 onMove={moveFamily}
-                onRename={(name) => renameNeighborhood(neighborhood.neighborhoodId, name)}
+                showUsefulSkills
                 style={style}
                 writable={writable}
               />
-            ))}
+            )}
+
+            {otherUnassignedFamilies.length > 0 && !selectedSkill && (
+              <FamilySection
+                description="No priority utility skill. These can stay parked until you care about them."
+                families={otherUnassignedFamilies}
+                heading="Okay to leave unassigned"
+                locationId={null}
+                neighborhoods={scope.neighborhoods}
+                onDragEnd={resetDragging}
+                onDragStart={startDragging}
+                onMove={moveFamily}
+                showUsefulSkills={false}
+                style={style}
+                writable={writable}
+              />
+            )}
+
+            {matchingUnassignedFamilies.length === 0 && (
+              <Box sx={{ display: 'grid', gap: 0.5, justifyItems: 'start', py: 2 }}>
+                <Inventory2OutlinedIcon sx={{ color: 'text.secondary' }} />
+                <Typography sx={{ fontWeight: 850 }} variant="body2">
+                  No unassigned groups match this view
+                </Typography>
+                <Typography color="text.secondary" variant="caption">
+                  Clear the search or skill filter, or move a group back from a neighborhood.
+                </Typography>
+              </Box>
+            )}
           </Box>
-        ) : (
+        </Box>
+
+        <Box
+          component="section"
+          sx={{
+            backgroundColor: 'oklch(0.99 0.004 155)',
+            display: 'grid',
+            gridTemplateRows: 'auto minmax(0, 1fr)',
+            minHeight: 0,
+            minWidth: 520,
+          }}
+        >
           <Box
             sx={{
-              alignItems: 'center',
-              border: '1px dashed oklch(0.72 0.055 155)',
-              borderRadius: 1.5,
-              display: 'flex',
-              flexDirection: { xs: 'column', sm: 'row' },
+              backgroundColor: 'oklch(0.975 0.012 155)',
+              borderBottom: '1px solid oklch(0.82 0.035 155)',
+              display: 'grid',
               gap: 1,
-              justifyContent: 'space-between',
-              p: 2,
+              p: 1.5,
             }}
           >
-            <Box sx={{ display: 'grid', gap: 0.25 }}>
-              <Typography sx={{ fontWeight: 850 }} variant="body2">
-                No neighborhoods yet
-              </Typography>
-              <Typography color="text.secondary" variant="caption">
-                Name one above, then drag or move your first useful evolution group into it.
-              </Typography>
+            <Box
+              sx={{
+                alignItems: 'baseline',
+                display: 'flex',
+                gap: 1,
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box sx={{ display: 'grid', gap: 0.125 }}>
+                <Typography component="h2" sx={{ fontWeight: 900 }} variant="h5">
+                  Neighborhoods
+                </Typography>
+                <Typography color="text.secondary" variant="caption">
+                  No capacity limit while you are ideating
+                </Typography>
+              </Box>
+              <Chip
+                label={`${scope.neighborhoods.length} total`}
+                size="small"
+                variant="outlined"
+              />
             </Box>
-            <FolderOpenRoundedIcon sx={{ color: style.deep }} />
+            <CreateNeighborhoodForm
+              name={newNeighborhoodName}
+              onCreate={createNeighborhood}
+              onNameChange={setNewNeighborhoodName}
+              writable={writable}
+            />
           </Box>
-        )}
+
+          <Box
+            sx={{
+              minHeight: 0,
+              overflowY: 'auto',
+              overscrollBehavior: 'contain',
+              p: 1.5,
+              scrollbarGutter: 'stable',
+            }}
+          >
+            {scope.neighborhoods.length > 0 ? (
+              <Box
+                sx={{
+                  alignItems: 'start',
+                  display: 'grid',
+                  gap: 1.5,
+                  gridTemplateColumns:
+                    'repeat(auto-fit, minmax(min(100%, 410px), 1fr))',
+                  minWidth: 0,
+                }}
+              >
+                {scope.neighborhoods.map((neighborhood) => (
+                  <NeighborhoodCanvas
+                    dropActive={dropTargetId === neighborhood.neighborhoodId}
+                    dragging={Boolean(draggedFamilyId)}
+                    families={neighborhood.familyIds.flatMap((familyId) => {
+                      const family = familyById.get(familyId)
+                      return family ? [family] : []
+                    })}
+                    key={neighborhood.neighborhoodId}
+                    neighborhood={neighborhood}
+                    neighborhoods={scope.neighborhoods}
+                    onDelete={() => deleteNeighborhood(neighborhood.neighborhoodId)}
+                    onDragEnd={resetDragging}
+                    onDragLeave={(event) =>
+                      leaveDropTarget(event, neighborhood.neighborhoodId)
+                    }
+                    onDragOver={(event) =>
+                      dragOverTarget(event, neighborhood.neighborhoodId)
+                    }
+                    onDragStart={startDragging}
+                    onDrop={(event) =>
+                      finishDrop(event, neighborhood.neighborhoodId)
+                    }
+                    onMove={moveFamily}
+                    onRename={(name) =>
+                      renameNeighborhood(neighborhood.neighborhoodId, name)
+                    }
+                    style={style}
+                    writable={writable}
+                  />
+                ))}
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  border: '1px dashed oklch(0.72 0.055 155)',
+                  borderRadius: 1.5,
+                  display: 'flex',
+                  gap: 1,
+                  justifyContent: 'space-between',
+                  p: 2,
+                }}
+              >
+                <Box sx={{ display: 'grid', gap: 0.25 }}>
+                  <Typography sx={{ fontWeight: 850 }} variant="body2">
+                    No neighborhoods yet
+                  </Typography>
+                  <Typography color="text.secondary" variant="caption">
+                    Name one above, then move your first useful evolution group into it.
+                  </Typography>
+                </Box>
+                <FolderOpenRoundedIcon sx={{ color: style.deep }} />
+              </Box>
+            )}
+          </Box>
+        </Box>
       </Box>
 
       <Snackbar
@@ -515,101 +609,146 @@ export function GroupingStudioWorkspace({
   )
 }
 
-function StudioHeader({
+function StudioToolbar({
   assignedCount,
   familyCount,
   neighborhoodCount,
-  newNeighborhoodName,
-  onCreateNeighborhood,
-  onNewNeighborhoodNameChange,
-  regionName,
+  onChooseRegion,
+  onClose,
+  regionId,
+  regions,
   saveError,
   saveStatus,
   style,
   unassignedCount,
-  writable,
 }: {
   assignedCount: number
   familyCount: number
   neighborhoodCount: number
-  newNeighborhoodName: string
-  onCreateNeighborhood: () => void
-  onNewNeighborhoodNameChange: (name: string) => void
-  regionName: string
+  onChooseRegion: (regionId: string) => void
+  onClose: () => void
+  regionId: string
+  regions: CurrentRegion[]
   saveError: string
   saveStatus: SaveStatus
   style: VisualStyle
   unassignedCount: number
-  writable: boolean
 }) {
   return (
     <Box
       component="header"
       sx={{
         backgroundColor: style.soft,
-        border: `1px solid ${style.accent}`,
-        borderRadius: 1.5,
-        display: 'grid',
-        gap: 1.5,
-        p: { xs: 1.5, sm: 2 },
+        borderBottom: `1px solid ${style.accent}`,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 1,
+        minHeight: 64,
+        px: { xs: 1, sm: 1.5 },
+        py: 1,
       }}
     >
+      <Tooltip title="Close grouping studio">
+        <IconButton
+          aria-label="Close grouping studio"
+          onClick={onClose}
+          sx={{ alignSelf: 'center', minHeight: 44, minWidth: 44 }}
+        >
+          <CloseRoundedIcon />
+        </IconButton>
+      </Tooltip>
       <Box
         sx={{
-          alignItems: { xs: 'start', md: 'center' },
+          alignSelf: 'center',
           display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          gap: 1.5,
-          justifyContent: 'space-between',
+          flex: '1 1 280px',
+          gap: 1,
+          minWidth: 0,
         }}
       >
-        <Box sx={{ display: 'grid', gap: 0.375 }}>
-          <Typography component="h2" sx={{ color: style.deep }} variant="h4">
-            {regionName} grouping studio
+        <Box sx={{ display: 'grid', gap: 0.125, minWidth: 0 }}>
+          <Typography
+            component="h1"
+            id="grouping-studio-title"
+            noWrap
+            sx={{ color: style.deep, fontWeight: 900 }}
+            variant="h5"
+          >
+            Grouping studio
           </Typography>
-          <Typography sx={{ color: style.deep, maxWidth: '68ch' }} variant="body2">
-            Place the evolution groups you care about. Everything else can stay unassigned.
+          <Typography noWrap sx={{ color: style.deep }} variant="caption">
+            Evolution groups and neighborhoods, side by side
           </Typography>
         </Box>
-        <SaveStatusIndicator error={saveError} status={saveStatus} />
       </Box>
-
-      <Stack direction="row" spacing={0.75} sx={{ flexWrap: 'wrap' }} useFlexGap>
+      <TextField
+        label="Region"
+        onChange={(event) => onChooseRegion(event.target.value)}
+        select
+        size="small"
+        sx={{ minWidth: 210 }}
+        value={regionId}
+      >
+        {regions.map((region) => (
+          <MenuItem key={region.regionId} value={region.regionId}>
+            {region.name}
+          </MenuItem>
+        ))}
+      </TextField>
+      <Stack
+        direction="row"
+        spacing={0.5}
+        sx={{ alignItems: 'center', flexWrap: 'wrap' }}
+        useFlexGap
+      >
         <Chip label={`${neighborhoodCount} neighborhoods`} size="small" />
         <Chip label={`${assignedCount}/${familyCount} placed`} size="small" />
         <Chip label={`${unassignedCount} unassigned`} size="small" />
       </Stack>
-
-      <Box
-        component="form"
-        onSubmit={(event) => {
-          event.preventDefault()
-          onCreateNeighborhood()
-        }}
-        sx={{
-          alignItems: { xs: 'stretch', sm: 'center' },
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          gap: 1,
-        }}
-      >
-        <TextField
-          disabled={!writable}
-          label="New neighborhood name"
-          onChange={(event) => onNewNeighborhoodNameChange(event.target.value)}
-          size="small"
-          sx={{ flex: '1 1 280px', maxWidth: { sm: 420 } }}
-          value={newNeighborhoodName}
-        />
-        <Button
-          disabled={!writable || !newNeighborhoodName.trim()}
-          startIcon={<AddRoundedIcon />}
-          type="submit"
-          variant="contained"
-        >
-          Create neighborhood
-        </Button>
+      <Box sx={{ alignSelf: 'center' }}>
+        <SaveStatusIndicator error={saveError} status={saveStatus} />
       </Box>
+    </Box>
+  )
+}
+
+function CreateNeighborhoodForm({
+  name,
+  onCreate,
+  onNameChange,
+  writable,
+}: {
+  name: string
+  onCreate: () => void
+  onNameChange: (name: string) => void
+  writable: boolean
+}) {
+  return (
+    <Box
+      component="form"
+      onSubmit={(event) => {
+        event.preventDefault()
+        onCreate()
+      }}
+      sx={{ alignItems: 'center', display: 'flex', gap: 1 }}
+    >
+      <TextField
+        disabled={!writable}
+        fullWidth
+        label="New neighborhood name"
+        onChange={(event) => onNameChange(event.target.value)}
+        size="small"
+        value={name}
+      />
+      <Button
+        disabled={!writable || !name.trim()}
+        startIcon={<AddRoundedIcon />}
+        sx={{ flex: '0 0 auto', minHeight: 40 }}
+        type="submit"
+        variant="contained"
+      >
+        Create
+      </Button>
     </Box>
   )
 }
@@ -687,11 +826,8 @@ function UnassignedHeader({
     <Box sx={{ display: 'grid', gap: 1 }}>
       <Box
         sx={{
-          alignItems: { xs: 'start', md: 'center' },
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          gap: 1,
-          justifyContent: 'space-between',
+          display: 'grid',
+          gap: 0.75,
         }}
       >
         <Box sx={{ display: 'grid', gap: 0.25 }}>
@@ -715,7 +851,7 @@ function UnassignedHeader({
               ),
             },
           }}
-          sx={{ width: { xs: '100%', md: 320 } }}
+          fullWidth
           value={query}
         />
       </Box>
